@@ -13,7 +13,7 @@ import SwiftyJSON
 
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var message: UITextField!
     
     @IBOutlet weak var tv: UITableView!
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
      
     //fin chat
     
-  /*  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 return 11
 
     }
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         
     }
     
-   */
+   
 
     
     
@@ -230,7 +230,7 @@ extension ViewController{
 }
 
 
-
+/*
 extension ViewController:UITableViewDataSource,UITableViewDelegate{
   
     
@@ -276,6 +276,8 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
     
     
 }
+
+*/
 
 extension ViewController:UITextFieldDelegate{
     
