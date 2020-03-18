@@ -1,0 +1,6 @@
+module Pods_EspaceCollaboratif {
+  umbrella header "Pods-EspaceCollaboratif-umbrella.h"
+
+  export *
+  module * { export * }
+}
