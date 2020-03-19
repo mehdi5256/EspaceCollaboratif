@@ -15,16 +15,13 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     
     func configure(withIcon: String) {
-        //UserIcon.layer.borderWidth = 1
            UserImage.layer.masksToBounds = false
-          // UserIcon.layer.borderColor = UIColor.black.cgColor
            UserImage.layer.cornerRadius = UserImage.frame.height/2
            UserImage.clipsToBounds = true
         UserImage.image = UIImage(named: withIcon)
     }
     override func awakeFromNib() {
         UserImage.layer.masksToBounds = false
-                // UserIcon.layer.borderColor = UIColor.black.cgColor
                  UserImage.layer.cornerRadius = UserImage.frame.height/2
                  UserImage.clipsToBounds = true
         

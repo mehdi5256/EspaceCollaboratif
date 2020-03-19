@@ -52,7 +52,6 @@ class RoomsTableViewCell: UITableViewCell {
 
              gradientLayer.startPoint = CGPoint(x: 0, y: 0)
              gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-             print(gradientLayer.frame)
              viewcell.layer.insertSublayer(gradientLayer, at: 0)
            
         }

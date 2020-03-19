@@ -73,27 +73,11 @@ extension RoomsViewController:UITableViewDataSource{
                 return UITableViewCell()
         }
         
-        //      let present = Movie.list[indexPath.row]
-        
-        //let showsDict = allTvShow[indexPath.row] as! Dictionary<String,Any>
-        // let showsDictint = allTvShow[indexPath.row] as! Dictionary<Int,Any>
         self.usersCell = roomsArray[indexPath.row].users
         
         cell.RoomName.text = self.roomsArray[indexPath.row].name!
         cell.UserName.text = self.roomsArray[indexPath.row].subject
-        
-        
         cell.NumPoste.text  =  (self.roomsArray[indexPath.row].id!).description
-        //  Int(cell.NumPoste.text!) = showsDict["id"]
-        
-        
-        
-        
-        
-        // cell.UserName.text = Int(showsDictint["id"])
-        
-        
-        
         cell.selectionStyle = .none
         
         
@@ -151,13 +135,7 @@ extension RoomsViewController: UICollectionViewDataSource,UICollectionViewDelega
 
             
         let image = self.usersCell[indexPath.row].image
-        print(image)
-       // let imagec = Movie.all[indexPath.row]
-        
-        //   let showsDict = allTvShow[indexPath.row] as! Dictionary<String,Any>
-        
-        //  let imageDict = showsDict["users"] as! Dictionary<String,String>
-        // print(imageDict)
+       
         cell.UserImage.af.setImage(withURL: URL(string: image)!)
         
         
@@ -173,11 +151,7 @@ extension RoomsViewController: UICollectionViewDataSource,UICollectionViewDelega
             cell.isHidden = true
             
         }
-        
-        
-        //  cell.configure(withIcon:imagec )
-        
-        
+     
         
         return cell
         

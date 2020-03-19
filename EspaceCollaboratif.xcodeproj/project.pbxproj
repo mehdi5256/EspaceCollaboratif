@@ -34,6 +34,7 @@
 		9186166B24224481008DF1D6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166A24224481008DF1D6 /* Response.swift */; };
 		9186166D2422449E008DF1D6 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166C2422449E008DF1D6 /* Word.swift */; };
 		9186166F242244CF008DF1D6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166E242244CF008DF1D6 /* Util.swift */; };
+		91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB0A25242388410025752F /* AddRoomViewController.swift */; };
 		AE0CC97208913F94E78C3F4C /* libPods-EspaceCollaboratif.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEFCA2C6C115F576491C752 /* libPods-EspaceCollaboratif.a */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		9186166A24224481008DF1D6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9186166C2422449E008DF1D6 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		9186166E242244CF008DF1D6 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		91CB0A25242388410025752F /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		95FD83A3CAD325341D167A8F /* Pods-EspaceCollaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspaceCollaboratif.debug.xcconfig"; path = "Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +202,7 @@
 			children = (
 				8231A3E4241A65EB00A3EEF3 /* ViewController.swift */,
 				82565120241A695300B4875E /* RoomsViewController.swift */,
+				91CB0A25242388410025752F /* AddRoomViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				9186166F242244CF008DF1D6 /* Util.swift in Sources */,
 				82565123241A697C00B4875E /* RoomsTableViewCell.swift in Sources */,
 				825089B5241BB20D00B754EE /* Room.swift in Sources */,
+				91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */,
 				9186166724224427008DF1D6 /* Message.swift in Sources */,
 				82125C62241BDC5A009817B7 /* Room2.swift in Sources */,
 				9186166D2422449E008DF1D6 /* Word.swift in Sources */,
