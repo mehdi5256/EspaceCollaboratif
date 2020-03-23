@@ -12,6 +12,6 @@ struct Room1: Codable{
     var id: Int?
     var name: String?
     var image: String?
-    var subject: String
+    var subject: String?
     var users: [User1]
 }

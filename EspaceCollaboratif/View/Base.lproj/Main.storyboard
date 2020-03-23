@@ -654,7 +654,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="50" estimatedRowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eOp-YN-ZUi">
-                                <rect key="frame" x="0.0" y="361" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="430" width="375" height="181"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="50" id="wgg-ch-OvR" customClass="AddUserTableViewCell" customModule="EspaceCollaboratif" customModuleProvider="target">
@@ -702,11 +702,10 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpZ-8w-L2X">
-                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.30133757" green="0.60583239789999999" blue="0.70329767470000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="eJL-cX-YlN"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="kuA-DB-L8p"/>
+                                    <constraint firstAttribute="height" constant="40" id="eJL-cX-YlN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
                                 <state key="normal" title="Créer une chaine">
@@ -718,21 +717,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKM-Eb-AVI">
-                                <rect key="frame" x="0.0" y="308" width="375" height="53"/>
+                                <rect key="frame" x="0.0" y="308" width="375" height="39.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jy5-Vh-c11">
-                                        <rect key="frame" x="13.5" y="11" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="V4m-Re-1oL"/>
-                                            <constraint firstAttribute="width" constant="30" id="jHy-5r-TLe"/>
-                                        </constraints>
-                                        <state key="normal" image="circle25"/>
-                                        <connections>
-                                            <action selector="BtnSelectAll:" destination="Xo8-yN-2Qd" eventType="touchUpInside" id="xyB-0M-MC6"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uof-Gn-KLs">
-                                        <rect key="frame" x="101" y="10" width="259" height="32"/>
+                                        <rect key="frame" x="101" y="10" width="259" height="18.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="259" id="ZCD-hY-h6l"/>
                                         </constraints>
@@ -742,16 +730,39 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jy5-Vh-c11">
+                                        <rect key="frame" x="13.5" y="4" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="V4m-Re-1oL"/>
+                                            <constraint firstAttribute="width" constant="30" id="jHy-5r-TLe"/>
+                                        </constraints>
+                                        <state key="normal" image="circle25"/>
+                                        <connections>
+                                            <action selector="BtnSelectAll:" destination="Xo8-yN-2Qd" eventType="touchUpInside" id="xyB-0M-MC6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="Jy5-Vh-c11" firstAttribute="leading" secondItem="IKM-Eb-AVI" secondAttribute="leading" constant="13.5" id="79x-GA-Utp"/>
                                     <constraint firstAttribute="trailing" secondItem="uof-Gn-KLs" secondAttribute="trailing" constant="15" id="Hkw-IM-KM3"/>
-                                    <constraint firstItem="Jy5-Vh-c11" firstAttribute="top" secondItem="IKM-Eb-AVI" secondAttribute="top" constant="11" id="LI2-1I-cri"/>
+                                    <constraint firstItem="Jy5-Vh-c11" firstAttribute="top" secondItem="IKM-Eb-AVI" secondAttribute="top" constant="4" id="LI2-1I-cri"/>
                                     <constraint firstItem="uof-Gn-KLs" firstAttribute="top" secondItem="IKM-Eb-AVI" secondAttribute="top" constant="10" id="Ysl-nM-2Nc"/>
                                     <constraint firstAttribute="bottom" secondItem="uof-Gn-KLs" secondAttribute="bottom" constant="11" id="mDQ-Ud-ssL"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" placeholder="Rechercher utilisateurs" translatesAutoresizingMaskIntoConstraints="NO" id="zb3-26-oP3">
+                                <rect key="frame" x="0.0" y="363" width="375" height="56"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="Xo8-yN-2Qd" id="bRS-u5-hYS"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -762,18 +773,20 @@
                             <constraint firstItem="U6B-kx-ihu" firstAttribute="centerX" secondItem="OUe-bY-RYF" secondAttribute="centerX" id="9lS-jO-jKh"/>
                             <constraint firstItem="U6B-kx-ihu" firstAttribute="leading" secondItem="Drr-6x-aRK" secondAttribute="leading" id="A76-8v-ATe"/>
                             <constraint firstItem="SpZ-8w-L2X" firstAttribute="leading" secondItem="bgl-Wi-kNb" secondAttribute="leading" id="Ay0-A6-4dD"/>
+                            <constraint firstItem="zb3-26-oP3" firstAttribute="top" secondItem="IKM-Eb-AVI" secondAttribute="bottom" constant="15.5" id="BPK-YO-bEa"/>
                             <constraint firstItem="eOp-YN-ZUi" firstAttribute="leading" secondItem="bgl-Wi-kNb" secondAttribute="leading" id="CyA-tB-pcS"/>
                             <constraint firstItem="SpZ-8w-L2X" firstAttribute="top" secondItem="eOp-YN-ZUi" secondAttribute="bottom" constant="16" id="GBV-y8-4mO"/>
                             <constraint firstItem="eOp-YN-ZUi" firstAttribute="trailing" secondItem="bgl-Wi-kNb" secondAttribute="trailing" id="HYj-Ud-bzr"/>
                             <constraint firstItem="gd1-Ja-vPV" firstAttribute="top" secondItem="Drr-6x-aRK" secondAttribute="bottom" constant="16" id="Js4-9A-ctb"/>
                             <constraint firstItem="IKM-Eb-AVI" firstAttribute="trailing" secondItem="bgl-Wi-kNb" secondAttribute="trailing" id="Lp1-2z-pSm"/>
+                            <constraint firstItem="zb3-26-oP3" firstAttribute="trailing" secondItem="bgl-Wi-kNb" secondAttribute="trailing" id="Plk-cT-qQJ"/>
                             <constraint firstItem="gd1-Ja-vPV" firstAttribute="leading" secondItem="bgl-Wi-kNb" secondAttribute="leading" constant="16" id="Pui-Oi-z1X"/>
-                            <constraint firstItem="eOp-YN-ZUi" firstAttribute="top" secondItem="gd1-Ja-vPV" secondAttribute="bottom" constant="66.5" id="RTd-mp-LPr"/>
                             <constraint firstItem="Drr-6x-aRK" firstAttribute="top" secondItem="U6B-kx-ihu" secondAttribute="bottom" id="Yrw-JB-9UG"/>
                             <constraint firstItem="U6B-kx-ihu" firstAttribute="top" secondItem="bgl-Wi-kNb" secondAttribute="top" id="Z7i-za-29Q"/>
+                            <constraint firstItem="eOp-YN-ZUi" firstAttribute="top" secondItem="zb3-26-oP3" secondAttribute="bottom" constant="11" id="fBG-7q-Hux"/>
                             <constraint firstItem="SpZ-8w-L2X" firstAttribute="trailing" secondItem="bgl-Wi-kNb" secondAttribute="trailing" id="nzJ-BM-5PH"/>
+                            <constraint firstItem="zb3-26-oP3" firstAttribute="leading" secondItem="bgl-Wi-kNb" secondAttribute="leading" id="r23-H1-OAM"/>
                             <constraint firstItem="bgl-Wi-kNb" firstAttribute="trailing" secondItem="UKu-Eb-YEQ" secondAttribute="trailing" constant="16" id="r76-gk-0gg"/>
-                            <constraint firstItem="eOp-YN-ZUi" firstAttribute="top" secondItem="IKM-Eb-AVI" secondAttribute="bottom" id="taW-oq-pZ3"/>
                             <constraint firstItem="U6B-kx-ihu" firstAttribute="leading" secondItem="bgl-Wi-kNb" secondAttribute="leading" id="uDg-mB-gtH"/>
                             <constraint firstItem="U6B-kx-ihu" firstAttribute="trailing" secondItem="Drr-6x-aRK" secondAttribute="trailing" id="wAo-Xj-laF"/>
                             <constraint firstItem="SpZ-8w-L2X" firstAttribute="bottom" secondItem="bgl-Wi-kNb" secondAttribute="bottom" id="wrh-k0-g3w"/>
@@ -781,6 +794,9 @@
                         <viewLayoutGuide key="safeArea" id="bgl-Wi-kNb"/>
                     </view>
                     <connections>
+                        <outlet property="RoomName" destination="Jj2-tw-b1N" id="b4H-ZM-wnJ"/>
+                        <outlet property="SearchBar" destination="zb3-26-oP3" id="D3j-Rs-HRO"/>
+                        <outlet property="Subject" destination="kak-bN-wiE" id="nm0-3c-yu1"/>
                         <outlet property="createbtnoutlet" destination="SpZ-8w-L2X" id="uwT-mn-S9J"/>
                         <outlet property="numberusers" destination="UKu-Eb-YEQ" id="yqX-hx-3mS"/>
                         <outlet property="selectalllabel" destination="uof-Gn-KLs" id="cla-3y-PS6"/>

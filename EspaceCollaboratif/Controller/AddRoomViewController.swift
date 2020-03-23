@@ -19,13 +19,19 @@ class AddRoomViewController: UIViewController {
     @IBOutlet weak var tvuser: UITableView!
     @IBOutlet weak var Subject: UITextField!
     @IBOutlet weak var RoomName: UITextField!
+    @IBOutlet weak var SearchBar: UISearchBar!
     
-    var Userscells: [User1] = []
+    
+   // var Userscells: [User1] = []
     let userservice = UserService()
-    var selectarrayusers: [User1] = []
+    var selectarrayusers: [Dictionary<String,Any>] = []
+    //var arrFilter:[String] = []
+    var isSearch : Bool = false
+   var arrFilter = [User1]()
 
-    
-    
+    var userid = Int()
+    var Userscells = [User1]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,66 +45,100 @@ class AddRoomViewController: UIViewController {
     func fetchAllUers(){
            userservice.getAllUsers(){ (users) in
                self.Userscells = users
+            self.arrFilter = self.Userscells
                self.tvuser.reloadData()
            }
        }
     
+    
+    func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
+    
     @IBAction func CreateRoom(_ sender: Any) {
         
         
-        print(selectarrayusers)
-        print(selectarrayusers.count)
+        
+        /*
+        let data = try! JSONEncoder().encode(selectarrayusers)
+        do {
+            let json =  try JSONSerialization.jsonObject(with: data, options: [])
+           // print(json)
+                   if let object = json as? [String: Any] {
+                   // json is a dictionary
+                   print(object)
+                   }
+        }   catch {
+        print(error.localizedDescription)
+        }
+       
+        
+
+        var jsonstring = String(data: data, encoding: .utf8)!
+        
+        
+        jsonstring = jsonstring.replacingOccurrences(of: "\\/", with: "/")
 
         
-   /*     let myUrl = "http://1193a49a.ngrok.io/room";
+        
+        jsonstring = jsonstring.replacingOccurrences(of: "{", with: "[")
+        jsonstring = jsonstring.replacingOccurrences(of: "}", with: "]")
+        
+     //   let dict = selectarrayusers.toDictionary { $0.id }
+
+       print(jsonstring)
+ 
+ */
+        
+        /*  let users = try! JSONDecoder().decode([User1].self, from: data)
+
+        for ggggg in users {
+            userid = ggggg.id
+            print(userid)
+
+        }
+ */
+       // print(data)
+      //  print(selectarrayusers.count)
+
+        
+      let myUrl = "http://0b71751d.ngrok.io/room";
         
         let nomroom = RoomName.text;
                let description = Subject.text;
         
-        let parameters: Parameters=[
+        
+        
+        let parameters: [String: Any] = [
             "name":nomroom!,
             "subject":description!,
+            "users": selectarrayusers
+                
             
         ]
+            
+ 
        
-
-        AF.request(myUrl, method: .post, parameters: parameters).responseJSON
-        {
-            response in
-            //printing response
-            print(response)
-            //getting the json value from the server
-                           if let result = response.value {
-                               
-                               //converting it as NSDictionary
-                               let jsonData = result as! NSDictionary
-                               let responsetype = jsonData.value(forKey: "error") as! Bool;
-                                if (responsetype ){
-                                 //  self.lblmsg.text = "Adresse mail existe déjà!";
-                                    
-                                    print("nonononoono")
-
-                               }
-                               
-                               
-                               if (!responsetype ){
-                                DispatchQueue.main.async {
-                                    print("okookokokok")
-
-                                }
-                            }
-
-
-       }
+        
+        AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
+        .responseJSON { response in
+            print(response.request)
+            print(response.response)
+            print(response.result)
+            
             
         }
  
- */
+        
+       
     }
-
-    
-
-   
    
   /*
     @IBAction func DismissKeyboard(_ sender: UITapGestureRecognizer) {
@@ -125,22 +165,45 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
     self.selectarrayusers.removeAll()
     
     if sender.isSelected{
-        for row in 0..<Userscells.count {
+        for row in 0..<arrFilter.count {
             tvuser.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
         }
         sender.isSelected = false
         sender.setImage(UIImage(named: "ok"), for: .normal)
-        print(Userscells.count)
+       // print(Userscells.count)
         selectalllabel.text = ("Désélectionner tous les utilisateurs")
-        numberusers.text = (String(Userscells.count) + " utilisateurs")
+        numberusers.text = (String(arrFilter.count) + " utilisateurs")
 
+        if let arr = tvuser.indexPathsForSelectedRows {
+            for index in arr{
+             //   selectarrayusers.append(arrFilter[index.row].id)
+              //   selectarrayusers.append(Userscells[index.row])
+                
+            //    selectarrayusers = [Userscells[index.row].id]
 
+                let dddddd = try Userscells[index.row].jsonData
+                               // To get dictionary from `Data`
+                do {
+                    let json = try JSONSerialization.jsonObject(with: dddddd(), options: [])
+                    guard let dictionary = json as? [String : Any] else { return }
+                    
+                    selectarrayusers.append(dictionary)
+                    
+                } catch {
+                print(error.localizedDescription)
+                }
+                
+
+            }
+        }
+       // print(selectarrayusers)
         
         
-        selectarrayusers = Userscells
+      //  selectarrayusers = Userscells
+        
     }else{
         
-        for row in 0..<Userscells.count {
+        for row in 0..<arrFilter.count {
         self.tvuser.deselectRow(at: IndexPath(row: row, section: 0), animated: false)
 
         }
@@ -153,17 +216,20 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
 
 
         self.selectarrayusers.removeAll()
+        
+        
          
         
     }
     
-   
+  // print(selectarrayusers)
+
           
       }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-                return Userscells.count
+                return arrFilter.count
 
     }
     
@@ -175,9 +241,9 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
                                    return UITableViewCell()
                            }
         
-        cell.usernom.text = Userscells[indexPath.row].firstName + " " + Userscells[indexPath.row].lastName
+        cell.usernom.text = arrFilter[indexPath.row].firstName + " " + arrFilter[indexPath.row].lastName
         
-        let image = self.Userscells[indexPath.row].image
+        let image = self.arrFilter[indexPath.row].image
               
         cell.imguser.af.setImage(withURL: URL(string: image)!)
 
@@ -218,22 +284,39 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
         self.selectarrayusers.removeAll()
         if let arr = tableview.indexPathsForSelectedRows {
             for index in arr{
-               // selectarrayusers.append(Userscells[index.row].id)
-               selectarrayusers.append(Userscells[index.row])
+              //  selectarrayusers.append(arrFilter[index.row].id)
+                 
+                let dddddd = try Userscells[index.row].jsonData
+                               // To get dictionary from `Data`
+                do {
+                    let json = try JSONSerialization.jsonObject(with: dddddd(), options: [])
+                    guard let dictionary = json as? [String : Any] else { return }
+                    
+                    selectarrayusers.append(dictionary)
+                    
+                } catch {
+                print(error.localizedDescription)
+                }
+                
 
             }
         }
-        print(selectarrayusers)
-        print(selectarrayusers.count)
+      //  print(selectarrayusers)
+        //print(selectarrayusers.count)
+        
+        
+       
+        
         
         if (selectarrayusers.count == 1) {
             numberusers.text = "1 utilisateur"
         }
-            if (selectarrayusers.count == 0) {
-                       numberusers.text = "0 utilisateur"
-                   }
+            
+             if (selectarrayusers.count == 0) {
+                                         numberusers.text = "0 utilisateur"
+                                     }
         
-        else{
+        if (selectarrayusers.count >= 2) {
             numberusers.text = (String(selectarrayusers.count) + " utilisateurs")
 
             
@@ -243,5 +326,31 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
         
     }
     
+    
+}
+
+///// SEARCHHHHHH
+
+extension AddRoomViewController:UISearchBarDelegate{
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else
+        {
+            arrFilter = Userscells
+            tvuser.reloadData()
+            return
+        }
+        arrFilter = Userscells.filter({ (ussss) -> Bool in
+         
+            return ussss.firstName.lowercased().contains(searchText.lowercased())
+        })
+        tvuser.reloadData()
+       }
+    
+    
+}
+
+extension Encodable { /// Encode into JSON and return `Data`
+    func jsonData() throws -> Data { let encoder = JSONEncoder(); encoder.outputFormatting = .prettyPrinted; encoder.dateEncodingStrategy = .iso8601; return try encoder.encode(self) }
     
 }

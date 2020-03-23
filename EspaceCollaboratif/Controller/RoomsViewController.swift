@@ -76,7 +76,7 @@ extension RoomsViewController:UITableViewDataSource{
         self.usersCell = roomsArray[indexPath.row].users
         
         cell.RoomName.text = self.roomsArray[indexPath.row].name!
-        cell.UserName.text = self.roomsArray[indexPath.row].subject
+        cell.UserName.text = self.roomsArray[indexPath.row].subject!
         cell.NumPoste.text  =  (self.roomsArray[indexPath.row].id!).description
         cell.selectionStyle = .none
         
