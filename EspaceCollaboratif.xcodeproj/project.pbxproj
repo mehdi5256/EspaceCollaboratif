@@ -37,7 +37,6 @@
 		91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB0A25242388410025752F /* AddRoomViewController.swift */; };
 		91F39FFD2424FB51009BDAD8 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */; };
 		91F39FFF24253EBC009BDAD8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFE24253EBC009BDAD8 /* UserService.swift */; };
-		91F6315624293AAC00F39B64 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F6315524293AAC00F39B64 /* Encodable.swift */; };
 		AE0CC97208913F94E78C3F4C /* libPods-EspaceCollaboratif.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEFCA2C6C115F576491C752 /* libPods-EspaceCollaboratif.a */; };
 /* End PBXBuildFile section */
 
@@ -97,7 +96,6 @@
 		91CB0A25242388410025752F /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
 		91F39FFE24253EBC009BDAD8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		91F6315524293AAC00F39B64 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		95FD83A3CAD325341D167A8F /* Pods-EspaceCollaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspaceCollaboratif.debug.xcconfig"; path = "Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,7 +242,6 @@
 				8231A3E2241A65EB00A3EEF3 /* SceneDelegate.swift */,
 				8231A3E0241A65EB00A3EEF3 /* AppDelegate.swift */,
 				8231A3EC241A65EE00A3EEF3 /* Assets.xcassets */,
-				91F6315524293AAC00F39B64 /* Encodable.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -473,7 +470,6 @@
 				9186166D2422449E008DF1D6 /* Word.swift in Sources */,
 				9153E3672422492200CAF859 /* Mutex.swift in Sources */,
 				9186166B24224481008DF1D6 /* Response.swift in Sources */,
-				91F6315624293AAC00F39B64 /* Encodable.swift in Sources */,
 				82125C60241BDBC5009817B7 /* User1.swift in Sources */,
 				918616632422438E008DF1D6 /* Movie.swift in Sources */,
 				82565129241A6A1A00B4875E /* UserCollectionViewCell.swift in Sources */,

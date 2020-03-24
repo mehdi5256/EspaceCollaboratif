@@ -509,7 +509,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Kf-tg-0fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="325.60000000000002" y="1055.1724137931035"/>
+            <point key="canvasLocation" x="302" y="2483"/>
         </scene>
         <!--Add Room View Controller-->
         <scene sceneID="Fgj-NO-Fgz">
@@ -801,11 +801,12 @@
                         <outlet property="numberusers" destination="UKu-Eb-YEQ" id="yqX-hx-3mS"/>
                         <outlet property="selectalllabel" destination="uof-Gn-KLs" id="cla-3y-PS6"/>
                         <outlet property="tvuser" destination="eOp-YN-ZUi" id="LDw-7V-f42"/>
+                        <segue destination="7Lj-CE-Pcl" kind="presentation" identifier="main" modalPresentationStyle="fullScreen" id="CJ8-ai-P7c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SvW-jQ-o1r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1149.5999999999999" y="904.49775112443785"/>
+            <point key="canvasLocation" x="326" y="931"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="l3f-0H-DtW">
@@ -993,6 +994,7 @@
                                             <outlet property="imguser" destination="JnW-EA-7AK" id="cJ4-Bs-YkR"/>
                                             <outlet property="message" destination="wEC-zH-jnc" id="7XG-kd-bba"/>
                                             <outlet property="msgtxt" destination="h8D-sx-VOw" id="0J1-UN-AW2"/>
+                                            <outlet property="usernamelbl" destination="sky-Zu-5m6" id="qrO-ua-5mC"/>
                                             <outlet property="viewimg" destination="NAj-0e-nHw" id="Iug-5c-EbV"/>
                                             <outlet property="viewleft" destination="9lf-nF-NES" id="tgL-wz-Ei7"/>
                                             <outlet property="viewright" destination="59u-Ng-Kbe" id="TMR-gq-caN"/>

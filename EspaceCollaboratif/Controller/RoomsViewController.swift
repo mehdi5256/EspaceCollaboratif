@@ -26,6 +26,8 @@ class RoomsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+
         setupButton()
         fetchRooms()
         
@@ -73,12 +75,14 @@ extension RoomsViewController:UITableViewDataSource{
                 return UITableViewCell()
         }
         
-        self.usersCell = roomsArray[indexPath.row].users
         
         cell.RoomName.text = self.roomsArray[indexPath.row].name!
         cell.UserName.text = self.roomsArray[indexPath.row].subject!
         cell.NumPoste.text  =  (self.roomsArray[indexPath.row].id!).description
         cell.selectionStyle = .none
+        usersCell = roomsArray[indexPath.row].users
+
+        
         
         
         let frequency = indexPath.row % 10;
@@ -143,7 +147,7 @@ extension RoomsViewController: UICollectionViewDataSource,UICollectionViewDelega
         if (indexPath.row) == 3{
             
             cell.lblnmbruser.isHidden = false
-            cell.lblnmbruser.text = "+" + usersCell.count.description
+            cell.lblnmbruser.text = "+" + (usersCell.count-4).description
             
         }
         if (indexPath.row) >= 4{
@@ -200,6 +204,8 @@ extension RoomsViewController:UITableViewDelegate{
            // let imageDict = showsDict["image"] as! Dictionary<String,String>
            // DVC.image = imageDict["medium"] as! String
             // DVC.image = images[indice.row]
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.name , style: .plain, target: nil, action: nil)
+            
             
         }
     }

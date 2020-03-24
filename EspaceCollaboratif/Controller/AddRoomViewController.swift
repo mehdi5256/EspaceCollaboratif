@@ -109,7 +109,7 @@ class AddRoomViewController: UIViewController {
       //  print(selectarrayusers.count)
 
         
-      let myUrl = "http://0b71751d.ngrok.io/room";
+      let myUrl = "http://cf36a5d0.ngrok.io/room";
         
         let nomroom = RoomName.text;
                let description = Subject.text;
@@ -132,6 +132,9 @@ class AddRoomViewController: UIViewController {
             print(response.request)
             print(response.response)
             print(response.result)
+            
+            self.performSegue(withIdentifier: "main", sender: self)
+
             
             
         }
@@ -350,4 +353,7 @@ extension AddRoomViewController:UISearchBarDelegate{
     
 }
 
-
+extension Encodable { /// Encode into JSON and return `Data`
+    func jsonData() throws -> Data { let encoder = JSONEncoder(); encoder.outputFormatting = .prettyPrinted; encoder.dateEncodingStrategy = .iso8601; return try encoder.encode(self) }
+    
+}

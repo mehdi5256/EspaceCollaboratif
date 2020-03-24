@@ -12,7 +12,7 @@ import Alamofire
 class UserService: NSObject{
     
     func getAllUsers(completion: @escaping ([User1]) -> Void) {
-        AF.request("http://0b71751d.ngrok.io/user").responseJSON{
+        AF.request("http://cf36a5d0.ngrok.io/user").responseJSON{
                    response in
                 let usersarray = (response.value as! NSArray)
             var users: [User1] = []

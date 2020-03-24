@@ -13,7 +13,7 @@ import SwiftyJSON
 
 
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ViewController: UIViewController {
     @IBOutlet weak var message: UITextField!
     
     @IBOutlet weak var tv: UITableView!
@@ -28,12 +28,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var words = [String: Word]()
      var eventBus:EventBus!
-     var data:[[String : Any]] = []
+     var data:[String] = []
      var user = "mehdi"
      
     //fin chat
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  /*  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 return 11
 
     }
@@ -49,7 +49,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return cell
         
     }
-    
+    */
    
 
     
@@ -59,6 +59,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
+
         
         stackbg.layer.cornerRadius = 10
         viewtxtfild.layer.cornerRadius = 10
@@ -70,7 +73,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
               
                
                
-       /*        eventBus = EventBus(host: "192.168.2.9", port: 7000)
+             eventBus = EventBus(host: "0.tcp.ngrok.io", port: 12362)
                eventBus.register(errorHandler: { print($0) })
                do {
                   try eventBus.connect()
@@ -94,29 +97,34 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 */
                // register a listener to store the reversed words
                let _ = try! eventBus.register(address: "chat.to.client") {
-                   print($0.body["body"])
-                   let obj = $0.body["body"].description
-                   let data = Data(obj.utf8)
-                   print(data)
-                   do{
-                       if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
-                           DispatchQueue.main.async {
-                              // self.chat.text.append(obj)
-                               print(json)
-                               self.data.append(json)
-                            //   self.tv.reloadData()
+                
+                let obj = $0.body["body"].description
+                
+                do{
+                    DispatchQueue.main.async {
+                        
+                                       //print(obj)
+                                       self.data.append(obj)
+                                       self.tv.reloadData()
+                                     
+                        
+                        
+                    }
+                    
+                }catch{
+                    
+                }
 
-                           }
-                       }
-                   }catch let err as NSError{
-                       print(err.description)
-                   }
+                
+                
+                
+              //  print($0.body["body"])
+               
                    
                    
                
                }
                
-*/
 
                // Do any additional setup after loading the view.
            }
@@ -209,10 +217,13 @@ extension ViewController{
     
     @IBAction func Send(_ sender: Any) {
         
-        try! eventBus.send(to: "chat.to.server", body: [ "user":"aziz","body":("{\"user\":\"" + self.user + "\",\"body\":\"" + message.text! + "\"}") ])
+        try! eventBus.send(to: "chat.to.server", body: [ "user":"mehdi","body":message.text! ])
               message.text = ""
        }
     
+ /*   try! eventBus.send(to: "chat.to.server", body: [ "user":"aziz","body":("{\"user\":\"" + self.user + "\",\"body\":\"" + message.text! + "\"}") ])
+    message.text = ""
+    */
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -230,12 +241,11 @@ extension ViewController{
 }
 
 
-/*
 extension ViewController:UITableViewDataSource,UITableViewDelegate{
   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data.count
+        return data.count
 
     }
     
@@ -243,13 +253,14 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ChatTableViewCell
                          else{
-                             return UITableViewCell()
+                             return ChatTableViewCell()
                      }
       //  let contentview = cell.viewWithTag(0)
       //  let chat = cell.txtmsg
        // let userLabel = contentview?.viewWithTag(2) as! UILabel
-        cell.aaaaa.text = self.data[indexPath.row]["body"] as! String
-        cell.userlablbubble.text = self.data[indexPath.row]["user"] as! String
+        //   cell.usernamelbl.text = self.data[indexPath.row]["user"] as? String
+        cell.msgtxt.text = self.data[indexPath.row]
+
 
         /* if (cell.labeluser.text == user){
             
@@ -277,7 +288,7 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
     
 }
 
-*/
+
 
 extension ViewController:UITextFieldDelegate{
     
