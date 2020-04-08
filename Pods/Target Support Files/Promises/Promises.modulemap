@@ -1,4 +1,4 @@
-module Promise {
+framework module Promise {
   umbrella header "Promises-umbrella.h"
 
   export *

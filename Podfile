@@ -1,17 +1,19 @@
-platform :ios, '13.2'
+#platform :ios, '13.2'
 
 workspace 'EspaceCollaboratif.xcworkspace'
 
 target 'EspaceCollaboratif' do
   project 'EspaceCollaboratif.xcodeproj'
+    use_frameworks!
+
 
   pod 'JitsiMeetSDK'
   pod 'BlueSocket'
   pod 'SwiftyJSON' 
   pod 'Alamofire'
   pod 'Promises'
-    pod 'AlamofireImage'
-
+  pod 'AlamofireImage'
+  pod 'AppAuth'
 
 
 end

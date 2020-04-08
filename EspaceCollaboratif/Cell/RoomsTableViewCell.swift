@@ -13,6 +13,7 @@ class RoomsTableViewCell: UITableViewCell {
     @IBOutlet weak var RoomName: UILabel!
     @IBOutlet weak var viewcell: UIView!
     
+    @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var NumPoste: UILabel!
     @IBOutlet weak var UserName: UILabel!
     
@@ -24,7 +25,13 @@ class RoomsTableViewCell: UITableViewCell {
         gradientLayer.frame = viewcell.bounds
 
     }
-
+    
+     override func prepareForReuse() {
+          
+             viewcell.backgroundColor = nil
+               NumPoste?.text = ""
+             UserName?.text = ""
+         }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

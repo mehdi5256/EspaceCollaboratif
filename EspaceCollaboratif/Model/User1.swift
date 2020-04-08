@@ -9,11 +9,12 @@
 import Foundation
 
 struct User1: Codable{
-    var id: Int
+    var id: String
     var firstName: String
     var lastName: String
     var email: String
     var image: String
+    var rooms: Array<String>
     
 }
 

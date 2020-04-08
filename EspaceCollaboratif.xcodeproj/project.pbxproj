@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,9 @@
 		82565127241A69FA00B4875E /* ColorRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82565125241A69FA00B4875E /* ColorRooms.swift */; };
 		82565129241A6A1A00B4875E /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82565128241A6A1A00B4875E /* UserCollectionViewCell.swift */; };
 		8256513A241A79EB00B4875E /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82565139241A79EB00B4875E /* ChatTableViewCell.swift */; };
+		90B8829BE26BE4FD8DA445B0 /* Pods_EspaceCollaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CE3EBDCDC0497AB528E984 /* Pods_EspaceCollaboratif.framework */; };
+		9131E512243D1EA10081B324 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9131E511243D1EA10081B324 /* UserDefaultService.swift */; };
+		91454AE5243BA41200039A0F /* NetworkMehdi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91454AE4243BA41200039A0F /* NetworkMehdi.swift */; };
 		9153E3672422492200CAF859 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9153E3662422492200CAF859 /* Mutex.swift */; };
 		918616612422433F008DF1D6 /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918616602422433F008DF1D6 /* ConstantColor.swift */; };
 		918616632422438E008DF1D6 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918616622422438E008DF1D6 /* Movie.swift */; };
@@ -35,9 +38,9 @@
 		9186166D2422449E008DF1D6 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166C2422449E008DF1D6 /* Word.swift */; };
 		9186166F242244CF008DF1D6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166E242244CF008DF1D6 /* Util.swift */; };
 		91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB0A25242388410025752F /* AddRoomViewController.swift */; };
+		91E9CCCE243B523200804899 /* KeyCloakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E9CCCD243B523200804899 /* KeyCloakViewController.swift */; };
 		91F39FFD2424FB51009BDAD8 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */; };
 		91F39FFF24253EBC009BDAD8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFE24253EBC009BDAD8 /* UserService.swift */; };
-		AE0CC97208913F94E78C3F4C /* libPods-EspaceCollaboratif.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEFCA2C6C115F576491C752 /* libPods-EspaceCollaboratif.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +62,6 @@
 
 /* Begin PBXFileReference section */
 		070E473F4AE28A0025F3C5D6 /* Pods-EspaceCollaboratif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspaceCollaboratif.release.xcconfig"; path = "Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif.release.xcconfig"; sourceTree = "<group>"; };
-		1EEFCA2C6C115F576491C752 /* libPods-EspaceCollaboratif.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EspaceCollaboratif.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82125C5D241BDB44009817B7 /* Room1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room1.swift; sourceTree = "<group>"; };
 		82125C5F241BDBC5009817B7 /* User1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User1.swift; sourceTree = "<group>"; };
 		82125C61241BDC5A009817B7 /* Room2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room2.swift; sourceTree = "<group>"; };
@@ -85,6 +87,9 @@
 		82565125241A69FA00B4875E /* ColorRooms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorRooms.swift; path = ../../../ncnhlhjitsi/ncnhlhjitsi/View/ColorRooms.swift; sourceTree = "<group>"; };
 		82565128241A6A1A00B4875E /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		82565139241A79EB00B4875E /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		87CE3EBDCDC0497AB528E984 /* Pods_EspaceCollaboratif.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspaceCollaboratif.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9131E511243D1EA10081B324 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
+		91454AE4243BA41200039A0F /* NetworkMehdi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMehdi.swift; sourceTree = "<group>"; };
 		9153E3662422492200CAF859 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		918616602422433F008DF1D6 /* ConstantColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
 		918616622422438E008DF1D6 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 		9186166C2422449E008DF1D6 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		9186166E242244CF008DF1D6 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		91CB0A25242388410025752F /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
+		91E9CCCD243B523200804899 /* KeyCloakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCloakViewController.swift; sourceTree = "<group>"; };
 		91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
 		91F39FFE24253EBC009BDAD8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		95FD83A3CAD325341D167A8F /* Pods-EspaceCollaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspaceCollaboratif.debug.xcconfig"; path = "Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE0CC97208913F94E78C3F4C /* libPods-EspaceCollaboratif.a in Frameworks */,
+				90B8829BE26BE4FD8DA445B0 /* Pods_EspaceCollaboratif.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +134,7 @@
 		261A64E006FE3A1905330DFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1EEFCA2C6C115F576491C752 /* libPods-EspaceCollaboratif.a */,
+				87CE3EBDCDC0497AB528E984 /* Pods_EspaceCollaboratif.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,6 +144,8 @@
 			children = (
 				82125C64241BDCC9009817B7 /* RoomService.swift */,
 				91F39FFE24253EBC009BDAD8 /* UserService.swift */,
+				91454AE4243BA41200039A0F /* NetworkMehdi.swift */,
+				9131E511243D1EA10081B324 /* UserDefaultService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -208,6 +216,7 @@
 				8231A3E4241A65EB00A3EEF3 /* ViewController.swift */,
 				82565120241A695300B4875E /* RoomsViewController.swift */,
 				91CB0A25242388410025752F /* AddRoomViewController.swift */,
+				91E9CCCD243B523200804899 /* KeyCloakViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -423,18 +432,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif-frameworks.sh",
-				"${PODS_ROOT}/JitsiMeetSDK/Frameworks/JitsiMeet.framework",
-				"${PODS_ROOT}/JitsiMeetSDK/Frameworks/WebRTC.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JitsiMeet.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -449,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8231A3E5241A65EB00A3EEF3 /* ViewController.swift in Sources */,
+				91E9CCCE243B523200804899 /* KeyCloakViewController.swift in Sources */,
 				91F39FFF24253EBC009BDAD8 /* UserService.swift in Sources */,
 				91861665242243DC008DF1D6 /* EventBus.swift in Sources */,
 				82565121241A695300B4875E /* RoomsViewController.swift in Sources */,
@@ -459,12 +462,14 @@
 				82125C5E241BDB44009817B7 /* Room1.swift in Sources */,
 				8231A3EB241A65EB00A3EEF3 /* EspaceCollaboratif.xcdatamodeld in Sources */,
 				8231A3E3241A65EB00A3EEF3 /* SceneDelegate.swift in Sources */,
+				9131E512243D1EA10081B324 /* UserDefaultService.swift in Sources */,
 				8256513A241A79EB00B4875E /* ChatTableViewCell.swift in Sources */,
 				9186166F242244CF008DF1D6 /* Util.swift in Sources */,
 				82565123241A697C00B4875E /* RoomsTableViewCell.swift in Sources */,
 				825089B5241BB20D00B754EE /* Room.swift in Sources */,
 				91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */,
 				9186166724224427008DF1D6 /* Message.swift in Sources */,
+				91454AE5243BA41200039A0F /* NetworkMehdi.swift in Sources */,
 				91F39FFD2424FB51009BDAD8 /* AddUserTableViewCell.swift in Sources */,
 				82125C62241BDC5A009817B7 /* Room2.swift in Sources */,
 				9186166D2422449E008DF1D6 /* Word.swift in Sources */,

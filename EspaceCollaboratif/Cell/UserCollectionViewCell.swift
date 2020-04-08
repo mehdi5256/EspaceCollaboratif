@@ -27,4 +27,11 @@ class UserCollectionViewCell: UICollectionViewCell {
         
     }
     
+    override func prepareForReuse() {
+        
+        UserImage?.image = nil
+
+    
+       }
+    
 }

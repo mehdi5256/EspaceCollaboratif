@@ -12,7 +12,7 @@ import Alamofire
 class RoomService: NSObject{
     
     func getAll(completion: @escaping ([Room1]) -> Void) {
-        AF.request("http://cf36a5d0.ngrok.io/room").responseJSON{
+        AF.request(SelectAllRoomsURL).responseJSON{
                    response in
                 let tvShowsArray = (response.value as! NSArray)
             var rooms: [Room1] = []

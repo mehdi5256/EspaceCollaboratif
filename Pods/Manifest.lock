@@ -2,6 +2,11 @@ PODS:
   - Alamofire (5.0.2)
   - AlamofireImage (4.0.3):
     - Alamofire (< 6.0.0, >= 5.0.2)
+  - AppAuth (1.3.0):
+    - AppAuth/Core (= 1.3.0)
+    - AppAuth/ExternalUserAgent (= 1.3.0)
+  - AppAuth/Core (1.3.0)
+  - AppAuth/ExternalUserAgent (1.3.0)
   - BlueSocket (1.0.52)
   - JitsiMeetSDK (2.6.1)
   - Promises (2.0.4)
@@ -10,15 +15,17 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - AppAuth
   - BlueSocket
   - JitsiMeetSDK
   - Promises
   - SwiftyJSON
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
+    - AppAuth
     - BlueSocket
     - JitsiMeetSDK
     - Promises
@@ -27,11 +34,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
   AlamofireImage: 3d1a2010519e58675318735580eb856e88840ff7
+  AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   BlueSocket: 1acd943acb07b55905291d608649fcfbf8cbd57d
   JitsiMeetSDK: 8ff0aea05c63c84ecffe23f6bc731e232a0b378a
   Promises: fcb83dc6be43294a8d30c343636ed1a45a8d2e0a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 6c3e807dda25581e7a52c920bf8e173930c06c0e
+PODFILE CHECKSUM: f0d0a2611c48db22f131154433f1aa4156e8a35c
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.9.1

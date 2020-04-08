@@ -9,10 +9,14 @@
 import UIKit
 import CoreData
 import JitsiMeet
-
+import AppAuth
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+var currentAuthorizationFlow: OIDExternalUserAgentSession?
+
 
     var window: UIWindow?
 
@@ -21,6 +25,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let launchOptions = launchOptions else { return false }
         return JitsiMeet.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
+    
+    
+    // KeyCloak methods
+     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+          if currentAuthorizationFlow?.resumeExternalUserAgentFlow(with: url) ?? false {
+              currentAuthorizationFlow = nil
+              print("SSO STUFF")
+            return JitsiMeet.sharedInstance().application(app, open: url, options: options)
+
+           //   return true
+          } else {
+              return false
+          }
+      }
+       
+       func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+           return
+       }
+    
+    
 
     // MARK: - Linking delegate methods
 
@@ -30,9 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return JitsiMeet.sharedInstance().application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+/* func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return JitsiMeet.sharedInstance().application(app, open: url, options: options)
-    }
+
+    } */
 
     // MARK: - Core Data stack
 

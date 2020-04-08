@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,11 +12,44 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="k8e-F7-cNT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="92297926_517385018954764_342776602544832512_n" translatesAutoresizingMaskIntoConstraints="NO" id="nqA-7V-v1D">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accretio-logo" translatesAutoresizingMaskIntoConstraints="NO" id="eFl-1t-ce3">
+                                <rect key="frame" x="16" y="80" width="343" height="105"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="105" id="OJV-ae-9Oz"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Espace Collaboratif" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNV-bn-RaA">
+                                <rect key="frame" x="47.5" y="177" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="phI-RL-z8r"/>
+                                    <constraint firstAttribute="height" constant="40" id="sj4-QL-INk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Black" family="Snell Roundhand" pointSize="24"/>
+                                <color key="textColor" red="0.35642327359999998" green="0.25963750429999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nqA-7V-v1D" firstAttribute="leading" secondItem="aLD-7A-GM6" secondAttribute="leading" id="1LV-tu-9sQ"/>
+                            <constraint firstItem="eFl-1t-ce3" firstAttribute="leading" secondItem="aLD-7A-GM6" secondAttribute="leading" constant="16" id="2cn-T2-Av0"/>
+                            <constraint firstItem="fNV-bn-RaA" firstAttribute="centerX" secondItem="k8e-F7-cNT" secondAttribute="centerX" id="60l-2O-OXq"/>
+                            <constraint firstItem="fNV-bn-RaA" firstAttribute="centerX" secondItem="eFl-1t-ce3" secondAttribute="centerX" id="Bv0-au-KLM"/>
+                            <constraint firstItem="aLD-7A-GM6" firstAttribute="bottom" secondItem="nqA-7V-v1D" secondAttribute="bottom" id="Kxd-Ri-SfW"/>
+                            <constraint firstItem="nqA-7V-v1D" firstAttribute="top" secondItem="aLD-7A-GM6" secondAttribute="top" id="NoH-6p-H9u"/>
+                            <constraint firstItem="nqA-7V-v1D" firstAttribute="top" secondItem="k8e-F7-cNT" secondAttribute="top" id="YEU-E4-CO3"/>
+                            <constraint firstItem="eFl-1t-ce3" firstAttribute="top" secondItem="aLD-7A-GM6" secondAttribute="top" constant="80" id="l9g-y6-KwQ"/>
+                            <constraint firstItem="fNV-bn-RaA" firstAttribute="top" secondItem="aLD-7A-GM6" secondAttribute="top" constant="177" id="uxl-rH-Nir"/>
+                            <constraint firstItem="aLD-7A-GM6" firstAttribute="trailing" secondItem="nqA-7V-v1D" secondAttribute="trailing" id="vSq-7v-iB9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aLD-7A-GM6"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,4 +57,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="92297926_517385018954764_342776602544832512_n" width="1400" height="2500"/>
+        <image name="accretio-logo" width="519" height="173"/>
+    </resources>
 </document>

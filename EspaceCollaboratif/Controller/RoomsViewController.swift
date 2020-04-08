@@ -24,6 +24,8 @@ class RoomsViewController: UIViewController {
     let roomService = RoomService()
     
     
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -32,11 +34,13 @@ class RoomsViewController: UIViewController {
         fetchRooms()
         
          }
-    
+  
     func fetchRooms(){
         roomService.getAll(){ (rooms) in
             self.roomsArray = rooms
+        //    print (self.roomsArray)
             self.tv.reloadData()
+
         }
     }
     
@@ -65,27 +69,30 @@ extension RoomsViewController:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.roomsArray.count
+        return roomsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RoomsTableViewCell
             else{
                 return UITableViewCell()
         }
-        
-        
+    
         cell.RoomName.text = self.roomsArray[indexPath.row].name!
         cell.UserName.text = self.roomsArray[indexPath.row].subject!
         cell.NumPoste.text  =  (self.roomsArray[indexPath.row].id!).description
         cell.selectionStyle = .none
-        usersCell = roomsArray[indexPath.row].users
+        self.usersCell = roomsArray[indexPath.row].users
+        
+        
+       // print (usersCell.count)
 
+     //   print(usersCell)
         
         
         
-        let frequency = indexPath.row % 10;
+      let frequency = indexPath.row % 10;
         switch (frequency) {
         case 0:
             cell.setGradientBackground(colorOne: Colors.skyblue, colorTwo: Colors.skyblue2)
@@ -100,6 +107,7 @@ extension RoomsViewController:UITableViewDataSource{
             
         case 3:
             cell.setGradientBackground(colorOne: Colors.orange1, colorTwo: Colors.orange2)
+         break;
         case 4:
             cell.setGradientBackground(colorOne: Colors.lightGrey, colorTwo: Colors.veryDarkGrey)
             break;
@@ -121,43 +129,38 @@ extension RoomsViewController: UICollectionViewDataSource,UICollectionViewDelega
     
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return self.usersCell.count
-       return 4
-        
-        
-        
-    }
+        return usersCell.count
+        }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //print(usersCell.count)
+
         
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
-            else{
-                return UserCollectionViewCell()
-        }
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
+            
         
 
             
         let image = self.usersCell[indexPath.row].image
        
-        cell.UserImage.af.setImage(withURL: URL(string: image)!)
+        cell!.UserImage.af.setImage(withURL: URL(string: image)!)
         
         
         
-        if (indexPath.row) == 3{
+        if (usersCell.count) == 5 && (indexPath.row) == 3 {
             
-            cell.lblnmbruser.isHidden = false
-            cell.lblnmbruser.text = "+" + (usersCell.count-4).description
+            cell!.lblnmbruser.isHidden = false
+            cell!.lblnmbruser.text = "+" + (usersCell.count-4).description
             
         }
         if (indexPath.row) >= 4{
             
-            cell.isHidden = true
+            cell!.isHidden = true
             
         }
      
         
-        return cell
+        return cell!
         
     }
     
@@ -198,13 +201,13 @@ extension RoomsViewController:UITableViewDelegate{
             let DVC = segue.destination as! ViewController
             let indice = sender as! IndexPath
             //let showsDict = roomsArray[indice.row] as! Dictionary<String,Any>
-            DVC.name = roomsArray[indice.row].name
-            //DVC.name = showsDict["name"] as? String
+            DVC.nomroom = roomsArray[indice.row].name
+            DVC.idroom = roomsArray[indice.row].id
             //DVC.overview = showsDict["summary"] as! String
            // let imageDict = showsDict["image"] as! Dictionary<String,String>
            // DVC.image = imageDict["medium"] as! String
             // DVC.image = images[indice.row]
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.name , style: .plain, target: nil, action: nil)
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
             
             
         }

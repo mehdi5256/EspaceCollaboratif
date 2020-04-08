@@ -109,7 +109,7 @@ class AddRoomViewController: UIViewController {
       //  print(selectarrayusers.count)
 
         
-      let myUrl = "http://cf36a5d0.ngrok.io/room";
+   //   let myUrl = "http://268fe392.ngrok.io/room";
         
         let nomroom = RoomName.text;
                let description = Subject.text;
@@ -127,7 +127,7 @@ class AddRoomViewController: UIViewController {
  
        
         
-        AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
+        AF.request(SelectAllRoomsURL, method: .post, parameters: parameters,encoding: JSONEncoding.init())
         .responseJSON { response in
             print(response.request)
             print(response.response)

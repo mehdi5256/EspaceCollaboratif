@@ -1,4 +1,4 @@
-module Pods_EspaceCollaboratif {
+framework module Pods_EspaceCollaboratif {
   umbrella header "Pods-EspaceCollaboratif-umbrella.h"
 
   export *

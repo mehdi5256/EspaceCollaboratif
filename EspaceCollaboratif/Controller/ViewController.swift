@@ -9,6 +9,7 @@
 import UIKit
 import JitsiMeet
 import SwiftyJSON
+import Alamofire
 
 
 
@@ -17,7 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var message: UITextField!
     
     @IBOutlet weak var tv: UITableView!
-    var name:String?
+    var nomroom:String?
+    var idroom:Int!
+
     // debut jitsi
     
     fileprivate var pipViewCoordinator: PiPViewCoordinator?
@@ -29,10 +32,36 @@ class ViewController: UIViewController {
     var words = [String: Word]()
      var eventBus:EventBus!
      var data:[String] = []
-     var user = "mehdi"
+     var usernamecell = ""
+    var imgcell = ""
+
+    
      
     //fin chat
     
+    
+    //debut user logged
+    var Userlogged: User1!
+    let userservice = UserService()
+    
+    let fn = UserDefaultService.firstNameUD
+    let ln = UserDefaultService.lasttNameUD
+    let id = UserDefaultService.idUD
+    let emaaail = UserDefaultService.emailUD
+    let photoprofil = UserDefaultService.IMGUD
+    
+   
+    
+ /*   func fetchUserLogged(){
+           userservice.getUserLogged{ (userloggg) in
+               self.Userlogged = userloggg
+           print (self.Userlogged)
+               self.tv.reloadData()
+
+           }
+       }
+ */
+
   /*  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 return 11
 
@@ -60,7 +89,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        print(idroom!)
         
+        // logged user
+        
+        
+      //  fetchUserLogged()
+        
+       /* let udd = UserDefaults.standard.string(forKey: "ud")
+        print(udd)
+        */
+        
+        //end logged user
 
         
         stackbg.layer.cornerRadius = 10
@@ -73,7 +113,7 @@ class ViewController: UIViewController {
               
                
                
-             eventBus = EventBus(host: "0.tcp.ngrok.io", port: 12362)
+             eventBus = EventBus(host: eventbusURL, port: portNumber)
                eventBus.register(errorHandler: { print($0) })
                do {
                   try eventBus.connect()
@@ -98,28 +138,36 @@ class ViewController: UIViewController {
                // register a listener to store the reversed words
                let _ = try! eventBus.register(address: "chat.to.client") {
                 
-                let obj = $0.body["body"].description
-                
-                do{
-                    DispatchQueue.main.async {
-                        
-                                       //print(obj)
-                                       self.data.append(obj)
-                                       self.tv.reloadData()
-                                     
-                        
-                        
-                    }
+                if ($0.body["room_id"].intValue == self.idroom!){
                     
-                }catch{
+                    let obj = $0.body["body"].description
+
+                    do{
+                    DispatchQueue.main.async {
+                                           
+                    //print(obj)
+                    self.data.append(obj)
+                    self.tv.reloadData()
+                                                        
+                                           
+                            }
+                                       
+                                   }catch{
+                                       
+                                   }
                     
                 }
+                
+                
+               
 
                 
+                self.usernamecell = ($0.body["user"].description)
+                self.imgcell = ($0.body["user_img"].description)
                 
-                
-              //  print($0.body["body"])
-               
+                print($0.body["user"])
+                print($0.body["user_img"])
+
                    
                    
                
@@ -167,8 +215,8 @@ extension ViewController: JitsiMeetViewDelegate {
                      builder.welcomePageEnabled = true
                          
                          builder.welcomePageEnabled = false
-                         builder.serverURL = (URL(string: "https://mobile-int.accretio.io:8443/"))
-                        builder.room = self.name
+                         builder.serverURL = (URL(string: jitsiURL))
+                        builder.room = self.nomroom
                       
                       self.navigationController?.isNavigationBarHidden = true
 
@@ -217,9 +265,12 @@ extension ViewController{
     
     @IBAction func Send(_ sender: Any) {
         
-        try! eventBus.send(to: "chat.to.server", body: [ "user":"mehdi","body":message.text! ])
+        
+        
+        try! eventBus.send(to: "chat.to.server", body: ["type":"send","address":"chat.to.server","headers":[],"user":fn + " " + ln,"user_img":photoprofil,"room_id":idroom!,"body":message.text! ])
               message.text = ""
-       }
+        
+    }
     
  /*   try! eventBus.send(to: "chat.to.server", body: [ "user":"aziz","body":("{\"user\":\"" + self.user + "\",\"body\":\"" + message.text! + "\"}") ])
     message.text = ""
@@ -260,6 +311,12 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
        // let userLabel = contentview?.viewWithTag(2) as! UILabel
         //   cell.usernamelbl.text = self.data[indexPath.row]["user"] as? String
         cell.msgtxt.text = self.data[indexPath.row]
+      //  cell.usernamelbl.text = self.Userlogged[indexPath.row].firstName
+        
+      //  let image = self.Userlogged[indexPath.].image
+
+
+      //  cell.imguser.af.setImage(withURL: URL(string: image)!)
 
 
         /* if (cell.labeluser.text == user){
