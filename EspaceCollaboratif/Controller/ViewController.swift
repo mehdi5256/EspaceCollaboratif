@@ -17,6 +17,7 @@ import Alamofire
 class ViewController: UIViewController {
     @IBOutlet weak var message: UITextField!
     
+    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var tv: UITableView!
     var nomroom:String?
     var idroom:Int!
@@ -34,6 +35,8 @@ class ViewController: UIViewController {
      var data:[String] = []
      var usernamecell = ""
     var imgcell = ""
+    
+    var messages: [MessageChat] = []
 
     
      
@@ -90,7 +93,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         print(idroom!)
-        
+        navigationController?.navigationBar.tintColor = .white
+
         // logged user
         
         
@@ -140,13 +144,17 @@ class ViewController: UIViewController {
                 
                 if ($0.body["room_id"].intValue == self.idroom!){
                     
+                    
                     let obj = $0.body["body"].description
-
+                    let msgs: MessageChat!
+                    msgs = MessageChat(nomuser: $0.body["user"].description, imageuser: $0.body["user_img"].description, messages: $0.body["body"].description)
                     do{
                     DispatchQueue.main.async {
+                        
+                     
                                            
                     //print(obj)
-                    self.data.append(obj)
+                        self.messages.append(msgs)
                     self.tv.reloadData()
                                                         
                                            
@@ -162,14 +170,14 @@ class ViewController: UIViewController {
                
 
                 
-                self.usernamecell = ($0.body["user"].description)
+              /*  self.usernamecell = ($0.body["user"].description)
                 self.imgcell = ($0.body["user_img"].description)
                 
                 print($0.body["user"])
                 print($0.body["user_img"])
 
                    
-                   
+                   */
                
                }
                
@@ -296,7 +304,7 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return messages.count
 
     }
     
@@ -305,18 +313,12 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ChatTableViewCell
                          else{
                              return ChatTableViewCell()
-                     }
-      //  let contentview = cell.viewWithTag(0)
-      //  let chat = cell.txtmsg
-       // let userLabel = contentview?.viewWithTag(2) as! UILabel
-        //   cell.usernamelbl.text = self.data[indexPath.row]["user"] as? String
-        cell.msgtxt.text = self.data[indexPath.row]
-      //  cell.usernamelbl.text = self.Userlogged[indexPath.row].firstName
-        
-      //  let image = self.Userlogged[indexPath.].image
-
-
-      //  cell.imguser.af.setImage(withURL: URL(string: image)!)
+      
+        }
+        cell.usernamelbl.text = self.messages[indexPath.row].nomuser
+        cell.msgtxt.text = self.messages[indexPath.row].messages
+        let image = messages[indexPath.row].imageuser
+        cell.imguser.af.setImage(withURL: URL(string: image)!)
 
 
         /* if (cell.labeluser.text == user){

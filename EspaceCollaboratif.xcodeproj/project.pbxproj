@@ -27,6 +27,7 @@
 		82565129241A6A1A00B4875E /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82565128241A6A1A00B4875E /* UserCollectionViewCell.swift */; };
 		8256513A241A79EB00B4875E /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82565139241A79EB00B4875E /* ChatTableViewCell.swift */; };
 		90B8829BE26BE4FD8DA445B0 /* Pods_EspaceCollaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CE3EBDCDC0497AB528E984 /* Pods_EspaceCollaboratif.framework */; };
+		9105AB39243E07FB00C8CECF /* MessageChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105AB38243E07FB00C8CECF /* MessageChat.swift */; };
 		9131E512243D1EA10081B324 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9131E511243D1EA10081B324 /* UserDefaultService.swift */; };
 		91454AE5243BA41200039A0F /* NetworkMehdi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91454AE4243BA41200039A0F /* NetworkMehdi.swift */; };
 		9153E3672422492200CAF859 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9153E3662422492200CAF859 /* Mutex.swift */; };
@@ -88,6 +89,7 @@
 		82565128241A6A1A00B4875E /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		82565139241A79EB00B4875E /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		87CE3EBDCDC0497AB528E984 /* Pods_EspaceCollaboratif.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspaceCollaboratif.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9105AB38243E07FB00C8CECF /* MessageChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageChat.swift; sourceTree = "<group>"; };
 		9131E511243D1EA10081B324 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
 		91454AE4243BA41200039A0F /* NetworkMehdi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMehdi.swift; sourceTree = "<group>"; };
 		9153E3662422492200CAF859 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				82125C5F241BDBC5009817B7 /* User1.swift */,
 				82125C61241BDC5A009817B7 /* Room2.swift */,
 				918616622422438E008DF1D6 /* Movie.swift */,
+				9105AB38243E07FB00C8CECF /* MessageChat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				9186166D2422449E008DF1D6 /* Word.swift in Sources */,
 				9153E3672422492200CAF859 /* Mutex.swift in Sources */,
 				9186166B24224481008DF1D6 /* Response.swift in Sources */,
+				9105AB39243E07FB00C8CECF /* MessageChat.swift in Sources */,
 				82125C60241BDBC5009817B7 /* User1.swift in Sources */,
 				918616632422438E008DF1D6 /* Movie.swift in Sources */,
 				82565129241A6A1A00B4875E /* UserCollectionViewCell.swift in Sources */,
