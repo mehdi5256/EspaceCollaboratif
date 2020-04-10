@@ -31,6 +31,7 @@
 		9131E512243D1EA10081B324 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9131E511243D1EA10081B324 /* UserDefaultService.swift */; };
 		91454AE5243BA41200039A0F /* NetworkMehdi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91454AE4243BA41200039A0F /* NetworkMehdi.swift */; };
 		9153E3672422492200CAF859 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9153E3662422492200CAF859 /* Mutex.swift */; };
+		91851C53243FF42F00D743B9 /* ChatReceptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91851C52243FF42F00D743B9 /* ChatReceptionTableViewCell.swift */; };
 		918616612422433F008DF1D6 /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918616602422433F008DF1D6 /* ConstantColor.swift */; };
 		918616632422438E008DF1D6 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918616622422438E008DF1D6 /* Movie.swift */; };
 		91861665242243DC008DF1D6 /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91861664242243DC008DF1D6 /* EventBus.swift */; };
@@ -93,6 +94,7 @@
 		9131E511243D1EA10081B324 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
 		91454AE4243BA41200039A0F /* NetworkMehdi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMehdi.swift; sourceTree = "<group>"; };
 		9153E3662422492200CAF859 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
+		91851C52243FF42F00D743B9 /* ChatReceptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatReceptionTableViewCell.swift; sourceTree = "<group>"; };
 		918616602422433F008DF1D6 /* ConstantColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
 		918616622422438E008DF1D6 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		91861664242243DC008DF1D6 /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				82565128241A6A1A00B4875E /* UserCollectionViewCell.swift */,
 				82565139241A79EB00B4875E /* ChatTableViewCell.swift */,
 				91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */,
+				91851C52243FF42F00D743B9 /* ChatReceptionTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				82125C62241BDC5A009817B7 /* Room2.swift in Sources */,
 				9186166D2422449E008DF1D6 /* Word.swift in Sources */,
 				9153E3672422492200CAF859 /* Mutex.swift in Sources */,
+				91851C53243FF42F00D743B9 /* ChatReceptionTableViewCell.swift in Sources */,
 				9186166B24224481008DF1D6 /* Response.swift in Sources */,
 				9105AB39243E07FB00C8CECF /* MessageChat.swift in Sources */,
 				82125C60241BDBC5009817B7 /* User1.swift in Sources */,

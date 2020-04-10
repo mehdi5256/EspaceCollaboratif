@@ -273,10 +273,13 @@ extension ViewController{
     
     @IBAction func Send(_ sender: Any) {
         
+        if  (message.text != ""){
+            try! eventBus.send(to: "chat.to.server", body: ["type":"send","address":"chat.to.server","headers":[],"user":fn + " " + ln,"user_img":photoprofil,"room_id":idroom!,"body":message.text! ])
+                         message.text = ""
+            
+        }
         
-        
-        try! eventBus.send(to: "chat.to.server", body: ["type":"send","address":"chat.to.server","headers":[],"user":fn + " " + ln,"user_img":photoprofil,"room_id":idroom!,"body":message.text! ])
-              message.text = ""
+       
         
     }
     
@@ -315,31 +318,34 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
                              return ChatTableViewCell()
       
         }
-        cell.usernamelbl.text = self.messages[indexPath.row].nomuser
-        cell.msgtxt.text = self.messages[indexPath.row].messages
-        let image = messages[indexPath.row].imageuser
-        cell.imguser.af.setImage(withURL: URL(string: image)!)
-
-
-        /* if (cell.labeluser.text == user){
+        guard let cell3 = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as? ChatReceptionTableViewCell
+                           else{
+                               return ChatReceptionTableViewCell()
+        
+          }
+        
+        if (self.messages[indexPath.row].nomuser == fn + " " + ln ){
             
-            
-                       //cell.bibl.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            cell.stc.alignment = .trailing
+            cell.usernamelbl.text = self.messages[indexPath.row].nomuser
+            cell.msgtxt.text = self.messages[indexPath.row].messages
+            let image = messages[indexPath.row].imageuser
+            cell.imguser.af.setImage(withURL: URL(string: image)!)
+            return cell
 
-                       
         }
         else {
+            cell3.usernamelbl.text = self.messages[indexPath.row].nomuser
+            cell3.msgtxt.text = self.messages[indexPath.row].messages
+            let image = messages[indexPath.row].imageuser
+            cell3.imguser.af.setImage(withURL: URL(string: image)!)
+            return cell
+
             
-         
-            
-            cell.bibl.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-            cell.stc.alignment = .leading
+        }
+        
 
 
-            
-        }*/
-        return cell
+      
 
     }
     
