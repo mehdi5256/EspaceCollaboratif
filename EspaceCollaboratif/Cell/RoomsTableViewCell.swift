@@ -26,12 +26,9 @@ class RoomsTableViewCell: UITableViewCell {
 
     }
     
-     override func prepareForReuse() {
-          
-             viewcell.backgroundColor = nil
-               NumPoste?.text = ""
-             UserName?.text = ""
-         }
+//     override func prepareForReuse() {
+//       self.cv.reloadData()
+//         }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

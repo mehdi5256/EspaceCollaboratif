@@ -39,7 +39,7 @@ class ChatReceptionTableViewCell: UITableViewCell {
                       
                       
 
-                  viewleft.roundCorners([.topRight, .topRight] , radius: 10)
+                  viewleft.roundCorners([.topLeft, .topLeft] , radius: 10)
 
 
 

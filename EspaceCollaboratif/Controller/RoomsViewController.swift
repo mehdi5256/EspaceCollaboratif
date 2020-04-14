@@ -135,32 +135,31 @@ extension RoomsViewController: UICollectionViewDataSource,UICollectionViewDelega
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //print(usersCell.count)
 
-        
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
-            
-        
-
-            
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
+                   else{
+                       return UserCollectionViewCell()
+               }
+             
         let image = self.usersCell[indexPath.row].image
        
-        cell!.UserImage.af.setImage(withURL: URL(string: image)!)
+        cell.UserImage.af.setImage(withURL: URL(string: image)!)
         
         
         
-        if (usersCell.count) == 5 && (indexPath.row) == 3 {
-            
-            cell!.lblnmbruser.isHidden = false
-            cell!.lblnmbruser.text = "+" + (usersCell.count-4).description
-            
+        if (indexPath.row) == 3 {
+
+            cell.lblnmbruser.isHidden = false
+            cell.lblnmbruser.text = "+" + (usersCell.count-4).description
+
         }
         if (indexPath.row) >= 4{
             
-            cell!.isHidden = true
+            cell.isHidden = true
             
         }
      
         
-        return cell!
+        return cell
         
     }
     
@@ -202,7 +201,7 @@ extension RoomsViewController:UITableViewDelegate{
             let indice = sender as! IndexPath
             //let showsDict = roomsArray[indice.row] as! Dictionary<String,Any>
             DVC.nomroom = roomsArray[indice.row].name
-            DVC.idroom = roomsArray[indice.row].id
+            ViewController.idroom = roomsArray[indice.row].id
             //DVC.overview = showsDict["summary"] as! String
            // let imageDict = showsDict["image"] as! Dictionary<String,String>
            // DVC.image = imageDict["medium"] as! String

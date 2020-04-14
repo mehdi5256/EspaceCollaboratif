@@ -40,6 +40,9 @@
 		9186166D2422449E008DF1D6 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166C2422449E008DF1D6 /* Word.swift */; };
 		9186166F242244CF008DF1D6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186166E242244CF008DF1D6 /* Util.swift */; };
 		91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB0A25242388410025752F /* AddRoomViewController.swift */; };
+		91CCA1582445F42000790D0A /* ChatPersist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCA1572445F42000790D0A /* ChatPersist.swift */; };
+		91CCA15A2446009200790D0A /* msgtest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCA1592446009200790D0A /* msgtest.swift */; };
+		91CCA15C24460E4500790D0A /* corbeille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCA15B24460E4500790D0A /* corbeille.swift */; };
 		91E9CCCE243B523200804899 /* KeyCloakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E9CCCD243B523200804899 /* KeyCloakViewController.swift */; };
 		91F39FFD2424FB51009BDAD8 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */; };
 		91F39FFF24253EBC009BDAD8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFE24253EBC009BDAD8 /* UserService.swift */; };
@@ -103,6 +106,9 @@
 		9186166C2422449E008DF1D6 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		9186166E242244CF008DF1D6 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		91CB0A25242388410025752F /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
+		91CCA1572445F42000790D0A /* ChatPersist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPersist.swift; sourceTree = "<group>"; };
+		91CCA1592446009200790D0A /* msgtest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = msgtest.swift; sourceTree = "<group>"; };
+		91CCA15B24460E4500790D0A /* corbeille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corbeille.swift; sourceTree = "<group>"; };
 		91E9CCCD243B523200804899 /* KeyCloakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCloakViewController.swift; sourceTree = "<group>"; };
 		91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
 		91F39FFE24253EBC009BDAD8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 				91F39FFE24253EBC009BDAD8 /* UserService.swift */,
 				91454AE4243BA41200039A0F /* NetworkMehdi.swift */,
 				9131E511243D1EA10081B324 /* UserDefaultService.swift */,
+				91CCA1572445F42000790D0A /* ChatPersist.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -246,6 +253,7 @@
 				82125C61241BDC5A009817B7 /* Room2.swift */,
 				918616622422438E008DF1D6 /* Movie.swift */,
 				9105AB38243E07FB00C8CECF /* MessageChat.swift */,
+				91CCA1592446009200790D0A /* msgtest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +276,7 @@
 				82565139241A79EB00B4875E /* ChatTableViewCell.swift */,
 				91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */,
 				91851C52243FF42F00D743B9 /* ChatReceptionTableViewCell.swift */,
+				91CCA15B24460E4500790D0A /* corbeille.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -458,6 +467,7 @@
 			files = (
 				8231A3E5241A65EB00A3EEF3 /* ViewController.swift in Sources */,
 				91E9CCCE243B523200804899 /* KeyCloakViewController.swift in Sources */,
+				91CCA15C24460E4500790D0A /* corbeille.swift in Sources */,
 				91F39FFF24253EBC009BDAD8 /* UserService.swift in Sources */,
 				91861665242243DC008DF1D6 /* EventBus.swift in Sources */,
 				82565121241A695300B4875E /* RoomsViewController.swift in Sources */,
@@ -471,9 +481,11 @@
 				9131E512243D1EA10081B324 /* UserDefaultService.swift in Sources */,
 				8256513A241A79EB00B4875E /* ChatTableViewCell.swift in Sources */,
 				9186166F242244CF008DF1D6 /* Util.swift in Sources */,
+				91CCA15A2446009200790D0A /* msgtest.swift in Sources */,
 				82565123241A697C00B4875E /* RoomsTableViewCell.swift in Sources */,
 				825089B5241BB20D00B754EE /* Room.swift in Sources */,
 				91CB0A26242388410025752F /* AddRoomViewController.swift in Sources */,
+				91CCA1582445F42000790D0A /* ChatPersist.swift in Sources */,
 				9186166724224427008DF1D6 /* Message.swift in Sources */,
 				91454AE5243BA41200039A0F /* NetworkMehdi.swift in Sources */,
 				91F39FFD2424FB51009BDAD8 /* AddUserTableViewCell.swift in Sources */,

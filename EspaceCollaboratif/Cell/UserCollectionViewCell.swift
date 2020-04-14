@@ -27,11 +27,16 @@ class UserCollectionViewCell: UICollectionViewCell {
         
     }
     
-    override func prepareForReuse() {
-        
-        UserImage?.image = nil
-
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//     //  UserImage.image = nil
+//
+//       // UICollectionView.reloadData()
+//       // image1.image = nil
+//
+//       }
+//    
     
-       }
+    
     
 }

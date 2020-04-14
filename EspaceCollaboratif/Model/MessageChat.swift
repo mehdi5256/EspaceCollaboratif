@@ -10,7 +10,18 @@ import Foundation
 
 struct MessageChat:Codable {
     
+    
+ //   var id: Int
     var nomuser: String
     var imageuser:String
     var messages:String
+//    var timestamp:String
+//    var type:String
+//    var users: User1
+
+        
+
+    
+    
+    
 }
