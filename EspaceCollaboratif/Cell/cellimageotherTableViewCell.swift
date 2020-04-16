@@ -10,46 +10,51 @@ import UIKit
 
 class cellimageotherTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imagechat: UIImageView!
-    @IBOutlet weak var viewleft: UIView!
-         @IBOutlet weak var viewright: UIView!
-      
-         @IBOutlet weak var message: UIStackView!
-         @IBOutlet weak var imguser: UIImageView!
-     @IBOutlet weak var usernamelbl: UILabel!
-     @IBOutlet weak var viewimg: UIView!
-         override func awakeFromNib() {
-             super.awakeFromNib()
-             // Initialization code
-         }
+    @IBOutlet weak var usernamelbl: UILabel!
+    @IBOutlet weak var viewimg: UIView!
+        
+        @IBOutlet weak var imgsend: UIImageView!
+        @IBOutlet weak var viewsendimg: UIView!
+        @IBOutlet weak var timestamp: UILabel!
+        @IBOutlet weak var viewleft: UIView!
+        @IBOutlet weak var viewright: UIView!
+        @IBOutlet weak var msgtxt: UITextView!
+        @IBOutlet weak var message: UIStackView!
+        @IBOutlet weak var imguser: UIImageView!
+        
+        override func awakeFromNib() {
+            super.awakeFromNib()
+            // Initialization code
+        }
 
-         override func setSelected(_ selected: Bool, animated: Bool) {
-             super.setSelected(selected, animated: animated)
+        override func setSelected(_ selected: Bool, animated: Bool) {
+            super.setSelected(selected, animated: animated)
 
-        imagechat.layer.cornerRadius = 10
-                     
-                     
-                     viewimg.layer.masksToBounds = false
-                            viewimg.layer.cornerRadius = viewimg.frame.height/2
-                            viewimg.clipsToBounds = true
-                     
-                     
-                     imguser.layer.masksToBounds = false
-                     imguser.layer.cornerRadius = imguser.frame.height/2
+       viewsendimg.layer.cornerRadius = 10
+        imgsend.layer.cornerRadius = 10
 
-                     imguser.clipsToBounds = true
-                     
-                     
+                    
+                    
+                    viewimg.layer.masksToBounds = false
+                           viewimg.layer.cornerRadius = viewimg.frame.height/2
+                           viewimg.clipsToBounds = true
+                    
+                    
+                    imguser.layer.masksToBounds = false
+                    imguser.layer.cornerRadius = imguser.frame.height/2
 
-                 viewleft.roundCorners([.topRight, .topRight] , radius: 10)
+                    imguser.clipsToBounds = true
+                    
+                    
+        //    viewright.roundCorners([.topLeft, .topLeft] , radius: 10)
+                viewleft.roundCorners([.topRight, .topRight] , radius: 10)
 
 
 
-                 }
-                 
-                 
+                }
+                
+                
 
-             }
+            }
 
-    
-
+   

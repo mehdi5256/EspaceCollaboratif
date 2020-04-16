@@ -13,7 +13,7 @@ import SwiftyJSON
 import Alamofire
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
     @IBOutlet weak var message: UITextField!
 
     @IBOutlet weak var BtnSideUp: UIButton!
@@ -62,8 +62,30 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackbg: UIView!
     
     
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+          // The info dictionary may contain multiple representations of the image. You want to use the original.
+          guard let selectedImage = info[.originalImage] as? UIImage else {
+              fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+          }
+    convertImageToBase64(selectedImage)
+          // Set photoImageView to display the selected image.
+        //  imgv.image = selectedImage
+
+          // Dismiss the picker.
+          dismiss(animated: true, completion: nil)
+      }
+    
+    
+    
+    
+    
+    
+    
     func getAllMsgs(completion: @escaping ([msgtest]) -> Void) {
-        AF.request("http://3cab59d9.ngrok.io/msg/room/" + String(idroom!)).responseJSON{
+        AF.request("http://9e9fd64a.ngrok.io/msg/room/" + String(idroom!)).responseJSON{
                    response in
           //  print(response)
                 let persistmsgarray = (response.value as! NSArray)
@@ -84,6 +106,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        imagePicker.delegate = self
+
 
       //  print(idroom!)
         navigationController?.navigationBar.tintColor = .white
@@ -115,7 +140,7 @@ class ViewController: UIViewController {
                 if ($0.body["room_id"].intValue == self.idroom!){
                     let msgs: msgtest!
 
-                    msgs = msgtest(body: $0.body["body"].description, file: nil, id: nil ,timestamp: nil, type: "TEXT", user: User1(id: self.iddd, firstName: self.fn, lastName: self.ln, email: self.emaaail, image: self.photoprofil, rooms:[]))
+                    msgs = msgtest(body: $0.body["body"].description, file: $0.body["file"].description, id: nil ,timestamp: nil, type: $0.body["type"].description, user: User1(id: self.iddd, firstName: self.fn, lastName: self.ln, email: self.emaaail, image: self.photoprofil, rooms:[]))
                         print($0.body[])
                     do{
                     DispatchQueue.main.async {
@@ -232,7 +257,7 @@ extension ViewController{
                        "user":["id":iddd]
 
                    ]
-                AF.request("http://3cab59d9.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                AF.request("http://9e9fd64a.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
                    .responseJSON { response in
                        print(response.request)
                        print(response.response)
@@ -318,7 +343,7 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
               cellimageother.imguser.af.setImage(withURL: URL(string: image)!)
             
             let imagechat = msgarray[indexPath.row].file
-            cellimageother.imagechat.af.setImage(withURL: URL(string: imagechat!)!)
+            cellimageother.imgsend.af.setImage(withURL: URL(string: imagechat!)!)
                                     
               return cellimageother
         }
@@ -356,7 +381,7 @@ extension ViewController:UITextFieldDelegate{
 }
 
 // Open gallery and upload image , file ,
-extension ViewController:UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+extension ViewController{
    
 
     
@@ -373,6 +398,8 @@ extension ViewController:UINavigationControllerDelegate, UIImagePickerController
                             let imagecontrooler = UIImagePickerController()
                                             imagecontrooler.delegate = self
                                             imagecontrooler.sourceType = .photoLibrary
+                
+                
                 
                                             self.present(self.imagePicker
                                                 , animated: true
@@ -412,61 +439,52 @@ extension ViewController:UINavigationControllerDelegate, UIImagePickerController
             
            // sheet.view.backgroundColor = .white
 
-
-
             present(sheet, animated: true, completion: nil)
         }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                         
-                         // The info dictionary may contain multiple representations of the image. You want to use the original.
-                         guard let selectedImage = info[.originalImage] as? UIImage else {
-                             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-                         }
-                   convertImageToBase64(selectedImage)
-                         // Set photoImageView to display the selected image.
-                       //  imgv.image = selectedImage
-                         
-                         // Dismiss the picker.
-                         dismiss(animated: true, completion: nil)
-                     }
+    
                
                func convertImageToBase64(_ image: UIImage) -> String {
                    let imageData:NSData = image.jpegData(compressionQuality: 0.4)! as NSData
                       let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-                   print(strBase64)
+                 //  print(strBase64)
+                
+
+            
+                
+                
+                 try! eventBus.send(to: "chat.to.server", body: ["type":"IMAGE","address":"chat.to.server","headers":[],"body":"","file":strBase64,"user":fn + " " + ln,"user_img":photoprofil,"room_id":self.idroom!])
                
                 
                 let parameters: [String: Any] = [
                 "type":"IMAGE",
                 "body":"",
-                "type":"TEXT",
                 "user":["id":iddd],
                 "room":["id":self.idroom],
-                "file":"http://2e553a5a.ngrok.io/toutou/data:image/jpeg;base64" + strBase64
+                "file":strBase64
                 ]
-                               AF.request("http://3cab59d9.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                               AF.request("http://9e9fd64a.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
                                   .responseJSON { response in
                                       print(response.request)
                                       print(response.response)
                                       print(response.result)}
                        //vider textfields
                       // message.text = ""
-
-                       
+//
+//
                 
                 
                    return strBase64
 
                }
                
-               func convertBase64ToImage(_ str: String) -> UIImage {
-                       let dataDecoded : Data = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
-                       let decodedimage = UIImage(data: dataDecoded)
-                   print(decodedimage)
-
-                       return decodedimage!
-               }
+//               func convertBase64ToImage(_ str: String) -> UIImage {
+//                       let dataDecoded : Data = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
+//                       let decodedimage = UIImage(data: dataDecoded)
+//                   print(decodedimage)
+//
+//                       return decodedimage!
+//               }
              
     }
 
