@@ -44,6 +44,8 @@
 		91CCA15A2446009200790D0A /* msgtest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCA1592446009200790D0A /* msgtest.swift */; };
 		91CCA15C24460E4500790D0A /* corbeille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCA15B24460E4500790D0A /* corbeille.swift */; };
 		91E9CCCE243B523200804899 /* KeyCloakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E9CCCD243B523200804899 /* KeyCloakViewController.swift */; };
+		91EA4CD624478FA6002858B2 /* cellimageotherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EA4CD524478FA6002858B2 /* cellimageotherTableViewCell.swift */; };
+		91EA4CD82447CECA002858B2 /* CellimageMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EA4CD72447CECA002858B2 /* CellimageMeTableViewCell.swift */; };
 		91F39FFD2424FB51009BDAD8 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */; };
 		91F39FFF24253EBC009BDAD8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F39FFE24253EBC009BDAD8 /* UserService.swift */; };
 /* End PBXBuildFile section */
@@ -110,6 +112,8 @@
 		91CCA1592446009200790D0A /* msgtest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = msgtest.swift; sourceTree = "<group>"; };
 		91CCA15B24460E4500790D0A /* corbeille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corbeille.swift; sourceTree = "<group>"; };
 		91E9CCCD243B523200804899 /* KeyCloakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCloakViewController.swift; sourceTree = "<group>"; };
+		91EA4CD524478FA6002858B2 /* cellimageotherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellimageotherTableViewCell.swift; sourceTree = "<group>"; };
+		91EA4CD72447CECA002858B2 /* CellimageMeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellimageMeTableViewCell.swift; sourceTree = "<group>"; };
 		91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
 		91F39FFE24253EBC009BDAD8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		95FD83A3CAD325341D167A8F /* Pods-EspaceCollaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspaceCollaboratif.debug.xcconfig"; path = "Target Support Files/Pods-EspaceCollaboratif/Pods-EspaceCollaboratif.debug.xcconfig"; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				91F39FFC2424FB51009BDAD8 /* AddUserTableViewCell.swift */,
 				91851C52243FF42F00D743B9 /* ChatReceptionTableViewCell.swift */,
 				91CCA15B24460E4500790D0A /* corbeille.swift */,
+				91EA4CD524478FA6002858B2 /* cellimageotherTableViewCell.swift */,
+				91EA4CD72447CECA002858B2 /* CellimageMeTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -474,7 +480,9 @@
 				82565127241A69FA00B4875E /* ColorRooms.swift in Sources */,
 				918616612422433F008DF1D6 /* ConstantColor.swift in Sources */,
 				8231A3E1241A65EB00A3EEF3 /* AppDelegate.swift in Sources */,
+				91EA4CD82447CECA002858B2 /* CellimageMeTableViewCell.swift in Sources */,
 				82125C65241BDCC9009817B7 /* RoomService.swift in Sources */,
+				91EA4CD624478FA6002858B2 /* cellimageotherTableViewCell.swift in Sources */,
 				82125C5E241BDB44009817B7 /* Room1.swift in Sources */,
 				8231A3EB241A65EB00A3EEF3 /* EspaceCollaboratif.xcdatamodeld in Sources */,
 				8231A3E3241A65EB00A3EEF3 /* SceneDelegate.swift in Sources */,
@@ -675,6 +683,7 @@
 				DEVELOPMENT_TEAM = WP8BP28JA8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = EspaceCollaboratif/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -695,6 +704,7 @@
 				DEVELOPMENT_TEAM = WP8BP28JA8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = EspaceCollaboratif/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

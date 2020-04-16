@@ -10,9 +10,8 @@ import Foundation
 
 struct msgtest:Codable {
    
-    var body:String
+    var body:String?
     var file:String?
-
     var id: Int?
     var timestamp:String?
     

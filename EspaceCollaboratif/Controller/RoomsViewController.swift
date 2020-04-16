@@ -201,7 +201,7 @@ extension RoomsViewController:UITableViewDelegate{
             let indice = sender as! IndexPath
             //let showsDict = roomsArray[indice.row] as! Dictionary<String,Any>
             DVC.nomroom = roomsArray[indice.row].name
-            ViewController.idroom = roomsArray[indice.row].id
+            DVC.idroom = roomsArray[indice.row].id
             //DVC.overview = showsDict["summary"] as! String
            // let imageDict = showsDict["image"] as! Dictionary<String,String>
            // DVC.image = imageDict["medium"] as! String
