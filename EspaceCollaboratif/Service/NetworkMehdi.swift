@@ -9,14 +9,14 @@
 import Foundation
     
 
-public var SelectAllRoomsURL = "http://9e9fd64a.ngrok.io/room"
-public var SelectAllUserURL = "http://9e9fd64a.ngrok.io/user"
+public var SelectAllRoomsURL = "http://8394dc06.ngrok.io/room"
+public var SelectAllUserURL = "http://8394dc06.ngrok.io/user"
 
 //keycloak
 
-public var tokenURL = URL(string: "http://6f862abe.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/token")!
+public var tokenURL = URL(string: "http://bb169bed.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/token")!
       
-public var authURL = URL(string: "http://6f862abe.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/auth")!
+public var authURL = URL(string: "http://bb169bed.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/auth")!
 
 public var redirectURL = URL(string: "accretio://mobile/loginsuccess")!
 
@@ -24,7 +24,7 @@ public var ClientSecret = "8e9c9737-7c84-4111-b2e9-c4d2479a2869"
 
 public var ClientId = "quarkus-app"
 
-public var loggedUser = "http://9e9fd64a.ngrok.io/user/me"
+public var loggedUser = "http://8394dc06.ngrok.io/user/me"
 
 
 // *************************
@@ -40,7 +40,7 @@ public var jitsiURL = "https://meet.jit.si/"
 
 public var eventbusURL = "0.tcp.ngrok.io"
 
-public var portNumber = 11043
+public var portNumber = 17162
 
 
 // perist chat msg
