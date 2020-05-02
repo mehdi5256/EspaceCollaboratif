@@ -1,20 +1,20 @@
-#platform :ios, '13.2'
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
 
-workspace 'EspaceCollaboratif.xcworkspace'
+target 'Espace_Collaboratif' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
 
-target 'EspaceCollaboratif' do
-  project 'EspaceCollaboratif.xcodeproj'
-    use_frameworks!
+  # Pods for Espace_Collaboratif
 
-
-  pod 'JitsiMeetSDK'
-  pod 'BlueSocket'
-  pod 'SwiftyJSON' 
-  pod 'Alamofire'
-  pod 'Promises'
-  pod 'AlamofireImage'
-  pod 'AppAuth'
-
+   pod 'Alamofire', '~> 5.0.0-beta.7'
+   pod 'PromisesSwift'
+   pod 'SwiftyJSON'
+   pod 'CRRefresh'
+   pod 'Kingfisher'
+   pod 'JitsiMeetSDK'
+   pod 'BlueSocket'
+   pod 'AppAuth'
 
 end
 

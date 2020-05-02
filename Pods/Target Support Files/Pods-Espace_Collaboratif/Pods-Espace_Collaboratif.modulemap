@@ -1,0 +1,6 @@
+framework module Pods_Espace_Collaboratif {
+  umbrella header "Pods-Espace_Collaboratif-umbrella.h"
+
+  export *
+  module * { export * }
+}
