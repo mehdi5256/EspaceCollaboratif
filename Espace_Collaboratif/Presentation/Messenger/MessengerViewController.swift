@@ -20,10 +20,38 @@ protocol MessengerDisplayLogic: class
     func displayrRoomByIdError(error: String)
     func displayPostMsgSucess(msg :[Messenger1])
     func displayPostMsgError(error: String)
+    func displayConnexionSuccess(result: String)
+    func displayError(error: String)
+    func displayMessenger(messenger:Messenger1)
+    
+    func displaySendMessageEventBus(result:String)
+    
+    
 }
 
 class MessengerViewController: UIViewController, MessengerDisplayLogic
 {
+    func displaySendMessageEventBus(result: String) {
+        print(result)
+    }
+    
+    func displayMessenger(messenger: Messenger1) {
+        print(messenger)
+        self.msgarray.append(messenger)
+        self.tv.reloadData()
+        self.scrolltobottom(animated: true)
+    }
+    
+    
+    func displayConnexionSuccess(result: String) {
+        print(result)
+        interactor?.registerMessenger(id: idroom)
+    }
+    
+    func displayError(error: String) {
+        print(error)
+    }
+    
     
   var interactor: MessengerBusinessLogic?
   var router: (NSObjectProtocol & MessengerRoutingLogic & MessengerDataPassing)?
@@ -111,6 +139,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
   {
     super.viewDidLoad()
     
+    
 
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -126,6 +155,9 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     interactor?.getRoomById(id: idroom)
     scrolltobottom(animated: false)
     btnlastrow.roundCorners([.topLeft, .bottomLeft] , radius: 8)
+    
+    interactor?.connect()
+
 
     message.delegate = self
     design()
@@ -136,6 +168,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     }
     
     @IBAction func BtnSend(_ sender: Any) {
+        interactor?.send(idroom: self.idroom, messagesend: message.text)
         
         interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
         designbuttonaftersend()

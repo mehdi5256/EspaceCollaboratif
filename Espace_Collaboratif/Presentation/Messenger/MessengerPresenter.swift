@@ -19,10 +19,37 @@ protocol MessengerPresentationLogic
     
     func presentPostMsgdSuccess(msg: [Messenger1])
    func presentPostMsgdError(error: String)
+    
+    func presentConnexionSuccess(result: String)
+    func presentError(error: String)
+    func presentMessenger(messenger:Messenger1)
+    func sendMessageEventBus(result:String)
+    
 }
 
 class MessengerPresenter: MessengerPresentationLogic
 {
+    func sendMessageEventBus(result: String) {
+        viewController?.displaySendMessageEventBus(result: result)
+    }
+    
+   
+    
+    func presentMessenger(messenger: Messenger1) {
+        
+        viewController?.displayMessenger(messenger:messenger)
+    }
+    
+    func presentConnexionSuccess(result: String) {
+        viewController?.displayConnexionSuccess(result:result)
+    }
+    
+    func presentError(error: String) {
+        viewController?.displayError(error:error)
+    }
+    
+   
+    
    
   
     

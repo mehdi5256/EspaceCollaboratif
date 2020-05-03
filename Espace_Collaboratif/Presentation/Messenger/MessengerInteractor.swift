@@ -16,6 +16,10 @@ protocol MessengerBusinessLogic
 {
     func getRoomById (id:Int)
     func PostMsg(type: String, file: String, room: [String: Any], user: [String: Any], body: String)
+    func connect()
+    func registerMessenger(id:Int)
+    func send(idroom: Int, messagesend:String)
+    
 }
 
 protocol MessengerDataStore
@@ -25,6 +29,49 @@ protocol MessengerDataStore
 
 class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
 {
+    func send(idroom: Int, messagesend:String) {
+        
+        let body : Dictionary<String,Any> = ["type":"TEXT","address":"chat.to.server","headers":[],"body":messagesend,"file":"","user":UserDefaultLogged.firstNameUD + " " + UserDefaultLogged.lasttNameUD,"user_img":UserDefaultLogged.IMGUD,"room_id":idroom ]
+
+        worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+                  result in
+                  self.presenter?.sendMessageEventBus(result: result)
+               }.catch { error in
+                  self.presenter?.presentError(error: error.localizedDescription)
+                  print("got error")
+               }
+    }
+    
+    func connect() {
+         eventbus = EventBus(host: Keys.MobileIntegrationServer.baseURLEventBus , port: Keys.MobileIntegrationServer.basePortEventBus)
+        
+        worker = MessengerWorker()
+     
+        worker?.connect(eventBus: eventbus).then {
+           result in
+           self.presenter?.presentConnexionSuccess(result: result)
+        }.catch { error in
+           self.presenter?.presentError(error: error.localizedDescription)
+           print("got error")
+        }
+    }
+    
+    func registerMessenger(id:Int){
+         let _ = try! eventbus.register(address: "chat.to.client") {
+            
+             if ($0.body["room_id"].intValue == id){
+                             //  let msgs: msgtest!
+                print($0.body)
+               self.worker?.presentMessenger(bodyJson: $0.body).then {
+                  messageQuestion in
+                     self.presenter?.presentMessenger(messenger: messageQuestion)
+                  }.catch { error in
+                     self.presenter?.presentError(error: error.localizedDescription )
+                  }
+             }
+         }
+      }
+    
     
     
  
@@ -32,6 +79,7 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
   var presenter: MessengerPresentationLogic?
   var worker: MessengerWorker?
   //var name: String = ""
+    var eventbus: EventBus!
   
   // MARK: Do something
     
