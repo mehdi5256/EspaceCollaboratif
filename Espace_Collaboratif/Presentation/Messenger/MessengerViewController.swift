@@ -132,6 +132,21 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     var idroom:Int!
     var msgarray:[Messenger1] = []
     let messageTextViewMaxHeight: CGFloat = 100
+    
+    
+    
+         override func viewWillAppear(_ animated: Bool) {
+               tv.register(UINib(nibName: "TextSenderCell", bundle: nil), forCellReuseIdentifier: "TextSenderCell")
+             tv.register(UINib(nibName: "TextReceiverCell", bundle: nil), forCellReuseIdentifier: "TextReceiverCell")
+             
+             tv.register(UINib(nibName: "ImageSenderCell", bundle: nil), forCellReuseIdentifier: "ImageSenderCell")
+             
+             tv.register(UINib(nibName: "ImageReceiverCell", bundle: nil), forCellReuseIdentifier: "ImageReceiverCell")
+                        
+             
+     
+     
+           }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -308,7 +323,7 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
 interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBase64)
                 
 //
-                interactor?.postImage(type: "IMAGE", body: "", user: ["id":UserDefaultLogged.idUD], room: ["id":self.idroom!], file: strBase64)
+//                interactor?.postImage(type: "IMAGE", body: "", user: ["id":UserDefaultLogged.idUD], room: ["id":self.idroom!], file: strBase64)
                 
                 
                 
@@ -316,20 +331,20 @@ interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBa
 
 //
 //
-//                let parameters: [String: Any] = [
-//                "type":"IMAGE",
-//                "body":"",
-//                "user":["id":UserDefaultLogged.idUD],
-//                "room":["id":self.idroom],
-//                "file":strBase64
-//                ]
-//                               AF.request("http://8f2eb1df.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
-//                                  .responseJSON { response in
-//                                      print(response.request)
-//                                      print(response.response)
-//                                      print(response.result)}
-//                       //vider textfields
-//                      // message.text = ""
+                let parameters: [String: Any] = [
+                "type":"IMAGE",
+                "body":"",
+                "user":["id":UserDefaultLogged.idUD],
+                "room":["id":self.idroom],
+                "file":strBase64
+                ]
+                               AF.request("http://35606b82.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                                  .responseJSON { response in
+                                      print(response.request)
+                                      print(response.response)
+                                      print(response.result)}
+                       //vider textfields
+                      // message.text = ""
 //
 //
                 
@@ -511,101 +526,92 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let celltextother = tableView.dequeueReusableCell(withIdentifier: "celltextother", for: indexPath) as? CellTextOther
-                         else{
-                             return CellTextOther()
-
-        }
-        guard let celltextme = tableView.dequeueReusableCell(withIdentifier: "celltextme", for: indexPath) as? CellTextMe
-                           else{
-                               return CellTextMe()
-
-          }
+         let TextSenderCell = tv.dequeueReusableCell(withIdentifier: "TextSenderCell", for: indexPath) as! TextSenderCell
         
-        guard let cellimageother = tableView.dequeueReusableCell(withIdentifier: "cellimageother", for: indexPath) as? CellImageOther
-                                  else{
-                                      return CellImageOther()
-
-                 }
+        let TextReceiverCell = tv.dequeueReusableCell(withIdentifier: "TextReceiverCell", for: indexPath) as! TextReceiverCell
         
-        guard let cellimageme = tableView.dequeueReusableCell(withIdentifier: "cellimgme", for: indexPath) as? CellimageMe
-                         else{
-                             return CellimageMe()
+        let ImageSenderCell = tv.dequeueReusableCell(withIdentifier: "ImageSenderCell", for: indexPath) as! ImageSenderCell
+                   
+        let ImageReceiverCell = tv.dequeueReusableCell(withIdentifier: "ImageReceiverCell", for: indexPath) as! ImageReceiverCell
 
-        }
+        
         
         
 
         if (self.msgarray[indexPath.row].type == "IMAGE" && self.msgarray[indexPath.row].user.image == UserDefaultLogged.IMGUD ){
-                   
-            cellimageme.usernamelbl.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                                let image = msgarray[indexPath.row].user.image
-                                let imagechat = msgarray[indexPath.row].file
-
-            cellimageme.imguser.kf.setImage(with: URL(string: image))
-         //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
             
-            cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+            
+            ImageSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
+                           let image = msgarray[indexPath.row].user.image
+                           let imagechat = msgarray[indexPath.row].file
+
+                       ImageSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                             // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
+
+                       ImageSenderCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
                                         result in
                                         switch result {
                                         case .success:
                                             break
                                         case .failure:
-                                            cellimageother.imgsend.image = UIImage(named: "loadingimage")!
-                                        }
+                                           ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
+                               }
                            }
+                           
                                                       
-        return cellimageme
+                                return ImageSenderCell
+                          }
                    
-               }
+          
 
-               
-               if (self.msgarray[indexPath.row].type == "IMAGE"){
-                   
-                   
+        if (self.msgarray[indexPath.row].type == "IMAGE"){
+            
+            ImageReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                                          //cell3.msgtxt.text = self.msgarray[indexPath.row].body
+                          let image = msgarray[indexPath.row].user.image
+                          let imagechat = msgarray[indexPath.row].file
 
-                     cellimageother.usernamelbl.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                     //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                     let image = msgarray[indexPath.row].user.image
-                let imagechat = msgarray[indexPath.row].file
-
-                     
-                   cellimageother.imguser.kf.setImage(with: URL(string: image))
-                  // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
-
-                   cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                             result in
-                             switch result {
-                             case .success:
-                                 break
-                             case .failure:
-                                 cellimageother.imgsend.image = UIImage(named: "loadingimage")!
-                             }
-                }
-                
-                                           
-                     return cellimageother
-               }
+                      ImageReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
+                   //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
+                      
+                      ImageReceiverCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                              result in
+                                  switch result {
+                                      case .success:
+                                          break
+                                      case .failure:
+                                          ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
+                                      }
+                      }
+                                                                
+                  return ImageReceiverCell
+                             
+                         }
+           
                
         if (self.msgarray[indexPath.row].user.image  == UserDefaultLogged.IMGUD){
 
-                   celltextme.usernamelbl.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                   celltextme.msgtxt.text = self.msgarray[indexPath.row].body
-                   let image = msgarray[indexPath.row].user.image
-            celltextme.imguser.kf.setImage(with: URL(string: image))
-                   return celltextme
+            TextSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+            
+            TextSenderCell.messageTextView.text = self.msgarray[indexPath.row].body
+            let image = msgarray[indexPath.row].user.image
+            TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                   return TextSenderCell
              }
-               else {
-                       celltextother.usernamelbl.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                       celltextother.msgtxt.text = self.msgarray[indexPath.row].body
+            
+            else {
+                    TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                       TextReceiverCell.messageTextView.text = self.msgarray[indexPath.row].body
                        let image = msgarray[indexPath.row].user.image
-                celltextother.imguser.kf.setImage(with: URL(string: image))
+                TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
 
                    
-                       return celltextother
-                           }
-                   }
+                       return TextReceiverCell
+                }
+        
+        }
+    
 }
 
 
