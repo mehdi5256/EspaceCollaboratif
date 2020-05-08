@@ -16,7 +16,10 @@ import SwiftyJSON
 
 class MessengerWorker{
     
-    
+    func PostImage(type: String, body: String, user: [String: Any], room: [String: Any], file: String)-> Promise<Messenger1>{
+        return RoomAPIClient.posImage(type: type, body: body, user: user, room: room, file: file)
+        
+    }
     func getRoomsById(id:Int) -> Promise<[Messenger1]>{
     return RoomAPIClient.getRoomById(id: id)
     }

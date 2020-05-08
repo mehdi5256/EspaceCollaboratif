@@ -32,4 +32,9 @@ class RoomAPIClient: APIClient {
 
     }
     
+    static func posImage(type: String,body: String,user: [String: Any], room: [String: Any], file: String)-> Promise<Messenger1>{
+        return performRequest(route: RoomsEndPoints.PostImage(type: type, body: body, user: user, room: room, file: file))
+
+    }
+    
 }

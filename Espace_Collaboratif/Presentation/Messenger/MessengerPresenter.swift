@@ -20,6 +20,10 @@ protocol MessengerPresentationLogic
     func presentPostMsgdSuccess(msg: [Messenger1])
    func presentPostMsgdError(error: String)
     
+    func presentPostImgdSuccess(img: [Messenger1])
+    func presentPostImgError(error: String)
+
+    
     func presentConnexionSuccess(result: String)
     func presentError(error: String)
     func presentMessenger(messenger:Messenger1)
@@ -29,6 +33,10 @@ protocol MessengerPresentationLogic
 
 class MessengerPresenter: MessengerPresentationLogic
 {
+   
+    
+   
+    
     func sendMessageEventBus(result: String) {
         viewController?.displaySendMessageEventBus(result: result)
     }
@@ -81,6 +89,14 @@ class MessengerPresenter: MessengerPresentationLogic
         viewController?.displayPostMsgError(error: error)
 
        }
-       
+    
+    func presentPostImgdSuccess(img: [Messenger1]) {
+    viewController?.displayPostImgSucess(img : img)
+
+       }
+       func presentPostImgError(error: String) {
+        viewController?.displayPostImgError(error: error)
+
+          }
    
 }

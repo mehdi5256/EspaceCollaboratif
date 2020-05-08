@@ -14,11 +14,13 @@ import UIKit
 
 protocol MessengerBusinessLogic
 {
+    func postImage(type: String, body: String, user: [String: Any], room: [String: Any], file: String)
     func getRoomById (id:Int)
     func PostMsg(type: String, file: String, room: [String: Any], user: [String: Any], body: String)
+    
     func connect()
     func registerMessenger(id:Int)
-    func send(idroom: Int, messagesend:String)
+    func send(idroom: Int, messagesend:String,type:String,file:String)
     
 }
 
@@ -29,9 +31,11 @@ protocol MessengerDataStore
 
 class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
 {
-    func send(idroom: Int, messagesend:String) {
+   
+    
+    func send(idroom: Int, messagesend:String,type:String,file:String) {
         
-        let body : Dictionary<String,Any> = ["type":"TEXT","address":"chat.to.server","headers":[],"body":messagesend,"file":"","user":UserDefaultLogged.firstNameUD + " " + UserDefaultLogged.lasttNameUD,"user_img":UserDefaultLogged.IMGUD,"room_id":idroom ]
+        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"body":messagesend,"file":file,"firstName":UserDefaultLogged.firstNameUD ,"lastName": UserDefaultLogged.lasttNameUD,"user_img":UserDefaultLogged.IMGUD,"room_id":idroom ]
 
         worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
                   result in
@@ -111,6 +115,19 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
             
             
         }
+    
+    func postImage(type: String, body: String, user: [String : Any], room: [String : Any], file: String) {
+           worker = MessengerWorker()
+        worker?.PostImage(type: type, body: body, user: user, room: room, file: file).then {
+               img in
+               print(img)
+
+               self.presenter?.presentPostImgdSuccess(img: [img])
+                   }.catch {
+                   error in
+               self.presenter?.presentPostImgError(error: error.localizedDescription)
+               }
+       }
 
     }
   

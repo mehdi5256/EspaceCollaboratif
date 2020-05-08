@@ -14,5 +14,4 @@ public struct Room1: Codable{
     var image: String?
     var subject: String?
     var users: [User]
-    var room_id:Int?
 }

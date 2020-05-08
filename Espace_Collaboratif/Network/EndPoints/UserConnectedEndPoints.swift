@@ -61,6 +61,7 @@ enum UserConnectedEndPoints: APIConfiguration {
       case .me(let token):
         
          urlRequest.addValue("Bearer " + token, forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
+         
          urlRequest.addValue(ContentType.json.rawValue, forHTTPHeaderField:  HTTPHeaderField.acceptType.rawValue)
          
            

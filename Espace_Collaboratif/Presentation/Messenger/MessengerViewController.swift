@@ -12,6 +12,7 @@
 
 import UIKit
 import JitsiMeet
+import Alamofire
 
 
 protocol MessengerDisplayLogic: class
@@ -26,11 +27,17 @@ protocol MessengerDisplayLogic: class
     
     func displaySendMessageEventBus(result:String)
     
+    func displayPostImgSucess(img :[Messenger1])
+    func displayPostImgError(error: String)
+    
     
 }
 
 class MessengerViewController: UIViewController, MessengerDisplayLogic
 {
+   
+   
+    
     func displaySendMessageEventBus(result: String) {
         print(result)
     }
@@ -168,7 +175,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     }
     
     @IBAction func BtnSend(_ sender: Any) {
-        interactor?.send(idroom: self.idroom, messagesend: message.text)
+        interactor?.send(idroom: self.idroom, messagesend: message.text, type:"TEXT", file: "")
         
         interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
         designbuttonaftersend()
@@ -197,13 +204,23 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     func displayPostMsgError(error: String) {
            print(error)
-           print("aaaa")
+          // print("aaaa")
        }
        
        func displayPostMsgSucess(msg: [Messenger1]) {
            print(msg)
        }
   
+    func displayPostImgSucess(img: [Messenger1]) {
+                      print(img)
+
+       }
+    
+    func displayPostImgError(error: String) {
+           print(error)
+        print("braaaassssssadzafazfa")
+       }
+       
 }
 
 
@@ -286,23 +303,27 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
                func convertImageToBase64(_ image: UIImage) -> String {
                    let imageData:NSData = image.jpegData(compressionQuality: 0.4)! as NSData
                       let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-                   print(strBase64)
+                  // print(strBase64)
                 
+interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBase64)
+                
+//
+                interactor?.postImage(type: "IMAGE", body: "", user: ["id":UserDefaultLogged.idUD], room: ["id":self.idroom!], file: strBase64)
+                
+                
+                
+//                interactor?.PostMsg(type: "IMAGE", file: strBase64, room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: "")
 
-            
-                
-                
-//                 try! eventBus.send(to: "chat.to.server", body: ["type":"IMAGE","address":"chat.to.server","headers":[],"body":"","file":strBase64,"user":fn + " " + ln,"user_img":photoprofil,"room_id":self.idroom!])
 //
 //
 //                let parameters: [String: Any] = [
 //                "type":"IMAGE",
 //                "body":"",
-//                "user":["id":iddd],
+//                "user":["id":UserDefaultLogged.idUD],
 //                "room":["id":self.idroom],
 //                "file":strBase64
 //                ]
-//                               AF.request("http://b7db035b.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+//                               AF.request("http://8f2eb1df.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
 //                                  .responseJSON { response in
 //                                      print(response.request)
 //                                      print(response.response)
@@ -523,8 +544,17 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                                 let imagechat = msgarray[indexPath.row].file
 
             cellimageme.imguser.kf.setImage(with: URL(string: image))
-            cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
-
+         //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
+            
+            cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                                        result in
+                                        switch result {
+                                        case .success:
+                                            break
+                                        case .failure:
+                                            cellimageother.imgsend.image = UIImage(named: "loadingimage")!
+                                        }
+                           }
                                                       
         return cellimageme
                    
@@ -542,9 +572,17 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
 
                      
                    cellimageother.imguser.kf.setImage(with: URL(string: image))
-                   cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
+                  // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
 
-                   
+                   cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                             result in
+                             switch result {
+                             case .success:
+                                 break
+                             case .failure:
+                                 cellimageother.imgsend.image = UIImage(named: "loadingimage")!
+                             }
+                }
                 
                                            
                      return cellimageother

@@ -15,7 +15,9 @@ enum RoomsEndPoints: APIConfiguration {
     case getUsers
     case AddRoom (name:String , subject:String, users: [Dictionary<String,Any>])
     case getRoombyId(id: Int)
-    case PostMsg(type: String, file:String,room:[String: Any],user:[String: Any],body : String)
+    case PostMsg(type:String, file:String,room:[String: Any],user:[String: Any],body: String)
+     case PostImage(type:String,body: String ,user:[String: Any],room:[String: Any],file:String)
+    
     
     
     
@@ -42,14 +44,19 @@ enum RoomsEndPoints: APIConfiguration {
         
       case .PostMsg:
         return .post
-        
+      case .PostImage:
+        return .post
+     
       case .getRoombyId:
         return .get
         
         case .getUsers:
         return .get
+        
+        
       case  .AddRoom:
         return .post
+        
       default:
       return .get
         
@@ -73,6 +80,9 @@ enum RoomsEndPoints: APIConfiguration {
         
         case .PostMsg:
         return RoomsEndPoints.postmsg
+        
+        case .PostImage:
+              return RoomsEndPoints.postmsg
 
         
         
@@ -82,12 +92,15 @@ enum RoomsEndPoints: APIConfiguration {
    
    var parameters: Parameters?{
       switch self {
+     
         
         case .AddRoom(let name, let subject, let users):
         let object = NSMutableDictionary()
+        
         object.setValue(name, forKey: Keys.AddRoomKey.name)
         object.setValue(subject, forKey: Keys.AddRoomKey.subject)
         object.setValue(users, forKey: Keys.AddRoomKey.users)
+        
         return (object as! Parameters)
         
       case .PostMsg(let type, let file, let room, let user, let body):
@@ -98,6 +111,16 @@ enum RoomsEndPoints: APIConfiguration {
             object.setValue(room, forKey: "room")
             object.setValue(user, forKey: "user")
         return (object as! Parameters)
+        
+      case .PostImage(let type, let body, let user, let room, let file):
+        let object = NSMutableDictionary()
+                   object.setValue(type, forKey: "type")
+                   object.setValue(body, forKey: "body")
+                   object.setValue(user, forKey: "user")
+                   object.setValue(room, forKey: "room")
+                   object.setValue(file, forKey: "file")
+
+               return (object as! Parameters)
         
 
 

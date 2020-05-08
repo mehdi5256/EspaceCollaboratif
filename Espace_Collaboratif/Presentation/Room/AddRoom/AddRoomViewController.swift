@@ -157,9 +157,9 @@ class AddRoomViewController: UIViewController, AddRoomDisplayLogic
     @IBAction func AddRoomAction(_ sender: Any) {
         
         
-        let nomroom = RoomName.text
-        let description = Subject.text
-        interactor?.AddRoom(name: nomroom!, subject: description!, users: selectarrayusers)
+        let nomroom = RoomName.text!
+        let description = Subject.text!
+        interactor?.AddRoom(name: nomroom, subject: description, users: selectarrayusers)
         
         self.performSegue(withIdentifier: "main", sender: self)
 
