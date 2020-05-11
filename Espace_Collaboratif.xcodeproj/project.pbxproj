@@ -15,6 +15,14 @@
 		91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C75245B62F000E88133 /* MessengerModels.swift */; };
 		91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C76245B62F000E88133 /* MessengerViewController.swift */; };
 		91592C7D245B62F000E88133 /* MessengerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C77245B62F000E88133 /* MessengerInteractor.swift */; };
+		916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE4B2464E19E00498285 /* TextSenderCell.swift */; };
+		916ACE4E2464E19E00498285 /* TextSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE4C2464E19E00498285 /* TextSenderCell.xib */; };
+		916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE4F2464E1B500498285 /* TextReceiverCell.swift */; };
+		916ACE522464E1B500498285 /* TextReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE502464E1B500498285 /* TextReceiverCell.xib */; };
+		916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE532464E1DD00498285 /* ImageSenderCell.swift */; };
+		916ACE562464E1DD00498285 /* ImageSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE542464E1DD00498285 /* ImageSenderCell.xib */; };
+		916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE572464E1FE00498285 /* ImageReceiverCell.swift */; };
+		916ACE5A2464E1FE00498285 /* ImageReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE582464E1FE00498285 /* ImageReceiverCell.xib */; };
 		918574E5245D2A4D00F54DAE /* corbeille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918574E4245D2A4D00F54DAE /* corbeille.swift */; };
 		919A846B245A328B0094CE42 /* AddRoomPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8465245A328B0094CE42 /* AddRoomPresenter.swift */; };
 		919A846C245A328B0094CE42 /* AddRoomWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8466245A328B0094CE42 /* AddRoomWorker.swift */; };
@@ -79,6 +87,14 @@
 		91592C75245B62F000E88133 /* MessengerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerModels.swift; sourceTree = "<group>"; };
 		91592C76245B62F000E88133 /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
 		91592C77245B62F000E88133 /* MessengerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerInteractor.swift; sourceTree = "<group>"; };
+		916ACE4B2464E19E00498285 /* TextSenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSenderCell.swift; sourceTree = "<group>"; };
+		916ACE4C2464E19E00498285 /* TextSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextSenderCell.xib; sourceTree = "<group>"; };
+		916ACE4F2464E1B500498285 /* TextReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReceiverCell.swift; sourceTree = "<group>"; };
+		916ACE502464E1B500498285 /* TextReceiverCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextReceiverCell.xib; sourceTree = "<group>"; };
+		916ACE532464E1DD00498285 /* ImageSenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSenderCell.swift; sourceTree = "<group>"; };
+		916ACE542464E1DD00498285 /* ImageSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSenderCell.xib; sourceTree = "<group>"; };
+		916ACE572464E1FE00498285 /* ImageReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReceiverCell.swift; sourceTree = "<group>"; };
+		916ACE582464E1FE00498285 /* ImageReceiverCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageReceiverCell.xib; sourceTree = "<group>"; };
 		918574E4245D2A4D00F54DAE /* corbeille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corbeille.swift; sourceTree = "<group>"; };
 		919A8465245A328B0094CE42 /* AddRoomPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomPresenter.swift; sourceTree = "<group>"; };
 		919A8466245A328B0094CE42 /* AddRoomWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomWorker.swift; sourceTree = "<group>"; };
@@ -165,6 +181,53 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		916ACE462464E0AB00498285 /* CellsChat */ = {
+			isa = PBXGroup;
+			children = (
+				916ACE4A2464E13500498285 /* TextSender */,
+				916ACE492464E12900498285 /* TextReceiver */,
+				916ACE472464E0FC00498285 /* ImageSender */,
+				916ACE482464E11100498285 /* ImageReceiver */,
+			);
+			path = CellsChat;
+			sourceTree = "<group>";
+		};
+		916ACE472464E0FC00498285 /* ImageSender */ = {
+			isa = PBXGroup;
+			children = (
+				916ACE532464E1DD00498285 /* ImageSenderCell.swift */,
+				916ACE542464E1DD00498285 /* ImageSenderCell.xib */,
+			);
+			path = ImageSender;
+			sourceTree = "<group>";
+		};
+		916ACE482464E11100498285 /* ImageReceiver */ = {
+			isa = PBXGroup;
+			children = (
+				916ACE572464E1FE00498285 /* ImageReceiverCell.swift */,
+				916ACE582464E1FE00498285 /* ImageReceiverCell.xib */,
+			);
+			path = ImageReceiver;
+			sourceTree = "<group>";
+		};
+		916ACE492464E12900498285 /* TextReceiver */ = {
+			isa = PBXGroup;
+			children = (
+				916ACE4F2464E1B500498285 /* TextReceiverCell.swift */,
+				916ACE502464E1B500498285 /* TextReceiverCell.xib */,
+			);
+			path = TextReceiver;
+			sourceTree = "<group>";
+		};
+		916ACE4A2464E13500498285 /* TextSender */ = {
+			isa = PBXGroup;
+			children = (
+				916ACE4B2464E19E00498285 /* TextSenderCell.swift */,
+				916ACE4C2464E19E00498285 /* TextSenderCell.xib */,
+			);
+			path = TextSender;
+			sourceTree = "<group>";
+		};
 		919A8464245A325C0094CE42 /* AddRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +245,7 @@
 		919A8473245AA6B30094CE42 /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				916ACE462464E0AB00498285 /* CellsChat */,
 				91A6A624245B9C9A004F0C3D /* CellsMessenger */,
 				91592C74245B62F000E88133 /* MessengerRouter.swift */,
 				91592C75245B62F000E88133 /* MessengerModels.swift */,
@@ -462,7 +526,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916ACE5A2464E1FE00498285 /* ImageReceiverCell.xib in Resources */,
+				916ACE562464E1DD00498285 /* ImageSenderCell.xib in Resources */,
+				916ACE522464E1B500498285 /* TextReceiverCell.xib in Resources */,
 				91A3962D245386A7005F43F4 /* LaunchScreen.storyboard in Resources */,
+				916ACE4E2464E19E00498285 /* TextSenderCell.xib in Resources */,
 				91A3962A245386A7005F43F4 /* Assets.xcassets in Resources */,
 				91A39625245386A5005F43F4 /* Main.storyboard in Resources */,
 			);
@@ -519,9 +587,11 @@
 			files = (
 				91A39628245386A5005F43F4 /* Espace_Collaboratif.xcdatamodeld in Sources */,
 				91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */,
+				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
 				91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */,
 				91A6A62C245B9D33004F0C3D /* CellTextOther.swift in Sources */,
 				91A39622245386A5005F43F4 /* ViewController.swift in Sources */,
+				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
 				919A8475245AA7140094CE42 /* Messenger1.swift in Sources */,
 				91A3759924538B4D00854ADE /* RoomModels.swift in Sources */,
 				91A3759B24538B4D00854ADE /* RoomInteractor.swift in Sources */,
@@ -532,6 +602,7 @@
 				91A6A628245B9D0B004F0C3D /* CellImageOther.swift in Sources */,
 				91A6A626245B9CEB004F0C3D /* CellimageMe.swift in Sources */,
 				91A375A624539D9000854ADE /* RoomsEndPoints.swift in Sources */,
+				916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */,
 				91A3759724538B4D00854ADE /* RoomWorker.swift in Sources */,
 				91A375892453892100854ADE /* User.swift in Sources */,
 				91592C7D245B62F000E88133 /* MessengerInteractor.swift in Sources */,
@@ -561,6 +632,7 @@
 				91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */,
 				91A6A623245B9B09004F0C3D /* Word.swift in Sources */,
 				91A6A61B245B9AAB004F0C3D /* Mutex.swift in Sources */,
+				916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */,
 				91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */,
 				919A846F245A328B0094CE42 /* AddRoomViewController.swift in Sources */,
 				91A6A61F245B9AC9004F0C3D /* Util.swift in Sources */,
