@@ -81,7 +81,13 @@ class LoginViewController: UIViewController, LoginDisplayLogic
       }
     }
   }
-  
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserDefaultLogged.isUserLogged == true){
+         performSegue(withIdentifier: "accueil", sender: nil)
+        }
+    }
+     
   // MARK: View lifecycle
   
   override func viewDidLoad()
@@ -93,12 +99,9 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     redirectURL = URL(string: Keys.MobileIntegrationServer.redirectURL)!
     clientId = Keys.MobileIntegrationServer.ClientId
     clientsecret = Keys.MobileIntegrationServer.ClientSecret
-    
-    
-
-
-    
     Setupbutton()
+    
+   
   }
   
   // MARK: Do something
@@ -133,11 +136,15 @@ class LoginViewController: UIViewController, LoginDisplayLogic
             self.accesstoken = token
                   print(token)
         performSegue(withIdentifier: "accueil", sender: nil)
+        
+        
+        }
 
-       }
+       
        
        func displayUserMeError(error: String) {
                    print(error)
+       
 
        }
     
@@ -154,3 +161,9 @@ class LoginViewController: UIViewController, LoginDisplayLogic
         
     }
 }
+
+
+//logout user
+
+//navigationController?.popToRootViewController(animated: true)
+//       UserDefaultLogged.isUserLogged = false

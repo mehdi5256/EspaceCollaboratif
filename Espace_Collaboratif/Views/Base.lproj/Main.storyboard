@@ -108,9 +108,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="idn-Kj-sgp"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XJk-CQ-UnU"/>
                     <connections>
                         <outlet property="BtnLogin" destination="7NB-dc-kKM" id="BXV-xf-s5Z"/>
-                        <segue destination="8T5-rK-b0K" kind="presentation" identifier="accueil" modalPresentationStyle="fullScreen" id="FNb-Tb-3LF"/>
+                        <segue destination="8T5-rK-b0K" kind="presentation" identifier="accueil" animates="NO" modalPresentationStyle="fullScreen" id="FNb-Tb-3LF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EGK-He-AIN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -120,7 +121,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5cO-Hk-9Fc">
             <objects>
-                <navigationController id="8T5-rK-b0K" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="accueil" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8T5-rK-b0K" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RgK-ew-gcu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -298,6 +299,25 @@
                                     <outlet property="delegate" destination="585-4h-WsR" id="ftD-tU-gIP"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01Q-2u-yE3">
+                                <rect key="frame" x="0.0" y="44" width="375" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aucune Connexion Internet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXO-nB-8VJ">
+                                        <rect key="frame" x="5" y="5" width="365" height="30"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                                        <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="0.66944028253424659" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="dXO-nB-8VJ" firstAttribute="leading" secondItem="01Q-2u-yE3" secondAttribute="leading" constant="5" id="Ye0-7C-NvI"/>
+                                    <constraint firstAttribute="bottom" secondItem="dXO-nB-8VJ" secondAttribute="bottom" constant="5" id="arx-BV-iTS"/>
+                                    <constraint firstAttribute="height" constant="40" id="k6l-Yi-o8n"/>
+                                    <constraint firstAttribute="trailing" secondItem="dXO-nB-8VJ" secondAttribute="trailing" constant="5" id="mK6-1s-eeu"/>
+                                    <constraint firstItem="dXO-nB-8VJ" firstAttribute="top" secondItem="01Q-2u-yE3" secondAttribute="top" constant="5" id="vOy-3k-hUz"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYo-Tc-ZKK">
                                 <rect key="frame" x="309" y="593" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.54901960780000003" green="0.44705882349999998" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -319,8 +339,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="DYo-Tc-ZKK" secondAttribute="trailing" constant="16" id="Nbn-WZ-tEU"/>
+                            <constraint firstItem="01Q-2u-yE3" firstAttribute="top" secondItem="Wfy-aC-9MN" secondAttribute="top" id="VR0-KK-e6H"/>
                             <constraint firstItem="ZKU-HB-wcv" firstAttribute="top" secondItem="Wfy-aC-9MN" secondAttribute="top" id="eKg-v3-afl"/>
                             <constraint firstAttribute="bottom" secondItem="DYo-Tc-ZKK" secondAttribute="bottom" constant="24" id="j6b-Z6-AKh"/>
+                            <constraint firstItem="01Q-2u-yE3" firstAttribute="leading" secondItem="Wfy-aC-9MN" secondAttribute="leading" id="o0C-gd-3VD"/>
+                            <constraint firstItem="Wfy-aC-9MN" firstAttribute="trailing" secondItem="01Q-2u-yE3" secondAttribute="trailing" id="ob5-hI-x3O"/>
                             <constraint firstItem="ZKU-HB-wcv" firstAttribute="bottom" secondItem="Wfy-aC-9MN" secondAttribute="bottom" id="u7D-XV-rL3"/>
                             <constraint firstItem="ZKU-HB-wcv" firstAttribute="trailing" secondItem="Wfy-aC-9MN" secondAttribute="trailing" id="vrs-kZ-YhE"/>
                             <constraint firstItem="ZKU-HB-wcv" firstAttribute="leading" secondItem="Wfy-aC-9MN" secondAttribute="leading" id="wuF-1a-kOn"/>
@@ -330,6 +353,7 @@
                     <navigationItem key="navigationItem" title="Espace Collaboratif" id="5yc-6l-X4D"/>
                     <connections>
                         <outlet property="BtnAddOutlet" destination="DYo-Tc-ZKK" id="Mep-51-ptJ"/>
+                        <outlet property="ViewNoConnection" destination="01Q-2u-yE3" id="XvM-4o-6wR"/>
                         <outlet property="tv" destination="ZKU-HB-wcv" id="518-z1-jg5"/>
                         <segue destination="MyU-pp-vJh" kind="show" identifier="todetail" id="LJu-NH-q3W"/>
                     </connections>
@@ -785,6 +809,6 @@
         <image name="video.fill" catalog="system" width="64" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2bC-Fa-aOw"/>
+        <segue reference="FNb-Tb-3LF"/>
     </inferredMetricsTieBreakers>
 </document>

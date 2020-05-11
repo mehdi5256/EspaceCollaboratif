@@ -46,7 +46,6 @@ class RoomInteractor: RoomBusinessLogic, RoomDataStore
           worker = RoomWorker()
               worker?.getRooms().then {
                   rooms in
-                  print(rooms)
                   self.presenter?.presentRoomsSuccess(rooms: rooms)
               }.catch {
                   error in

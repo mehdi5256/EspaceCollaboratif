@@ -338,7 +338,7 @@ interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBa
                 "room":["id":self.idroom],
                 "file":strBase64
                 ]
-                               AF.request("http://35606b82.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                               AF.request("http://b187603e.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
                                   .responseJSON { response in
                                       print(response.request)
                                       print(response.response)

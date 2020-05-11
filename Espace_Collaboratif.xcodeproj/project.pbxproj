@@ -15,6 +15,9 @@
 		91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C75245B62F000E88133 /* MessengerModels.swift */; };
 		91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C76245B62F000E88133 /* MessengerViewController.swift */; };
 		91592C7D245B62F000E88133 /* MessengerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C77245B62F000E88133 /* MessengerInteractor.swift */; };
+		91656A9624691A5700802907 /* Espace_Collaboratif.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91656A9424691A5700802907 /* Espace_Collaboratif.xcdatamodeld */; };
+		91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91656A9724691B7A00802907 /* RoomCoreData.swift */; };
+		91656A9A2469374600802907 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91656A992469374600802907 /* Reachability.swift */; };
 		916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE4B2464E19E00498285 /* TextSenderCell.swift */; };
 		916ACE4E2464E19E00498285 /* TextSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE4C2464E19E00498285 /* TextSenderCell.xib */; };
 		916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE4F2464E1B500498285 /* TextReceiverCell.swift */; };
@@ -51,7 +54,6 @@
 		91A39620245386A5005F43F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3961F245386A5005F43F4 /* SceneDelegate.swift */; };
 		91A39622245386A5005F43F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A39621245386A5005F43F4 /* ViewController.swift */; };
 		91A39625245386A5005F43F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A39623245386A5005F43F4 /* Main.storyboard */; };
-		91A39628245386A5005F43F4 /* Espace_Collaboratif.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91A39626245386A5005F43F4 /* Espace_Collaboratif.xcdatamodeld */; };
 		91A3962A245386A7005F43F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91A39629245386A7005F43F4 /* Assets.xcassets */; };
 		91A3962D245386A7005F43F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A3962B245386A7005F43F4 /* LaunchScreen.storyboard */; };
 		91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A618245B9AA0004F0C3D /* EventBus.swift */; };
@@ -67,6 +69,7 @@
 		91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */; };
 		91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */; };
 		91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C1728B245485E000588967 /* UserCollectionViewCell.swift */; };
+		91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0E8952466D0AD00B7808A /* NetworkStatus.swift */; };
 		91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0342454DD5400AA3974 /* LoginPresenter.swift */; };
 		91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0352454DD5400AA3974 /* LoginWorker.swift */; };
 		91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0362454DD5400AA3974 /* LoginRouter.swift */; };
@@ -87,6 +90,9 @@
 		91592C75245B62F000E88133 /* MessengerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerModels.swift; sourceTree = "<group>"; };
 		91592C76245B62F000E88133 /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
 		91592C77245B62F000E88133 /* MessengerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerInteractor.swift; sourceTree = "<group>"; };
+		91656A9524691A5700802907 /* Espace_Collaboratif.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Espace_Collaboratif.xcdatamodel; sourceTree = "<group>"; };
+		91656A9724691B7A00802907 /* RoomCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCoreData.swift; sourceTree = "<group>"; };
+		91656A992469374600802907 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		916ACE4B2464E19E00498285 /* TextSenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSenderCell.swift; sourceTree = "<group>"; };
 		916ACE4C2464E19E00498285 /* TextSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextSenderCell.xib; sourceTree = "<group>"; };
 		916ACE4F2464E1B500498285 /* TextReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReceiverCell.swift; sourceTree = "<group>"; };
@@ -124,7 +130,6 @@
 		91A3961F245386A5005F43F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		91A39621245386A5005F43F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		91A39624245386A5005F43F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		91A39627245386A5005F43F4 /* Espace_Collaboratif.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Espace_Collaboratif.xcdatamodel; sourceTree = "<group>"; };
 		91A39629245386A7005F43F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91A3962C245386A7005F43F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91A3962E245386A7005F43F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 		91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClient.swift; sourceTree = "<group>"; };
 		91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClientTest.swift; sourceTree = "<group>"; };
 		91C1728B245485E000588967 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		91F0E8952466D0AD00B7808A /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		91F7B0342454DD5400AA3974 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		91F7B0352454DD5400AA3974 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
 		91F7B0362454DD5400AA3974 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
@@ -179,6 +185,14 @@
 				913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */,
 			);
 			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		91656A9124690D3B00802907 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				91656A9724691B7A00802907 /* RoomCoreData.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		916ACE462464E0AB00498285 /* CellsChat */ = {
@@ -261,6 +275,7 @@
 		91A375852453889A00854ADE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				91656A9124690D3B00802907 /* CoreData */,
 				91A37586245388F200854ADE /* Room1.swift */,
 				91A375882453892100854ADE /* User.swift */,
 				919A8474245AA7140094CE42 /* Messenger1.swift */,
@@ -304,6 +319,8 @@
 				91A375A124538E1300854ADE /* APIConfiguration.swift */,
 				91A375A324538E2400854ADE /* APIClient.swift */,
 				91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */,
+				91F0E8952466D0AD00B7808A /* NetworkStatus.swift */,
+				91656A992469374600802907 /* Reachability.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -369,7 +386,7 @@
 				91A39621245386A5005F43F4 /* ViewController.swift */,
 				91A39629245386A7005F43F4 /* Assets.xcassets */,
 				91A3962E245386A7005F43F4 /* Info.plist */,
-				91A39626245386A5005F43F4 /* Espace_Collaboratif.xcdatamodeld */,
+				91656A9424691A5700802907 /* Espace_Collaboratif.xcdatamodeld */,
 			);
 			path = Espace_Collaboratif;
 			sourceTree = "<group>";
@@ -585,7 +602,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91A39628245386A5005F43F4 /* Espace_Collaboratif.xcdatamodeld in Sources */,
 				91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */,
 				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
 				91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */,
@@ -600,6 +616,7 @@
 				91A375A424538E2400854ADE /* APIClient.swift in Sources */,
 				919A8472245A43E20094CE42 /* UsersTableViewCell.swift in Sources */,
 				91A6A628245B9D0B004F0C3D /* CellImageOther.swift in Sources */,
+				91656A9A2469374600802907 /* Reachability.swift in Sources */,
 				91A6A626245B9CEB004F0C3D /* CellimageMe.swift in Sources */,
 				91A375A624539D9000854ADE /* RoomsEndPoints.swift in Sources */,
 				916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */,
@@ -607,6 +624,7 @@
 				91A375892453892100854ADE /* User.swift in Sources */,
 				91592C7D245B62F000E88133 /* MessengerInteractor.swift in Sources */,
 				913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */,
+				91656A9624691A5700802907 /* Espace_Collaboratif.xcdatamodeld in Sources */,
 				919A846E245A328B0094CE42 /* AddRoomModels.swift in Sources */,
 				91A6A61D245B9AB9004F0C3D /* Message.swift in Sources */,
 				91F7B03D2454DD5400AA3974 /* LoginModels.swift in Sources */,
@@ -627,6 +645,7 @@
 				91A375A224538E1300854ADE /* APIConfiguration.swift in Sources */,
 				91A3759624538B4D00854ADE /* RoomPresenter.swift in Sources */,
 				91A3759A24538B4D00854ADE /* RoomViewController.swift in Sources */,
+				91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */,
 				91A375A82453B6E600854ADE /* RoomsTableViewCell.swift in Sources */,
 				91A3961E245386A5005F43F4 /* AppDelegate.swift in Sources */,
 				91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */,
@@ -644,6 +663,7 @@
 				91A37587245388F200854ADE /* Room1.swift in Sources */,
 				91F7B0442454F46D00AA3974 /* UserConnectedEndPoints.swift in Sources */,
 				91A375AA2453B80600854ADE /* ConstantColor.swift in Sources */,
+				91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,12 +866,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		91A39626245386A5005F43F4 /* Espace_Collaboratif.xcdatamodeld */ = {
+		91656A9424691A5700802907 /* Espace_Collaboratif.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				91A39627245386A5005F43F4 /* Espace_Collaboratif.xcdatamodel */,
+				91656A9524691A5700802907 /* Espace_Collaboratif.xcdatamodel */,
 			);
-			currentVersion = 91A39627245386A5005F43F4 /* Espace_Collaboratif.xcdatamodel */;
+			currentVersion = 91656A9524691A5700802907 /* Espace_Collaboratif.xcdatamodel */;
 			path = Espace_Collaboratif.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

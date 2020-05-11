@@ -14,6 +14,10 @@ class UserDefaultLogged {
         static let KeyLastName = "UserDefLN"
         static let KeyEmail = "UserDefMail"
         static let KeyIMG = "UserDefIMG"
+        static let KeyToken = "UserDefToken"
+        static let userlogged = "isUserLogged"
+
+
 
 
 
@@ -67,5 +71,24 @@ class UserDefaultLogged {
         }
         
     }
+    
+    static var TokenUD: String{
+          get {
+              return UserDefaults.standard.string(forKey: Keys.KeyToken)!
+              }
+          set {
+              UserDefaults.standard.set(newValue, forKey: Keys.KeyToken)
+          }
+          
+      }
 
+    static var isUserLogged: Bool{
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.userlogged)
+            }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.userlogged)
+        }
+        
+    }
 }

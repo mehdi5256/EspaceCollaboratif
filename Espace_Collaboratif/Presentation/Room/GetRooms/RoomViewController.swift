@@ -13,6 +13,7 @@
 import UIKit
 import CRRefresh
 import Kingfisher
+import CoreData
 
 protocol RoomDisplayLogic: class
 {
@@ -70,20 +71,127 @@ class RoomViewController: UIViewController, RoomDisplayLogic
 //      }
 //    }
 //  }
-  
-  // MARK: View lifecycle
+    
+    // MARK: View lifecycle
     var rooms: [Room1] = []
     var usersCell: [User] = []
+     let reachability = try! Reachability()
+
+
+    @IBOutlet weak var ViewNoConnection: UIView!
     
     @IBOutlet weak var BtnAddOutlet: UIButton!
     @IBOutlet weak var tv: UITableView!
+    
+    // CORE DATA
+    var roomsCD: [RoomCoreData] = []
+
+    
+    
+    // END CORE DATA
+    @objc func reachabilityChanged(note: Notification) {
+
+      let reachability = note.object as! Reachability
+
+      switch reachability.connection {
+      case .wifi:
+          interactor?.getRooms()
+        ViewNoConnection.isHidden = true
+
+
+      case .cellular:
+          print("Reachable via Cellular")
+      case .unavailable:
+        print("Network not reachable")
+        ViewNoConnection.isHidden = false
+
+        
+      case .none:
+        print("none")
+
+        }
+    }
     
     override func viewDidLoad()
   {
     super.viewDidLoad()
     doSomething()
     setupButton()
-    interactor?.getRooms()
+    
+    
+    reachability.whenReachable = { reachability in
+        if reachability.connection == .wifi {
+            print("Reachable via WiFi")
+            self.interactor?.getRooms()
+            
+
+        } else {
+            print("Reachable via Cellular")
+
+        }
+    }
+    reachability.whenUnreachable = { _ in
+        print("Not reachable")
+        self.ViewNoConnection.isHidden = true
+
+    }
+
+    do {
+        try reachability.startNotifier()
+    } catch {
+        print("Unable to start notifier")
+    }
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+    do{
+      try reachability.startNotifier()
+    }catch{
+      print("could not start reachability notifier")
+    }
+    
+    
+    //refresh table view
+    
+    
+    let loadingFooter = NormalFooterAnimator()
+           loadingFooter.loadingDescription = "Chargement "
+           loadingFooter.noMoreDataDescription = "pas d'autres contacts"
+           let loadingHeader = NormalHeaderAnimator()
+           loadingHeader.loadingDescription = "Chargement "
+           loadingHeader.pullToRefreshDescription = "Tirer pour rafraîchir"
+           loadingHeader.releaseToRefreshDescription = "Relâcher pour rafraîchir"
+           tv.backgroundColor = UIColor(named: "f5f5f5")
+           
+      /// animator: your customize animator, default is NormalHeaderAnimator
+      tv.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
+          /// start refresh
+          /// Do anything you want...
+          DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+              /// Stop refresh when your job finished, it will reset refresh footer if completion is true
+            self?.interactor?.getRooms()
+            self?.tv.cr.endHeaderRefresh()
+
+          })
+      }
+      /// manual refresh
+     // tv.cr.beginHeaderRefresh()
+           
+    
+   
+    // core data
+    let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
+    roomsCD =   try! AppDelegate.viewContext.fetch(request)
+
+    }
+    
+    func isEntityAttributeExist(name: String, entityName: String) -> Bool {
+      let appDelegate = UIApplication.shared.delegate as! AppDelegate
+      let managedContext = appDelegate.persistentContainer.viewContext
+      let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+      fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+
+      let res = try! managedContext.fetch(fetchRequest)
+      return res.count > 0 ? true : false
     }
     
     func setupButton() {
@@ -108,10 +216,37 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     //nameTextField.text = viewModel.name
   }
     
+   
+    
  func displayListeSuccess(rooms: [Room1]){
         self.rooms = rooms
-        print(rooms)
-        tv.reloadData()
+    
+    for r in  self.rooms{
+        
+       
+         if self.isEntityAttributeExist(name: r.name!, entityName: "RoomCoreData"){
+                        print("duplication ma tzidech")
+            
+                    }
+                    else{
+                        print("zid fel core data")
+                        let roomcc = RoomCoreData(context: AppDelegate.viewContext)
+            
+            
+                        roomcc.id = Int64(r.id!)
+                        roomcc.name = r.name
+                        roomcc.subject = r.subject
+                        try? AppDelegate.viewContext.save()
+            
+                    }
+        
+        
+    }
+    
+    
+
+    tv.reloadData()
+
     }
     
     func displayListeError(error: String) {
@@ -138,22 +273,43 @@ class RoomViewController: UIViewController, RoomDisplayLogic
 }
 
 extension RoomViewController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rooms.count
-    }
+      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+          switch NetworkStatus.Connection() {
+          case false:
+              print("not conncted")
+              return self.roomsCD.count
+
+          default:
+              print("connected")
+              return rooms.count
+          }
+          
+      }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     guard let cell = tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RoomsTableViewCell else {
-                                     return tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
                                  }
-                  
-        let roomindex = rooms[indexPath.item]
-        cell.RoomName.text = roomindex.name!
-        cell.UserName.text = roomindex.subject!
-        cell.NumPoste.text  =  (roomindex.id!).description
-        cell.selectionStyle = .none
-        self.usersCell = roomindex.users
+        
+        switch NetworkStatus.Connection() {
+        case false:
+            print("not conncted")
+            
+            
+            //         affichage core data
+            cell.RoomName.text = roomsCD[indexPath.row].name!
+            cell.UserName.text = roomsCD[indexPath.row].subject
+            cell.NumPoste.text  =  (roomsCD[indexPath.row].id).description
+        default:
+            let roomindex = rooms[indexPath.item]
+
+           cell.RoomName.text = roomindex.name!
+            cell.UserName.text = roomindex.subject!
+            cell.NumPoste.text  =  (roomindex.id!).description
+            cell.selectionStyle = .none
+            self.usersCell = roomindex.users
+        }
         
         let frequency = indexPath.item % 10;
         switch (frequency) {
@@ -289,4 +445,6 @@ extension RoomViewController:UITableViewDelegate{
                   
               }
           }
+    
+    
 }

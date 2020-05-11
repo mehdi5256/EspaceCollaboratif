@@ -41,6 +41,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
                 UserDefaultLogged.lasttNameUD = userme.lastName
                 UserDefaultLogged.emailUD = userme.email
                 UserDefaultLogged.IMGUD = userme.image
+                UserDefaultLogged.isUserLogged = true
             
             print("xxxxxxxxxxxx")
            print( UserDefaultLogged.IMGUD)
