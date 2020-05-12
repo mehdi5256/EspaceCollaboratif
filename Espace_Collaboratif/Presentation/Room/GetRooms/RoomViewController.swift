@@ -163,7 +163,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
            tv.backgroundColor = UIColor(named: "f5f5f5")
            
       /// animator: your customize animator, default is NormalHeaderAnimator
-      tv.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
+      tv.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
           /// start refresh
           /// Do anything you want...
           DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
@@ -184,11 +184,11 @@ class RoomViewController: UIViewController, RoomDisplayLogic
 
     }
     
-    func isEntityAttributeExist(name: String, entityName: String) -> Bool {
+    func isEntityAttributeExist(id: Int32, entityName: String) -> Bool {
       let appDelegate = UIApplication.shared.delegate as! AppDelegate
       let managedContext = appDelegate.persistentContainer.viewContext
       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-      fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+      fetchRequest.predicate = NSPredicate(format: "id == %u", id)
 
       let res = try! managedContext.fetch(fetchRequest)
       return res.count > 0 ? true : false
@@ -216,6 +216,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     //nameTextField.text = viewModel.name
   }
     
+  
    
     
  func displayListeSuccess(rooms: [Room1]){
@@ -224,7 +225,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     for r in  self.rooms{
         
        
-         if self.isEntityAttributeExist(name: r.name!, entityName: "RoomCoreData"){
+        if self.isEntityAttributeExist(id: Int32(r.id!), entityName: "RoomCoreData"){
                         print("duplication ma tzidech")
             
                     }
@@ -233,7 +234,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
                         let roomcc = RoomCoreData(context: AppDelegate.viewContext)
             
             
-                        roomcc.id = Int64(r.id!)
+                        roomcc.id = Int32(r.id!)
                         roomcc.name = r.name
                         roomcc.subject = r.subject
                         try? AppDelegate.viewContext.save()
@@ -296,11 +297,11 @@ extension RoomViewController: UITableViewDataSource{
         case false:
             print("not conncted")
             
-            
+            print(indexPath.item)
             //         affichage core data
-            cell.RoomName.text = roomsCD[indexPath.row].name!
-            cell.UserName.text = roomsCD[indexPath.row].subject
-            cell.NumPoste.text  =  (roomsCD[indexPath.row].id).description
+            cell.RoomName.text = roomsCD[indexPath.item].name!
+            cell.UserName.text = roomsCD[indexPath.item].subject
+            cell.NumPoste.text  =  (roomsCD[indexPath.item].id).description
         default:
             let roomindex = rooms[indexPath.item]
 
@@ -427,23 +428,52 @@ extension RoomViewController:UITableViewDelegate{
            performSegue(withIdentifier: "todetail", sender: indexPath)
            
        }
+    
+    
        
        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch reachability.connection {
+        case .wifi:
+                if segue.identifier == "todetail"{
+                          let DVC = segue.destination as! MessengerViewController
+                          let indice = sender as! IndexPath
+                          //let showsDict = roomsArray[indice.row] as! Dictionary<String,Any>
+                          DVC.nomroom = rooms[indice.row].name
+                          DVC.idroom = rooms[indice.row].id
+                        DVC.RoomSelectecCoreData = roomsCD[indice.row]
+
+                          //DVC.overview = showsDict["summary"] as! String
+                         // let imageDict = showsDict["image"] as! Dictionary<String,String>
+                         // DVC.image = imageDict["medium"] as! String
+                          // DVC.image = images[indice.row]
+                          navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
+                          
+                          
+                      }
+
+
+        case .cellular:
+            print("Reachable via Cellular")
+        case .unavailable:
+          if segue.identifier == "todetail"{
+            
+            let DVC = segue.destination as! MessengerViewController
+            let indice = sender as! IndexPath
+            DVC.nomroom = roomsCD[indice.row].name
+            DVC.RoomSelectecCoreData = roomsCD[indice.row]
+           
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
+            
+                                  
+                              }
+          
+        case .none:
+          print("none")
+
+          }
               
-              if segue.identifier == "todetail"{
-                  let DVC = segue.destination as! MessengerViewController
-                  let indice = sender as! IndexPath
-                  //let showsDict = roomsArray[indice.row] as! Dictionary<String,Any>
-                  DVC.nomroom = rooms[indice.row].name
-                  DVC.idroom = rooms[indice.row].id
-                  //DVC.overview = showsDict["summary"] as! String
-                 // let imageDict = showsDict["image"] as! Dictionary<String,String>
-                 // DVC.image = imageDict["medium"] as! String
-                  // DVC.image = images[indice.row]
-                  navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-                  
-                  
-              }
+          
           }
     
     

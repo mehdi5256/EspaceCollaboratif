@@ -66,6 +66,7 @@
 		91A6A628245B9D0B004F0C3D /* CellImageOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A627245B9D0B004F0C3D /* CellImageOther.swift */; };
 		91A6A62A245B9D22004F0C3D /* CellTextMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A629245B9D22004F0C3D /* CellTextMe.swift */; };
 		91A6A62C245B9D33004F0C3D /* CellTextOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A62B245B9D33004F0C3D /* CellTextOther.swift */; };
+		91ABB940246AC011001C8CBB /* MessageCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABB93F246AC011001C8CBB /* MessageCoreData.swift */; };
 		91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */; };
 		91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */; };
 		91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C1728B245485E000588967 /* UserCollectionViewCell.swift */; };
@@ -143,6 +144,7 @@
 		91A6A627245B9D0B004F0C3D /* CellImageOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageOther.swift; sourceTree = "<group>"; };
 		91A6A629245B9D22004F0C3D /* CellTextMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextMe.swift; sourceTree = "<group>"; };
 		91A6A62B245B9D33004F0C3D /* CellTextOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextOther.swift; sourceTree = "<group>"; };
+		91ABB93F246AC011001C8CBB /* MessageCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreData.swift; sourceTree = "<group>"; };
 		91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClient.swift; sourceTree = "<group>"; };
 		91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClientTest.swift; sourceTree = "<group>"; };
 		91C1728B245485E000588967 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				91656A9724691B7A00802907 /* RoomCoreData.swift */,
+				91ABB93F246AC011001C8CBB /* MessageCoreData.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				91A6A621245B9AD6004F0C3D /* Response.swift in Sources */,
 				91A39620245386A5005F43F4 /* SceneDelegate.swift in Sources */,
 				91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */,
+				91ABB940246AC011001C8CBB /* MessageCoreData.swift in Sources */,
 				91A6A62A245B9D22004F0C3D /* CellTextMe.swift in Sources */,
 				91A375A024538DE900854ADE /* Constants.swift in Sources */,
 				91A37587245388F200854ADE /* Room1.swift in Sources */,

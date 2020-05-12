@@ -156,6 +156,7 @@
                 <outlet property="messageTextView" destination="6qy-Rf-Sps" id="wAc-SF-tOg"/>
                 <outlet property="receiverImage" destination="iSJ-74-5X8" id="dUO-AU-nqO"/>
                 <outlet property="receiverName" destination="xjH-Mq-CGX" id="2lW-2t-4oh"/>
+                <outlet property="timeLabel" destination="5WQ-VQ-qvz" id="LZy-NI-RRB"/>
             </connections>
             <point key="canvasLocation" x="155.79710144927537" y="67.96875"/>
         </tableViewCell>
