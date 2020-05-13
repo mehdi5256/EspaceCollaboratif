@@ -442,6 +442,9 @@ extension RoomViewController:UITableViewDelegate{
                           DVC.nomroom = rooms[indice.row].name
                           DVC.idroom = rooms[indice.row].id
                         DVC.RoomSelectecCoreData = roomsCD[indice.row]
+                    
+                               DVC.nomroom = roomsCD[indice.row].name
+                               DVC.RoomSelectecCoreData = roomsCD[indice.row]
 
                           //DVC.overview = showsDict["summary"] as! String
                          // let imageDict = showsDict["image"] as! Dictionary<String,String>

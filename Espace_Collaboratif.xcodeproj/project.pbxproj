@@ -62,10 +62,6 @@
 		91A6A61F245B9AC9004F0C3D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A61E245B9AC9004F0C3D /* Util.swift */; };
 		91A6A621245B9AD6004F0C3D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A620245B9AD6004F0C3D /* Response.swift */; };
 		91A6A623245B9B09004F0C3D /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A622245B9B09004F0C3D /* Word.swift */; };
-		91A6A626245B9CEB004F0C3D /* CellimageMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A625245B9CEB004F0C3D /* CellimageMe.swift */; };
-		91A6A628245B9D0B004F0C3D /* CellImageOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A627245B9D0B004F0C3D /* CellImageOther.swift */; };
-		91A6A62A245B9D22004F0C3D /* CellTextMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A629245B9D22004F0C3D /* CellTextMe.swift */; };
-		91A6A62C245B9D33004F0C3D /* CellTextOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A62B245B9D33004F0C3D /* CellTextOther.swift */; };
 		91ABB940246AC011001C8CBB /* MessageCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABB93F246AC011001C8CBB /* MessageCoreData.swift */; };
 		91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */; };
 		91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */; };
@@ -140,10 +136,6 @@
 		91A6A61E245B9AC9004F0C3D /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		91A6A620245B9AD6004F0C3D /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		91A6A622245B9B09004F0C3D /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		91A6A625245B9CEB004F0C3D /* CellimageMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellimageMe.swift; sourceTree = "<group>"; };
-		91A6A627245B9D0B004F0C3D /* CellImageOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageOther.swift; sourceTree = "<group>"; };
-		91A6A629245B9D22004F0C3D /* CellTextMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextMe.swift; sourceTree = "<group>"; };
-		91A6A62B245B9D33004F0C3D /* CellTextOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextOther.swift; sourceTree = "<group>"; };
 		91ABB93F246AC011001C8CBB /* MessageCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreData.swift; sourceTree = "<group>"; };
 		91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClient.swift; sourceTree = "<group>"; };
 		91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClientTest.swift; sourceTree = "<group>"; };
@@ -263,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				916ACE462464E0AB00498285 /* CellsChat */,
-				91A6A624245B9C9A004F0C3D /* CellsMessenger */,
 				91592C74245B62F000E88133 /* MessengerRouter.swift */,
 				91592C75245B62F000E88133 /* MessengerModels.swift */,
 				91592C73245B62F000E88133 /* MessengerWorker.swift */,
@@ -413,17 +404,6 @@
 				91A6A622245B9B09004F0C3D /* Word.swift */,
 			);
 			path = EventBus;
-			sourceTree = "<group>";
-		};
-		91A6A624245B9C9A004F0C3D /* CellsMessenger */ = {
-			isa = PBXGroup;
-			children = (
-				91A6A625245B9CEB004F0C3D /* CellimageMe.swift */,
-				91A6A627245B9D0B004F0C3D /* CellImageOther.swift */,
-				91A6A629245B9D22004F0C3D /* CellTextMe.swift */,
-				91A6A62B245B9D33004F0C3D /* CellTextOther.swift */,
-			);
-			path = CellsMessenger;
 			sourceTree = "<group>";
 		};
 		91C0B8B6245E6BAC0059F675 /* Messenger */ = {
@@ -608,7 +588,6 @@
 				91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */,
 				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
 				91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */,
-				91A6A62C245B9D33004F0C3D /* CellTextOther.swift in Sources */,
 				91A39622245386A5005F43F4 /* ViewController.swift in Sources */,
 				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
 				919A8475245AA7140094CE42 /* Messenger1.swift in Sources */,
@@ -618,9 +597,7 @@
 				91A3759E24538D5600854ADE /* RoomAPIClient.swift in Sources */,
 				91A375A424538E2400854ADE /* APIClient.swift in Sources */,
 				919A8472245A43E20094CE42 /* UsersTableViewCell.swift in Sources */,
-				91A6A628245B9D0B004F0C3D /* CellImageOther.swift in Sources */,
 				91656A9A2469374600802907 /* Reachability.swift in Sources */,
-				91A6A626245B9CEB004F0C3D /* CellimageMe.swift in Sources */,
 				91A375A624539D9000854ADE /* RoomsEndPoints.swift in Sources */,
 				916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */,
 				91A3759724538B4D00854ADE /* RoomWorker.swift in Sources */,
@@ -662,7 +639,6 @@
 				91A39620245386A5005F43F4 /* SceneDelegate.swift in Sources */,
 				91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */,
 				91ABB940246AC011001C8CBB /* MessageCoreData.swift in Sources */,
-				91A6A62A245B9D22004F0C3D /* CellTextMe.swift in Sources */,
 				91A375A024538DE900854ADE /* Constants.swift in Sources */,
 				91A37587245388F200854ADE /* Room1.swift in Sources */,
 				91F7B0442454F46D00AA3974 /* UserConnectedEndPoints.swift in Sources */,
