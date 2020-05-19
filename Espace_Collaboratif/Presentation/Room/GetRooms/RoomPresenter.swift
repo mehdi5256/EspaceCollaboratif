@@ -14,7 +14,6 @@ import UIKit
 
 protocol RoomPresentationLogic
 {
-  func presentSomething(response: Room.Something.Response)
     func presentRoomsSuccess(rooms: [Room1])
     func presentRoomsError(error: String)
 }
@@ -24,12 +23,7 @@ class RoomPresenter: RoomPresentationLogic
     weak var viewController: RoomDisplayLogic?
     
     // MARK: Do something
-    func presentSomething(response: Room.Something.Response)
-    {
-      let viewModel = Room.Something.ViewModel()
-      viewController?.displaySomething(viewModel: viewModel)
-    }
-
+   
     func presentRoomsSuccess(rooms: [Room1]){
         viewController?.displayListeSuccess(rooms: rooms)
     }

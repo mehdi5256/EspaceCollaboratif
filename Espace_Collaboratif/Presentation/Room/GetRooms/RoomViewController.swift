@@ -17,7 +17,6 @@ import CoreData
 
 protocol RoomDisplayLogic: class
 {
-  func displaySomething(viewModel: Room.Something.ViewModel)
     func displayListeSuccess(rooms: [Room1])
     func displayListeError(error: String)
 }
@@ -27,10 +26,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
   var interactor: RoomBusinessLogic?
   var router: (NSObjectProtocol & RoomRoutingLogic & RoomDataPassing)?
    
-
-
-
-  // MARK: Object lifecycle
+ // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
@@ -75,47 +71,46 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     // MARK: View lifecycle
     var rooms: [Room1] = []
     var usersCell: [User] = []
-     let reachability = try! Reachability()
+    var usersCoreDataArray: [User] = []
 
+    let reachability = try! Reachability()
 
+    //outlets
     @IBOutlet weak var ViewNoConnection: UIView!
-    
     @IBOutlet weak var BtnAddOutlet: UIButton!
     @IBOutlet weak var tv: UITableView!
     
     // CORE DATA
     var roomsCD: [RoomCoreData] = []
 
-    
-    
     // END CORE DATA
+    
     @objc func reachabilityChanged(note: Notification) {
-
-      let reachability = note.object as! Reachability
-
-      switch reachability.connection {
-      case .wifi:
-          interactor?.getRooms()
-        ViewNoConnection.isHidden = true
-
-
-      case .cellular:
-          print("Reachable via Cellular")
-      case .unavailable:
-        print("Network not reachable")
-        ViewNoConnection.isHidden = false
-
-        
-      case .none:
-        print("none")
-
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .wifi:
+            interactor?.getRooms()
+            ViewNoConnection.isHidden = true
+        case .cellular:
+            print("Reachable via Cellular")
+        case .unavailable:
+            ViewNoConnection.isHidden = false
+            
+            
+        case .none:
+            print("none")
+            
         }
     }
+   
     
     override func viewDidLoad()
   {
     super.viewDidLoad()
-    doSomething()
+    
+    let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
+    roomsCD =   try! AppDelegate.viewContext.fetch(request)
+    
     setupButton()
     
     
@@ -179,8 +174,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     
    
     // core data
-    let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
-    roomsCD =   try! AppDelegate.viewContext.fetch(request)
+   
 
     }
     
@@ -204,50 +198,32 @@ class RoomViewController: UIViewController, RoomDisplayLogic
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = Room.Something.Request()
-    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: Room.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
     
-  
-   
-    
- func displayListeSuccess(rooms: [Room1]){
+    func displayListeSuccess(rooms: [Room1]){
         self.rooms = rooms
-    
-    for r in  self.rooms{
+        for r in  self.rooms{
+            if self.isEntityAttributeExist(id: Int32(r.id!), entityName: "RoomCoreData"){
+                print("duplication ma tzidech")
+            }
+            else{
+                print("zid fel core data")
+                let roomcc = RoomCoreData(context: AppDelegate.viewContext)
+                roomcc.id = Int32(r.id!)
+                roomcc.name = r.name
+                roomcc.subject = r.subject
+                let jsonData = try! JSONEncoder().encode(r.users)
+               // let jsonString = String(data: jsonData, encoding: .utf8)!
+              //  print(jsonString)
+                roomcc.users = jsonData
+                try? AppDelegate.viewContext.save()
+                let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
+                   roomsCD =   try! AppDelegate.viewContext.fetch(request)
+                
+                
+            }
+        }
+        tv.reloadData()
         
-       
-        if self.isEntityAttributeExist(id: Int32(r.id!), entityName: "RoomCoreData"){
-                        print("duplication ma tzidech")
-            
-                    }
-                    else{
-                        print("zid fel core data")
-                        let roomcc = RoomCoreData(context: AppDelegate.viewContext)
-            
-            
-                        roomcc.id = Int32(r.id!)
-                        roomcc.name = r.name
-                        roomcc.subject = r.subject
-                        try? AppDelegate.viewContext.save()
-            
-                    }
-        
-        
-    }
-    
-    
-
-    tv.reloadData()
-
     }
     
     func displayListeError(error: String) {
@@ -255,23 +231,11 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     }
     
     @IBAction func AddRoomAction(_ sender: Any) {
-//
-
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let AddRoomViewController = storyBoard.instantiateViewController(withIdentifier: "AddRoomViewController") as! AddRoomViewController
-//
-//        AddRoomViewController.modalPresentationStyle = .fullScreen
-//
-//        self.present(AddRoomViewController, animated: true, completion: nil)
-//        
-//        print("clicked")
-//         let storyboardg = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboardg.instantiateViewController(withIdentifier: "AddRoomViewController") as! AddRoomViewController
-//        navigationController?.pushViewController(vc,
-//        animated: true)
         
     }
 }
+
+
 
 extension RoomViewController: UITableViewDataSource{
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -297,21 +261,23 @@ extension RoomViewController: UITableViewDataSource{
         case false:
             print("not conncted")
             
-            print(indexPath.item)
             //         affichage core data
             cell.RoomName.text = roomsCD[indexPath.item].name!
             cell.UserName.text = roomsCD[indexPath.item].subject
             cell.NumPoste.text  =  (roomsCD[indexPath.item].id).description
-        default:
-            let roomindex = rooms[indexPath.item]
+            usersCoreDataArray = try! JSONDecoder().decode([User].self, from: roomsCD[indexPath.row].users! )
 
-           cell.RoomName.text = roomindex.name!
+      
+        default:
+            
+            let roomindex = rooms[indexPath.item]
+            cell.RoomName.text = roomindex.name!
             cell.UserName.text = roomindex.subject!
             cell.NumPoste.text  =  (roomindex.id!).description
-            cell.selectionStyle = .none
             self.usersCell = roomindex.users
         }
         
+        cell.selectionStyle = .none
         let frequency = indexPath.item % 10;
         switch (frequency) {
         case 0:
@@ -327,7 +293,7 @@ extension RoomViewController: UITableViewDataSource{
             
         case 3:
             cell.setGradientBackground(colorOne: Colors.orange1, colorTwo: Colors.orange2)
-         break;
+            break;
         case 4:
             cell.setGradientBackground(colorOne: Colors.lightGrey, colorTwo: Colors.veryDarkGrey)
             break;
@@ -335,24 +301,71 @@ extension RoomViewController: UITableViewDataSource{
         default:
             break;
         }
-                  
+        
         return  cell
-}
+    }
 
 }
 
 extension RoomViewController: UICollectionViewDataSource,UICollectionViewDelegate{
     
-    
-    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       // return usersCell.count
+        
+        switch NetworkStatus.Connection() {
+               case false:
+            return usersCoreDataArray.count>4 ?  4 : usersCoreDataArray.count;
+
+                
+                default:
+
         return usersCell.count>4 ?  4 : usersCell.count;
+        }
 
         }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //print(usersCell.count)
+        
+        switch NetworkStatus.Connection() {
+                      case false:
+                        
+                   guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
+                                     else{
+                                         return UserCollectionViewCell()
+                                 }
+                               
+                          let image = self.usersCoreDataArray[indexPath.item].image
+                          cell.lblnmbruser.text = "+" + (usersCoreDataArray.count-4).description
+
+
+                         cell.UserImage.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic_user")) {
+                             result in
+                             switch result {
+                             case .success:
+                                 break
+                             case .failure:
+                                 cell.UserImage.image = UIImage(named: "ic_user")!
+                             }
+                         }
+                          
+                          
+                          
+                          if (indexPath.item) < 3 {
+                              
+                              cell.lblnmbruser.isHidden = true
+                              
+                              
+                          }
+                          if (indexPath.item) == 3 {
+                              
+                              cell.lblnmbruser.isHidden = false
+                              
+                              
+                          }
+                          return cell
+                          
+                      
+                       default:
+      
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
                    else{
@@ -376,27 +389,21 @@ extension RoomViewController: UICollectionViewDataSource,UICollectionViewDelegat
         
         
         if (indexPath.item) < 3 {
-
+            
             cell.lblnmbruser.isHidden = true
-
-
+            
+            
         }
         if (indexPath.item) == 3 {
-
-                   cell.lblnmbruser.isHidden = false
-
-
-               }
-//        if (indexPath.item) >= 4{
-//            
-//            cell.isHidden = true
-//            
-//        }
-     
-        
+            
+            cell.lblnmbruser.isHidden = false
+            
+            
+        }
         return cell
         
     }
+          }
     
     
 }
@@ -435,49 +442,46 @@ extension RoomViewController:UITableViewDelegate{
         
         switch reachability.connection {
         case .wifi:
-                if segue.identifier == "todetail"{
-                          let DVC = segue.destination as! MessengerViewController
-                          let indice = sender as! IndexPath
-                          //let showsDict = roomsArray[indice.row] as! Dictionary<String,Any>
-                          DVC.nomroom = rooms[indice.row].name
-                          DVC.idroom = rooms[indice.row].id
-                        DVC.RoomSelectecCoreData = roomsCD[indice.row]
-                    
-                               DVC.nomroom = roomsCD[indice.row].name
-                               DVC.RoomSelectecCoreData = roomsCD[indice.row]
-
-                          //DVC.overview = showsDict["summary"] as! String
-                         // let imageDict = showsDict["image"] as! Dictionary<String,String>
-                         // DVC.image = imageDict["medium"] as! String
-                          // DVC.image = images[indice.row]
-                          navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-                          
-                          
-                      }
-
-
+            if segue.identifier == "todetail"{
+                let DVC = segue.destination as! MessengerViewController
+                let indice = sender as! IndexPath
+                
+                DVC.nomroom = rooms[indice.row].name
+                DVC.idroom = rooms[indice.row].id
+                
+                //CORE DATA
+                
+                DVC.RoomSelectecCoreData = roomsCD[indice.row]
+                
+                DVC.nomroom = roomsCD[indice.row].name
+                DVC.RoomSelectecCoreData = roomsCD[indice.row]
+                navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
+               
+            }
+            
+            
         case .cellular:
             print("Reachable via Cellular")
         case .unavailable:
-          if segue.identifier == "todetail"{
+            if segue.identifier == "todetail"{
+                
+                let DVC = segue.destination as! MessengerViewController
+                let indice = sender as! IndexPath
+                DVC.nomroom = roomsCD[indice.row].name
+                DVC.RoomSelectecCoreData = roomsCD[indice.row]
+                
+                navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
+                
+                
+            }
             
-            let DVC = segue.destination as! MessengerViewController
-            let indice = sender as! IndexPath
-            DVC.nomroom = roomsCD[indice.row].name
-            DVC.RoomSelectecCoreData = roomsCD[indice.row]
-           
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-            
-                                  
-                              }
-          
         case .none:
-          print("none")
-
-          }
-              
-          
-          }
+            print("none")
+            
+        }
+        
+        
+    }
     
     
 }

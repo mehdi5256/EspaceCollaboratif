@@ -15,10 +15,11 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="subject" optional="YES" attributeType="String"/>
+        <attribute name="users" optional="YES" attributeType="Binary"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MessageCoreData" inverseName="room" inverseEntity="MessageCoreData"/>
     </entity>
     <elements>
         <element name="MessageCoreData" positionX="8.796875" positionY="-3.4375" width="128" height="178"/>
-        <element name="RoomCoreData" positionX="-210.0546875" positionY="65.95703125" width="128" height="103"/>
+        <element name="RoomCoreData" positionX="-235.95703125" positionY="71.39453125" width="128" height="118"/>
     </elements>
 </model>

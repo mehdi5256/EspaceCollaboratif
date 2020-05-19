@@ -14,7 +14,6 @@ import UIKit
 
 protocol RoomBusinessLogic
 {
-  func doSomething(request: Room.Something.Request)
     func getRooms()
 
 }
@@ -34,18 +33,13 @@ class RoomInteractor: RoomBusinessLogic, RoomDataStore
     
     // MARK: Do something
     
-     func doSomething(request: Room.Something.Request)
-     {
-       worker = RoomWorker()
-       
-       let response = Room.Something.Response()
-       presenter?.presentSomething(response: response)
-     }
+    
     
     func getRooms() {
           worker = RoomWorker()
               worker?.getRooms().then {
                   rooms in
+                
                   self.presenter?.presentRoomsSuccess(rooms: rooms)
               }.catch {
                   error in

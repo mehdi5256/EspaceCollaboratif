@@ -36,56 +36,27 @@ protocol MessengerDisplayLogic: class
 
 class MessengerViewController: UIViewController, MessengerDisplayLogic
 {
-   
-   
+    
+    
     
     func displaySendMessageEventBus(result: String) {
         print(result)
     }
     
     func isEntityAttributeExist(id: Int32, entityName: String) -> Bool {
-         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-         let managedContext = appDelegate.persistentContainer.viewContext
-         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-         fetchRequest.predicate = NSPredicate(format: "id == %u", id)
-
-         let res = try! managedContext.fetch(fetchRequest)
-         return res.count > 0 ? true : false
-       }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "id == %u", id)
+        
+        let res = try! managedContext.fetch(fetchRequest)
+        return res.count > 0 ? true : false
+    }
     
     func displayMessenger(messenger: Messenger1) {
         print(messenger)
         self.msgarray.append(messenger)
         
-        for mmm in  self.msgarray{
-            
-           
-            if self.isEntityAttributeExist(id: Int32(mmm.id!), entityName: "MessageCoreData"){
-                            print("duplication ma tzidech")
-                
-                        }
-                        else{
-                            print("zid fel core data")
-                            let msgcc = MessageCoreData(context: AppDelegate.viewContext)
-                
-                
-                            msgcc.id = Int32(mmm.id!)
-                            msgcc.body = mmm.body
-                            msgcc.file = mmm.file
-                    msgcc.firstname = mmm.user.firstName
-                    msgcc.lastname = mmm.user.lastName
-                    msgcc.imguser = mmm.user.image
-                    msgcc.timestamp = mmm.timestamp
-                msgcc.room =  RoomSelectecCoreData
-
-
-
-                            try? AppDelegate.viewContext.save()
-                
-                        }
-            
-            
-        }
         self.tv.reloadData()
         self.scrolltobottom(animated: true)
     }
@@ -101,83 +72,83 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     }
     
     
-  var interactor: MessengerBusinessLogic?
-  var router: (NSObjectProtocol & MessengerRoutingLogic & MessengerDataPassing)?
-
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = MessengerInteractor()
-    let presenter = MessengerPresenter()
-    let router = MessengerRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
+    var interactor: MessengerBusinessLogic?
+    var router: (NSObjectProtocol & MessengerRoutingLogic & MessengerDataPassing)?
     
-   
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup()
+    {
+        let viewController = self
+        let interactor = MessengerInteractor()
+        let presenter = MessengerPresenter()
+        let router = MessengerRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
+    }
+    
+    
     //outlets
-       @IBOutlet weak var emptytvimg: UIImageView!
-       @IBOutlet weak var message: UITextView!
-       @IBOutlet weak var btn: UIButton!
-       @IBOutlet weak var BtnSideUp: UIButton!
-       @IBOutlet weak var navigationBar: UINavigationItem!
-       @IBOutlet weak var tv: UITableView!
-       @IBOutlet weak var btnlastrow: UIButton!
+    @IBOutlet weak var emptytvimg: UIImageView!
+    @IBOutlet weak var message: UITextView!
+    @IBOutlet weak var btn: UIButton!
+    @IBOutlet weak var BtnSideUp: UIButton!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var tv: UITableView!
+    @IBOutlet weak var btnlastrow: UIButton!
     
     
     //coredata
     
-   // var msgscoredataarray = MessageCoreData.all
+    // var msgscoredataarray = MessageCoreData.all
     
     var MessagesArrayCoreData: [MessageCoreData] = []
-
+    
     
     
     let reachability = try! Reachability()
-
-  
-  // MARK: View lifecycle
+    
+    
+    // MARK: View lifecycle
     
     // debut jitsi
-
+    
     fileprivate var pipViewCoordinator: PiPViewCoordinator?
     fileprivate var jitsiMeetView: JitsiMeetView?
     //fin jitsi
     
     //  open gallery
-       var imagePicker = UIImagePickerController()
+    var imagePicker = UIImagePickerController()
     
     //end 
     
@@ -191,311 +162,370 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     
     
-override func viewWillAppear(_ animated: Bool) {
-               tv.register(UINib(nibName: "TextSenderCell", bundle: nil), forCellReuseIdentifier: "TextSenderCell")
-             tv.register(UINib(nibName: "TextReceiverCell", bundle: nil), forCellReuseIdentifier: "TextReceiverCell")
-             
-             tv.register(UINib(nibName: "ImageSenderCell", bundle: nil), forCellReuseIdentifier: "ImageSenderCell")
-             
-             tv.register(UINib(nibName: "ImageReceiverCell", bundle: nil), forCellReuseIdentifier: "ImageReceiverCell")
-                        
-            // msgscoredataarray = MessageCoreData.all
+    override func viewWillAppear(_ animated: Bool) {
+        tv.register(UINib(nibName: "TextSenderCell", bundle: nil), forCellReuseIdentifier: "TextSenderCell")
+        tv.register(UINib(nibName: "TextReceiverCell", bundle: nil), forCellReuseIdentifier: "TextReceiverCell")
+        
+        tv.register(UINib(nibName: "ImageSenderCell", bundle: nil), forCellReuseIdentifier: "ImageSenderCell")
+        
+        tv.register(UINib(nibName: "ImageReceiverCell", bundle: nil), forCellReuseIdentifier: "ImageReceiverCell")
+        
+        // msgscoredataarray = MessageCoreData.all
+        
+        
+    }
     
-    
-           }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrolltobottom(animated: false)
-              
-          }
- 
+        
+    }
+    
     @IBAction func DismissKeyBoard(_ sender: UITapGestureRecognizer) {
         message.resignFirstResponder()
     }
     
     @objc func reachabilityChanged(note: Notification) {
-
-      let reachability = note.object as! Reachability
-
-      switch reachability.connection {
-      case .wifi:
-          self.interactor?.getRoomById(id: self.idroom)
-
-
-
-      case .cellular:
-          print("Reachable via Cellular")
-      case .unavailable:
-        print("Network not reachable")
-
         
-      case .none:
-        print("none")
-
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            self.interactor?.getRoomById(id: self.idroom)
+            
+            
+            
+        case .cellular:
+            print("Reachable via Cellular")
+        case .unavailable:
+            print("Network not reachable")
+            
+            
+        case .none:
+            print("none")
+            
         }
     }
+    
     
     override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    
-    let request:NSFetchRequest<MessageCoreData> = MessageCoreData.fetchRequest()
-    request.sortDescriptors = [
-        NSSortDescriptor(key: "room.name", ascending: false)
-    ]
-    request.predicate = NSPredicate(format: "room.name == %@", RoomSelectecCoreData!.name!)
-    
-       MessagesArrayCoreData =   try! AppDelegate.viewContext.fetch(request)
-    
-    
-
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-    
-    imagePicker.delegate = self
-
-    reachability.whenReachable = { reachability in
-        if reachability.connection == .wifi {
-            print("Reachable via WiFi")
-            self.interactor?.getRoomById(id: self.idroom)
-
-
-        } else {
-            print("Reachable via Cellular")
-
+    {
+        super.viewDidLoad()
+        
+        
+        let request:NSFetchRequest<MessageCoreData> = MessageCoreData.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "room.name", ascending: false)
+        ]
+        request.predicate = NSPredicate(format: "room.name == %@", RoomSelectecCoreData!.name!)
+        
+        MessagesArrayCoreData =   try! AppDelegate.viewContext.fetch(request)
+        
+        
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        imagePicker.delegate = self
+        
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                print("Reachable via WiFi")
+                self.interactor?.getRoomById(id: self.idroom)
+                
+                
+            } else {
+                print("Reachable via Cellular")
+                
+            }
         }
+        reachability.whenUnreachable = { _ in
+            print("Not reachable")
+            
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+        
+        //    print(nomroom!)
+        //    print(idroom!)
+        
+        
+        scrolltobottom(animated: false)
+        btnlastrow.roundCorners([.topLeft, .bottomLeft] , radius: 8)
+        
+        interactor?.connect()
+        
+        
+        message.delegate = self
+        design()
+        
     }
-    reachability.whenUnreachable = { _ in
-        print("Not reachable")
-
-    }
-
-    do {
-        try reachability.startNotifier()
-    } catch {
-        print("Unable to start notifier")
-    }
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
-    do{
-      try reachability.startNotifier()
-    }catch{
-      print("could not start reachability notifier")
-    }
-    
-//    print(nomroom!)
-//    print(idroom!)
-    
-    
-    scrolltobottom(animated: false)
-    btnlastrow.roundCorners([.topLeft, .bottomLeft] , radius: 8)
-    
-    interactor?.connect()
-
-
-    message.delegate = self
-    design()
-
-  }
     @IBAction func LastRowAction(_ sender: Any) {
         scrolltobottom(animated: true)
     }
     
     @IBAction func BtnSend(_ sender: Any) {
         
-        let msgtxtview : String = self.message.text
-
-//        interactor?.send(idroom: self.idroom, messagesend: message.text, type:"TEXT", file: "")
-        
-    //    interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
-        designbuttonaftersend()
-        
-        let msgCoreData = MessageCoreData(context: AppDelegate.viewContext)
-        msgCoreData.body = msgtxtview
-        msgCoreData.firstname = UserDefaultLogged.firstNameUD
-        msgCoreData.lastname = UserDefaultLogged.lasttNameUD
-        msgCoreData.imguser = UserDefaultLogged.IMGUD
-        msgCoreData.type = "TEXT"
-        msgCoreData.file = ""
-        
-        msgCoreData.room = RoomSelectecCoreData
-       
-        try? AppDelegate.viewContext.save()
-        print("msgCoreData")
-
-        print(msgCoreData)
-        print("msgCoreData")
-
-        
+        switch NetworkStatus.Connection() {
+        case false:
+            print("not conncted")
+            
+            
+            let alert = UIAlertController(title: "", message: "Impossible D'envoyer un message. Assurer-vous que votre téléphone est connecté à Internet et réessayez.", preferredStyle: UIAlertController.Style.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+            
+            
+        default:
+            
+            
+            
+            let msgtxtview : String = self.message.text
+            
+            interactor?.send(idroom: self.idroom, messagesend: message.text, type:"TEXT", file: "")
+            
+            interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
+            designbuttonaftersend()
+            
+            //        let msgCoreData = MessageCoreData(context: AppDelegate.viewContext)
+            //        msgCoreData.body = msgtxtview
+            //        msgCoreData.firstname = UserDefaultLogged.firstNameUD
+            //        msgCoreData.lastname = UserDefaultLogged.lasttNameUD
+            //        msgCoreData.imguser = UserDefaultLogged.IMGUD
+            //        msgCoreData.type = "TEXT"
+            //        msgCoreData.file = ""
+            //
+            //        msgCoreData.room = RoomSelectecCoreData
+            //
+            //        try? AppDelegate.viewContext.save()
+            //        print("msgCoreData")
+            //
+            //        print(msgCoreData)
+            //        print("msgCoreData")
+            
+        }
     }
-   
+    
     // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
+    
+    //@IBOutlet weak var nameTextField: UITextField!
+    
     
     func displayrRoomByIdError(error: String) {
-       print(error)
+        print(error)
         print("aaaa")
-
+        
     }
     
     func displayrRoomByIdSuccess(roomdid: [Messenger1]) {
-
+        
         self.msgarray = roomdid
         print(msgarray)
         print("feergger")
+        
+        for mmm in  self.msgarray{
+            print("mmmmmmm")
+            
+            
+            if self.isEntityAttributeExist(id: Int32(mmm.id!), entityName: "MessageCoreData"){
+                print("duplication ma tzidech")
+               
+                
+            }
+            else{
+                print("zid fel core data")
+                let msgcc = MessageCoreData(context: AppDelegate.viewContext)
+                
+                
+                msgcc.id = Int32(mmm.id!)
+                msgcc.body = mmm.body
+                msgcc.file = mmm.file
+                msgcc.firstname = mmm.user.firstName
+                msgcc.lastname = mmm.user.lastName
+                msgcc.imguser = mmm.user.image
+                msgcc.timestamp = mmm.timestamp
+                msgcc.room =  RoomSelectecCoreData
+                msgcc.type = mmm.type
+                
+                
+                
+                try? AppDelegate.viewContext.save()
+                print("hedha howa")
+
+                print(msgcc)
+                print("hedha howa")
+
+                
+            }
+            
+            
+        }
         tv.reloadData()
         
     }
     
     func displayPostMsgError(error: String) {
-           print(error)
-          // print("aaaa")
-       }
-       
-       func displayPostMsgSucess(msg: [Messenger1]) {
-           print(msg)
-       }
-  
+        print(error)
+        // print("aaaa")
+    }
+    
+    func displayPostMsgSucess(msg: [Messenger1]) {
+        print("ok")
+    }
+    
     func displayPostImgSucess(img: [Messenger1]) {
-                      print(img)
-
-       }
+        print("ok")
+        
+    }
     
     func displayPostImgError(error: String) {
-           print(error)
+        print(error)
         print("braaaassssssadzafazfa")
-       }
-       
+    }
+    
 }
 
 
 
 // Open gallery and upload image , file ,
 extension MessengerViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-   
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
-             // The info dictionary may contain multiple representations of the image. You want to use the original.
-             guard let selectedImage = info[.originalImage] as? UIImage else {
-                 fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-             }
-    convertImageToBase64(selectedImage)
-             // Set photoImageView to display the selected image.           //  imgv.image = selectedImage
-
-             // Dismiss the picker.
-             dismiss(animated: true, completion: nil)
-         }
+        
+        // The info dictionary may contain multiple representations of the image. You want to use the original.
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        convertImageToBase64(selectedImage)
+        // Set photoImageView to display the selected image.           //  imgv.image = selectedImage
+        
+        // Dismiss the picker.
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func OpenSideUpMeny(_ sender: Any) {
         actionSheet()
-       }
+    }
     
     func actionSheet() {
-           let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-            let gallery = UIAlertAction(title: "Bibliothéque Photo", style: .default) { (gallery) in
-                // gallery Code
-
-                            let imagecontrooler = UIImagePickerController()
-                                            imagecontrooler.delegate = self
-                                            imagecontrooler.sourceType = .photoLibrary
-                
-                
-                
-                                            self.present(self.imagePicker
-                                                , animated: true
-                                                , completion: nil)
-
-            }
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-            gallery.setValue(0, forKey: "titleTextAlignment")
-            gallery.setValue(UIColor.black, forKey: "titleTextColor")
-
-
-            gallery.setValue(UIImage(systemName: "photo"), forKey: "image")
-            sheet.addAction(gallery)
+        let gallery = UIAlertAction(title: "Bibliothéque Photo", style: .default) { (gallery) in
+            // gallery Code
             
-
-            let camera = UIAlertAction(title: "Caméra", style: .default) { (camera) in
-                // Facebook Code
-            }
-            camera.setValue(0, forKey: "titleTextAlignment")
-            camera.setValue(UIImage(systemName: "camera"), forKey: "image")
-            camera.setValue(UIColor.black, forKey: "titleTextColor")
-
-            sheet.addAction(camera)
-
-
-            let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
-                // Instagram Code
-            }
-            doc.setValue(0, forKey: "titleTextAlignment")
-            doc.setValue(UIImage(systemName: "doc"), forKey: "image")
-            doc.setValue(UIColor.black, forKey: "titleTextColor")
-
-            sheet.addAction(doc)
-
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            sheet.addAction(cancel)
+            let imagecontrooler = UIImagePickerController()
+            imagecontrooler.delegate = self
+            imagecontrooler.sourceType = .photoLibrary
             
-           // sheet.view.backgroundColor = .white
-
-            present(sheet, animated: true, completion: nil)
+            
+            
+            self.present(self.imagePicker
+                , animated: true
+                , completion: nil)
+            
         }
+        
+        gallery.setValue(0, forKey: "titleTextAlignment")
+        gallery.setValue(UIColor.black, forKey: "titleTextColor")
+        
+        
+        gallery.setValue(UIImage(systemName: "photo"), forKey: "image")
+        sheet.addAction(gallery)
+        
+        
+        let camera = UIAlertAction(title: "Caméra", style: .default) { (camera) in
+            // Facebook Code
+        }
+        camera.setValue(0, forKey: "titleTextAlignment")
+        camera.setValue(UIImage(systemName: "camera"), forKey: "image")
+        camera.setValue(UIColor.black, forKey: "titleTextColor")
+        
+        sheet.addAction(camera)
+        
+        
+        let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
+            // Instagram Code
+        }
+        doc.setValue(0, forKey: "titleTextAlignment")
+        doc.setValue(UIImage(systemName: "doc"), forKey: "image")
+        doc.setValue(UIColor.black, forKey: "titleTextColor")
+        
+        sheet.addAction(doc)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        sheet.addAction(cancel)
+        
+        // sheet.view.backgroundColor = .white
+        
+        present(sheet, animated: true, completion: nil)
+    }
     
     
-               
-               func convertImageToBase64(_ image: UIImage) -> String {
-                   let imageData:NSData = image.jpegData(compressionQuality: 0.4)! as NSData
-                      let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-                  // print(strBase64)
-                
-interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBase64)
-                
-//
-//                interactor?.postImage(type: "IMAGE", body: "", user: ["id":UserDefaultLogged.idUD], room: ["id":self.idroom!], file: strBase64)
-                
-                
-                
-//                interactor?.PostMsg(type: "IMAGE", file: strBase64, room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: "")
-
-//
-//
-                let parameters: [String: Any] = [
-                "type":"IMAGE",
-                "body":"",
-                "user":["id":UserDefaultLogged.idUD],
-                "room":["id":self.idroom],
-                "file":strBase64
-                ]
-                               AF.request("http://b187603e.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
-                                  .responseJSON { response in
-                                      print(response.request)
-                                      print(response.response)
-                                      print(response.result)}
-                       //vider textfields
-                      // message.text = ""
-//
-//
-                
-                
-                   return strBase64
-
-               }
     
-               
-//               func convertBase64ToImage(_ str: String) -> UIImage {
-//                       let dataDecoded : Data = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
-//                       let decodedimage = UIImage(data: dataDecoded)
-//                   print(decodedimage)
-//
-//                       return decodedimage!
-//               }
+    func convertImageToBase64(_ image: UIImage) -> String {
+        let imageData:NSData = image.jpegData(compressionQuality: 0.4)! as NSData
+        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        // print(strBase64)
+        
+        interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBase64)
+        
+        //
+        //                interactor?.postImage(type: "IMAGE", body: "", user: ["id":UserDefaultLogged.idUD], room: ["id":self.idroom!], file: strBase64)
+        
+        
+        
+        //                interactor?.PostMsg(type: "IMAGE", file: strBase64, room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: "")
+        
+        //
+        //
+        let parameters: [String: Any] = [
+            "type":"IMAGE",
+            "body":"",
+            "user":["id":UserDefaultLogged.idUD],
+            "room":["id":self.idroom],
+            "file":strBase64
+        ]
+        AF.request("http://bda0514f.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+            .responseJSON { response in
+                print(response.request)
+                print(response.response)
+                print(response.result)}
+        //vider textfields                      
+        // message.text = ""
+        //
+        //
+        
+        
+        return strBase64
+        
+    }
+    
+    
+    //               func convertBase64ToImage(_ str: String) -> UIImage {
+    //                       let dataDecoded : Data = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
+    //                       let decodedimage = UIImage(data: dataDecoded)
+    //                   print(decodedimage)
+    //
+    //                       return decodedimage!
+    //               }
     
     
     func convertUTCDateToLocalDate(dateToConvert:String) -> String {
@@ -508,44 +538,35 @@ interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBa
         let localDateStr = format.string(from: convertedDate!)
         return localDateStr
     }
-             
-    }
+    
+}
 
 
-
-
-
-
-
-
-
-
-
- ///////// Extension mta3 bar elli tab3th beha l msg
+///////// Extension mta3 bar elli tab3th beha l msg
 
 
 extension MessengerViewController: UITextViewDelegate{
     
     
-//        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//
-//            if text == "\n" {
-//                textView.resignFirstResponder()
-//                return false
-//            }
-//            return true
-//        }
-//    
-
-
+    //        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    //
+    //            if text == "\n" {
+    //                textView.resignFirstResponder()
+    //                return false
+    //            }
+    //            return true
+    //        }
+    //
+    
+    
     func textViewDidChange(_ textView: UITextView)
     {
         if Whitespace(textView: message){
             btn.backgroundColor = UIColor.systemBlue
-
+            
         }
         else{
-           btn.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            btn.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
         }
         
         if textView == self.message {
@@ -557,13 +578,13 @@ extension MessengerViewController: UITextViewDelegate{
             textView.isScrollEnabled = true
         }
         else
-            {
+        {
             textView.frame.size.height = textView.contentSize.height
-                textView.isScrollEnabled = false
-                
+            textView.isScrollEnabled = false
+            
         }
     }
-
+    
     //Configuration design textview mta3 chat
     func design(){
         message.layer.cornerRadius = 10
@@ -571,8 +592,8 @@ extension MessengerViewController: UITextViewDelegate{
         message.layer.borderWidth = 1
         message.layer.borderColor = #colorLiteral(red: 0.4948643718, green: 0.4948643718, blue: 0.4948643718, alpha: 1)
         btn.layer.cornerRadius = 15
-
-        }
+        
+    }
     
     func designbuttonaftersend(){
         message.text = ""
@@ -582,264 +603,275 @@ extension MessengerViewController: UITextViewDelegate{
     }
     
     // Configuration tableview show the last item
-       func scrolltobottom(animated:Bool){
-                  let numberOfSections = self.tv.numberOfSections
-                  let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
-
-                  let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+    func scrolltobottom(animated:Bool){
+        let numberOfSections = self.tv.numberOfSections
+        let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
+        
+        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
         if msgarray.count > 0{
             self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: animated)
-            }
-            
         }
-
-    // Fonction white space elimination
-func Whitespace(textView textView: UITextView) -> Bool {
-    guard let text = textView.text,
-        !text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else {
-        // this will be reached if the text is nil (unlikely)
-        // or if the text only contains white spaces
-        // or no text at all
-        return false
+        
     }
-
-    return true
-}
+    
+    // Fonction white space elimination
+    func Whitespace(textView textView: UITextView) -> Bool {
+        guard let text = textView.text,
+            !text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else {
+                // this will be reached if the text is nil (unlikely)
+                // or if the text only contains white spaces
+                // or no text at all
+                return false
+        }
+        
+        return true
+    }
     
     // l baar mta3  msg tatl3 w tahbet ki tselectionni l msg
     @objc func keyboardWillShow(notification: NSNotification) {
-           if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-               if self.view.frame.origin.y == 0 {
-                   self.view.frame.origin.y -= keyboardSize.height
-               }
-           }
-       }
-
-       @objc func keyboardWillHide(notification: NSNotification) {
-           if self.view.frame.origin.y != 0 {
-               self.view.frame.origin.y = 0
-           }
-       }
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
 }
 
 
- // extension table view mta3 l chat configuration des 4 cellules
+// extension table view mta3 l chat configuration des 4 cellules
 
 extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
-
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-                if ( indexPath.row == msgarray.count - 1)
-          {
-              print("came to last row")
-                  btnlastrow.isHidden = true
-          }
+        if ( indexPath.row == msgarray.count - 1)
+        {
+            print("came to last row")
+            btnlastrow.isHidden = true
+        }
         
-          if ( indexPath.row != msgarray.count - 1)
-          {
-              btnlastrow.isHidden = false
-
-
-              
-          }
-
+        if ( indexPath.row != msgarray.count - 1)
+        {
+            btnlastrow.isHidden = false
+            
+            
+            
+        }
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
         
         switch NetworkStatus.Connection() {
-            case false:
-                print("not conncted")
-                print("connected")
-                if  MessagesArrayCoreData.count == 0
-                {
-                    tv.isHidden = true
-                    emptytvimg.isHidden = false
-                }
-                else{
-                    tv.isHidden = false
-                    emptytvimg.isHidden = true
-                    
-                }
-                return MessagesArrayCoreData.count
+        case false:
+            print("not conncted")
+            print("connected")
+            if  MessagesArrayCoreData.count == 0
+            {
+                tv.isHidden = true
+                emptytvimg.isHidden = false
+            }
+            else{
+                tv.isHidden = false
+                emptytvimg.isHidden = true
+                
+            }
+            return MessagesArrayCoreData.count
         default:
             print("connected")
-                if  msgarray.count == 0
-                         {
-                             tv.isHidden = true
-                             emptytvimg.isHidden = false
-                }
-                         else{
-                            tv.isHidden = false
-                             emptytvimg.isHidden = true
-                             
-                         }
-                return msgarray.count
+            if  msgarray.count == 0
+            {
+                tv.isHidden = true
+                emptytvimg.isHidden = false
             }
-            
+            else{
+                tv.isHidden = false
+                emptytvimg.isHidden = true
+                
+            }
+            return msgarray.count
+        }
         
-
+        
+        
     }
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        switch NetworkStatus.Connection() {
-//                   case false:
-//
-//                       return msgscoredataarray.count
-//               default:
-//                   print("connected")
-//
-//                       return 1
-//                   }
-//
-//
-//        }
-        
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-         let TextSenderCell = tv.dequeueReusableCell(withIdentifier: "TextSenderCell", for: indexPath) as! TextSenderCell
-        
-        let TextReceiverCell = tv.dequeueReusableCell(withIdentifier: "TextReceiverCell", for: indexPath) as! TextReceiverCell
-        
-        let ImageSenderCell = tv.dequeueReusableCell(withIdentifier: "ImageSenderCell", for: indexPath) as! ImageSenderCell
-                   
-        let ImageReceiverCell = tv.dequeueReusableCell(withIdentifier: "ImageReceiverCell", for: indexPath) as! ImageReceiverCell
-
-        switch NetworkStatus.Connection() {
-              case false:
-                  print("not conncted")
-                  
-        default:
+             let TextSenderCell = tv.dequeueReusableCell(withIdentifier: "TextSenderCell", for: indexPath) as! TextSenderCell
             
-
-                    if (self.msgarray[indexPath.row].type == "IMAGE" && self.msgarray[indexPath.row].user.image == UserDefaultLogged.IMGUD ){
-                        
-                        
-                        ImageSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                                            //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                                       let image = msgarray[indexPath.row].user.image
-                                       let imagechat = msgarray[indexPath.row].file
-
-                                   ImageSenderCell.receiverImage.kf.setImage(with: URL(string: image))
-                                         // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
-            //            let time = convertUTCDateToLocalDate(dateToConvert: msgarray[indexPath.row].timestamp! )
-            //
-            //                       ImageSenderCell.timeLabel.text = time
-                                   ImageSenderCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                                                    result in
-                                                    switch result {
-                                                    case .success:
-                                                        break
-                                                    case .failure:
-                                                       ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
-                                           }
-                                       }
-                        return ImageSenderCell
-
-                                       
-                                                                  
-                                      }
+            let TextReceiverCell = tv.dequeueReusableCell(withIdentifier: "TextReceiverCell", for: indexPath) as! TextReceiverCell
             
+            let ImageSenderCell = tv.dequeueReusableCell(withIdentifier: "ImageSenderCell", for: indexPath) as! ImageSenderCell
+                       
+            let ImageReceiverCell = tv.dequeueReusableCell(withIdentifier: "ImageReceiverCell", for: indexPath) as! ImageReceiverCell
 
-            
-        }
-        
-        
-        switch NetworkStatus.Connection() {
-                     case false:
-                         print("not conncted")
-            
-                         
-               default:
-             if (self.msgarray[indexPath.row].type == "IMAGE"){
-                        
-                        ImageReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                                                      //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                                      let image = msgarray[indexPath.row].user.image
-                                      let imagechat = msgarray[indexPath.row].file
-
-                                  ImageReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
-                               //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
-            //
-            //            let time = convertUTCDateToLocalDate(dateToConvert: msgarray[indexPath.row].timestamp! )
-            //
-            //            ImageReceiverCell.timeLabel.text = time
-
-                                  
-                                  ImageReceiverCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                                          result in
-                                              switch result {
-                                                  case .success:
-                                                      break
-                                                  case .failure:
-                                                      ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
-                                                  }
-                                  }
-                                                                            
-                              return ImageReceiverCell
-                                         
-                                     }
-            
-        }
-        
-
-        switch NetworkStatus.Connection() {
-                            case false:
-                                print("not conncted")
-                                
-                      default:
-              if (self.msgarray[indexPath.row].user.image  == UserDefaultLogged.IMGUD){
-
-                        TextSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-            //
-            //            let time = convertUTCDateToLocalDate(dateToConvert: msgarray[indexPath.row].timestamp! )
-            //
-            //                       TextSenderCell.timeLabel.text = time
-                        
-                        TextSenderCell.messageTextView.text = self.msgarray[indexPath.row].body
-                        let image = msgarray[indexPath.row].user.image
-                        TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
-                               return TextSenderCell
-                         }
-                        
-        }
-             
         
         switch NetworkStatus.Connection() {
         case false:
-            print("not conncted")
+            print("not connected")
             
-            TextReceiverCell.senderName.text = self.MessagesArrayCoreData[indexPath.row].firstname! + " " + self.MessagesArrayCoreData[indexPath.row].lastname!
-            TextReceiverCell.messageTextView.text = self.MessagesArrayCoreData[indexPath.row].body
-            //            let time = convertUTCDateToLocalDate(dateToConvert: msgarray[indexPath.row].timestamp! )
-            //
-            //            TextReceiverCell.timeLabel.text = time
-            let image = MessagesArrayCoreData[indexPath.row].imguser
-            TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image!))
-            return TextReceiverCell
-
+            if (self.MessagesArrayCoreData[indexPath.row].type == "IMAGE" && self.MessagesArrayCoreData[indexPath.row].imguser == UserDefaultLogged.IMGUD ){
+                
+                
+                ImageSenderCell.receiverName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
+                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
+                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
+                let imagechat = MessagesArrayCoreData[indexPath.row].file
+                
+                ImageSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
+                ImageSenderCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                    result in
+                    switch result {
+                    case .success:
+                        break
+                    case .failure:
+                        ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
+                    }
+                }
+                
+                
+                return ImageSenderCell
+            }
+            
+            
+            
+            if (self.MessagesArrayCoreData[indexPath.row].type == "IMAGE"){
+                
+                ImageReceiverCell.senderName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
+                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
+                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
+                let imagechat = MessagesArrayCoreData[indexPath.row].file
+                
+                ImageReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
+                //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
+                
+                ImageReceiverCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                    result in
+                    switch result {
+                    case .success:
+                        break
+                    case .failure:
+                        ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
+                    }
+                }
+                
+                return ImageReceiverCell
+                
+            }
+            
+            
+            if (self.MessagesArrayCoreData[indexPath.row].imguser  == UserDefaultLogged.IMGUD){
+                
+                TextSenderCell.receiverName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
+                
+                TextSenderCell.messageTextView.text = self.MessagesArrayCoreData[indexPath.row].body
+                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
+                TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                return TextSenderCell
+            }
+                
+            else {
+                TextReceiverCell.senderName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
+                TextReceiverCell.messageTextView.text = self.MessagesArrayCoreData[indexPath.row].body
+                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
+                TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
+                
+                
+                return TextReceiverCell
+            }
+            
+            
         default:
             
-            TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-            TextReceiverCell.messageTextView.text = self.msgarray[indexPath.row].body
-            //            let time = convertUTCDateToLocalDate(dateToConvert: msgarray[indexPath.row].timestamp! )
-            //
-            //            TextReceiverCell.timeLabel.text = time
-            let image = msgarray[indexPath.row].user.image
-            TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
             
+            if (self.msgarray[indexPath.row].type == "IMAGE" && self.msgarray[indexPath.row].user.image == UserDefaultLogged.IMGUD ){
+                
+                
+                ImageSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
+                let image = msgarray[indexPath.row].user.image
+                let imagechat = msgarray[indexPath.row].file
+                
+                ImageSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
+                ImageSenderCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                    result in
+                    switch result {
+                    case .success:
+                        break
+                    case .failure:
+                        ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
+                    }
+                }
+                
+                
+                return ImageSenderCell
+            }
+            
+            
+            
+            if (self.msgarray[indexPath.row].type == "IMAGE"){
+                
+                ImageReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
+                let image = msgarray[indexPath.row].user.image
+                let imagechat = msgarray[indexPath.row].file
+                
+                ImageReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
+                //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
+                
+                ImageReceiverCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
+                    result in
+                    switch result {
+                    case .success:
+                        break
+                    case .failure:
+                        ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
+                    }
+                }
+                
+                return ImageReceiverCell
+                
+            }
+            
+            
+            if (self.msgarray[indexPath.row].user.image  == UserDefaultLogged.IMGUD){
+                
+                TextSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                
+                TextSenderCell.messageTextView.text = self.msgarray[indexPath.row].body
+                let image = msgarray[indexPath.row].user.image
+                TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                return TextSenderCell
+            }
+                
+            else {
+                TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                TextReceiverCell.messageTextView.text = self.msgarray[indexPath.row].body
+                let image = msgarray[indexPath.row].user.image
+                TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
+                
+                
+                return TextReceiverCell
+            }
             
         }
-        return TextReceiverCell
         
     }
-          
+                    
+            
 
-
-}
-
-
+        
+    }
 
 
 
@@ -847,78 +879,105 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
 
 extension MessengerViewController: JitsiMeetViewDelegate {
     
-@IBAction func OpenJitsi(_ sender: Any) {
-        cleanUp()
-    // create and configure jitsimeet view
-                     let jitsiMeetView = JitsiMeetView()
-                     jitsiMeetView.delegate = self
-                     self.jitsiMeetView = jitsiMeetView
-                     let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                     builder.welcomePageEnabled = true
-
-                         builder.welcomePageEnabled = false
-                        builder.serverURL = (URL(string: Keys.MobileIntegrationServer.jitsiURL))
-                        builder.room = self.nomroom
-
-                      self.navigationController?.isNavigationBarHidden = true
-                     }
-                     jitsiMeetView.join(options)
-
-                     // Enable jitsimeet view to be a view that can be displayed
-                     // on top of all the things, and let the coordinator to manage
-                     // the view state and interactions
-                     pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
-                     pipViewCoordinator?.configureAsStickyView(withParentView: view)
-
-                     // animate in
-                     jitsiMeetView.alpha = 0
-                     pipViewCoordinator?.show()
-
-  }
-
-  fileprivate func cleanUp() {
-    self.navigationController?.isNavigationBarHidden = false
-      jitsiMeetView?.removeFromSuperview()
-      jitsiMeetView = nil
-      pipViewCoordinator = nil
-
-  }
-
-  func conferenceTerminated(_ data: [AnyHashable : Any]!) {
-      DispatchQueue.main.async {
-          self.pipViewCoordinator?.hide() { _ in
-              self.cleanUp()
-          }
-      }
-  }
-
-  func enterPicture(inPicture data: [AnyHashable : Any]!) {
-      DispatchQueue.main.async {
-          self.pipViewCoordinator?.enterPictureInPicture()
-      }
-  }
+    @IBAction func OpenJitsi(_ sender: Any) {
+        
+        switch reachability.connection {
+        case .wifi:
+            
+            cleanUp()
+            // create and configure jitsimeet view
+            let jitsiMeetView = JitsiMeetView()
+            jitsiMeetView.delegate = self
+            self.jitsiMeetView = jitsiMeetView
+            let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+                builder.welcomePageEnabled = true
+                
+                builder.welcomePageEnabled = false
+                builder.serverURL = (URL(string: Keys.MobileIntegrationServer.jitsiURL))
+                builder.room = self.nomroom
+                
+                self.navigationController?.isNavigationBarHidden = true
+            }
+            jitsiMeetView.join(options)
+            
+            // Enable jitsimeet view to be a view that can be displayed
+            // on top of all the things, and let the coordinator to manage
+            // the view state and interactions
+            pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
+            pipViewCoordinator?.configureAsStickyView(withParentView: view)
+            
+            // animate in
+            jitsiMeetView.alpha = 0
+            pipViewCoordinator?.show()
+            
+            
+        case .cellular:
+            print("Reachable via Cellular")
+        case .unavailable:
+            print("Network not reachable")
+            
+            let alert = UIAlertController(title: "", message: "Impossible D'émettre un appel. Assurer-vous que votre téléphone est connecté à Internet et réessayez.", preferredStyle: UIAlertController.Style.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+            
+            
+        case .none:
+            print("none")
+            
+        }
+        
+    }
+    
+    fileprivate func cleanUp() {
+        self.navigationController?.isNavigationBarHidden = false
+        jitsiMeetView?.removeFromSuperview()
+        jitsiMeetView = nil
+        pipViewCoordinator = nil
+        
+    }
+    
+    func conferenceTerminated(_ data: [AnyHashable : Any]!) {
+        DispatchQueue.main.async {
+            self.pipViewCoordinator?.hide() { _ in
+                self.cleanUp()
+            }
+        }
+    }
+    
+    func enterPicture(inPicture data: [AnyHashable : Any]!) {
+        DispatchQueue.main.async {
+            self.pipViewCoordinator?.enterPictureInPicture()
+        }
+    }
     func reverse(_ str: String) -> String {
         return String(str.reversed())
     }
-
+    
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-
+        
         let rect = CGRect(origin: CGPoint.zero, size: size)
         pipViewCoordinator?.resetBounds(bounds: rect)
     }
-
+    
 }
 
 
 extension UIView {
-
+    
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-         let mask = CAShapeLayer()
-         mask.path = path.cgPath
-         self.layer.mask = mask
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
     }
-
+    
+    
+    
+    
 }
