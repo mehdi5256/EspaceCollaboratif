@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		1A628816FC5283D7E2FAB758 /* Pods_Espace_Collaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48386D4104445DA38D1184E /* Pods_Espace_Collaboratif.framework */; };
 		913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */; };
+		9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A633248F31C30068B55A /* ReactionsPresenter.swift */; };
+		9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A634248F31C30068B55A /* ReactionsWorker.swift */; };
+		9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A635248F31C30068B55A /* ReactionsRouter.swift */; };
+		9151A63C248F31C30068B55A /* ReactionsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A636248F31C30068B55A /* ReactionsModels.swift */; };
+		9151A63D248F31C30068B55A /* ReactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A637248F31C30068B55A /* ReactionsViewController.swift */; };
+		9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A638248F31C30068B55A /* ReactionsInteractor.swift */; };
+		9151A640248F31E80068B55A /* ReactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A63F248F31E80068B55A /* ReactionTableViewCell.swift */; };
+		9151A642248F32140068B55A /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A641248F32140068B55A /* Reaction.swift */; };
 		91592C78245B62F000E88133 /* MessengerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C72245B62F000E88133 /* MessengerPresenter.swift */; };
 		91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C73245B62F000E88133 /* MessengerWorker.swift */; };
 		91592C7A245B62F000E88133 /* MessengerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C74245B62F000E88133 /* MessengerRouter.swift */; };
@@ -81,6 +89,14 @@
 		25011D67E9EDF04603A98FB0 /* Pods-Espace_Collaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.debug.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.debug.xcconfig"; sourceTree = "<group>"; };
 		85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.release.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.release.xcconfig"; sourceTree = "<group>"; };
 		913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultLogged.swift; sourceTree = "<group>"; };
+		9151A633248F31C30068B55A /* ReactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsPresenter.swift; sourceTree = "<group>"; };
+		9151A634248F31C30068B55A /* ReactionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsWorker.swift; sourceTree = "<group>"; };
+		9151A635248F31C30068B55A /* ReactionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsRouter.swift; sourceTree = "<group>"; };
+		9151A636248F31C30068B55A /* ReactionsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsModels.swift; sourceTree = "<group>"; };
+		9151A637248F31C30068B55A /* ReactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsViewController.swift; sourceTree = "<group>"; };
+		9151A638248F31C30068B55A /* ReactionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsInteractor.swift; sourceTree = "<group>"; };
+		9151A63F248F31E80068B55A /* ReactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionTableViewCell.swift; sourceTree = "<group>"; };
+		9151A641248F32140068B55A /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		91592C72245B62F000E88133 /* MessengerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerPresenter.swift; sourceTree = "<group>"; };
 		91592C73245B62F000E88133 /* MessengerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerWorker.swift; sourceTree = "<group>"; };
 		91592C74245B62F000E88133 /* MessengerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerRouter.swift; sourceTree = "<group>"; };
@@ -181,6 +197,20 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		9151A632248F31AC0068B55A /* Reaction */ = {
+			isa = PBXGroup;
+			children = (
+				9151A633248F31C30068B55A /* ReactionsPresenter.swift */,
+				9151A634248F31C30068B55A /* ReactionsWorker.swift */,
+				9151A635248F31C30068B55A /* ReactionsRouter.swift */,
+				9151A636248F31C30068B55A /* ReactionsModels.swift */,
+				9151A637248F31C30068B55A /* ReactionsViewController.swift */,
+				9151A638248F31C30068B55A /* ReactionsInteractor.swift */,
+				9151A63F248F31E80068B55A /* ReactionTableViewCell.swift */,
+			);
+			path = Reaction;
+			sourceTree = "<group>";
+		};
 		91656A9124690D3B00802907 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +303,7 @@
 				91A37586245388F200854ADE /* Room1.swift */,
 				91A375882453892100854ADE /* User.swift */,
 				919A8474245AA7140094CE42 /* Messenger1.swift */,
+				9151A641248F32140068B55A /* Reaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +353,7 @@
 		91A3758E24538AFA00854ADE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9151A632248F31AC0068B55A /* Reaction */,
 				919A8473245AA6B30094CE42 /* Messenger */,
 				91F7B0322454DCA300AA3974 /* Users */,
 				91A3758F24538B0800854ADE /* Room */,
@@ -587,8 +619,10 @@
 			files = (
 				91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */,
 				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
+				9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */,
 				91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */,
 				91A39622245386A5005F43F4 /* ViewController.swift in Sources */,
+				9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */,
 				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
 				919A8475245AA7140094CE42 /* Messenger1.swift in Sources */,
 				91A3759924538B4D00854ADE /* RoomModels.swift in Sources */,
@@ -607,6 +641,7 @@
 				91656A9624691A5700802907 /* Espace_Collaboratif.xcdatamodeld in Sources */,
 				919A846E245A328B0094CE42 /* AddRoomModels.swift in Sources */,
 				91A6A61D245B9AB9004F0C3D /* Message.swift in Sources */,
+				9151A640248F31E80068B55A /* ReactionTableViewCell.swift in Sources */,
 				91F7B03D2454DD5400AA3974 /* LoginModels.swift in Sources */,
 				919A846B245A328B0094CE42 /* AddRoomPresenter.swift in Sources */,
 				91F7B0422454F2D800AA3974 /* UserAPIClient.swift in Sources */,
@@ -616,11 +651,13 @@
 				91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */,
 				91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */,
 				918574E5245D2A4D00F54DAE /* corbeille.swift in Sources */,
+				9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */,
 				91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */,
 				91F7B03E2454DD5400AA3974 /* LoginViewController.swift in Sources */,
 				91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */,
 				919A8470245A328B0094CE42 /* AddRoomInteractor.swift in Sources */,
 				91592C7A245B62F000E88133 /* MessengerRouter.swift in Sources */,
+				9151A63D248F31C30068B55A /* ReactionsViewController.swift in Sources */,
 				91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */,
 				91A375A224538E1300854ADE /* APIConfiguration.swift in Sources */,
 				91A3759624538B4D00854ADE /* RoomPresenter.swift in Sources */,
@@ -634,14 +671,17 @@
 				916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */,
 				91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */,
 				919A846F245A328B0094CE42 /* AddRoomViewController.swift in Sources */,
+				9151A642248F32140068B55A /* Reaction.swift in Sources */,
 				91A6A61F245B9AC9004F0C3D /* Util.swift in Sources */,
 				91A6A621245B9AD6004F0C3D /* Response.swift in Sources */,
 				91A39620245386A5005F43F4 /* SceneDelegate.swift in Sources */,
 				91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */,
 				91ABB940246AC011001C8CBB /* MessageCoreData.swift in Sources */,
 				91A375A024538DE900854ADE /* Constants.swift in Sources */,
+				9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */,
 				91A37587245388F200854ADE /* Room1.swift in Sources */,
 				91F7B0442454F46D00AA3974 /* UserConnectedEndPoints.swift in Sources */,
+				9151A63C248F31C30068B55A /* ReactionsModels.swift in Sources */,
 				91A375AA2453B80600854ADE /* ConstantColor.swift in Sources */,
 				91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,

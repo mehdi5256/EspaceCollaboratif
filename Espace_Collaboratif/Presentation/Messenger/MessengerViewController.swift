@@ -150,11 +150,13 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     //  open gallery
     var imagePicker = UIImagePickerController()
     
-    //end 
+    //end
     
     var nomroom:String?
     var idroom:Int!
     var msgarray:[Messenger1] = []
+    var reactionsArray:[Reaction] = []
+
     let messageTextViewMaxHeight: CGFloat = 100
     
     var RoomSelectecCoreData : RoomCoreData?
@@ -508,7 +510,7 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
                 print(response.request)
                 print(response.response)
                 print(response.result)}
-        //vider textfields                      
+        //vider textfields
         // message.text = ""
         //
         //
@@ -604,13 +606,26 @@ extension MessengerViewController: UITextViewDelegate{
     
     // Configuration tableview show the last item
     func scrolltobottom(animated:Bool){
-        let numberOfSections = self.tv.numberOfSections
-        let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
         
-        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
-        if msgarray.count > 0{
-            self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: animated)
-        }
+      //  switch NetworkStatus.Connection() {
+//        case false:
+//            let numberOfSections = self.tv.numberOfSections
+//                  let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
+//
+//                  let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+//                  if MessagesArrayCoreData.count > 0{
+//                      self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: animated)
+//                  }
+//        default:
+            let numberOfSections = self.tv.numberOfSections
+                  let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
+                  
+                  let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+                  if msgarray.count > 0{
+                      self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: animated)
+                  }
+//        }
+      
         
     }
     
@@ -650,19 +665,37 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        if ( indexPath.row == msgarray.count - 1)
-        {
-            print("came to last row")
-            btnlastrow.isHidden = true
+       
+        switch NetworkStatus.Connection() {
+        case false:
+            if ( indexPath.row == MessagesArrayCoreData.count - 1)
+                   {
+                       print("came to last row")
+                       btnlastrow.isHidden = true
+                   }
+
+            if ( indexPath.row != MessagesArrayCoreData.count - 1)
+            {
+                btnlastrow.isHidden = false
+                
+                
+                
+            }
+        default:
+            if ( indexPath.row == msgarray.count - 1)
+                   {
+                       print("came to last row")
+                       btnlastrow.isHidden = true
+                   }
+            if ( indexPath.row != msgarray.count - 1)
+            {
+                btnlastrow.isHidden = false
+                
+                
+                
+            }
         }
         
-        if ( indexPath.row != msgarray.count - 1)
-        {
-            btnlastrow.isHidden = false
-            
-            
-            
-        }
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -706,8 +739,13 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
              let TextSenderCell = tv.dequeueReusableCell(withIdentifier: "TextSenderCell", for: indexPath) as! TextSenderCell
+        
+                TextSenderCell.delegate = self
+
             
             let TextReceiverCell = tv.dequeueReusableCell(withIdentifier: "TextReceiverCell", for: indexPath) as! TextReceiverCell
+                TextReceiverCell.delegate = self
+
             
             let ImageSenderCell = tv.dequeueReusableCell(withIdentifier: "ImageSenderCell", for: indexPath) as! ImageSenderCell
                        
@@ -763,6 +801,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                         ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
                     }
                 }
+               
                 
                 return ImageReceiverCell
                 
@@ -812,7 +851,9 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                         ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
                     }
                 }
-                
+                // Reactionsss
+                self.reactionsArray = msgarray[indexPath.row].reactions
+                print(reactionsArray.count)
                 
                 return ImageSenderCell
             }
@@ -838,6 +879,9 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                         ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
                     }
                 }
+                // Reactionsss
+                self.reactionsArray = msgarray[indexPath.row].reactions
+                print(reactionsArray.count)
                 
                 return ImageReceiverCell
                 
@@ -851,6 +895,16 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 TextSenderCell.messageTextView.text = self.msgarray[indexPath.row].body
                 let image = msgarray[indexPath.row].user.image
                 TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
+                
+                // Reactionsss
+                self.reactionsArray = msgarray[indexPath.row].reactions
+                TextSenderCell.BtnReaction.tag = indexPath.row
+                print(reactionsArray.count)
+//                if (reactionsArray.count == 0){
+//                    TextSenderCell.ViewReaction.isHidden = true
+//                }
+                TextSenderCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
+                
                 return TextSenderCell
             }
                 
@@ -860,6 +914,15 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 let image = msgarray[indexPath.row].user.image
                 TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
                 
+                // Reactionsss
+                self.reactionsArray = msgarray[indexPath.row].reactions
+                TextReceiverCell.BtnReaction.tag = indexPath.row
+
+                print(reactionsArray.count)
+//                if (reactionsArray.count == 0){
+//                    TextReceiverCell.ViewReaction.isHidden = true
+//                }
+                 TextReceiverCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
                 
                 return TextReceiverCell
             }
@@ -980,4 +1043,19 @@ extension UIView {
     
     
     
+}
+
+
+extension MessengerViewController: ReactionDelegate {
+    func didButtonPressedreaction(tag: Int) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+              let vc = storyBoard.instantiateViewController(withIdentifier: "ReactionsViewController") as! ReactionsViewController
+        vc.modalPresentationStyle = .overFullScreen
+        
+
+        vc.reactionsArray = msgarray[tag].reactions
+              self.present(vc,animated:true,completion: nil)
+    }
+    
+
 }

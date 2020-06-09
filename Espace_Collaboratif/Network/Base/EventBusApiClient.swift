@@ -56,7 +56,7 @@ class EventBusApiClient {
       static func performRequest(bodyJson: JSON)->Promise<Messenger1> {
           return Promise<Messenger1> { fulfill, reject in
             do {
-                let msgs = Messenger1(body: bodyJson["body"].description, file: bodyJson["file"].description, id: nil ,timestamp: bodyJson["timestamp"].description,usert: bodyJson["user"].description, type: bodyJson["type"].description, user: User(id: UserDefaultLogged.idUD, firstName: bodyJson["firstName"].description, lastName: bodyJson["lastName"].description, email: UserDefaultLogged.emailUD, image: bodyJson["user_img"].description, rooms:[]))
+                let msgs = Messenger1(body: bodyJson["body"].description, file: bodyJson["file"].description, id: nil ,timestamp: bodyJson["timestamp"].description,usert: bodyJson["user"].description, type: bodyJson["type"].description, user: User(id: UserDefaultLogged.idUD, firstName: bodyJson["firstName"].description, lastName: bodyJson["lastName"].description, email: UserDefaultLogged.emailUD, image: bodyJson["user_img"].description, rooms:[]), reactions:[])
                 fulfill(msgs)
             } catch let error as NSError {
                reject(error)

@@ -13,14 +13,14 @@ struct Messenger1:Codable {
     
     
     var body:String?
-       var file:String?
-       var id: Int?
-       var timestamp:String?
-       var usert:String?
-        var userimg:String?
-    
-       var type:String
-       var user: User
+    var file:String?
+    var id: Int?
+    var timestamp:String?
+    var usert:String?
+    var userimg:String?
+    var type:String
+    var user: User
+    var reactions :[Reaction]
 
  
     
