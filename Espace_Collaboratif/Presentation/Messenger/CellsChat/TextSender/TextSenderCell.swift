@@ -7,30 +7,33 @@
 //
 
 import UIKit
+import Reactions
+
 
 protocol ReactionDelegate {
     func didButtonPressedreaction(tag: Int)
+    func ReactionPost(tag: Int)
+
 }
 
 class TextSenderCell: UITableViewCell {
-   // let selectReaction    = ReactionSelector()
+let selectReaction    = ReactionSelector()
 
     
-//    @IBOutlet weak var ReactionBtn: ReactionButton!{
-//
-//        didSet {
-//            ReactionBtn.reactionSelector = selectReaction
-//
-//            ReactionBtn.config = ReactionButtonConfig() {
-//                $0.font = UIFont(name: "HelveticaNeue", size: 0)
-//                $0.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
-//                $0.alignment = .centerRight
-//
-//
-//            }
-//
-//        }
-//    }
+    @IBOutlet weak var ReactionBtn: ReactionButton!{
+
+        didSet {
+            ReactionBtn.reactionSelector = selectReaction
+            ReactionBtn.config = ReactionButtonConfig() {
+                $0.font = UIFont(name: "HelveticaNeue", size: 0)
+                $0.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
+                $0.alignment = .centerRight
+
+
+            }
+
+        }
+    }
     @IBOutlet var messageBackground: UIView!
     @IBOutlet var messageTextView: UITextView!
     @IBOutlet var messageContainer: UIView!
@@ -55,11 +58,14 @@ class TextSenderCell: UITableViewCell {
     }
     
    
-    @IBAction func ReacSelecBtn(_ sender: Any) {
-//        
-//        ReactionBtn.reaction   = ReactionBtn.reaction
-//              ReactionBtn.isSelected = true
-//              print(selectReaction.selectedReaction!.title)
+    @IBAction func ReacSelecBtn(_ sender: UIButton) {
+        TextReceiverCell.typereac = selectReaction.selectedReaction!.title
+
+        ReactionBtn.reaction   = ReactionBtn.reaction
+              ReactionBtn.isSelected = true
+              print(selectReaction.selectedReaction!.title)
+        delegate?.ReactionPost(tag:sender.tag)
+
     }
     
     @IBAction func ReactionAction(_ sender: UIButton) {

@@ -8,25 +8,29 @@
 
 import UIKit
 import Alamofire
+ 
+import Reactions
 
 class TextReceiverCell: UITableViewCell {
-//    let selectReaction    = ReactionSelector()
+     let selectReaction    = ReactionSelector()
+    static var typereac: String?
+
     
-//   @IBOutlet weak var ReactionBtn: ReactionButton! {
-//
-//        didSet {
-//            ReactionBtn.reactionSelector = selectReaction
-//
-//            ReactionBtn.config = ReactionButtonConfig() {
-//                $0.font = UIFont(name: "HelveticaNeue", size: 0)
-//                $0.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
-//                $0.alignment = .centerRight
-//
-//
-//            }
-//
-//        }
-//    }
+   @IBOutlet weak var ReactionBtn: ReactionButton! {
+
+        didSet {
+            ReactionBtn.reactionSelector = selectReaction
+
+            ReactionBtn.config = ReactionButtonConfig() {
+                $0.font = UIFont(name: "HelveticaNeue", size: 0)
+                $0.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
+                $0.alignment = .centerRight
+
+
+            }
+
+        }
+    }
     @IBOutlet var messageTextView: UITextView!
           @IBOutlet var messageBackground: UIView!
           @IBOutlet var senderName: UILabel!
@@ -48,42 +52,23 @@ class TextReceiverCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    @IBAction func ReacSelecBtn(_ sender: Any) {
-//        ReactionBtn.reaction   = ReactionBtn.reaction
-//        ReactionBtn.isSelected = true
-//        print(selectReaction.selectedReaction!.title)
+    @IBAction func ReacSelecBtn(_ sender: UIButton) {
+        TextReceiverCell.typereac = selectReaction.selectedReaction!.title
+
         
-//        let myUrl = "http://8afc405d90aa.ngrok.io/reaction";
-//
-//        //  let type = "BRAVO";
-//        //let description = Subject.text;
-//
-//
-//
-//        let parameters: [String: Any] = [
-//            "type":"LIKE",
-//            "user":
-//                [
-//                    "id":"32e1c468-d045-4e41-800f-32770db64cec",
-//
-//            ],
-//            "message":
-//                [
-//                    "id":"446",
-//
-//            ],
-//
-//        ]
-//
-//        AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-//            .responseJSON { response in
-//                print(response.request)
-//                print(response.response)
-//                print(response.result)
-//
-//        }
-//
-//
+
+        ReactionBtn.reaction   = ReactionBtn.reaction
+        
+        ReactionBtn.isSelected = true
+       // print(selectReaction.selectedReaction!.title)
+        print(TextReceiverCell.typereac!)
+        delegate?.ReactionPost(tag:sender.tag)
+
+
+        
+       
+
+
         
     }
 

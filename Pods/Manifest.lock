@@ -14,6 +14,7 @@ PODS:
   - PromisesObjC (1.2.8)
   - PromisesSwift (1.2.8):
     - PromisesObjC (= 1.2.8)
+  - Reactions (3.0.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - JitsiMeetSDK
   - Kingfisher
   - PromisesSwift
+  - Reactions (~> 3.0.0)
   - SwiftyJSON
 
 SPEC REPOS:
@@ -36,6 +38,7 @@ SPEC REPOS:
     - Kingfisher
     - PromisesObjC
     - PromisesSwift
+    - Reactions
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -47,8 +50,9 @@ SPEC CHECKSUMS:
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
+  Reactions: 4994c6bb3e7c6b75756a0b26a4d4f5bde1a47dc7
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: e68a397f6eedae864cfc69d4d69566d6bc6921ee
+PODFILE CHECKSUM: f2eb7c91173138b60d84b0e5bd459274cb6f081f
 
 COCOAPODS: 1.9.1

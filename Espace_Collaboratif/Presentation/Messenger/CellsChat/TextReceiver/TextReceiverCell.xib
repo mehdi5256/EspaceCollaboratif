@@ -148,7 +148,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7x-Hr-IZZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7x-Hr-IZZ" customClass="ReactionButton" customModule="Reactions">
                                 <rect key="frame" x="291" y="54.5" width="46" height="26"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -156,7 +156,7 @@
                                     <constraint firstAttribute="width" constant="46" id="8gd-1H-fXd"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="ReacSelecBtn:" destination="1en-0l-r7t" eventType="valueChanged" id="xrL-LD-cBG"/>
+                                    <action selector="ReacSelecBtn:" destination="1en-0l-r7t" eventType="valueChanged" id="yzw-Ef-Vow"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -194,6 +194,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="BtnReaction" destination="LIY-LE-oeY" id="Us4-4Z-beC"/>
+                <outlet property="ReactionBtn" destination="I7x-Hr-IZZ" id="jhr-US-SS4"/>
                 <outlet property="ViewReaction" destination="PIn-Ke-D3w" id="hXv-Im-ha0"/>
                 <outlet property="messageBackground" destination="Pvk-gR-pJ9" id="ER5-mh-K8q"/>
                 <outlet property="messageContainer" destination="lv2-wb-2QH" id="uet-Sl-wRj"/>

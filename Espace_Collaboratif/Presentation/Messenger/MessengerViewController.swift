@@ -897,13 +897,20 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
                 
                 // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions
+                reactionsArray = msgarray[indexPath.row].reactions
                 TextSenderCell.BtnReaction.tag = indexPath.row
+                
+                self.reactionsArray = msgarray[indexPath.row].reactions
+                TextSenderCell.ReactionBtn.tag = indexPath.row
+                
                 print(reactionsArray.count)
-//                if (reactionsArray.count == 0){
-//                    TextSenderCell.ViewReaction.isHidden = true
-//                }
+//                if (msgarray[indexPath.row].reactions.count > 0){
+//                    TextSenderCell.ViewReaction.isHidden = false
+//                               }
                 TextSenderCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
+//                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
+//                print(  UserDefaultLogged.idmsg )
+
                 
                 return TextSenderCell
             }
@@ -917,12 +924,21 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 // Reactionsss
                 self.reactionsArray = msgarray[indexPath.row].reactions
                 TextReceiverCell.BtnReaction.tag = indexPath.row
+                
+               
 
                 print(reactionsArray.count)
-//                if (reactionsArray.count == 0){
-//                    TextReceiverCell.ViewReaction.isHidden = true
+                
+                self.reactionsArray = msgarray[indexPath.row].reactions
+                               TextReceiverCell.ReactionBtn.tag = indexPath.row
+//                if (msgarray[indexPath.row].reactions.count > 0){
+//                    TextReceiverCell.ViewReaction.isHidden = false
 //                }
                  TextReceiverCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
+//                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
+//                print(  UserDefaultLogged.idmsg )
+
+
                 
                 return TextReceiverCell
             }
@@ -930,10 +946,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
         }
         
     }
-                    
-            
-
-        
+    
     }
 
 
@@ -1047,14 +1060,58 @@ extension UIView {
 
 
 extension MessengerViewController: ReactionDelegate {
+   
+    
+    func ReactionPost(tag: Int) {
+        
+      //  print(msgarray[tag].id!)
+        
+        let myUrl = "http://a47dfa4dd548.ngrok.io/reaction";
+
+               //  let type = selectReaction.selectedReaction!.title;
+               //let description = Subject.text;
+
+               print( msgarray[tag].id!)
+
+
+               let parameters: [String: Any] = [
+                   "type":TextReceiverCell.typereac!,
+                   "user":
+                       [
+                           "id": UserDefaultLogged.idUD,
+
+                   ],
+                   "message":
+                       [
+                           "id":msgarray[tag].id!,
+
+                   ],
+
+               ]
+
+               AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                   .responseJSON { response in
+                       print(response.request)
+                       print(response.response)
+                       print(response.result)
+
+               }
+
+        
+       
+    }
+    
     func didButtonPressedreaction(tag: Int) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
               let vc = storyBoard.instantiateViewController(withIdentifier: "ReactionsViewController") as! ReactionsViewController
         vc.modalPresentationStyle = .overFullScreen
-        
+
 
         vc.reactionsArray = msgarray[tag].reactions
               self.present(vc,animated:true,completion: nil)
+     //   print( msgarray[tag].id!)
+
+        
     }
     
 

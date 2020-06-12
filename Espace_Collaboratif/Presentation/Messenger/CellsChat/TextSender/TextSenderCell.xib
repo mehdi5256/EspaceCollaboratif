@@ -147,7 +147,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5g-Cw-DSM">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5g-Cw-DSM" customClass="ReactionButton" customModule="Reactions">
                                 <rect key="frame" x="26" y="54.5" width="46" height="26"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -195,6 +195,7 @@
             <viewLayoutGuide key="safeArea" id="N3K-vX-lRI"/>
             <connections>
                 <outlet property="BtnReaction" destination="pHn-He-MVQ" id="9xy-yM-fHT"/>
+                <outlet property="ReactionBtn" destination="n5g-Cw-DSM" id="gjV-bA-rNO"/>
                 <outlet property="ViewReaction" destination="9jx-Gb-zJA" id="pIZ-HN-UZZ"/>
                 <outlet property="messageBackground" destination="nxd-mk-YdM" id="8Qe-wk-bpz"/>
                 <outlet property="messageContainer" destination="IeX-vu-9Te" id="ORN-Px-HAw"/>

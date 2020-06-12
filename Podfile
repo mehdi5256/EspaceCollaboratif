@@ -15,6 +15,8 @@ target 'Espace_Collaboratif' do
    pod 'JitsiMeetSDK'
    pod 'BlueSocket'
    pod 'AppAuth'
+   pod 'Reactions', '~> 3.0.0'
+
 
 end
 
