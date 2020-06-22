@@ -31,6 +31,7 @@ protocol MessengerDisplayLogic: class
     func displayPostImgSucess(img :[Messenger1])
     func displayPostImgError(error: String)
     
+    func displayReaction(reaction: Reaction)
     
 }
 
@@ -505,7 +506,7 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
             "room":["id":self.idroom],
             "file":strBase64
         ]
-        AF.request("http://bda0514f.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+        AF.request("http://1da6a9f289a6.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
             .responseJSON { response in
                 print(response.request)
                 print(response.response)
@@ -1061,12 +1062,26 @@ extension UIView {
 
 extension MessengerViewController: ReactionDelegate {
    
+    func displayReaction(reaction: Reaction) {
+        let index: Int? = msgarray.firstIndex(where:  { ( $0.body == reaction.message?.body  )})
+        print("index")
+        print(index)
+        msgarray[index!].reactions.append(reaction)
+        let indexPath = IndexPath(row: index! , section: 0)
+        tv.reloadRows(at: [indexPath], with: .none)
+
+    }
     
     func ReactionPost(tag: Int) {
         
       //  print(msgarray[tag].id!)
+        let user = User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, rooms: [], username: UserDefaultLogged.firstNameUD)
         
-        let myUrl = "http://a47dfa4dd548.ngrok.io/reaction";
+        let reaction = Reaction(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
+        
+        interactor?.sendReaction(idroom: idroom, message: msgarray[tag], type: "reaction", reaction: reaction)
+        
+        let myUrl = "http://1da6a9f289a6.ngrok.io/reaction";
 
                //  let type = selectReaction.selectedReaction!.title;
                //let description = Subject.text;

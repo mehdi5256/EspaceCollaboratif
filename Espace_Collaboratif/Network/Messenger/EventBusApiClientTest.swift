@@ -20,8 +20,11 @@ static func Connect(eventBus: EventBus) -> Promise<String> {
        return performSendRequest(eventBus: eventBus, body: body, channel: channel)
     }
 
-static func presentMessenger(bodyJson: JSON) -> Promise<Messenger1> {
-   return performRequest(bodyJson: bodyJson)
+    static func presentMessenger(bodyJson: JSON) -> Promise<Messenger1> {
+       return performRequest(bodyJson: bodyJson)
     }
     
+    static func presentReaction(bodyJson: JSON) -> Promise<Reaction> {
+        return performRequestReaction(bodyJson: bodyJson)
+    }
 }

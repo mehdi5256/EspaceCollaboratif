@@ -28,13 +28,15 @@ protocol MessengerPresentationLogic
     func presentError(error: String)
     func presentMessenger(messenger:Messenger1)
     func sendMessageEventBus(result:String)
-    
+    func presentReaction(reaction: Reaction)
 }
 
 class MessengerPresenter: MessengerPresentationLogic
 {
    
-    
+    func presentReaction(reaction: Reaction) {
+        self.viewController!.displayReaction(reaction: reaction)
+    }
    
     
     func sendMessageEventBus(result: String) {

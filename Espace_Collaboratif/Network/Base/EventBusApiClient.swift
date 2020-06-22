@@ -44,6 +44,7 @@ class EventBusApiClient {
                   if !eventBus.connected() {
                      try eventBus.connect()
                   }
+                print(eventBus.connected())
                   try! eventBus.send(to: channel, body: body)
                   fulfill("success")
                } catch let error {
@@ -64,4 +65,23 @@ class EventBusApiClient {
       }
    }
    
+    @discardableResult
+       static func performRequestReaction(bodyJson: JSON)->Promise<Reaction> {
+           return Promise<Reaction> { fulfill, reject in
+             do {
+                 let jsonData = bodyJson["reaction"].description.data(using: .utf8)!
+                 let jsonDataMessage = bodyJson["message"].description.data(using: .utf8)!
+                 do {
+                     var objectReaction = try JSONDecoder().decode(Reaction.self, from: jsonData)
+                     let objectMessage = try JSONDecoder().decode(Messenger1.self, from: jsonDataMessage)
+                     objectReaction.message = objectMessage
+                     fulfill(objectReaction)
+                 } catch let error as NSError {
+                     reject(error)
+                 }
+             } catch let error as NSError {
+                reject(error)
+             }
+       }
+    }
 }

@@ -149,7 +149,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5g-Cw-DSM" customClass="ReactionButton" customModule="Reactions">
                                 <rect key="frame" x="26" y="54.5" width="46" height="26"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="Kqr-fD-pyj"/>
                                     <constraint firstAttribute="width" constant="46" id="TZE-Rq-Rny"/>

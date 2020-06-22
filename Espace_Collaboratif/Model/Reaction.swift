@@ -12,4 +12,5 @@ public struct Reaction: Codable{
     var id: Int?
     var type: String?
     var user: User
+    var message: Messenger1?
 }

@@ -21,7 +21,7 @@ protocol MessengerBusinessLogic
     func connect()
     func registerMessenger(id:Int)
     func send(idroom: Int, messagesend:String,type:String,file:String)
-    
+    func sendReaction(idroom: Int, message: Messenger1, type: String, reaction: Reaction)
 }
 
 protocol MessengerDataStore
@@ -46,6 +46,22 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
                }
     }
     
+    func sendReaction(idroom: Int, message: Messenger1, type: String, reaction: Reaction) {
+        let jsonDataReaction = try! JSONEncoder().encode(reaction)
+        let jsonStringReaction = String(data: jsonDataReaction, encoding: .utf8)!
+        let jsonDataMessage = try! JSONEncoder().encode(message)
+        let jsonStringMessage = String(data: jsonDataMessage, encoding: .utf8)!
+        
+        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"room_id":idroom,"message":jsonDataMessage,"reaction":jsonStringReaction]
+        worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+           result in
+           self.presenter?.sendMessageEventBus(result: result)
+        }.catch { error in
+           self.presenter?.presentError(error: error.localizedDescription)
+           print("got error")
+        }
+    }
+    
     func connect() {
          eventbus = EventBus(host: Keys.MobileIntegrationServer.baseURLEventBus , port: Keys.MobileIntegrationServer.basePortEventBus)
         
@@ -66,12 +82,24 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
              if ($0.body["room_id"].intValue == id){
                              //  let msgs: msgtest!
                 print($0.body)
-               self.worker?.presentMessenger(bodyJson: $0.body).then {
-                  messageQuestion in
-                     self.presenter?.presentMessenger(messenger: messageQuestion)
-                  }.catch { error in
-                     self.presenter?.presentError(error: error.localizedDescription )
-                  }
+                if $0.body["type"].description == "TEXT" || $0.body["type"].description == "IMAGE" {
+                    self.worker?.presentMessenger(bodyJson: $0.body).then {
+                    messageQuestion in
+                       self.presenter?.presentMessenger(messenger: messageQuestion)
+                    }.catch { error in
+                       self.presenter?.presentError(error: error.localizedDescription )
+                    }
+                }
+                else if $0.body["type"].description == "reaction" {
+                    self.worker?.presentReaction(bodyJson: $0.body).then {
+                    reaction in
+                        print("reaction")
+                        print(reaction)
+                        self.presenter?.presentReaction(reaction: reaction)
+                    }.catch { error in
+                       self.presenter?.presentError(error: error.localizedDescription )
+                    }
+                }
              }
          }
       }
