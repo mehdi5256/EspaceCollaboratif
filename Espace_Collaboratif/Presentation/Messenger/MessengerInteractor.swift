@@ -51,8 +51,7 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
         let jsonStringReaction = String(data: jsonDataReaction, encoding: .utf8)!
         let jsonDataMessage = try! JSONEncoder().encode(message)
         let jsonStringMessage = String(data: jsonDataMessage, encoding: .utf8)!
-        
-        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"room_id":idroom,"message":jsonDataMessage,"reaction":jsonStringReaction]
+        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"room_id":idroom,"message":jsonStringMessage,"reaction":jsonStringReaction]
         worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
            result in
            self.presenter?.sendMessageEventBus(result: result)

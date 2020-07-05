@@ -16,6 +16,8 @@ target 'Espace_Collaboratif' do
    pod 'BlueSocket'
    pod 'AppAuth'
    pod 'Reactions', '~> 3.0.0'
+   pod 'GTProgressBar'
+
 
 
 end

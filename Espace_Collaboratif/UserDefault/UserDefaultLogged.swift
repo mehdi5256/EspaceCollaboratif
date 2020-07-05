@@ -25,7 +25,7 @@ class UserDefaultLogged {
     
     static var idUD: String{
         get {
-            return UserDefaults.standard.string(forKey: Keys.KeyId)!
+            return UserDefaults.standard.string(forKey: Keys.KeyId) ??  "tt"
             }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.KeyId)
@@ -35,7 +35,7 @@ class UserDefaultLogged {
     
     static var firstNameUD: String{
         get {
-            return UserDefaults.standard.string(forKey: Keys.KeyFirstName)!
+            return UserDefaults.standard.string(forKey: Keys.KeyFirstName) ??  "tt"
             }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.KeyFirstName)
@@ -45,7 +45,7 @@ class UserDefaultLogged {
     
     static var lasttNameUD: String{
         get {
-            return UserDefaults.standard.string(forKey: Keys.KeyLastName)!
+            return UserDefaults.standard.string(forKey: Keys.KeyLastName) ??  "tt"
             }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.KeyLastName)
@@ -54,7 +54,7 @@ class UserDefaultLogged {
     }
     static var emailUD: String{
         get {
-            return UserDefaults.standard.string(forKey: Keys.KeyEmail)!
+            return UserDefaults.standard.string(forKey: Keys.KeyEmail) ??  "tt"
             }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.KeyEmail)
@@ -64,7 +64,7 @@ class UserDefaultLogged {
     
     static var IMGUD: String{
         get {
-            return UserDefaults.standard.string(forKey: Keys.KeyIMG)!
+            return UserDefaults.standard.string(forKey: Keys.KeyIMG) ??  "tt"
             }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.KeyIMG)
@@ -74,7 +74,7 @@ class UserDefaultLogged {
     
     static var TokenUD: String{
           get {
-              return UserDefaults.standard.string(forKey: Keys.KeyToken)!
+              return UserDefaults.standard.string(forKey: Keys.KeyToken) ??  "tt"
               }
           set {
               UserDefaults.standard.set(newValue, forKey: Keys.KeyToken)

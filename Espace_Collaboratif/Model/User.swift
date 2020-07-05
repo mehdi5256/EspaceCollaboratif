@@ -14,7 +14,7 @@ public struct User: Codable{
     var lastName: String
     var email: String
     var image: String
-    var rooms: Array<String>
+   // var rooms: Array<String>
     var  username :  String?
     
     

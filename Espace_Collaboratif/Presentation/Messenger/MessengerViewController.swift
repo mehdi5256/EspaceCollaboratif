@@ -14,6 +14,7 @@ import UIKit
 import JitsiMeet
 import Alamofire
 import CoreData
+import GTProgressBar
 
 
 protocol MessengerDisplayLogic: class
@@ -133,6 +134,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     // var msgscoredataarray = MessageCoreData.all
     
+    var countUsers = 0
+
     var MessagesArrayCoreData: [MessageCoreData] = []
     
     
@@ -157,6 +160,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     var idroom:Int!
     var msgarray:[Messenger1] = []
     var reactionsArray:[Reaction] = []
+    var choixcell: [Choix] = []
+
 
     let messageTextViewMaxHeight: CGFloat = 100
     
@@ -364,7 +369,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
                 msgcc.firstname = mmm.user.firstName
                 msgcc.lastname = mmm.user.lastName
                 msgcc.imguser = mmm.user.image
-                msgcc.timestamp = mmm.timestamp
+             //   msgcc.timestamp = mmm.timestamp
                 msgcc.room =  RoomSelectecCoreData
                 msgcc.type = mmm.type
                 
@@ -506,7 +511,7 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
             "room":["id":self.idroom],
             "file":strBase64
         ]
-        AF.request("http://1da6a9f289a6.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+        AF.request("http://1bbe04cc6ec4.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
             .responseJSON { response in
                 print(response.request)
                 print(response.response)
@@ -905,9 +910,11 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 TextSenderCell.ReactionBtn.tag = indexPath.row
                 
                 print(reactionsArray.count)
-//                if (msgarray[indexPath.row].reactions.count > 0){
-//                    TextSenderCell.ViewReaction.isHidden = false
-//                               }
+                TextSenderCell.ViewReaction.isHidden = true
+                if (msgarray[indexPath.row].reactions.count > 0){
+                    TextSenderCell.ViewReaction.isHidden = false
+                }
+                
                 TextSenderCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
 //                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
 //                print(  UserDefaultLogged.idmsg )
@@ -915,6 +922,23 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 
                 return TextSenderCell
             }
+                
+            if (self.msgarray[indexPath.row].type == "SONDAGE"){
+                
+                guard let cellsondage = tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath) as? SondageTableViewCell else {
+                return tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath)
+                        }
+                let sonadgeindex = msgarray[indexPath.item]
+                cellsondage.questionsondage.text = sonadgeindex.body
+                
+                self.choixcell = sonadgeindex.choix
+                
+                return cellsondage
+
+                
+            }
+                    
+
                 
             else {
                 TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
@@ -931,10 +955,12 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 print(reactionsArray.count)
                 
                 self.reactionsArray = msgarray[indexPath.row].reactions
-                               TextReceiverCell.ReactionBtn.tag = indexPath.row
-//                if (msgarray[indexPath.row].reactions.count > 0){
-//                    TextReceiverCell.ViewReaction.isHidden = false
-//                }
+                TextReceiverCell.ReactionBtn.tag = indexPath.row
+                TextReceiverCell.ViewReaction.isHidden = true
+
+                if (msgarray[indexPath.row].reactions.count > 0){
+                    TextReceiverCell.ViewReaction.isHidden = false
+                }
                  TextReceiverCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
 //                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
 //                print(  UserDefaultLogged.idmsg )
@@ -1063,7 +1089,7 @@ extension UIView {
 extension MessengerViewController: ReactionDelegate {
    
     func displayReaction(reaction: Reaction) {
-        let index: Int? = msgarray.firstIndex(where:  { ( $0.body == reaction.message?.body  )})
+        let index: Int? = msgarray.firstIndex(where:  { ( $0.body == reaction.message?.body && $0.timestamp == reaction.message?.timestamp )})
         print("index")
         print(index)
         msgarray[index!].reactions.append(reaction)
@@ -1075,18 +1101,17 @@ extension MessengerViewController: ReactionDelegate {
     func ReactionPost(tag: Int) {
         
       //  print(msgarray[tag].id!)
-        let user = User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, rooms: [], username: UserDefaultLogged.firstNameUD)
+        let user = User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD)
         
         let reaction = Reaction(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
         
         interactor?.sendReaction(idroom: idroom, message: msgarray[tag], type: "reaction", reaction: reaction)
         
-        let myUrl = "http://1da6a9f289a6.ngrok.io/reaction";
+        let myUrl = "http://1bbe04cc6ec4.ngrok.io/reaction";
 
                //  let type = selectReaction.selectedReaction!.title;
                //let description = Subject.text;
 
-               print( msgarray[tag].id!)
 
 
                let parameters: [String: Any] = [
@@ -1106,8 +1131,6 @@ extension MessengerViewController: ReactionDelegate {
 
                AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
                    .responseJSON { response in
-                       print(response.request)
-                       print(response.response)
                        print(response.result)
 
                }
@@ -1130,4 +1153,41 @@ extension MessengerViewController: ReactionDelegate {
     }
     
 
+}
+
+extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        countUsers = 0
+        choixcell.forEach{c in
+            self.countUsers += c.users.count
+        }
+        print("azzziiiizzz")
+        print(countUsers)
+        collectionView.frame = CGRect(x: collectionView.frame.origin.x , y: collectionView.frame.origin.y, width: collectionView.frame.width, height: collectionView.frame.height * CGFloat(choixcell.count))
+        return choixcell.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         guard let cellx = collectionView.dequeueReusableCell(withReuseIdentifier: "ChoixSondageCollectionViewCell", for: indexPath) as? ChoixSondageCollectionViewCell
+                          else{
+                              return ChoixSondageCollectionViewCell()
+                      }
+        
+        cellx.choixlbl.text =  self.choixcell[indexPath.item].body
+        
+
+        var stat = CGFloat(Double(choixcell[indexPath.row].users.count)/Double(self.countUsers))
+        print (stat)
+        print("statttttt")
+        if(stat.isNaN){
+            stat = 0
+        }
+        cellx.viewstatrep.progress = stat
+
+        return cellx
+        
+    }
+    
+    
 }

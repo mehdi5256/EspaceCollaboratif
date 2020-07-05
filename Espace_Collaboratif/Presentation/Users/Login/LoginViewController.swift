@@ -117,7 +117,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     func tokenSuccess(token: String) {
        print(token)
         self.accesstoken = token
-        interactor?.me(token: token)
+        
+       interactor?.me(token: token)
         
       // Connected.userSession = UserSession(username: codeClientText.text!,color: UIColor.randomHex)
 
@@ -157,7 +158,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     
     @IBAction func Connect(_ sender: Any) {
        
-        interactor?.connect(tokenURL: tokenURL, authURL: authURL, redirectURL: redirectURL, ClientId: clientId, ClientSecret: clientsecret)
+    interactor?.connect(tokenURL: tokenURL, authURL: authURL, redirectURL: redirectURL, ClientId: clientId, ClientSecret: clientsecret)
+
         
     }
 }

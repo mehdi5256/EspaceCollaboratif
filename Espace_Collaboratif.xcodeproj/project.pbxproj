@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1A628816FC5283D7E2FAB758 /* Pods_Espace_Collaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48386D4104445DA38D1184E /* Pods_Espace_Collaboratif.framework */; };
 		913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */; };
+		914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34A24AEC5E400F11C33 /* Choix.swift */; };
+		914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */; };
+		914DD35024AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */; };
 		9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A633248F31C30068B55A /* ReactionsPresenter.swift */; };
 		9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A634248F31C30068B55A /* ReactionsWorker.swift */; };
 		9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A635248F31C30068B55A /* ReactionsRouter.swift */; };
@@ -89,6 +92,9 @@
 		25011D67E9EDF04603A98FB0 /* Pods-Espace_Collaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.debug.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.debug.xcconfig"; sourceTree = "<group>"; };
 		85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.release.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.release.xcconfig"; sourceTree = "<group>"; };
 		913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultLogged.swift; sourceTree = "<group>"; };
+		914DD34A24AEC5E400F11C33 /* Choix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choix.swift; sourceTree = "<group>"; };
+		914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SondageTableViewCell.swift; sourceTree = "<group>"; };
+		914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoixSondageCollectionViewCell.swift; sourceTree = "<group>"; };
 		9151A633248F31C30068B55A /* ReactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsPresenter.swift; sourceTree = "<group>"; };
 		9151A634248F31C30068B55A /* ReactionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsWorker.swift; sourceTree = "<group>"; };
 		9151A635248F31C30068B55A /* ReactionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsRouter.swift; sourceTree = "<group>"; };
@@ -197,6 +203,15 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		914DD34C24AECCE500F11C33 /* Sondage */ = {
+			isa = PBXGroup;
+			children = (
+				914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */,
+				914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */,
+			);
+			path = Sondage;
+			sourceTree = "<group>";
+		};
 		9151A632248F31AC0068B55A /* Reaction */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +238,7 @@
 		916ACE462464E0AB00498285 /* CellsChat */ = {
 			isa = PBXGroup;
 			children = (
+				914DD34C24AECCE500F11C33 /* Sondage */,
 				916ACE4A2464E13500498285 /* TextSender */,
 				916ACE492464E12900498285 /* TextReceiver */,
 				916ACE472464E0FC00498285 /* ImageSender */,
@@ -304,6 +320,7 @@
 				91A375882453892100854ADE /* User.swift */,
 				919A8474245AA7140094CE42 /* Messenger1.swift */,
 				9151A641248F32140068B55A /* Reaction.swift */,
+				914DD34A24AEC5E400F11C33 /* Choix.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -632,6 +649,7 @@
 				91A375A424538E2400854ADE /* APIClient.swift in Sources */,
 				919A8472245A43E20094CE42 /* UsersTableViewCell.swift in Sources */,
 				91656A9A2469374600802907 /* Reachability.swift in Sources */,
+				914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */,
 				91A375A624539D9000854ADE /* RoomsEndPoints.swift in Sources */,
 				916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */,
 				91A3759724538B4D00854ADE /* RoomWorker.swift in Sources */,
@@ -647,6 +665,7 @@
 				91F7B0422454F2D800AA3974 /* UserAPIClient.swift in Sources */,
 				919A846C245A328B0094CE42 /* AddRoomWorker.swift in Sources */,
 				91592C78245B62F000E88133 /* MessengerPresenter.swift in Sources */,
+				914DD35024AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift in Sources */,
 				91F7B03F2454DD5400AA3974 /* LoginInteractor.swift in Sources */,
 				91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */,
 				91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */,
@@ -684,6 +703,7 @@
 				9151A63C248F31C30068B55A /* ReactionsModels.swift in Sources */,
 				91A375AA2453B80600854ADE /* ConstantColor.swift in Sources */,
 				91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */,
+				914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
