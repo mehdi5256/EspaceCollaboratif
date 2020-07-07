@@ -17,6 +17,10 @@ class SondageTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    override func prepareForReuse() {
+       self.cvvvv.reloadData()
+         }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

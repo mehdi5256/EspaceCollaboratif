@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1A628816FC5283D7E2FAB758 /* Pods_Espace_Collaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48386D4104445DA38D1184E /* Pods_Espace_Collaboratif.framework */; };
+		9127F7FE24B3F84F0091968A /* AddSondagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */; };
+		9127F7FF24B3F84F0091968A /* AddSondageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7F924B3F84F0091968A /* AddSondageWorker.swift */; };
+		9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */; };
+		9127F80124B3F84F0091968A /* AddSondageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FB24B3F84F0091968A /* AddSondageModels.swift */; };
+		9127F80224B3F84F0091968A /* AddSondageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */; };
+		9127F80324B3F84F0091968A /* AddSondageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */; };
 		913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */; };
 		914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34A24AEC5E400F11C33 /* Choix.swift */; };
 		914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */; };
@@ -91,6 +97,12 @@
 /* Begin PBXFileReference section */
 		25011D67E9EDF04603A98FB0 /* Pods-Espace_Collaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.debug.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.debug.xcconfig"; sourceTree = "<group>"; };
 		85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.release.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.release.xcconfig"; sourceTree = "<group>"; };
+		9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondagePresenter.swift; sourceTree = "<group>"; };
+		9127F7F924B3F84F0091968A /* AddSondageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageWorker.swift; sourceTree = "<group>"; };
+		9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageRouter.swift; sourceTree = "<group>"; };
+		9127F7FB24B3F84F0091968A /* AddSondageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageModels.swift; sourceTree = "<group>"; };
+		9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageViewController.swift; sourceTree = "<group>"; };
+		9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageInteractor.swift; sourceTree = "<group>"; };
 		913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultLogged.swift; sourceTree = "<group>"; };
 		914DD34A24AEC5E400F11C33 /* Choix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choix.swift; sourceTree = "<group>"; };
 		914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SondageTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +205,19 @@
 				85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9127F7F724B3F8250091968A /* Sondage */ = {
+			isa = PBXGroup;
+			children = (
+				9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */,
+				9127F7F924B3F84F0091968A /* AddSondageWorker.swift */,
+				9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */,
+				9127F7FB24B3F84F0091968A /* AddSondageModels.swift */,
+				9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */,
+				9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */,
+			);
+			path = Sondage;
 			sourceTree = "<group>";
 		};
 		913EBB14245512B500A40CA9 /* UserDefault */ = {
@@ -370,6 +395,7 @@
 		91A3758E24538AFA00854ADE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9127F7F724B3F8250091968A /* Sondage */,
 				9151A632248F31AC0068B55A /* Reaction */,
 				919A8473245AA6B30094CE42 /* Messenger */,
 				91F7B0322454DCA300AA3974 /* Users */,
@@ -638,6 +664,7 @@
 				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
 				9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */,
 				91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */,
+				9127F7FF24B3F84F0091968A /* AddSondageWorker.swift in Sources */,
 				91A39622245386A5005F43F4 /* ViewController.swift in Sources */,
 				9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */,
 				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
@@ -647,7 +674,9 @@
 				919A846D245A328B0094CE42 /* AddRoomRouter.swift in Sources */,
 				91A3759E24538D5600854ADE /* RoomAPIClient.swift in Sources */,
 				91A375A424538E2400854ADE /* APIClient.swift in Sources */,
+				9127F80324B3F84F0091968A /* AddSondageInteractor.swift in Sources */,
 				919A8472245A43E20094CE42 /* UsersTableViewCell.swift in Sources */,
+				9127F7FE24B3F84F0091968A /* AddSondagePresenter.swift in Sources */,
 				91656A9A2469374600802907 /* Reachability.swift in Sources */,
 				914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */,
 				91A375A624539D9000854ADE /* RoomsEndPoints.swift in Sources */,
@@ -678,6 +707,7 @@
 				91592C7A245B62F000E88133 /* MessengerRouter.swift in Sources */,
 				9151A63D248F31C30068B55A /* ReactionsViewController.swift in Sources */,
 				91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */,
+				9127F80224B3F84F0091968A /* AddSondageViewController.swift in Sources */,
 				91A375A224538E1300854ADE /* APIConfiguration.swift in Sources */,
 				91A3759624538B4D00854ADE /* RoomPresenter.swift in Sources */,
 				91A3759A24538B4D00854ADE /* RoomViewController.swift in Sources */,
@@ -704,6 +734,8 @@
 				91A375AA2453B80600854ADE /* ConstantColor.swift in Sources */,
 				91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */,
 				914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */,
+				9127F80124B3F84F0091968A /* AddSondageModels.swift in Sources */,
+				9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

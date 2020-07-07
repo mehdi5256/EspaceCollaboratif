@@ -220,6 +220,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     {
         super.viewDidLoad()
         
+        UserDefaultLogged.idRoom = self.idroom
         
         let request:NSFetchRequest<MessageCoreData> = MessageCoreData.fetchRequest()
         request.sortDescriptors = [
@@ -461,12 +462,34 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
         
         let camera = UIAlertAction(title: "Caméra", style: .default) { (camera) in
             // Facebook Code
+    
         }
+        
+        
         camera.setValue(0, forKey: "titleTextAlignment")
         camera.setValue(UIImage(systemName: "camera"), forKey: "image")
         camera.setValue(UIColor.black, forKey: "titleTextColor")
         
         sheet.addAction(camera)
+        
+        
+        let sondage = UIAlertAction(title: "sondage", style: .default) { (sondage) in
+                // Facebook Code
+            print("sondage")
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                         let vc = storyBoard.instantiateViewController(withIdentifier: "AddSondageViewController") as! AddSondageViewController
+                   vc.modalPresentationStyle = .overFullScreen
+            self.present(vc,animated:true,completion: nil)
+
+        
+            }
+            
+            
+            sondage.setValue(0, forKey: "titleTextAlignment")
+            sondage.setValue(UIImage(systemName: "camera"), forKey: "image")
+            sondage.setValue(UIColor.black, forKey: "titleTextColor")
+            
+            sheet.addAction(sondage)
         
         
         let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
@@ -504,6 +527,8 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
         
         //
         //
+        let myUrl = Keys.MobileIntegrationServer.baseURL + "/msg"
+
         let parameters: [String: Any] = [
             "type":"IMAGE",
             "body":"",
@@ -511,7 +536,7 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
             "room":["id":self.idroom],
             "file":strBase64
         ]
-        AF.request("http://1bbe04cc6ec4.ngrok.io/msg", method: .post, parameters: parameters,encoding: JSONEncoding.init())
+        AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
             .responseJSON { response in
                 print(response.request)
                 print(response.response)
@@ -836,6 +861,20 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
             
             
         default:
+            if (self.msgarray[indexPath.row].type == "SONDAGE"){
+                           
+                           guard let cellsondage = tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath) as? SondageTableViewCell else {
+                           return tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath)
+                                   }
+                           let sonadgeindex = msgarray[indexPath.item]
+                           cellsondage.questionsondage.text = sonadgeindex.body
+                           
+                           self.choixcell = sonadgeindex.choix
+                           
+                           return cellsondage
+
+                           
+                       }
             
             
             if (self.msgarray[indexPath.row].type == "IMAGE" && self.msgarray[indexPath.row].user.image == UserDefaultLogged.IMGUD ){
@@ -923,20 +962,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 return TextSenderCell
             }
                 
-            if (self.msgarray[indexPath.row].type == "SONDAGE"){
-                
-                guard let cellsondage = tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath) as? SondageTableViewCell else {
-                return tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath)
-                        }
-                let sonadgeindex = msgarray[indexPath.item]
-                cellsondage.questionsondage.text = sonadgeindex.body
-                
-                self.choixcell = sonadgeindex.choix
-                
-                return cellsondage
-
-                
-            }
+           
                     
 
                 
@@ -1107,7 +1133,8 @@ extension MessengerViewController: ReactionDelegate {
         
         interactor?.sendReaction(idroom: idroom, message: msgarray[tag], type: "reaction", reaction: reaction)
         
-        let myUrl = "http://1bbe04cc6ec4.ngrok.io/reaction";
+        let myUrl = Keys.MobileIntegrationServer.baseURL + "/reaction"
+        
 
                //  let type = selectReaction.selectedReaction!.title;
                //let description = Subject.text;
@@ -1164,7 +1191,7 @@ extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDat
         }
         print("azzziiiizzz")
         print(countUsers)
-        collectionView.frame = CGRect(x: collectionView.frame.origin.x , y: collectionView.frame.origin.y, width: collectionView.frame.width, height: collectionView.frame.height * CGFloat(choixcell.count))
+//        collectionView.frame = CGRect(x: collectionView.frame.origin.x , y: collectionView.frame.origin.y, width: collectionView.frame.width, height: collectionView.frame.height * CGFloat(choixcell.count))
         return choixcell.count
     }
     
