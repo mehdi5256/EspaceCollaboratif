@@ -272,7 +272,7 @@ extension RoomViewController: UITableViewDataSource{
             
             let roomindex = rooms[indexPath.item]
             cell.RoomName.text = roomindex.name!
-            cell.UserName.text = roomindex.subject!
+                cell.UserName.text = roomindex.subject!
             cell.NumPoste.text  =  (roomindex.id!).description
             self.usersCell = roomindex.users
         }

@@ -16,6 +16,12 @@ import Alamofire
 import CoreData
 import GTProgressBar
 
+class DataManager {
+
+        static let shared = DataManager()
+        var mvc = MessengerViewController()
+}
+
 
 protocol MessengerDisplayLogic: class
 {
@@ -117,6 +123,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
                 router.perform(selector, with: segue)
             }
         }
+        
     }
     
     
@@ -133,6 +140,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     //coredata
     
     // var msgscoredataarray = MessageCoreData.all
+    
+
     
     var countUsers = 0
 
@@ -179,6 +188,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         tv.register(UINib(nibName: "ImageReceiverCell", bundle: nil), forCellReuseIdentifier: "ImageReceiverCell")
         
         // msgscoredataarray = MessageCoreData.all
+       tv.reloadData()
         
         
     }
@@ -186,8 +196,14 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrolltobottom(animated: false)
+       tv.reloadData()
+//        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: NSNotification.Name(rawValue: "fetchRendezVousListe"), object: nil)
+
+               
         
     }
+    
+     
     
     @IBAction func DismissKeyBoard(_ sender: UITapGestureRecognizer) {
         message.resignFirstResponder()
@@ -215,10 +231,19 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         }
     }
     
-    
+    @objc func fetchData(){
+        tv.reloadData()
+    }
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        //DataManager.shared.mvc = self
+        
+        
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tap)
         
         UserDefaultLogged.idRoom = self.idroom
         
@@ -733,40 +758,50 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
         
         
         
-        switch NetworkStatus.Connection() {
-        case false:
-            print("not conncted")
-            print("connected")
-            if  MessagesArrayCoreData.count == 0
-            {
-                tv.isHidden = true
-                emptytvimg.isHidden = false
-            }
-            else{
-                tv.isHidden = false
-                emptytvimg.isHidden = true
-                
-            }
-            return MessagesArrayCoreData.count
-        default:
-            print("connected")
-            if  msgarray.count == 0
-            {
-                tv.isHidden = true
-                emptytvimg.isHidden = false
-            }
-            else{
-                tv.isHidden = false
-                emptytvimg.isHidden = true
-                
-            }
-            return msgarray.count
-        }
+//        switch NetworkStatus.Connection() {
+//        case false:
+//            print("not conncted")
+//            print("connected")
+//            if  MessagesArrayCoreData.count == 0
+//            {
+//                tv.isHidden = true
+//                emptytvimg.isHidden = false
+//            }
+//            else{
+//                tv.isHidden = false
+//                emptytvimg.isHidden = true
+//
+//            }
+//            return MessagesArrayCoreData.count
+//        default:
+//            print("connected")
+//            if  msgarray.count == 0
+//            {
+//                tv.isHidden = true
+//                emptytvimg.isHidden = false
+//            }
+//            else{
+//                tv.isHidden = false
+//                emptytvimg.isHidden = true
+//
+//            }
+//            return msgarray.count
+//        }
+//
         
-        
-        
+//            if  MessagesArrayCoreData.count == 0
+//            {
+//                tv.isHidden = true
+//                emptytvimg.isHidden = false
+//            }
+//            else{
+//                tv.isHidden = false
+//                emptytvimg.isHidden = true
+//
+//            }
+        return msgarray.count
     }
-    
+   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
              let TextSenderCell = tv.dequeueReusableCell(withIdentifier: "TextSenderCell", for: indexPath) as! TextSenderCell
@@ -866,6 +901,11 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                            guard let cellsondage = tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath) as? SondageTableViewCell else {
                            return tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath)
                                    }
+                
+                cellsondage.delegate = self
+                cellsondage.voterBtn.tag = indexPath.row
+
+
                            let sonadgeindex = msgarray[indexPath.item]
                            cellsondage.questionsondage.text = sonadgeindex.body
                            
@@ -1182,15 +1222,29 @@ extension MessengerViewController: ReactionDelegate {
 
 }
 
-extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDataSource{
+extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDataSource,SondageDelegate{
+    func SondageVote(tag: Int) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+              let vc = storyBoard.instantiateViewController(withIdentifier: "VoteSondageViewController") as! VoteSondageViewController
+        vc.modalPresentationStyle = .automatic
+
+        vc.question = msgarray[tag].body
+        vc.sondageArray = msgarray[tag].choix
+              self.present(vc,animated:true,completion: nil)
+        //print(msgarray[tag].choix)
+
+        
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         countUsers = 0
         choixcell.forEach{c in
             self.countUsers += c.users.count
         }
-        print("azzziiiizzz")
-        print(countUsers)
+       // print("azzziiiizzz")
+        //print(countUsers)
 //        collectionView.frame = CGRect(x: collectionView.frame.origin.x , y: collectionView.frame.origin.y, width: collectionView.frame.width, height: collectionView.frame.height * CGFloat(choixcell.count))
         return choixcell.count
     }
@@ -1205,8 +1259,8 @@ extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDat
         
 
         var stat = CGFloat(Double(choixcell[indexPath.row].users.count)/Double(self.countUsers))
-        print (stat)
-        print("statttttt")
+      //  print (stat)
+     //   print("statttttt")
         if(stat.isNaN){
             stat = 0
         }
@@ -1216,5 +1270,11 @@ extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDat
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       // print(choixcell[indexPath.item])
+       // print(msgarray[tag].choix)
+       // SondageVote(tag:choixcell[indexPath.item].id!)
+
+    }
     
 }

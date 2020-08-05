@@ -7,11 +7,19 @@
 //
 
 import UIKit
+protocol SondageDelegate {
+    func SondageVote(tag: Int)
+   // func ReactionPost(tag: Int)
+
+}
 
 class SondageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var voterBtn: UIButton!
     @IBOutlet weak var cvvvv: UICollectionView!
     @IBOutlet weak var questionsondage: UILabel!
+    var delegate: SondageDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,10 +29,15 @@ class SondageTableViewCell: UITableViewCell {
        self.cvvvv.reloadData()
          }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
+    
+    @IBAction func SondageVote(_ sender: UIButton) {
+           delegate?.SondageVote(tag:sender.tag)
 
-        // Configure the view for the selected state
-    }
+       }
 
 }

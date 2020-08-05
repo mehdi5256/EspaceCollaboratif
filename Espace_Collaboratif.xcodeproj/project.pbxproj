@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		1A628816FC5283D7E2FAB758 /* Pods_Espace_Collaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48386D4104445DA38D1184E /* Pods_Espace_Collaboratif.framework */; };
+		9103F80124D9BA3300587112 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FB24D9BA3300587112 /* HomePresenter.swift */; };
+		9103F80224D9BA3300587112 /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FC24D9BA3300587112 /* HomeWorker.swift */; };
+		9103F80324D9BA3300587112 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FD24D9BA3300587112 /* HomeRouter.swift */; };
+		9103F80424D9BA3300587112 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FE24D9BA3300587112 /* HomeModels.swift */; };
+		9103F80524D9BA3300587112 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FF24D9BA3300587112 /* HomeViewController.swift */; };
+		9103F80624D9BA3300587112 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80024D9BA3300587112 /* HomeInteractor.swift */; };
+		9103F80E24D9DB0B00587112 /* TopicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80824D9DB0B00587112 /* TopicPresenter.swift */; };
+		9103F80F24D9DB0B00587112 /* TopicWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80924D9DB0B00587112 /* TopicWorker.swift */; };
+		9103F81024D9DB0B00587112 /* TopicRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80A24D9DB0B00587112 /* TopicRouter.swift */; };
+		9103F81124D9DB0B00587112 /* TopicModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80B24D9DB0B00587112 /* TopicModels.swift */; };
+		9103F81224D9DB0B00587112 /* TopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80C24D9DB0B00587112 /* TopicViewController.swift */; };
+		9103F81324D9DB0B00587112 /* TopicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80D24D9DB0B00587112 /* TopicInteractor.swift */; };
+		9103F81524D9DDF000587112 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F81424D9DDF000587112 /* TopicTableViewCell.swift */; };
 		9127F7FE24B3F84F0091968A /* AddSondagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */; };
 		9127F7FF24B3F84F0091968A /* AddSondageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7F924B3F84F0091968A /* AddSondageWorker.swift */; };
 		9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */; };
@@ -18,6 +31,10 @@
 		914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34A24AEC5E400F11C33 /* Choix.swift */; };
 		914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */; };
 		914DD35024AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */; };
+		914E1E7C24DA35FF001BC09F /* Topic1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E7B24DA35FF001BC09F /* Topic1.swift */; };
+		914E1E7E24DA36A8001BC09F /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E7D24DA36A8001BC09F /* Tag.swift */; };
+		914E1E8024DA3D68001BC09F /* TopicEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E7F24DA3D68001BC09F /* TopicEndPoints.swift */; };
+		914E1E8224DA5BEC001BC09F /* TopicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E8124DA5BEC001BC09F /* TopicService.swift */; };
 		9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A633248F31C30068B55A /* ReactionsPresenter.swift */; };
 		9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A634248F31C30068B55A /* ReactionsWorker.swift */; };
 		9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A635248F31C30068B55A /* ReactionsRouter.swift */; };
@@ -35,6 +52,14 @@
 		91656A9624691A5700802907 /* Espace_Collaboratif.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91656A9424691A5700802907 /* Espace_Collaboratif.xcdatamodeld */; };
 		91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91656A9724691B7A00802907 /* RoomCoreData.swift */; };
 		91656A9A2469374600802907 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91656A992469374600802907 /* Reachability.swift */; };
+		9166742124B5D19A00A5E687 /* VoteSondagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166741B24B5D19A00A5E687 /* VoteSondagePresenter.swift */; };
+		9166742224B5D19A00A5E687 /* VoteSondageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166741C24B5D19A00A5E687 /* VoteSondageWorker.swift */; };
+		9166742324B5D19A00A5E687 /* VoteSondageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166741D24B5D19A00A5E687 /* VoteSondageRouter.swift */; };
+		9166742424B5D19A00A5E687 /* VoteSondageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166741E24B5D19A00A5E687 /* VoteSondageModels.swift */; };
+		9166742524B5D19A00A5E687 /* VoteSondageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166741F24B5D19A00A5E687 /* VoteSondageViewController.swift */; };
+		9166742624B5D19A00A5E687 /* VoteSondageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166742024B5D19A00A5E687 /* VoteSondageInteractor.swift */; };
+		9166742A24B5D1C800A5E687 /* VoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166742824B5D1C800A5E687 /* VoteTableViewCell.swift */; };
+		9166742B24B5D1C800A5E687 /* VoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9166742924B5D1C800A5E687 /* VoteTableViewCell.xib */; };
 		916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE4B2464E19E00498285 /* TextSenderCell.swift */; };
 		916ACE4E2464E19E00498285 /* TextSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE4C2464E19E00498285 /* TextSenderCell.xib */; };
 		916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE4F2464E1B500498285 /* TextReceiverCell.swift */; };
@@ -97,6 +122,19 @@
 /* Begin PBXFileReference section */
 		25011D67E9EDF04603A98FB0 /* Pods-Espace_Collaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.debug.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.debug.xcconfig"; sourceTree = "<group>"; };
 		85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.release.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.release.xcconfig"; sourceTree = "<group>"; };
+		9103F7FB24D9BA3300587112 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		9103F7FC24D9BA3300587112 /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
+		9103F7FD24D9BA3300587112 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		9103F7FE24D9BA3300587112 /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
+		9103F7FF24D9BA3300587112 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9103F80024D9BA3300587112 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		9103F80824D9DB0B00587112 /* TopicPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicPresenter.swift; sourceTree = "<group>"; };
+		9103F80924D9DB0B00587112 /* TopicWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicWorker.swift; sourceTree = "<group>"; };
+		9103F80A24D9DB0B00587112 /* TopicRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRouter.swift; sourceTree = "<group>"; };
+		9103F80B24D9DB0B00587112 /* TopicModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicModels.swift; sourceTree = "<group>"; };
+		9103F80C24D9DB0B00587112 /* TopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewController.swift; sourceTree = "<group>"; };
+		9103F80D24D9DB0B00587112 /* TopicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicInteractor.swift; sourceTree = "<group>"; };
+		9103F81424D9DDF000587112 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondagePresenter.swift; sourceTree = "<group>"; };
 		9127F7F924B3F84F0091968A /* AddSondageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageWorker.swift; sourceTree = "<group>"; };
 		9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageRouter.swift; sourceTree = "<group>"; };
@@ -107,6 +145,10 @@
 		914DD34A24AEC5E400F11C33 /* Choix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choix.swift; sourceTree = "<group>"; };
 		914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SondageTableViewCell.swift; sourceTree = "<group>"; };
 		914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoixSondageCollectionViewCell.swift; sourceTree = "<group>"; };
+		914E1E7B24DA35FF001BC09F /* Topic1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic1.swift; sourceTree = "<group>"; };
+		914E1E7D24DA36A8001BC09F /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		914E1E7F24DA3D68001BC09F /* TopicEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicEndPoints.swift; sourceTree = "<group>"; };
+		914E1E8124DA5BEC001BC09F /* TopicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicService.swift; sourceTree = "<group>"; };
 		9151A633248F31C30068B55A /* ReactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsPresenter.swift; sourceTree = "<group>"; };
 		9151A634248F31C30068B55A /* ReactionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsWorker.swift; sourceTree = "<group>"; };
 		9151A635248F31C30068B55A /* ReactionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsRouter.swift; sourceTree = "<group>"; };
@@ -124,6 +166,14 @@
 		91656A9524691A5700802907 /* Espace_Collaboratif.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Espace_Collaboratif.xcdatamodel; sourceTree = "<group>"; };
 		91656A9724691B7A00802907 /* RoomCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCoreData.swift; sourceTree = "<group>"; };
 		91656A992469374600802907 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		9166741B24B5D19A00A5E687 /* VoteSondagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSondagePresenter.swift; sourceTree = "<group>"; };
+		9166741C24B5D19A00A5E687 /* VoteSondageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSondageWorker.swift; sourceTree = "<group>"; };
+		9166741D24B5D19A00A5E687 /* VoteSondageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSondageRouter.swift; sourceTree = "<group>"; };
+		9166741E24B5D19A00A5E687 /* VoteSondageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSondageModels.swift; sourceTree = "<group>"; };
+		9166741F24B5D19A00A5E687 /* VoteSondageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSondageViewController.swift; sourceTree = "<group>"; };
+		9166742024B5D19A00A5E687 /* VoteSondageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSondageInteractor.swift; sourceTree = "<group>"; };
+		9166742824B5D1C800A5E687 /* VoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteTableViewCell.swift; sourceTree = "<group>"; };
+		9166742924B5D1C800A5E687 /* VoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteTableViewCell.xib; sourceTree = "<group>"; };
 		916ACE4B2464E19E00498285 /* TextSenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSenderCell.swift; sourceTree = "<group>"; };
 		916ACE4C2464E19E00498285 /* TextSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextSenderCell.xib; sourceTree = "<group>"; };
 		916ACE4F2464E1B500498285 /* TextReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReceiverCell.swift; sourceTree = "<group>"; };
@@ -207,7 +257,35 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9127F7F724B3F8250091968A /* Sondage */ = {
+		9103F7FA24D9BA1600587112 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9103F7FB24D9BA3300587112 /* HomePresenter.swift */,
+				9103F7FC24D9BA3300587112 /* HomeWorker.swift */,
+				9103F7FD24D9BA3300587112 /* HomeRouter.swift */,
+				9103F7FE24D9BA3300587112 /* HomeModels.swift */,
+				9103F7FF24D9BA3300587112 /* HomeViewController.swift */,
+				9103F80024D9BA3300587112 /* HomeInteractor.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9103F80724D9DADA00587112 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				9103F80824D9DB0B00587112 /* TopicPresenter.swift */,
+				9103F80924D9DB0B00587112 /* TopicWorker.swift */,
+				9103F80A24D9DB0B00587112 /* TopicRouter.swift */,
+				9103F80B24D9DB0B00587112 /* TopicModels.swift */,
+				9103F80C24D9DB0B00587112 /* TopicViewController.swift */,
+				9103F80D24D9DB0B00587112 /* TopicInteractor.swift */,
+				9103F81424D9DDF000587112 /* TopicTableViewCell.swift */,
+				914E1E8124DA5BEC001BC09F /* TopicService.swift */,
+			);
+			path = Topic;
+			sourceTree = "<group>";
+		};
+		9127F7F724B3F8250091968A /* AddSondage */ = {
 			isa = PBXGroup;
 			children = (
 				9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */,
@@ -217,7 +295,7 @@
 				9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */,
 				9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */,
 			);
-			path = Sondage;
+			path = AddSondage;
 			sourceTree = "<group>";
 		};
 		913EBB14245512B500A40CA9 /* UserDefault */ = {
@@ -258,6 +336,38 @@
 				91ABB93F246AC011001C8CBB /* MessageCoreData.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		9166741924B5D15F00A5E687 /* Sondaage */ = {
+			isa = PBXGroup;
+			children = (
+				9166741A24B5D17B00A5E687 /* VoteSondage */,
+				9127F7F724B3F8250091968A /* AddSondage */,
+			);
+			path = Sondaage;
+			sourceTree = "<group>";
+		};
+		9166741A24B5D17B00A5E687 /* VoteSondage */ = {
+			isa = PBXGroup;
+			children = (
+				9166742724B5D1AF00A5E687 /* XibVote */,
+				9166741B24B5D19A00A5E687 /* VoteSondagePresenter.swift */,
+				9166741C24B5D19A00A5E687 /* VoteSondageWorker.swift */,
+				9166741D24B5D19A00A5E687 /* VoteSondageRouter.swift */,
+				9166741E24B5D19A00A5E687 /* VoteSondageModels.swift */,
+				9166741F24B5D19A00A5E687 /* VoteSondageViewController.swift */,
+				9166742024B5D19A00A5E687 /* VoteSondageInteractor.swift */,
+			);
+			path = VoteSondage;
+			sourceTree = "<group>";
+		};
+		9166742724B5D1AF00A5E687 /* XibVote */ = {
+			isa = PBXGroup;
+			children = (
+				9166742824B5D1C800A5E687 /* VoteTableViewCell.swift */,
+				9166742924B5D1C800A5E687 /* VoteTableViewCell.xib */,
+			);
+			path = XibVote;
 			sourceTree = "<group>";
 		};
 		916ACE462464E0AB00498285 /* CellsChat */ = {
@@ -346,6 +456,8 @@
 				919A8474245AA7140094CE42 /* Messenger1.swift */,
 				9151A641248F32140068B55A /* Reaction.swift */,
 				914DD34A24AEC5E400F11C33 /* Choix.swift */,
+				914E1E7B24DA35FF001BC09F /* Topic1.swift */,
+				914E1E7D24DA36A8001BC09F /* Tag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				91A375A524539D9000854ADE /* RoomsEndPoints.swift */,
+				914E1E7F24DA3D68001BC09F /* TopicEndPoints.swift */,
 				91F7B0432454F46D00AA3974 /* UserConnectedEndPoints.swift */,
 			);
 			path = EndPoints;
@@ -395,7 +508,9 @@
 		91A3758E24538AFA00854ADE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9127F7F724B3F8250091968A /* Sondage */,
+				9103F7FA24D9BA1600587112 /* Home */,
+				9103F80724D9DADA00587112 /* Topic */,
+				9166741924B5D15F00A5E687 /* Sondaage */,
 				9151A632248F31AC0068B55A /* Reaction */,
 				919A8473245AA6B30094CE42 /* Messenger */,
 				91F7B0322454DCA300AA3974 /* Users */,
@@ -608,6 +723,7 @@
 				916ACE4E2464E19E00498285 /* TextSenderCell.xib in Resources */,
 				91A3962A245386A7005F43F4 /* Assets.xcassets in Resources */,
 				91A39625245386A5005F43F4 /* Main.storyboard in Resources */,
+				9166742B24B5D1C800A5E687 /* VoteTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,15 +776,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9103F80524D9BA3300587112 /* HomeViewController.swift in Sources */,
 				91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */,
 				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
 				9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */,
 				91592C7B245B62F000E88133 /* MessengerModels.swift in Sources */,
+				9103F80324D9BA3300587112 /* HomeRouter.swift in Sources */,
+				914E1E7E24DA36A8001BC09F /* Tag.swift in Sources */,
 				9127F7FF24B3F84F0091968A /* AddSondageWorker.swift in Sources */,
 				91A39622245386A5005F43F4 /* ViewController.swift in Sources */,
 				9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */,
 				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
 				919A8475245AA7140094CE42 /* Messenger1.swift in Sources */,
+				914E1E8224DA5BEC001BC09F /* TopicService.swift in Sources */,
 				91A3759924538B4D00854ADE /* RoomModels.swift in Sources */,
 				91A3759B24538B4D00854ADE /* RoomInteractor.swift in Sources */,
 				919A846D245A328B0094CE42 /* AddRoomRouter.swift in Sources */,
@@ -676,18 +796,28 @@
 				91A375A424538E2400854ADE /* APIClient.swift in Sources */,
 				9127F80324B3F84F0091968A /* AddSondageInteractor.swift in Sources */,
 				919A8472245A43E20094CE42 /* UsersTableViewCell.swift in Sources */,
+				9166742124B5D19A00A5E687 /* VoteSondagePresenter.swift in Sources */,
+				9103F81124D9DB0B00587112 /* TopicModels.swift in Sources */,
 				9127F7FE24B3F84F0091968A /* AddSondagePresenter.swift in Sources */,
+				9103F81024D9DB0B00587112 /* TopicRouter.swift in Sources */,
 				91656A9A2469374600802907 /* Reachability.swift in Sources */,
 				914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */,
 				91A375A624539D9000854ADE /* RoomsEndPoints.swift in Sources */,
 				916ACE4D2464E19E00498285 /* TextSenderCell.swift in Sources */,
+				9103F80224D9BA3300587112 /* HomeWorker.swift in Sources */,
 				91A3759724538B4D00854ADE /* RoomWorker.swift in Sources */,
 				91A375892453892100854ADE /* User.swift in Sources */,
 				91592C7D245B62F000E88133 /* MessengerInteractor.swift in Sources */,
 				913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */,
 				91656A9624691A5700802907 /* Espace_Collaboratif.xcdatamodeld in Sources */,
+				9103F80E24D9DB0B00587112 /* TopicPresenter.swift in Sources */,
+				9103F81524D9DDF000587112 /* TopicTableViewCell.swift in Sources */,
 				919A846E245A328B0094CE42 /* AddRoomModels.swift in Sources */,
+				9103F80124D9BA3300587112 /* HomePresenter.swift in Sources */,
 				91A6A61D245B9AB9004F0C3D /* Message.swift in Sources */,
+				9103F80624D9BA3300587112 /* HomeInteractor.swift in Sources */,
+				9103F80424D9BA3300587112 /* HomeModels.swift in Sources */,
+				9166742224B5D19A00A5E687 /* VoteSondageWorker.swift in Sources */,
 				9151A640248F31E80068B55A /* ReactionTableViewCell.swift in Sources */,
 				91F7B03D2454DD5400AA3974 /* LoginModels.swift in Sources */,
 				919A846B245A328B0094CE42 /* AddRoomPresenter.swift in Sources */,
@@ -697,6 +827,7 @@
 				914DD35024AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift in Sources */,
 				91F7B03F2454DD5400AA3974 /* LoginInteractor.swift in Sources */,
 				91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */,
+				9166742A24B5D1C800A5E687 /* VoteTableViewCell.swift in Sources */,
 				91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */,
 				918574E5245D2A4D00F54DAE /* corbeille.swift in Sources */,
 				9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */,
@@ -710,31 +841,40 @@
 				9127F80224B3F84F0091968A /* AddSondageViewController.swift in Sources */,
 				91A375A224538E1300854ADE /* APIConfiguration.swift in Sources */,
 				91A3759624538B4D00854ADE /* RoomPresenter.swift in Sources */,
+				9166742524B5D19A00A5E687 /* VoteSondageViewController.swift in Sources */,
+				9103F81224D9DB0B00587112 /* TopicViewController.swift in Sources */,
 				91A3759A24538B4D00854ADE /* RoomViewController.swift in Sources */,
 				91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */,
 				91A375A82453B6E600854ADE /* RoomsTableViewCell.swift in Sources */,
 				91A3961E245386A5005F43F4 /* AppDelegate.swift in Sources */,
+				914E1E7C24DA35FF001BC09F /* Topic1.swift in Sources */,
 				91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */,
 				91A6A623245B9B09004F0C3D /* Word.swift in Sources */,
 				91A6A61B245B9AAB004F0C3D /* Mutex.swift in Sources */,
+				914E1E8024DA3D68001BC09F /* TopicEndPoints.swift in Sources */,
 				916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */,
 				91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */,
 				919A846F245A328B0094CE42 /* AddRoomViewController.swift in Sources */,
+				9103F81324D9DB0B00587112 /* TopicInteractor.swift in Sources */,
 				9151A642248F32140068B55A /* Reaction.swift in Sources */,
 				91A6A61F245B9AC9004F0C3D /* Util.swift in Sources */,
 				91A6A621245B9AD6004F0C3D /* Response.swift in Sources */,
 				91A39620245386A5005F43F4 /* SceneDelegate.swift in Sources */,
+				9166742324B5D19A00A5E687 /* VoteSondageRouter.swift in Sources */,
 				91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */,
 				91ABB940246AC011001C8CBB /* MessageCoreData.swift in Sources */,
 				91A375A024538DE900854ADE /* Constants.swift in Sources */,
+				9166742624B5D19A00A5E687 /* VoteSondageInteractor.swift in Sources */,
 				9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */,
 				91A37587245388F200854ADE /* Room1.swift in Sources */,
 				91F7B0442454F46D00AA3974 /* UserConnectedEndPoints.swift in Sources */,
 				9151A63C248F31C30068B55A /* ReactionsModels.swift in Sources */,
 				91A375AA2453B80600854ADE /* ConstantColor.swift in Sources */,
+				9166742424B5D19A00A5E687 /* VoteSondageModels.swift in Sources */,
 				91656A9824691B7A00802907 /* RoomCoreData.swift in Sources */,
 				914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */,
 				9127F80124B3F84F0091968A /* AddSondageModels.swift in Sources */,
+				9103F80F24D9DB0B00587112 /* TopicWorker.swift in Sources */,
 				9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
 			);

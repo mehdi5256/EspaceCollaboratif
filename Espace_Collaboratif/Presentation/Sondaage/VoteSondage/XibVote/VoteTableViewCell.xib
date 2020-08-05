@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="91" id="qTQ-5P-2BQ" userLabel="Vote Table View Cell" customClass="VoteTableViewCell" customModule="Espace_Collaboratif" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="384" height="91"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTQ-5P-2BQ" id="nwt-fk-Whc">
+                <rect key="frame" x="0.0" y="0.0" width="384" height="91"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-Jp-p55">
+                        <rect key="frame" x="8" y="11" width="368" height="69"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmN-8V-GMB">
+                                <rect key="frame" x="54" y="10" width="306" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="X3k-7C-oqQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="18"/>
+                                <color key="textColor" red="0.1404433846" green="0.18153458829999999" blue="0.30226141210000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUi-u1-kv4">
+                                <rect key="frame" x="14" y="18.5" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Vgj-GZ-Yia"/>
+                                    <constraint firstAttribute="width" constant="32" id="qkE-YM-14K"/>
+                                </constraints>
+                                <state key="normal" image="UnChecked"/>
+                                <state key="selected" image="Checked"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lmN-8V-GMB" secondAttribute="trailing" constant="8" id="8pZ-66-e9s"/>
+                            <constraint firstItem="GUi-u1-kv4" firstAttribute="centerY" secondItem="M6h-Jp-p55" secondAttribute="centerY" id="DXO-sK-dK2"/>
+                            <constraint firstItem="lmN-8V-GMB" firstAttribute="leading" secondItem="GUi-u1-kv4" secondAttribute="trailing" constant="8" id="Fyg-iE-dx3"/>
+                            <constraint firstItem="GUi-u1-kv4" firstAttribute="leading" secondItem="M6h-Jp-p55" secondAttribute="leading" constant="14" id="Vqx-sP-VYb"/>
+                            <constraint firstItem="lmN-8V-GMB" firstAttribute="top" secondItem="M6h-Jp-p55" secondAttribute="top" constant="10" id="i9Q-D3-PNW"/>
+                            <constraint firstAttribute="bottom" secondItem="lmN-8V-GMB" secondAttribute="bottom" constant="11" id="ifi-a8-Kvy"/>
+                            <constraint firstItem="lmN-8V-GMB" firstAttribute="leading" secondItem="M6h-Jp-p55" secondAttribute="leading" constant="54" id="leW-G7-fCV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="M6h-Jp-p55" secondAttribute="trailing" constant="8" id="SGS-df-ysK"/>
+                    <constraint firstItem="M6h-Jp-p55" firstAttribute="top" secondItem="nwt-fk-Whc" secondAttribute="top" constant="11" id="SOJ-RA-Uds"/>
+                    <constraint firstItem="M6h-Jp-p55" firstAttribute="leading" secondItem="nwt-fk-Whc" secondAttribute="leading" constant="8" id="fWL-9J-qQB"/>
+                    <constraint firstAttribute="bottom" secondItem="M6h-Jp-p55" secondAttribute="bottom" constant="11" id="qWh-Mi-WN9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="dA1-Qp-M8V"/>
+            <connections>
+                <outlet property="checkedimg" destination="GUi-u1-kv4" id="xco-fX-0hg"/>
+                <outlet property="choixlbl" destination="lmN-8V-GMB" id="VRA-vv-uho"/>
+                <outlet property="shadowView" destination="M6h-Jp-p55" id="e9Q-K3-XpJ"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="61.272321428571423"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Checked" width="16" height="16"/>
+        <image name="UnChecked" width="32" height="32"/>
+    </resources>
+</document>

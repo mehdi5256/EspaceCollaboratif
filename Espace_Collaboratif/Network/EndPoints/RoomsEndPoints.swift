@@ -17,6 +17,7 @@ enum RoomsEndPoints: APIConfiguration {
     case getRoombyId(id: Int)
     case PostMsg(type:String, file:String,room:[String: Any],user:[String: Any],body: String)
      case PostImage(type:String,body: String ,user:[String: Any],room:[String: Any],file:String)
+    case getAllTopics
     
     
     
@@ -31,6 +32,8 @@ enum RoomsEndPoints: APIConfiguration {
     static let endPointaddroomURL = "/room/"
     static let getRoomById = "/msg/room/"
     static let postmsg = "/msg/"
+    static let getalltopics = "/topic/tag/"
+
 
 
 
@@ -55,6 +58,9 @@ enum RoomsEndPoints: APIConfiguration {
         
         
       case  .AddRoom:
+        return .post
+        
+      case .getAllTopics:
         return .post
         
       default:
@@ -83,6 +89,11 @@ enum RoomsEndPoints: APIConfiguration {
         
         case .PostImage:
               return RoomsEndPoints.postmsg
+        
+      case .getAllTopics:
+        return RoomsEndPoints.getalltopics
+
+        
 
         
         
@@ -121,6 +132,10 @@ enum RoomsEndPoints: APIConfiguration {
                    object.setValue(file, forKey: "file")
 
                return (object as! Parameters)
+        
+      case .getAllTopics:
+        let object = NSMutableDictionary()
+        return (object as! Parameters)
         
 
 
