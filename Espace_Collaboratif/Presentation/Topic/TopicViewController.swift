@@ -68,6 +68,8 @@ class TopicViewController: UIViewController, TopicDisplayLogic
   // MARK: View lifecycle
     
     var topicarray: [Topic1] = []
+    var tagname: [String] = []
+    var tagsarray : [Tag] = []
     let topicservice = TopicService()
     
     @IBOutlet weak var tv: UITableView!
@@ -109,6 +111,9 @@ class TopicViewController: UIViewController, TopicDisplayLogic
     doSomething()
     print(topicarray.count)
     fetchalltopics()
+    
+    
+    
 
 
     
@@ -119,6 +124,15 @@ class TopicViewController: UIViewController, TopicDisplayLogic
         topicservice.getAllTopics(){ (rooms) in
             self.topicarray = rooms
             self.tv.reloadData()
+            for r in rooms{
+                
+                self.tagsarray = r.tags
+            }
+            for x in self.tagsarray{
+                self.tagname.append(x.name!)
+                
+            }
+            print(self.tagname)
             print("lklklkjljklj")
             print(self.topicarray)
          
@@ -150,13 +164,78 @@ extension TopicViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topiccell", for: indexPath) as! TopicTableViewCell
+        
+        //user info
         let image = topicarray[indexPath.row].user.image
-
         cell.UserImage.kf.setImage(with: URL(string: image))
+        cell.Username.text = topicarray[indexPath.row].user.firstName + " " + topicarray[indexPath.row].user.lastName
+        
+        //topic info
         cell.TitleTopic.text = topicarray[indexPath.row].title
+//        cell.DescriptionTopic.text = topicarray[indexPath.row].description
+        //cell.TagName.text = topicarray[indexPath.row].tags
+        cell.CountReply.text = topicarray[indexPath.row].countReplies!.description + " Réponses"
+       // self.tagsarray = topicarray[indexPath.row].tags
+        
+        var arrtag :[String] = []
+        let array2 = topicarray[indexPath.row].tags
+        for a in array2{
+            arrtag.append(a.name!)
+           // print(arrtag)
+           
+
+        }
+        cell.taglistview.removeAllTags()
+        cell.taglistview.addTags(arrtag)
+        //print(arrtag)
+        
+
+
         
         return cell
     }
     
     
 }
+
+//extension TopicViewController: UICollectionViewDataSource,UICollectionViewDelegate{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return tagsarray.count
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagcell", for: indexPath) as? TagCollectionViewCell
+//            else{
+//                return TagCollectionViewCell()
+//        }
+//        cell.labeltag.text = tagsarray[indexPath.row].name
+//        return cell
+//        
+//    }
+    
+    
+    
+    
+//}
+
+/*extension TopicViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    
+   
+    
+    
+}
+*/

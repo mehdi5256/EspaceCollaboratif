@@ -17,6 +17,7 @@ PODS:
     - PromisesObjC (= 1.2.8)
   - Reactions (3.0.0)
   - SwiftyJSON (5.0.0)
+  - TagListView (1.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.7)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - PromisesSwift
   - Reactions (~> 3.0.0)
   - SwiftyJSON
+  - TagListView (~> 1.0)
 
 SPEC REPOS:
   trunk:
@@ -43,6 +45,7 @@ SPEC REPOS:
     - PromisesSwift
     - Reactions
     - SwiftyJSON
+    - TagListView
 
 SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
@@ -56,7 +59,8 @@ SPEC CHECKSUMS:
   PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
   Reactions: 4994c6bb3e7c6b75756a0b26a4d4f5bde1a47dc7
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  TagListView: 987b0bdbb16cd9d9e7c0e2ec32aff37ecba8b173
 
-PODFILE CHECKSUM: 33286739303692c785ef77b23e1408ed669582a4
+PODFILE CHECKSUM: 80b294a422e68952d49685b77c5ddc8e188b7c30
 
 COCOAPODS: 1.9.1

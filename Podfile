@@ -17,6 +17,8 @@ target 'Espace_Collaboratif' do
    pod 'AppAuth'
    pod 'Reactions', '~> 3.0.0'
    pod 'GTProgressBar'
+   pod 'TagListView', '~> 1.0'
+
 
 
 

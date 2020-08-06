@@ -27,6 +27,7 @@
 		9127F80124B3F84F0091968A /* AddSondageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FB24B3F84F0091968A /* AddSondageModels.swift */; };
 		9127F80224B3F84F0091968A /* AddSondageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */; };
 		9127F80324B3F84F0091968A /* AddSondageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */; };
+		913C420A24DB327600DDFC5D /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */; };
 		913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */; };
 		914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34A24AEC5E400F11C33 /* Choix.swift */; };
 		914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */; };
@@ -141,6 +142,7 @@
 		9127F7FB24B3F84F0091968A /* AddSondageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageModels.swift; sourceTree = "<group>"; };
 		9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageViewController.swift; sourceTree = "<group>"; };
 		9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageInteractor.swift; sourceTree = "<group>"; };
+		913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultLogged.swift; sourceTree = "<group>"; };
 		914DD34A24AEC5E400F11C33 /* Choix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choix.swift; sourceTree = "<group>"; };
 		914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SondageTableViewCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				9103F80D24D9DB0B00587112 /* TopicInteractor.swift */,
 				9103F81424D9DDF000587112 /* TopicTableViewCell.swift */,
 				914E1E8124DA5BEC001BC09F /* TopicService.swift */,
+				913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */,
 			);
 			path = Topic;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */,
 				9127F80124B3F84F0091968A /* AddSondageModels.swift in Sources */,
 				9103F80F24D9DB0B00587112 /* TopicWorker.swift in Sources */,
+				913C420A24DB327600DDFC5D /* TagCollectionViewCell.swift in Sources */,
 				9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
 			);
