@@ -55,17 +55,19 @@ class EventBusApiClient {
           }
      }
    
-   @discardableResult
-      static func performRequest(bodyJson: JSON)->Promise<Messenger1> {
-          return Promise<Messenger1> { fulfill, reject in
-            do {
-                let msgs = Messenger1(body: bodyJson["body"].description, file: bodyJson["file"].description, id: nil ,timestamp: 12345,usert: bodyJson["user"].description, type: bodyJson["type"].description, user: User(id: UserDefaultLogged.idUD, firstName: bodyJson["firstName"].description, lastName: bodyJson["lastName"].description, email: UserDefaultLogged.emailUD, image: bodyJson["user_img"].description), reactions:[],choix:[])
-                fulfill(msgs)
-            } catch let error as NSError {
-               reject(error)
-            }
-      }
-   }
+     @discardableResult
+       static func performRequest<T: Decodable>(bodyJson: JSON, decoder: JSONDecoder = JSONDecoder())->Promise<T> {
+        print (bodyJson)
+           return Promise<T> { fulfill, reject in
+             let jsonData = bodyJson.description.data(using: .utf8)!
+             do {
+                 let object = try JSONDecoder().decode(T.self, from: jsonData)
+                 fulfill(object)
+             } catch let error as NSError {
+                reject(error)
+             }
+       }
+    }
    
     @discardableResult
        static func performRequestReaction(bodyJson: JSON)->Promise<Reaction> {

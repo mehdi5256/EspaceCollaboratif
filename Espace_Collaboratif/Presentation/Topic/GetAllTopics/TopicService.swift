@@ -14,15 +14,15 @@ import Alamofire
 class TopicService: NSObject{
     
     func getAllTopics(completion: @escaping ([Topic1]) -> Void) {
-//        let url = URL(string:Keys.MobileIntegrationServer.baseURL + "/topic/tag")
-        let url = URL(string: "https://api.jsonbin.io/b/5f29fdf0dddf413f95bcfe38/7")
+        let url = URL(string:Keys.MobileIntegrationServer.baseURL + "/topic/tag")
+//       let url = URL(string: "https://api.jsonbin.io/b/5f29fdf0dddf413f95bcfe38/7")
         var request = URLRequest(url: url!)
-        request.httpMethod = "get"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        //let values = [] as Any
+        let values = [] as Any
 
-      //  request.httpBody = try! JSONSerialization.data(withJSONObject: values)
+        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
 
 //        AF.request(request)
 //            .responseJSON { response in

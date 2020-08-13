@@ -40,10 +40,20 @@ protocol MessengerDisplayLogic: class
     
     func displayReaction(reaction: Reaction)
     
+    func displayIdRoomEventBus(id: Room1)
+
+    
+    
 }
 
 class MessengerViewController: UIViewController, MessengerDisplayLogic
 {
+    func displayIdRoomEventBus(id: Room1) {
+        self.idroomEventBus = id.id
+        print(idroomEventBus)
+        print("ideventbuseventbyssssssssssss")
+    }
+    
     
     
     
@@ -167,6 +177,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     var nomroom:String?
     var idroom:Int!
+    var idroomEventBus:Int!
+
     var msgarray:[Messenger1] = []
     var reactionsArray:[Reaction] = []
     var choixcell: [Choix] = []
@@ -236,6 +248,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     }
     override func viewDidLoad()
     {
+        
+        self.interactor?.getRoomById(id: self.idroom)
+        self.interactor?.GetRoomEventBusid(id: self.idroom)
+
         super.viewDidLoad()
         
         //DataManager.shared.mvc = self
@@ -336,7 +352,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
             
             interactor?.send(idroom: self.idroom, messagesend: message.text, type:"TEXT", file: "")
             
-            interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
+           // interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
             designbuttonaftersend()
             
             //        let msgCoreData = MessageCoreData(context: AppDelegate.viewContext)
@@ -909,7 +925,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                            let sonadgeindex = msgarray[indexPath.item]
                            cellsondage.questionsondage.text = sonadgeindex.body
                            
-                           self.choixcell = sonadgeindex.choix
+                           self.choixcell = sonadgeindex.choix ?? []
                            
                            return cellsondage
 
@@ -937,7 +953,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                     }
                 }
                 // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions
+                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 print(reactionsArray.count)
                 
                 return ImageSenderCell
@@ -965,7 +981,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                     }
                 }
                 // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions
+                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 print(reactionsArray.count)
                 
                 return ImageReceiverCell
@@ -982,15 +998,15 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
                 
                 // Reactionsss
-                reactionsArray = msgarray[indexPath.row].reactions
+                reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextSenderCell.BtnReaction.tag = indexPath.row
                 
-                self.reactionsArray = msgarray[indexPath.row].reactions
+                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextSenderCell.ReactionBtn.tag = indexPath.row
                 
                 print(reactionsArray.count)
                 TextSenderCell.ViewReaction.isHidden = true
-                if (msgarray[indexPath.row].reactions.count > 0){
+                if (msgarray[indexPath.row].reactions?.count ?? 0 > 0 ){
                     TextSenderCell.ViewReaction.isHidden = false
                 }
                 
@@ -1013,18 +1029,18 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
                 
                 // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions
+                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextReceiverCell.BtnReaction.tag = indexPath.row
                 
                
 
                 print(reactionsArray.count)
                 
-                self.reactionsArray = msgarray[indexPath.row].reactions
+                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextReceiverCell.ReactionBtn.tag = indexPath.row
                 TextReceiverCell.ViewReaction.isHidden = true
 
-                if (msgarray[indexPath.row].reactions.count > 0){
+                if ((msgarray[indexPath.row].reactions ?? []).count > 0){
                     TextReceiverCell.ViewReaction.isHidden = false
                 }
                  TextReceiverCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
@@ -1158,7 +1174,13 @@ extension MessengerViewController: ReactionDelegate {
         let index: Int? = msgarray.firstIndex(where:  { ( $0.body == reaction.message?.body && $0.timestamp == reaction.message?.timestamp )})
         print("index")
         print(index)
-        msgarray[index!].reactions.append(reaction)
+        if (msgarray[index!].reactions == nil )
+        {
+            msgarray[index!].reactions = []
+
+            
+        }
+        msgarray[index!].reactions!.append(reaction)
         let indexPath = IndexPath(row: index! , section: 0)
         tv.reloadRows(at: [indexPath], with: .none)
 
@@ -1212,7 +1234,7 @@ extension MessengerViewController: ReactionDelegate {
         vc.modalPresentationStyle = .overFullScreen
 
 
-        vc.reactionsArray = msgarray[tag].reactions
+        vc.reactionsArray = msgarray[tag].reactions ?? []
               self.present(vc,animated:true,completion: nil)
      //   print( msgarray[tag].id!)
 
@@ -1230,7 +1252,7 @@ extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDat
         vc.modalPresentationStyle = .automatic
 
         vc.question = msgarray[tag].body
-        vc.sondageArray = msgarray[tag].choix
+        vc.sondageArray = msgarray[tag].choix ?? []
               self.present(vc,animated:true,completion: nil)
         //print(msgarray[tag].choix)
 

@@ -37,4 +37,8 @@ class RoomAPIClient: APIClient {
 
     }
     
+    static func getRoomEventBus(id: Int) -> Promise<Room1> {
+           return performRequest(route: RoomsEndPoints.getRoomIdEventBus(id: id))
+       }
+    
 }

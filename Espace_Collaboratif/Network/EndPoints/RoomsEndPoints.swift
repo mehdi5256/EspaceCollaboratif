@@ -18,6 +18,7 @@ enum RoomsEndPoints: APIConfiguration {
     case PostMsg(type:String, file:String,room:[String: Any],user:[String: Any],body: String)
      case PostImage(type:String,body: String ,user:[String: Any],room:[String: Any],file:String)
     case getAllTopics
+    case getRoomIdEventBus(id: Int)
     
     
     
@@ -33,6 +34,9 @@ enum RoomsEndPoints: APIConfiguration {
     static let getRoomById = "/msg/room/"
     static let postmsg = "/msg/"
     static let getalltopics = "/topic/tag/"
+    
+
+    
 
 
 
@@ -63,6 +67,9 @@ enum RoomsEndPoints: APIConfiguration {
       case .getAllTopics:
         return .post
         
+      case .getRoomIdEventBus:
+        return .get
+        
       default:
       return .get
         
@@ -83,6 +90,11 @@ enum RoomsEndPoints: APIConfiguration {
         
       case .getRoombyId(let id):
         return "/msg/room/\(id)"
+        
+      case .getRoomIdEventBus(let id):
+        return "/ws/chat/info?room_id=\(id)"
+
+
         
         case .PostMsg:
         return RoomsEndPoints.postmsg

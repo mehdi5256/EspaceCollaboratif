@@ -55,15 +55,15 @@ class TopicViewController: UIViewController, TopicDisplayLogic
   
   // MARK: Routing
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+//  {
+//    if let scene = segue.identifier {
+//      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+//      if let router = router, router.responds(to: selector) {
+//        router.perform(selector, with: segue)
+//      }
+//    }
+//  }
   
   // MARK: View lifecycle
     
@@ -71,6 +71,7 @@ class TopicViewController: UIViewController, TopicDisplayLogic
     var tagname: [String] = []
     var tagsarray : [Tag] = []
     let topicservice = TopicService()
+
     
     @IBOutlet weak var tv: UITableView!
     
@@ -121,6 +122,8 @@ class TopicViewController: UIViewController, TopicDisplayLogic
   }
     
     func fetchalltopics(){
+        
+        
         topicservice.getAllTopics(){ (rooms) in
             self.topicarray = rooms
             self.tv.reloadData()
@@ -155,7 +158,7 @@ class TopicViewController: UIViewController, TopicDisplayLogic
   }
 }
 
-extension TopicViewController: UITableViewDelegate,UITableViewDataSource{
+extension TopicViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(topicarray.count)
@@ -174,68 +177,67 @@ extension TopicViewController: UITableViewDelegate,UITableViewDataSource{
         cell.TitleTopic.text = topicarray[indexPath.row].title
 //        cell.DescriptionTopic.text = topicarray[indexPath.row].description
         //cell.TagName.text = topicarray[indexPath.row].tags
-        cell.CountReply.text = topicarray[indexPath.row].countReplies!.description + " Réponses"
-       // self.tagsarray = topicarray[indexPath.row].tags
+        cell.CountReply.text = topicarray[indexPath.row].countReplies!.description + " réponses"
         
+        cell.numberview.text = topicarray[indexPath.row].seen!.description + " vues"
         var arrtag :[String] = []
         let array2 = topicarray[indexPath.row].tags
         for a in array2{
             arrtag.append(a.name!)
-           // print(arrtag)
-           
-
+            // print(arrtag)
+            
+            
         }
         cell.taglistview.removeAllTags()
         cell.taglistview.addTags(arrtag)
         //print(arrtag)
         
-
-
+        
+        
         
         return cell
     }
+}
+extension TopicViewController:UITableViewDelegate{
     
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            performSegue(withIdentifier: "todetailtopic", sender: indexPath)
+            
+        }
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      
+    
+          if segue.identifier == "todetailtopic"{
+              
+              let DVC = segue.destination as! DetailTopicViewController
+              let indice = sender as! IndexPath
+            
+            DVC.idtopic = topicarray[indice.row].id
+            DVC.userimg = topicarray[indice.row].user.image
+            DVC.FirstName = topicarray[indice.row].user.firstName
+            DVC.LastName = topicarray[indice.row].user.lastName
+            DVC.TitreTopic = topicarray[indice.row].title
+            DVC.descriiptionTopic = topicarray[indice.row].description
+            DVC.NumberReply = topicarray[indice.row].countReplies
+            let array2 = topicarray[indice.row].tags
+                   for a in array2{
+                       DVC.arrtag.append(a.name!)
+                      // print(arrtag)
+                   }
+            
+
+
+              
+              
+          }
+          
+     
+      
+      
+  }
+    
+ 
     
 }
-
-//extension TopicViewController: UICollectionViewDataSource,UICollectionViewDelegate{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return tagsarray.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagcell", for: indexPath) as? TagCollectionViewCell
-//            else{
-//                return TagCollectionViewCell()
-//        }
-//        cell.labeltag.text = tagsarray[indexPath.row].name
-//        return cell
-//        
-//    }
-    
-    
-    
-    
-//}
-
-/*extension TopicViewController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    
-   
-    
-    
-}
-*/
+  

@@ -11,6 +11,7 @@ import TagListView
 
 class TopicTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var numberview: UILabel!
     @IBOutlet weak var taglistview: TagListView!
 //    @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var TitleTopic: UILabel!

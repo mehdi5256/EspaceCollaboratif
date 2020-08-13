@@ -17,6 +17,9 @@ protocol MessengerPresentationLogic
     func presentGetRoomByIdSuccess(roomdid: [Messenger1])
     func presentGetRoomByIdError(error: String)
     
+    func presentGetRoomEventBusSuccess(id: Room1)
+    func presentGetRoomEventBusError(error: String)
+    
     func presentPostMsgdSuccess(msg: [Messenger1])
    func presentPostMsgdError(error: String)
     
@@ -68,15 +71,26 @@ class MessengerPresenter: MessengerPresentationLogic
   weak var viewController: MessengerDisplayLogic?
   
   // MARK: Do something
+    
+    func presentGetRoomByIdSuccess(roomdid: [Messenger1]) {
+     viewController?.displayrRoomByIdSuccess(roomdid : roomdid)
+
+     }
+     
+    
+     
+     func presentGetRoomByIdError(error: String) {
+            viewController?.displayrRoomByIdError(error: error)
+      }
   
-  func presentGetRoomByIdSuccess(roomdid: [Messenger1]) {
-   viewController?.displayrRoomByIdSuccess(roomdid : roomdid)
+  func presentGetRoomEventBusSuccess(id: Room1) {
+   viewController?.displayIdRoomEventBus(id : id)
 
    }
    
   
    
-   func presentGetRoomByIdError(error: String) {
+   func presentGetRoomEventBusError(error: String) {
           viewController?.displayrRoomByIdError(error: error)
     }
     

@@ -22,6 +22,8 @@ protocol MessengerBusinessLogic
     func registerMessenger(id:Int)
     func send(idroom: Int, messagesend:String,type:String,file:String)
     func sendReaction(idroom: Int, message: Messenger1, type: String, reaction: Reaction)
+    
+    func GetRoomEventBusid(id:Int)
 }
 
 protocol MessengerDataStore
@@ -31,20 +33,57 @@ protocol MessengerDataStore
 
 class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
 {
+    func GetRoomEventBusid(id: Int) {
+         worker = MessengerWorker()
+                               worker?.getRoomEventBus(id: id).then {
+                               roomdid in
+                               print(roomdid)
+                                  self.presenter?.presentGetRoomEventBusSuccess(id: roomdid)
+                                   }.catch {
+                                   error in
+                               self.presenter?.presentGetRoomByIdError(error: error.localizedDescription)
+                               }
+    }
+    
    
+    
+    
+    
+   
+    
+   
+    
+//    func send(idroom: Int, messagesend:String,type:String,file:String) {
+//
+//        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"body":messagesend,"file":file,"firstName":UserDefaultLogged.firstNameUD ,"lastName": UserDefaultLogged.lasttNameUD,"user_img":UserDefaultLogged.IMGUD,"room_id":idroom ]
+//
+//        worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+//                  result in
+//                  self.presenter?.sendMessageEventBus(result: result)
+//               }.catch { error in
+//                  self.presenter?.presentError(error: error.localizedDescription)
+//                  print("got error")
+//               }
+//    }
     
     func send(idroom: Int, messagesend:String,type:String,file:String) {
         
-        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"body":messagesend,"file":file,"firstName":UserDefaultLogged.firstNameUD ,"lastName": UserDefaultLogged.lasttNameUD,"user_img":UserDefaultLogged.IMGUD,"room_id":idroom ]
+        var body : Dictionary<String,Any> = ["type":type,
+//
+//
+                                             "file":file,
+                                             "user_id":UserDefaultLogged.idUD,
+                                             "room_id":idroom ]
+        body["body"] = messagesend
 
-        worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
-                  result in
-                  self.presenter?.sendMessageEventBus(result: result)
-               }.catch { error in
-                  self.presenter?.presentError(error: error.localizedDescription)
-                  print("got error")
-               }
-    }
+           worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+                     result in
+                     self.presenter?.sendMessageEventBus(result: result)
+                  }.catch { error in
+                     self.presenter?.presentError(error: error.localizedDescription)
+                     print("got error")
+                  }
+       }
     
     func sendReaction(idroom: Int, message: Messenger1, type: String, reaction: Reaction) {
         let jsonDataReaction = try! JSONEncoder().encode(reaction)
@@ -76,18 +115,22 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
     }
     
     func registerMessenger(id:Int){
-         let _ = try! eventbus.register(address: "chat.to.client") {
+         let _ = try! eventbus.register(address: "chat.to.client/\(id)") {
             
-             if ($0.body["room_id"].intValue == id){
                              //  let msgs: msgtest!
-                print($0.body)
+              //  print($0.body["body"])
+            
                 if $0.body["type"].description == "TEXT" || $0.body["type"].description == "IMAGE" {
-                    self.worker?.presentMessenger(bodyJson: $0.body).then {
+                    self.worker?.presentMessenger(bodyJson: $0.body["body"] ).then {
                     messageQuestion in
                        self.presenter?.presentMessenger(messenger: messageQuestion)
+                        print("amir")
+
+                        print(messageQuestion)
                     }.catch { error in
                        self.presenter?.presentError(error: error.localizedDescription )
                     }
+                    
                 }
                 else if $0.body["type"].description == "reaction" {
                     self.worker?.presentReaction(bodyJson: $0.body).then {
@@ -99,7 +142,7 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
                        self.presenter?.presentError(error: error.localizedDescription )
                     }
                 }
-             }
+             
          }
       }
     
@@ -126,6 +169,7 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
               }
    }
     
+   
     
     func PostMsg(type: String, file: String, room: [String: Any], user: [String: Any], body: String) {
         worker = MessengerWorker()

@@ -16,12 +16,10 @@ struct Messenger1:Codable {
     var file:String?
     var id: Int?
     var timestamp:Int?
-    var usert:String?
-    var userimg:String?
-    var type:String
+    var type:String?
     var user: User
-    var reactions :[Reaction]
-    var choix: [Choix]
+    var reactions :[Reaction]?
+    var choix: [Choix]?
 
  
     

@@ -29,6 +29,12 @@
 		9127F80324B3F84F0091968A /* AddSondageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */; };
 		913C420A24DB327600DDFC5D /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */; };
 		913EBB16245512DB00A40CA9 /* UserDefaultLogged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */; };
+		9145041724DCE5C000DA85B0 /* DetailTopicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145041124DCE5C000DA85B0 /* DetailTopicPresenter.swift */; };
+		9145041824DCE5C000DA85B0 /* DetailTopicWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145041224DCE5C000DA85B0 /* DetailTopicWorker.swift */; };
+		9145041924DCE5C000DA85B0 /* DetailTopicRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145041324DCE5C000DA85B0 /* DetailTopicRouter.swift */; };
+		9145041A24DCE5C000DA85B0 /* DetailTopicModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145041424DCE5C000DA85B0 /* DetailTopicModels.swift */; };
+		9145041B24DCE5C000DA85B0 /* DetailTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145041524DCE5C000DA85B0 /* DetailTopicViewController.swift */; };
+		9145041C24DCE5C000DA85B0 /* DetailTopicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145041624DCE5C000DA85B0 /* DetailTopicInteractor.swift */; };
 		914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34A24AEC5E400F11C33 /* Choix.swift */; };
 		914DD34E24AECD0000F11C33 /* SondageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */; };
 		914DD35024AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */; };
@@ -109,7 +115,11 @@
 		91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */; };
 		91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */; };
 		91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C1728B245485E000588967 /* UserCollectionViewCell.swift */; };
+		91C7ED2F24E195A900D0D8D2 /* ReplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7ED2E24E195A900D0D8D2 /* ReplyTableViewCell.swift */; };
+		91C7ED3124E1976A00D0D8D2 /* ReplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7ED3024E1976A00D0D8D2 /* ReplyService.swift */; };
+		91C7ED3324E1988F00D0D8D2 /* Reply1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7ED3224E1988F00D0D8D2 /* Reply1.swift */; };
 		91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0E8952466D0AD00B7808A /* NetworkStatus.swift */; };
+		91F13ECD24E418BD00320364 /* ConnectRoomEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F13ECC24E418BD00320364 /* ConnectRoomEventBus.swift */; };
 		91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0342454DD5400AA3974 /* LoginPresenter.swift */; };
 		91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0352454DD5400AA3974 /* LoginWorker.swift */; };
 		91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0362454DD5400AA3974 /* LoginRouter.swift */; };
@@ -144,6 +154,12 @@
 		9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageInteractor.swift; sourceTree = "<group>"; };
 		913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultLogged.swift; sourceTree = "<group>"; };
+		9145041124DCE5C000DA85B0 /* DetailTopicPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopicPresenter.swift; sourceTree = "<group>"; };
+		9145041224DCE5C000DA85B0 /* DetailTopicWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopicWorker.swift; sourceTree = "<group>"; };
+		9145041324DCE5C000DA85B0 /* DetailTopicRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopicRouter.swift; sourceTree = "<group>"; };
+		9145041424DCE5C000DA85B0 /* DetailTopicModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopicModels.swift; sourceTree = "<group>"; };
+		9145041524DCE5C000DA85B0 /* DetailTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopicViewController.swift; sourceTree = "<group>"; };
+		9145041624DCE5C000DA85B0 /* DetailTopicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopicInteractor.swift; sourceTree = "<group>"; };
 		914DD34A24AEC5E400F11C33 /* Choix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choix.swift; sourceTree = "<group>"; };
 		914DD34D24AECD0000F11C33 /* SondageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SondageTableViewCell.swift; sourceTree = "<group>"; };
 		914DD34F24AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoixSondageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -226,7 +242,11 @@
 		91C0B8B4245E6A4D0059F675 /* EventBusApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClient.swift; sourceTree = "<group>"; };
 		91C0B8B9245E7C170059F675 /* EventBusApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBusApiClientTest.swift; sourceTree = "<group>"; };
 		91C1728B245485E000588967 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		91C7ED2E24E195A900D0D8D2 /* ReplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyTableViewCell.swift; sourceTree = "<group>"; };
+		91C7ED3024E1976A00D0D8D2 /* ReplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyService.swift; sourceTree = "<group>"; };
+		91C7ED3224E1988F00D0D8D2 /* Reply1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply1.swift; sourceTree = "<group>"; };
 		91F0E8952466D0AD00B7808A /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		91F13ECC24E418BD00320364 /* ConnectRoomEventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectRoomEventBus.swift; sourceTree = "<group>"; };
 		91F7B0342454DD5400AA3974 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		91F7B0352454DD5400AA3974 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
 		91F7B0362454DD5400AA3974 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
@@ -275,15 +295,8 @@
 		9103F80724D9DADA00587112 /* Topic */ = {
 			isa = PBXGroup;
 			children = (
-				9103F80824D9DB0B00587112 /* TopicPresenter.swift */,
-				9103F80924D9DB0B00587112 /* TopicWorker.swift */,
-				9103F80A24D9DB0B00587112 /* TopicRouter.swift */,
-				9103F80B24D9DB0B00587112 /* TopicModels.swift */,
-				9103F80C24D9DB0B00587112 /* TopicViewController.swift */,
-				9103F80D24D9DB0B00587112 /* TopicInteractor.swift */,
-				9103F81424D9DDF000587112 /* TopicTableViewCell.swift */,
-				914E1E8124DA5BEC001BC09F /* TopicService.swift */,
-				913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */,
+				9145040E24DCE3E100DA85B0 /* GetAllTopics */,
+				9145041024DCE58D00DA85B0 /* DetailTopic */,
 			);
 			path = Topic;
 			sourceTree = "<group>";
@@ -307,6 +320,37 @@
 				913EBB15245512DB00A40CA9 /* UserDefaultLogged.swift */,
 			);
 			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		9145040E24DCE3E100DA85B0 /* GetAllTopics */ = {
+			isa = PBXGroup;
+			children = (
+				9103F80824D9DB0B00587112 /* TopicPresenter.swift */,
+				9103F80924D9DB0B00587112 /* TopicWorker.swift */,
+				9103F80A24D9DB0B00587112 /* TopicRouter.swift */,
+				9103F80B24D9DB0B00587112 /* TopicModels.swift */,
+				9103F80C24D9DB0B00587112 /* TopicViewController.swift */,
+				9103F80D24D9DB0B00587112 /* TopicInteractor.swift */,
+				9103F81424D9DDF000587112 /* TopicTableViewCell.swift */,
+				914E1E8124DA5BEC001BC09F /* TopicService.swift */,
+				913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */,
+			);
+			path = GetAllTopics;
+			sourceTree = "<group>";
+		};
+		9145041024DCE58D00DA85B0 /* DetailTopic */ = {
+			isa = PBXGroup;
+			children = (
+				9145041124DCE5C000DA85B0 /* DetailTopicPresenter.swift */,
+				9145041224DCE5C000DA85B0 /* DetailTopicWorker.swift */,
+				9145041324DCE5C000DA85B0 /* DetailTopicRouter.swift */,
+				9145041424DCE5C000DA85B0 /* DetailTopicModels.swift */,
+				9145041524DCE5C000DA85B0 /* DetailTopicViewController.swift */,
+				9145041624DCE5C000DA85B0 /* DetailTopicInteractor.swift */,
+				91C7ED2E24E195A900D0D8D2 /* ReplyTableViewCell.swift */,
+				91C7ED3024E1976A00D0D8D2 /* ReplyService.swift */,
+			);
+			path = DetailTopic;
 			sourceTree = "<group>";
 		};
 		914DD34C24AECCE500F11C33 /* Sondage */ = {
@@ -446,6 +490,7 @@
 				91592C72245B62F000E88133 /* MessengerPresenter.swift */,
 				91592C76245B62F000E88133 /* MessengerViewController.swift */,
 				918574E4245D2A4D00F54DAE /* corbeille.swift */,
+				91F13ECC24E418BD00320364 /* ConnectRoomEventBus.swift */,
 			);
 			path = Messenger;
 			sourceTree = "<group>";
@@ -461,6 +506,7 @@
 				914DD34A24AEC5E400F11C33 /* Choix.swift */,
 				914E1E7B24DA35FF001BC09F /* Topic1.swift */,
 				914E1E7D24DA36A8001BC09F /* Tag.swift */,
+				91C7ED3224E1988F00D0D8D2 /* Reply1.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -795,6 +841,7 @@
 				91A3759924538B4D00854ADE /* RoomModels.swift in Sources */,
 				91A3759B24538B4D00854ADE /* RoomInteractor.swift in Sources */,
 				919A846D245A328B0094CE42 /* AddRoomRouter.swift in Sources */,
+				91C7ED3124E1976A00D0D8D2 /* ReplyService.swift in Sources */,
 				91A3759E24538D5600854ADE /* RoomAPIClient.swift in Sources */,
 				91A375A424538E2400854ADE /* APIClient.swift in Sources */,
 				9127F80324B3F84F0091968A /* AddSondageInteractor.swift in Sources */,
@@ -817,6 +864,7 @@
 				9103F81524D9DDF000587112 /* TopicTableViewCell.swift in Sources */,
 				919A846E245A328B0094CE42 /* AddRoomModels.swift in Sources */,
 				9103F80124D9BA3300587112 /* HomePresenter.swift in Sources */,
+				9145041824DCE5C000DA85B0 /* DetailTopicWorker.swift in Sources */,
 				91A6A61D245B9AB9004F0C3D /* Message.swift in Sources */,
 				9103F80624D9BA3300587112 /* HomeInteractor.swift in Sources */,
 				9103F80424D9BA3300587112 /* HomeModels.swift in Sources */,
@@ -836,21 +884,27 @@
 				9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */,
 				91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */,
 				91F7B03E2454DD5400AA3974 /* LoginViewController.swift in Sources */,
+				9145041A24DCE5C000DA85B0 /* DetailTopicModels.swift in Sources */,
 				91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */,
 				919A8470245A328B0094CE42 /* AddRoomInteractor.swift in Sources */,
 				91592C7A245B62F000E88133 /* MessengerRouter.swift in Sources */,
+				91C7ED3324E1988F00D0D8D2 /* Reply1.swift in Sources */,
 				9151A63D248F31C30068B55A /* ReactionsViewController.swift in Sources */,
 				91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */,
+				91C7ED2F24E195A900D0D8D2 /* ReplyTableViewCell.swift in Sources */,
 				9127F80224B3F84F0091968A /* AddSondageViewController.swift in Sources */,
 				91A375A224538E1300854ADE /* APIConfiguration.swift in Sources */,
 				91A3759624538B4D00854ADE /* RoomPresenter.swift in Sources */,
 				9166742524B5D19A00A5E687 /* VoteSondageViewController.swift in Sources */,
+				91F13ECD24E418BD00320364 /* ConnectRoomEventBus.swift in Sources */,
 				9103F81224D9DB0B00587112 /* TopicViewController.swift in Sources */,
+				9145041924DCE5C000DA85B0 /* DetailTopicRouter.swift in Sources */,
 				91A3759A24538B4D00854ADE /* RoomViewController.swift in Sources */,
 				91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */,
 				91A375A82453B6E600854ADE /* RoomsTableViewCell.swift in Sources */,
 				91A3961E245386A5005F43F4 /* AppDelegate.swift in Sources */,
 				914E1E7C24DA35FF001BC09F /* Topic1.swift in Sources */,
+				9145041C24DCE5C000DA85B0 /* DetailTopicInteractor.swift in Sources */,
 				91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */,
 				91A6A623245B9B09004F0C3D /* Word.swift in Sources */,
 				91A6A61B245B9AAB004F0C3D /* Mutex.swift in Sources */,
@@ -862,6 +916,7 @@
 				9151A642248F32140068B55A /* Reaction.swift in Sources */,
 				91A6A61F245B9AC9004F0C3D /* Util.swift in Sources */,
 				91A6A621245B9AD6004F0C3D /* Response.swift in Sources */,
+				9145041724DCE5C000DA85B0 /* DetailTopicPresenter.swift in Sources */,
 				91A39620245386A5005F43F4 /* SceneDelegate.swift in Sources */,
 				9166742324B5D19A00A5E687 /* VoteSondageRouter.swift in Sources */,
 				91592C7C245B62F000E88133 /* MessengerViewController.swift in Sources */,
@@ -878,6 +933,7 @@
 				914DD34B24AEC5E400F11C33 /* Choix.swift in Sources */,
 				9127F80124B3F84F0091968A /* AddSondageModels.swift in Sources */,
 				9103F80F24D9DB0B00587112 /* TopicWorker.swift in Sources */,
+				9145041B24DCE5C000DA85B0 /* DetailTopicViewController.swift in Sources */,
 				913C420A24DB327600DDFC5D /* TagCollectionViewCell.swift in Sources */,
 				9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
