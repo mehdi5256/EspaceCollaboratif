@@ -31,14 +31,14 @@ protocol MessengerPresentationLogic
     func presentError(error: String)
     func presentMessenger(messenger:Messenger1)
     func sendMessageEventBus(result:String)
-    func presentReaction(reaction: Reaction)
+    func presentReaction(reaction: Reaction,messageId: Int)
 }
 
 class MessengerPresenter: MessengerPresentationLogic
 {
    
-    func presentReaction(reaction: Reaction) {
-        self.viewController!.displayReaction(reaction: reaction)
+    func presentReaction(reaction: Reaction,messageId: Int) {
+        self.viewController!.displayReaction(reaction: reaction, messageId:messageId)
     }
    
     

@@ -14,6 +14,8 @@ import UIKit
 import TagListView
 import Kingfisher
 import Alamofire
+import GrowingTextView
+
 
 protocol DetailTopicDisplayLogic: class
 {
@@ -70,7 +72,7 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
   // MARK: View lifecycle
   
     
-    @IBOutlet weak var textreply: UITextView!
+    @IBOutlet weak var textreply: GrowingTextView!
     
     @IBOutlet weak var BtnSendReply: UIButton!
     
@@ -87,6 +89,7 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
     @IBOutlet weak var dscrptionntopic: UILabel!
     @IBOutlet weak var titletopic: UILabel!
     
+    @IBOutlet weak var textviewbotomconstraint: NSLayoutConstraint!
     
 // variable  prepare
     
@@ -130,9 +133,45 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
     fetchallreplies()
     design()
     
+    textreply.contentInsetAdjustmentBehavior = .always
+    automaticallyAdjustsScrollViewInsets = false
+
+    
+    // *** Customize GrowingTextView ***
+
+    // *** Listen to keyboard show / hide ***
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+
+    // *** Hide keyboard when tapping outside ***
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
+    view.addGestureRecognizer(tapGesture)
+
+    
 
     
   }
+    
+    deinit {
+           NotificationCenter.default.removeObserver(self)
+       }
+    
+     @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+            if let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                var keyboardHeight = UIScreen.main.bounds.height - endFrame.origin.y
+                if #available(iOS 11, *) {
+                    if keyboardHeight > 0 {
+                        keyboardHeight = keyboardHeight - view.safeAreaInsets.bottom
+                    }
+                }
+                textviewbotomconstraint.constant = keyboardHeight + 8
+                view.layoutIfNeeded()
+            }
+        }
+
+        @objc func tapGestureHandler() {
+            view.endEditing(true)
+        }
+    
     
     func design(){
         textreply.layer.cornerRadius = 10
@@ -154,31 +193,52 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
     
     func designbuttonaftersend(){
            textreply.text = ""
-           BtnSendReply.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+          // BtnSendReply.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
         //   BtnSendReply.isEnabled = false
            
        }
     @IBAction func SendReply(_ sender: Any) {
-        let myUrl = Keys.MobileIntegrationServer.baseURL + "/reply"
         
-        let parameters: [String: Any] = [
-            "reply":textreply.text,
-            "reply":
-                [
-                    "id":idtopic,
-                ],
-            "user":
-                [
-                    "id": UserDefaultLogged.idUD,
+        if(textreply.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
+                   BtnSendReply.isEnabled = false
+               
+            let myUrl = Keys.MobileIntegrationServer.baseURL + "/reply"
+            
+            let parameters: [String: Any] = [
+                "reply":textreply.text,
+                "topic":
+                    [
+                        "id":idtopic,
+                    ],
+                "user":
+                    [
+                        "id": UserDefaultLogged.idUD,
+                ]
             ]
-        ]
+            
+            AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                .responseJSON { response in
+                    print(response.value)
+                    self.designbuttonaftersend()
+                    
+                    let response = response as! NSDictionary
+
+                    //example if there is an id
+                    
+                    let reply12 = Reply1(id: response.object(forKey: "id")! as? Int, reply:response.object(forKey: "reply") as? String , timestamp: response.object(forKey: "timestamp")! as! Int, user: User(id: "1", firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: "mehdi"))
+                    self.replyarray.insert(reply12, at: 0)
+                 self.tv.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+            }
+            
+            
+               } else {
+                   print("tesstt")
+               }
         
-        AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-            .responseJSON { response in
-                print(response.result)
-        }
         
-        designbuttonaftersend()
+        
+        
+        
     }
     
   // MARK: Do something
@@ -248,6 +308,17 @@ extension DetailTopicViewController:UITableViewDataSource,UITableViewDelegate{
 }
 
 
-
+extension DetailTopicViewController: GrowingTextViewDelegate {
+    
+    // *** Call layoutIfNeeded on superview for animation when changing height ***
+    
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: [.curveLinear], animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+   
+}
     
 

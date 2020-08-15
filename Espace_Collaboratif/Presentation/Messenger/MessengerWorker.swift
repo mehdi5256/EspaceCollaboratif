@@ -40,13 +40,15 @@ class MessengerWorker{
         return EventBusApiClientTest.presentMessenger(bodyJson: bodyJson)
      }
     
-    func presentReaction(bodyJson: JSON) -> Promise<Reaction>{
-       return EventBusApiClientTest.presentReaction(bodyJson: bodyJson)
+    func presentReaction(bodyJson: JSON,messageId: Int) -> Promise<Reaction>{
+       return EventBusApiClientTest.presentReaction(bodyJson: bodyJson,messageId: messageId)
     }
     
     func getRoomEventBus(id:Int) -> Promise<Room1>{
        return RoomAPIClient.getRoomEventBus(id: id)
        }
+    
+    
 
 }
 

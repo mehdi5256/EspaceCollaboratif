@@ -21,7 +21,7 @@ protocol MessengerBusinessLogic
     func connect()
     func registerMessenger(id:Int)
     func send(idroom: Int, messagesend:String,type:String,file:String)
-    func sendReaction(idroom: Int, message: Messenger1, type: String, reaction: Reaction)
+    func sendReaction(idroom: Int, type: String, reaction: Reaction)
     
     func GetRoomEventBusid(id:Int)
 }
@@ -33,6 +33,8 @@ protocol MessengerDataStore
 
 class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
 {
+   
+    
     func GetRoomEventBusid(id: Int) {
          worker = MessengerWorker()
                                worker?.getRoomEventBus(id: id).then {
@@ -69,12 +71,10 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
     func send(idroom: Int, messagesend:String,type:String,file:String) {
         
         var body : Dictionary<String,Any> = ["type":type,
-//
-//
                                              "file":file,
                                              "user_id":UserDefaultLogged.idUD,
                                              "room_id":idroom ]
-        body["body"] = messagesend
+                                            body["body"] = messagesend
 
            worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
                      result in
@@ -85,19 +85,26 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
                   }
        }
     
-    func sendReaction(idroom: Int, message: Messenger1, type: String, reaction: Reaction) {
-        let jsonDataReaction = try! JSONEncoder().encode(reaction)
-        let jsonStringReaction = String(data: jsonDataReaction, encoding: .utf8)!
-        let jsonDataMessage = try! JSONEncoder().encode(message)
-        let jsonStringMessage = String(data: jsonDataMessage, encoding: .utf8)!
-        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"room_id":idroom,"message":jsonStringMessage,"reaction":jsonStringReaction]
+    func sendReaction(idroom: Int, type: String, reaction: Reaction) {
+
+        
+        var body : Dictionary<String,Any> = ["type":type,
+                                          "user_id":UserDefaultLogged.idUD,
+                                          "room_id":idroom,
+                                          
+                                          "message_id":reaction.message?.id
+            
+            ]
+        body["body"] = reaction.type
+
         worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
-           result in
-           self.presenter?.sendMessageEventBus(result: result)
-        }.catch { error in
-           self.presenter?.presentError(error: error.localizedDescription)
-           print("got error")
-        }
+                  result in
+                  self.presenter?.sendMessageEventBus(result: result)
+               }.catch { error in
+                  self.presenter?.presentError(error: error.localizedDescription)
+                  print("got error")
+               }
+
     }
     
     func connect() {
@@ -132,14 +139,19 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
                     }
                     
                 }
-                else if $0.body["type"].description == "reaction" {
-                    self.worker?.presentReaction(bodyJson: $0.body).then {
+                else if $0.body["type"].description == "REACTION" {
+                    
+                    let messageId = $0.body["message_id"].description
+                    
+                    self.worker?.presentReaction(bodyJson: $0.body["body"], messageId : Int(messageId)!).then {
                     reaction in
-                        print("reaction")
-                        print(reaction)
-                        self.presenter?.presentReaction(reaction: reaction)
+            
+                        self.presenter?.presentReaction(reaction: reaction,messageId:Int(messageId)!)
+                       
+
                     }.catch { error in
                        self.presenter?.presentError(error: error.localizedDescription )
+
                     }
                 }
              

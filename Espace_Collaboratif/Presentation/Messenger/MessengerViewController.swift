@@ -38,7 +38,7 @@ protocol MessengerDisplayLogic: class
     func displayPostImgSucess(img :[Messenger1])
     func displayPostImgError(error: String)
     
-    func displayReaction(reaction: Reaction)
+    func displayReaction(reaction: Reaction,messageId:Int)
     
     func displayIdRoomEventBus(id: Room1)
 
@@ -1170,17 +1170,40 @@ extension UIView {
 
 extension MessengerViewController: ReactionDelegate {
    
-    func displayReaction(reaction: Reaction) {
-        let index: Int? = msgarray.firstIndex(where:  { ( $0.body == reaction.message?.body && $0.timestamp == reaction.message?.timestamp )})
+    func displayReaction(reaction: Reaction,messageId:Int) {
+       
+        let index: Int? = msgarray.firstIndex {
+            $0.id == messageId
+
+           
+        }
         print("index")
-        print(index)
+
+        print(index!)
+
+        
+        if (msgarray[index!].reactions?.contains(where: { $0.user.id == reaction.user.id }))! {
+             // found
+            print("found")
+            
+            let userIndex: Int? = msgarray[index!].reactions?.firstIndex {
+                $0.user.id == reaction.user.id
+               
+            }
+            msgarray[index!].reactions?.remove(at:userIndex ?? 0 )
+
+        }
+            
+       
+        
+       print("index")
+        msgarray[index!].reactions?.append(reaction)
         if (msgarray[index!].reactions == nil )
         {
             msgarray[index!].reactions = []
 
-            
+
         }
-        msgarray[index!].reactions!.append(reaction)
         let indexPath = IndexPath(row: index! , section: 0)
         tv.reloadRows(at: [indexPath], with: .none)
 
@@ -1193,37 +1216,7 @@ extension MessengerViewController: ReactionDelegate {
         
         let reaction = Reaction(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
         
-        interactor?.sendReaction(idroom: idroom, message: msgarray[tag], type: "reaction", reaction: reaction)
-        
-        let myUrl = Keys.MobileIntegrationServer.baseURL + "/reaction"
-        
-
-               //  let type = selectReaction.selectedReaction!.title;
-               //let description = Subject.text;
-
-
-
-               let parameters: [String: Any] = [
-                   "type":TextReceiverCell.typereac!,
-                   "user":
-                       [
-                           "id": UserDefaultLogged.idUD,
-
-                   ],
-                   "message":
-                       [
-                           "id":msgarray[tag].id!,
-
-                   ],
-
-               ]
-
-               AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-                   .responseJSON { response in
-                       print(response.result)
-
-               }
-
+        interactor?.sendReaction(idroom: idroom, type: "REACTION", reaction: reaction)
         
        
     }

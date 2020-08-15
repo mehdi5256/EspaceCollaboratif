@@ -18,6 +18,8 @@ target 'Espace_Collaboratif' do
    pod 'Reactions', '~> 3.0.0'
    pod 'GTProgressBar'
    pod 'TagListView', '~> 1.0'
+   pod 'GrowingTextView', '0.7.2'
+
 
 
 

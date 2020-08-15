@@ -1605,12 +1605,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vaD-hl-zXS" userLabel="ViewBarSend">
                                 <rect key="frame" x="0.0" y="930" width="375" height="50"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KZC-IX-bfX">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KZC-IX-bfX" customClass="GrowingTextView" customModule="GrowingTextView">
                                         <rect key="frame" x="16" y="9" width="313" height="33"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                <integer key="value" value="200"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxHeight">
+                                                <real key="value" value="70"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Say something..."/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minHeight">
+                                                <real key="value" value="33"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="NeC-zw-bGk" id="uNy-Md-uUW"/>
+                                        </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5K-BH-sjM">
                                         <rect key="frame" x="337" y="12" width="30" height="30"/>
@@ -1634,10 +1649,9 @@
                                 <constraints>
                                     <constraint firstItem="KZC-IX-bfX" firstAttribute="leading" secondItem="vaD-hl-zXS" secondAttribute="leading" constant="16" id="2L1-4d-W9X"/>
                                     <constraint firstItem="p5K-BH-sjM" firstAttribute="leading" secondItem="KZC-IX-bfX" secondAttribute="trailing" constant="8" id="EiJ-vv-LTo"/>
+                                    <constraint firstItem="p5K-BH-sjM" firstAttribute="top" secondItem="vaD-hl-zXS" secondAttribute="top" constant="12" id="Q4U-QR-0Gv"/>
                                     <constraint firstItem="KZC-IX-bfX" firstAttribute="top" secondItem="vaD-hl-zXS" secondAttribute="top" constant="9" id="TeD-nZ-tnD"/>
-                                    <constraint firstItem="p5K-BH-sjM" firstAttribute="leading" secondItem="KZC-IX-bfX" secondAttribute="trailing" constant="8" id="k19-Sn-Z3j"/>
                                     <constraint firstAttribute="trailing" secondItem="p5K-BH-sjM" secondAttribute="trailing" constant="8" id="kL0-ZY-ZFE"/>
-                                    <constraint firstAttribute="bottom" secondItem="p5K-BH-sjM" secondAttribute="bottom" constant="8" id="sBh-AI-6n5"/>
                                     <constraint firstAttribute="bottom" secondItem="KZC-IX-bfX" secondAttribute="bottom" constant="8" id="weg-Eu-NzV"/>
                                 </constraints>
                             </view>
@@ -1651,7 +1665,6 @@
                             <constraint firstAttribute="bottom" secondItem="vaD-hl-zXS" secondAttribute="bottom" id="RLC-BR-MXq"/>
                             <constraint firstAttribute="trailing" secondItem="E13-DH-ePe" secondAttribute="trailing" id="U7p-Rz-OIr"/>
                             <constraint firstItem="E13-DH-ePe" firstAttribute="leading" secondItem="gQL-7B-Se6" secondAttribute="leading" id="bCT-oP-xli"/>
-                            <constraint firstAttribute="bottom" secondItem="E13-DH-ePe" secondAttribute="bottom" constant="50" id="xff-Iz-uEf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O0I-pU-DsG"/>
                     </view>
@@ -1665,6 +1678,7 @@
                         <outlet property="scrollView" destination="E13-DH-ePe" id="auC-NI-xXw"/>
                         <outlet property="tableHeight" destination="z4N-iU-lCB" id="TVh-H9-pMO"/>
                         <outlet property="textreply" destination="KZC-IX-bfX" id="cG2-sm-Uxy"/>
+                        <outlet property="textviewbotomconstraint" destination="weg-Eu-NzV" id="dDc-ti-KD2"/>
                         <outlet property="titletopic" destination="3i3-iL-EbW" id="YFQ-gn-qnf"/>
                         <outlet property="tv" destination="yGs-92-X2F" id="oMI-rm-iae"/>
                         <outlet property="useriimg" destination="5Ot-pk-0hZ" id="rzR-A4-K9Z"/>
@@ -1687,14 +1701,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topiccell" id="mA6-V4-UZX" customClass="TopicTableViewCell" customModule="Espace_Collaboratif" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="197.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="177.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mA6-V4-UZX" id="8Sx-N6-bYB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="197.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="177.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BB1-eF-ybO">
-                                                    <rect key="frame" x="15" y="8" width="345" height="181.5"/>
+                                                    <rect key="frame" x="15" y="8" width="345" height="161.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3dh-Eb-XZD">
                                                             <rect key="frame" x="8" y="8" width="40" height="40"/>
@@ -1721,17 +1735,17 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-comments-20" translatesAutoresizingMaskIntoConstraints="NO" id="Ey7-ZJ-nD8">
-                                                            <rect key="frame" x="24" y="125.5" width="40" height="40"/>
+                                                            <rect key="frame" x="24" y="125.5" width="20" height="20"/>
                                                             <color key="tintColor" red="0.50588235290000005" green="0.28627450980000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 reponses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hoX-QC-Yic">
-                                                            <rect key="frame" x="72" y="125.5" width="76.5" height="40"/>
+                                                            <rect key="frame" x="52" y="125.5" width="76.5" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.40483197773972601" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Views" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WxZ-HC-kbw">
-                                                            <rect key="frame" x="267" y="123" width="54" height="45"/>
+                                                            <rect key="frame" x="267" y="123" width="54" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.40483197770000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1793,7 +1807,7 @@
                                                             </constraints>
                                                         </view>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-invisible-20" translatesAutoresizingMaskIntoConstraints="NO" id="vmT-uQ-o5a">
-                                                            <rect key="frame" x="219" y="121" width="40" height="49.5"/>
+                                                            <rect key="frame" x="239" y="121" width="20" height="29.5"/>
                                                             <color key="tintColor" red="0.50588235290000005" green="0.28627450980000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </imageView>
                                                     </subviews>
