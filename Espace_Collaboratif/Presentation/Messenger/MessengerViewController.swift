@@ -41,6 +41,8 @@ protocol MessengerDisplayLogic: class
     func displayReaction(reaction: Reaction,messageId:Int)
     
     func displayIdRoomEventBus(id: Room1)
+    
+    func DisplayVoteEventBus(idMessage: Int, idChoix: Int, user: User)
 
     
     
@@ -48,6 +50,48 @@ protocol MessengerDisplayLogic: class
 
 class MessengerViewController: UIViewController, MessengerDisplayLogic
 {
+    func DisplayVoteEventBus(idMessage: Int, idChoix: Int, user: User) {
+        
+        
+        let index: Int? = msgarray.firstIndex {
+             $0.id == idMessage
+
+            
+         }
+        
+        let indexchoix: Int? = msgarray[index!].choix?.firstIndex {
+                    $0.id == idChoix
+
+                   
+                }
+       
+
+         print(index!)
+        
+        var indexxuser = -1
+        var indexChoixU = -1
+        msgarray[index!].choix?.enumerated().forEach{ c in
+            let indexUser: Int? = c.element.users.firstIndex {
+                $0.id == user.id
+            }
+            if(indexUser != nil){
+                indexxuser = indexUser!
+                indexChoixU = c.offset
+            }
+        }
+        if indexxuser != -1 {
+            msgarray[index!].choix![indexChoixU].users.remove(at: indexxuser)
+        }
+        
+        msgarray[index!].choix![indexchoix!].users.append(user)
+                print("index")
+       
+         let indexPath = IndexPath(row: index! , section: 0)
+        DispatchQueue.main.async {
+            self.tv.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+    
     func displayIdRoomEventBus(id: Room1) {
         self.idroomEventBus = id.id
         print(idroomEventBus)

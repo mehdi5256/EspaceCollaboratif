@@ -16,10 +16,21 @@ import Alamofire
 protocol AddSondageDisplayLogic: class
 {
   func displaySomething(viewModel: AddSondage.Something.ViewModel)
+    func displaySendSondageEventBus(result:String)
+    func displayConnexionSuccess ( result:String)
+
 }
 
 class AddSondageViewController: UIViewController, AddSondageDisplayLogic
 {
+    func displaySendSondageEventBus(result: String) {
+        print(result)
+    }
+    func displayConnexionSuccess(result: String) {
+        print(result)
+        interactor?.connect()
+    }
+    
   var interactor: AddSondageBusinessLogic?
   var router: (NSObjectProtocol & AddSondageRoutingLogic & AddSondageDataPassing)?
 
@@ -39,6 +50,7 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
   
   // MARK: Setup
     var choix = [String]()
+    
 
   
     @IBOutlet weak var tv: UITableView!
@@ -49,6 +61,7 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
   {
     let viewController = self
     let interactor = AddSondageInteractor()
+    
     let presenter = AddSondagePresenter()
     let router = AddSondageRouter()
     viewController.interactor = interactor
@@ -58,46 +71,37 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
     router.viewController = viewController
     router.dataStore = interactor
   }
+    
+
   
     @IBAction func BtnCreatePoll(_ sender: Any) {
-        let myUrl = Keys.MobileIntegrationServer.baseURL + "/sondage"
+
+
+        let choixSondageArray = self.choix.map({ ["body": $0] })
+                          print (choixSondageArray)
+     var choixa :[Choi2] = []
         
-        //let myUrl = "http://ff3f402e0abf.ngrok.io/sondage";
+        
+        for x in choixSondageArray{
+            
+            let choix = Choi2( body: x["body"])
+            choixa.append(choix)
+        }
+        print("amir")
 
-                             //  let type = selectReaction.selectedReaction!.title;
-                             //let description = Subject.text;
+        print(choixa)
+        
+    
+        
+        let Sondage = Messenger2(body: QuestionOutlet.text, type: "SONDAGE", user: User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD), choix: choixa,room: Room1(id: UserDefaultLogged.idRoom, users: []))
+        
+        
 
-               let phoneNumbersDictionary = self.choix.map({ ["body": $0] })
-                          print (phoneNumbersDictionary)
+        
 
-             
-                             let parameters: [String: Any] = [
-                                "body":QuestionOutlet.text,
-                                 "type":"SONDAGE",
-
-                                 "user":
-                                     [
-                                        "id": UserDefaultLogged.idUD,
-
-                                 ],
-                                 "room":
-                                     [
-                                        "id":UserDefaultLogged.idRoom,
-                                       
-                               ],
-                                 
-                                 "choix":phoneNumbersDictionary
-                               
-                                 
-
-                             ]
-
-                             AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-                                 .responseJSON { response in
-                                     print(response.result)
-
-               
-           }
+          interactor?.connect()
+        
+    interactor?.sendSondage(idroom: UserDefaultLogged.idRoom ,messagesend:Sondage, type: "SONDAGE")
         
         
     }

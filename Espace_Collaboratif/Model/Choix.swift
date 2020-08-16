@@ -14,3 +14,7 @@ public struct Choix: Codable{
     var users: [User]
     }
 
+public struct Choi2: Codable{
+var body: String?
+}
+

@@ -11,6 +11,7 @@ public struct Reply1: Codable{
     var id: Int?
     var reply: String?
     var timestamp: Int?
+    var topic : String?
     var user: User
 
 }

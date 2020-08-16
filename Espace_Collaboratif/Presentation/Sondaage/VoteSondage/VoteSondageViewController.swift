@@ -16,10 +16,20 @@ import Alamofire
 protocol VoteSondageDisplayLogic: class
 {
   func displaySomething(viewModel: VoteSondage.Something.ViewModel)
+   func displaySendVoteSondageEventBus(result: String)
+   func displayConnexionSuccess(result:String)
 }
 
 class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
 {
+    func displayConnexionSuccess(result: String) {
+        print(result)
+    }
+    
+    func displaySendVoteSondageEventBus(result: String) {
+        print(result)
+    }
+    
   var interactor: VoteSondageBusinessLogic?
   var router: (NSObjectProtocol & VoteSondageRoutingLogic & VoteSondageDataPassing)?
 
@@ -87,6 +97,8 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    interactor?.connect()
+
     doSomething()
      tv.register(UINib(nibName: "VoteTableViewCell", bundle: nil), forCellReuseIdentifier: "VoteTableViewCell")
    
@@ -109,23 +121,10 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
   }
     @IBAction func SendVote(_ sender: Any) {
         
-        let myUrl = Keys.MobileIntegrationServer.baseURL+"/vote/\(idvote!)"
-        print(myUrl)
-              
-                     let parameters: [String: Any] = [
-                             
-                    "id": UserDefaultLogged.idUD,
-        ]
+        
+        interactor?.sendVoteSondage(idroom: UserDefaultLogged.idRoom, type: "VOTE", choixId:idvote!, messageId: 1234)
+        
 
-                     AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-                         .responseJSON { response in
-                             print(response.result)
-                       //     self.instanceOfVCA.tv.reloadData()
-
-                            self.dismiss(animated: true, completion: nil)
-
-
-                     }
     }
     
 }
@@ -144,20 +143,7 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
         return cellchoix
         
     }
-//
-//     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(sondageArray[indexPath.row].id)
-//
-//        if selectedIndexPath == indexPath {
-//            // it was already selected
-//            selectedIndexPath = nil
-//            tableView.deselectRow(at: indexPath, animated: false)
-//        } else {
-//            // wasn't yet selected, so let's remember it
-//            selectedIndexPath = indexPath
-//        }
-//        print (selectedIndexPath)
-//    }
+
     
     
    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

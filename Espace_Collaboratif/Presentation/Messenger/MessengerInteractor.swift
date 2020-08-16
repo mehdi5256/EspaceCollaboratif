@@ -33,8 +33,110 @@ protocol MessengerDataStore
 
 class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
 {
-   
+    func connect() {
+            eventbus = EventBus(host: Keys.MobileIntegrationServer.baseURLEventBus , port: Keys.MobileIntegrationServer.basePortEventBus)
+           
+           worker = MessengerWorker()
+        
+           worker?.connect(eventBus: eventbus).then {
+              result in
+              self.presenter?.presentConnexionSuccess(result: result)
+           }.catch { error in
+              self.presenter?.presentError(error: error.localizedDescription)
+              print("got error")
+           }
+       }
+    func send(idroom: Int, messagesend:String,type:String,file:String) {
+           
+           var body : Dictionary<String,Any> = ["type":type,
+                                                "file":file,
+                                                "user_id":UserDefaultLogged.idUD,
+                                                "room_id":idroom ]
+                                               body["body"] = messagesend
+
+              worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+                        result in
+                        self.presenter?.sendMessageEventBus(result: result)
+                     }.catch { error in
+                        self.presenter?.presentError(error: error.localizedDescription)
+                        print("got error")
+                     }
+          }
+       
+       func sendReaction(idroom: Int, type: String, reaction: Reaction) {
+
+           
+           var body : Dictionary<String,Any> = ["type":type,
+                                             "user_id":UserDefaultLogged.idUD,
+                                             "room_id":idroom,
+                                             
+                                             "message_id":reaction.message?.id
+               
+               ]
+           body["body"] = reaction.type
+
+           worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+                     result in
+                     self.presenter?.sendMessageEventBus(result: result)
+                  }.catch { error in
+                     self.presenter?.presentError(error: error.localizedDescription)
+                     print("got error")
+                  }
+
+       }
     
+    
+    func registerMessenger(id:Int){
+       let _ = try! eventbus.register(address: "chat.to.client/\(id)") {
+          
+          
+              if $0.body["type"].description == "TEXT" || $0.body["type"].description == "IMAGE" || $0.body["type"].description == "SONDAGE"  {
+                  self.worker?.presentMessenger(bodyJson: $0.body["body"] ).then {
+                  messageQuestion in
+                     self.presenter?.presentMessenger(messenger: messageQuestion)
+
+                      print(messageQuestion)
+                  }.catch { error in
+                     self.presenter?.presentError(error: error.localizedDescription )
+                  }
+                  
+              }
+                 else if $0.body["type"].description == "VOTE" {
+                
+                let messageId = $0.body["message_id"].description
+                let ChoixId = $0.body["choix_id"].description
+                
+                let jsonData = $0.body["user"].description.data(using: .utf8)!
+                           do {
+                               let UserObj = try JSONDecoder().decode(User.self, from: jsonData)
+                            self.presenter?.presentVoteEventBus(idMessage: messageId,idChoix: ChoixId, user:UserObj)
+                            
+                           } catch let error as NSError {
+                            
+                           }
+
+                
+              }
+              else if $0.body["type"].description == "REACTION" {
+                  
+                  let messageId = $0.body["message_id"].description
+                  
+                  self.worker?.presentReaction(bodyJson: $0.body["body"], messageId : Int(messageId)!).then {
+                  reaction in
+          
+                      self.presenter?.presentReaction(reaction: reaction,messageId:Int(messageId)!)
+                     
+
+                  }.catch { error in
+                     self.presenter?.presentError(error: error.localizedDescription )
+
+                  }
+              }
+           
+       }
+    }
+       
+      
     func GetRoomEventBusid(id: Int) {
          worker = MessengerWorker()
                                worker?.getRoomEventBus(id: id).then {
@@ -46,117 +148,9 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
                                self.presenter?.presentGetRoomByIdError(error: error.localizedDescription)
                                }
     }
-    
    
     
     
-    
-   
-    
-   
-    
-//    func send(idroom: Int, messagesend:String,type:String,file:String) {
-//
-//        let body : Dictionary<String,Any> = ["type":type,"address":"chat.to.server","headers":[],"body":messagesend,"file":file,"firstName":UserDefaultLogged.firstNameUD ,"lastName": UserDefaultLogged.lasttNameUD,"user_img":UserDefaultLogged.IMGUD,"room_id":idroom ]
-//
-//        worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
-//                  result in
-//                  self.presenter?.sendMessageEventBus(result: result)
-//               }.catch { error in
-//                  self.presenter?.presentError(error: error.localizedDescription)
-//                  print("got error")
-//               }
-//    }
-    
-    func send(idroom: Int, messagesend:String,type:String,file:String) {
-        
-        var body : Dictionary<String,Any> = ["type":type,
-                                             "file":file,
-                                             "user_id":UserDefaultLogged.idUD,
-                                             "room_id":idroom ]
-                                            body["body"] = messagesend
-
-           worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
-                     result in
-                     self.presenter?.sendMessageEventBus(result: result)
-                  }.catch { error in
-                     self.presenter?.presentError(error: error.localizedDescription)
-                     print("got error")
-                  }
-       }
-    
-    func sendReaction(idroom: Int, type: String, reaction: Reaction) {
-
-        
-        var body : Dictionary<String,Any> = ["type":type,
-                                          "user_id":UserDefaultLogged.idUD,
-                                          "room_id":idroom,
-                                          
-                                          "message_id":reaction.message?.id
-            
-            ]
-        body["body"] = reaction.type
-
-        worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
-                  result in
-                  self.presenter?.sendMessageEventBus(result: result)
-               }.catch { error in
-                  self.presenter?.presentError(error: error.localizedDescription)
-                  print("got error")
-               }
-
-    }
-    
-    func connect() {
-         eventbus = EventBus(host: Keys.MobileIntegrationServer.baseURLEventBus , port: Keys.MobileIntegrationServer.basePortEventBus)
-        
-        worker = MessengerWorker()
-     
-        worker?.connect(eventBus: eventbus).then {
-           result in
-           self.presenter?.presentConnexionSuccess(result: result)
-        }.catch { error in
-           self.presenter?.presentError(error: error.localizedDescription)
-           print("got error")
-        }
-    }
-    
-    func registerMessenger(id:Int){
-         let _ = try! eventbus.register(address: "chat.to.client/\(id)") {
-            
-                             //  let msgs: msgtest!
-              //  print($0.body["body"])
-            
-                if $0.body["type"].description == "TEXT" || $0.body["type"].description == "IMAGE" {
-                    self.worker?.presentMessenger(bodyJson: $0.body["body"] ).then {
-                    messageQuestion in
-                       self.presenter?.presentMessenger(messenger: messageQuestion)
-                        print("amir")
-
-                        print(messageQuestion)
-                    }.catch { error in
-                       self.presenter?.presentError(error: error.localizedDescription )
-                    }
-                    
-                }
-                else if $0.body["type"].description == "REACTION" {
-                    
-                    let messageId = $0.body["message_id"].description
-                    
-                    self.worker?.presentReaction(bodyJson: $0.body["body"], messageId : Int(messageId)!).then {
-                    reaction in
-            
-                        self.presenter?.presentReaction(reaction: reaction,messageId:Int(messageId)!)
-                       
-
-                    }.catch { error in
-                       self.presenter?.presentError(error: error.localizedDescription )
-
-                    }
-                }
-             
-         }
-      }
     
     
     

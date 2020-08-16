@@ -197,6 +197,10 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
         //   BtnSendReply.isEnabled = false
            
        }
+    
+    
+    
+    
     @IBAction func SendReply(_ sender: Any) {
         
         if(textreply.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
@@ -221,12 +225,16 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
                     print(response.value)
                     self.designbuttonaftersend()
                     
-                    let response = response as! NSDictionary
-
-                    //example if there is an id
                     
-                    let reply12 = Reply1(id: response.object(forKey: "id")! as? Int, reply:response.object(forKey: "reply") as? String , timestamp: response.object(forKey: "timestamp")! as! Int, user: User(id: "1", firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: "mehdi"))
-                    self.replyarray.insert(reply12, at: 0)
+                    
+                    self.tv.beginUpdates()
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self.tv.insertRows(at: [indexPath], with: .top)
+                    self.tv.endUpdates()
+                    self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.none, animated: true)
+
+                    
+                  
                  self.tv.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
             }
             

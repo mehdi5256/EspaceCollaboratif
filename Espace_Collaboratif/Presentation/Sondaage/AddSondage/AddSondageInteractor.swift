@@ -15,6 +15,9 @@ import UIKit
 protocol AddSondageBusinessLogic
 {
   func doSomething(request: AddSondage.Something.Request)
+  func sendSondage(idroom: Int, messagesend:Messenger2,type:String)
+  func  connect()
+
 }
 
 protocol AddSondageDataStore
@@ -27,6 +30,8 @@ class AddSondageInteractor: AddSondageBusinessLogic, AddSondageDataStore
   var presenter: AddSondagePresentationLogic?
   var worker: AddSondageWorker?
   //var name: String = ""
+    var eventbus: EventBus!
+
   
   // MARK: Do something
   
@@ -38,4 +43,38 @@ class AddSondageInteractor: AddSondageBusinessLogic, AddSondageDataStore
     let response = AddSondage.Something.Response()
     presenter?.presentSomething(response: response)
   }
+    func connect() {
+         eventbus = EventBus(host: Keys.MobileIntegrationServer.baseURLEventBus , port: Keys.MobileIntegrationServer.basePortEventBus)
+        
+        worker = AddSondageWorker()
+     
+        worker?.connect(eventBus: eventbus).then {
+           result in
+           self.presenter?.presentConnexionSuccess(result: result)
+        }.catch { error in
+           print("got error")
+        }
+    }
+    
+    func sendSondage(idroom: Int, messagesend:Messenger2,type:String) {
+        
+        let jsonData = try! JSONEncoder().encode(messagesend)
+        let jsonString = String(data: jsonData, encoding: .utf8)!
+        
+        var body : Dictionary<String,Any> = ["type":type,
+                                             "user_id":UserDefaultLogged.idUD,
+                                             "room_id":idroom
+                                            ]
+                                            body["body"] = jsonString
+
+           worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+                     result in
+                     self.presenter?.sendSondageEventBus(result: result)
+                  }.catch { error in
+                     
+                     print("got error")
+                  }
+       }
+    
+    
 }

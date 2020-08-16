@@ -15,6 +15,10 @@ import UIKit
 protocol AddSondagePresentationLogic
 {
   func presentSomething(response: AddSondage.Something.Response)
+  func sendSondageEventBus(result: String)
+func presentConnexionSuccess(result: String)
+
+    
 }
 
 class AddSondagePresenter: AddSondagePresentationLogic
@@ -28,4 +32,12 @@ class AddSondagePresenter: AddSondagePresentationLogic
     let viewModel = AddSondage.Something.ViewModel()
     viewController?.displaySomething(viewModel: viewModel)
   }
+    
+    func sendSondageEventBus(result: String) {
+        viewController?.displaySendSondageEventBus(result: result)
+    }
+    
+    func presentConnexionSuccess(result: String) {
+        viewController?.displayConnexionSuccess(result:result)
+    }
 }

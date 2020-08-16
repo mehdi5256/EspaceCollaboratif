@@ -15,10 +15,21 @@ import UIKit
 protocol VoteSondagePresentationLogic
 {
   func presentSomething(response: VoteSondage.Something.Response)
+   func sendVoteSondageEventBus(result: String)
+   func presentConnexionSuccess(result: String)
 }
 
 class VoteSondagePresenter: VoteSondagePresentationLogic
 {
+    func sendVoteSondageEventBus(result: String) {
+                viewController?.displaySendVoteSondageEventBus(result: result)
+
+    }
+    
+    func presentConnexionSuccess(result: String) {
+        viewController?.displayConnexionSuccess(result:result)
+    }
+    
   weak var viewController: VoteSondageDisplayLogic?
   
   // MARK: Do something

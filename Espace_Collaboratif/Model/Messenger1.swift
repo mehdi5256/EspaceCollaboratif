@@ -24,6 +24,20 @@ struct Messenger1:Codable {
  
     
 }
+
+struct Messenger2:Codable {
+   
+    
+    
+    var body:String?
+    var type:String?
+    var user: User
+    var choix: [Choi2]?
+    var room : Room1
+
+ 
+    
+}
 //
 //var body:String?
 //var file:String?

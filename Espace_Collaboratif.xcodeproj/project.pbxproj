@@ -304,12 +304,12 @@
 		9127F7F724B3F8250091968A /* AddSondage */ = {
 			isa = PBXGroup;
 			children = (
-				9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */,
 				9127F7F924B3F84F0091968A /* AddSondageWorker.swift */,
+				9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */,
+				9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */,
+				9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */,
 				9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */,
 				9127F7FB24B3F84F0091968A /* AddSondageModels.swift */,
-				9127F7FC24B3F84F0091968A /* AddSondageViewController.swift */,
-				9127F7FD24B3F84F0091968A /* AddSondageInteractor.swift */,
 			);
 			path = AddSondage;
 			sourceTree = "<group>";
@@ -398,12 +398,12 @@
 			isa = PBXGroup;
 			children = (
 				9166742724B5D1AF00A5E687 /* XibVote */,
-				9166741B24B5D19A00A5E687 /* VoteSondagePresenter.swift */,
 				9166741C24B5D19A00A5E687 /* VoteSondageWorker.swift */,
+				9166742024B5D19A00A5E687 /* VoteSondageInteractor.swift */,
+				9166741B24B5D19A00A5E687 /* VoteSondagePresenter.swift */,
+				9166741F24B5D19A00A5E687 /* VoteSondageViewController.swift */,
 				9166741D24B5D19A00A5E687 /* VoteSondageRouter.swift */,
 				9166741E24B5D19A00A5E687 /* VoteSondageModels.swift */,
-				9166741F24B5D19A00A5E687 /* VoteSondageViewController.swift */,
-				9166742024B5D19A00A5E687 /* VoteSondageInteractor.swift */,
 			);
 			path = VoteSondage;
 			sourceTree = "<group>";

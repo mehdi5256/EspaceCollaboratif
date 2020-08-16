@@ -32,10 +32,21 @@ protocol MessengerPresentationLogic
     func presentMessenger(messenger:Messenger1)
     func sendMessageEventBus(result:String)
     func presentReaction(reaction: Reaction,messageId: Int)
+    
+    func presentVoteEventBus(idMessage: String,idChoix: String, user:User)
+
 }
 
 class MessengerPresenter: MessengerPresentationLogic
 {
+    func presentVoteEventBus(idMessage: String, idChoix: String, user: User) {
+        let idmsg = Int(idMessage)
+        let idchoix = Int(idChoix)
+        
+
+        self.viewController!.DisplayVoteEventBus(idMessage: idmsg!, idChoix: idchoix!, user: user)
+    }
+    
    
     func presentReaction(reaction: Reaction,messageId: Int) {
         self.viewController!.displayReaction(reaction: reaction, messageId:messageId)

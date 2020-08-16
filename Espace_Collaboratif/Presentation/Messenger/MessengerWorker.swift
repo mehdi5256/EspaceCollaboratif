@@ -25,28 +25,27 @@ class MessengerWorker{
     }
     
     func PostMsg(type: String, file: String, room: [String: Any], user: [String: Any], body: String)-> Promise<Messenger1>{
-        return RoomAPIClient.PostMsg(type: type, file: file, room: room, user: user, body: body)
-        
+        return RoomAPIClient.PostMsg(type: type, file: file, room: room, user: user, body: body)        
     }
+    func getRoomEventBus(id:Int) -> Promise<Room1>{
+        return RoomAPIClient.getRoomEventBus(id: id)
+    }
+    
     
     func connect(eventBus: EventBus) -> Promise<String> {
         return EventBusApiClientTest.Connect(eventBus: eventBus)
-     }
+    }
     func send(eventBus: EventBus, body: Dictionary<String,Any>, channel: String) -> Promise<String> {
         return EventBusApiClientTest.Send(eventBus: eventBus, body: body, channel: channel)
-        }
-     
-     func presentMessenger(bodyJson: JSON) -> Promise<Messenger1>{
-        return EventBusApiClientTest.presentMessenger(bodyJson: bodyJson)
-     }
-    
-    func presentReaction(bodyJson: JSON,messageId: Int) -> Promise<Reaction>{
-       return EventBusApiClientTest.presentReaction(bodyJson: bodyJson,messageId: messageId)
     }
     
-    func getRoomEventBus(id:Int) -> Promise<Room1>{
-       return RoomAPIClient.getRoomEventBus(id: id)
-       }
+    func presentMessenger(bodyJson: JSON) -> Promise<Messenger1>{
+        return EventBusApiClientTest.presentMessenger(bodyJson: bodyJson)
+    }
+    
+    func presentReaction(bodyJson: JSON,messageId: Int) -> Promise<Reaction>{
+        return EventBusApiClientTest.presentReaction(bodyJson: bodyJson,messageId: messageId)
+    }
     
     
 

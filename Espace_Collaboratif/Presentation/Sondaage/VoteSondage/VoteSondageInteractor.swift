@@ -15,18 +15,58 @@ import UIKit
 protocol VoteSondageBusinessLogic
 {
   func doSomething(request: VoteSondage.Something.Request)
+    func sendVoteSondage(idroom: Int, type: String, choixId:Int, messageId: Int)
+    func  connect()
+
+
 }
 
 protocol VoteSondageDataStore
 {
   //var name: String { get set }
+
 }
 
 class VoteSondageInteractor: VoteSondageBusinessLogic, VoteSondageDataStore
 {
+    func connect() {
+         eventbus = EventBus(host: Keys.MobileIntegrationServer.baseURLEventBus , port: Keys.MobileIntegrationServer.basePortEventBus)
+        
+        worker = VoteSondageWorker()
+     
+        worker?.connect(eventBus: eventbus).then {
+           result in
+           self.presenter?.presentConnexionSuccess(result: result)
+        }.catch { error in
+           print("got error")
+        }
+    }
+    
+    
+    func sendVoteSondage(idroom: Int, type: String, choixId:Int, messageId: Int) {
+        
+               
+               var body : Dictionary<String,Any> = ["type":type,
+                                                    "user_id":UserDefaultLogged.idUD,
+                                                    "room_id":idroom,
+                                                    "choix_id": choixId,
+                                                    "message_id": messageId
+                                                   ]
+
+                  worker?.send(eventBus: eventbus, body: body, channel:"chat.to.server").then {
+                            result in
+                            self.presenter?.sendVoteSondageEventBus(result: result)
+                         }.catch { error in
+                            
+                            print("got error")
+                         }
+    }
+    
   var presenter: VoteSondagePresentationLogic?
   var worker: VoteSondageWorker?
   //var name: String = ""
+    var eventbus: EventBus!
+
   
   // MARK: Do something
   

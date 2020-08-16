@@ -11,10 +11,20 @@
 //
 
 import UIKit
+import Promises
+import SwiftyJSON
 
 class AddSondageWorker
 {
   func doSomeWork()
   {
   }
+    func connect(eventBus: EventBus) -> Promise<String> {
+        return EventBusApiClientTest.Connect(eventBus: eventBus)
+    }
+    
+    func send(eventBus: EventBus, body: Dictionary<String,Any>, channel: String) -> Promise<String> {
+        return EventBusApiClientTest.Send(eventBus: eventBus, body: body, channel: channel)
+    }
+    
 }
