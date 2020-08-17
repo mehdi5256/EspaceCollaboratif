@@ -10,6 +10,8 @@ import Foundation
 class UserDefaultLogged {
     private struct Keys{
         static let KeyIdRoom = "RoomDefId"
+        static let KeyIdMsg = "MsgDefId"
+
 
         static let KeyId = "UserDefId"
         static let KeyFirstName = "UserDefFN"
@@ -34,6 +36,16 @@ class UserDefaultLogged {
            }
            
        }
+    
+    static var idMsg: Int{
+        get {
+            return UserDefaults.standard.integer(forKey: Keys.KeyIdMsg)
+            }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.KeyIdMsg)
+        }
+        
+    }
     
     static var idUD: String{
         get {

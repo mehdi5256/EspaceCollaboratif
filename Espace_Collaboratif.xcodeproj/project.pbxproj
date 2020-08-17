@@ -21,6 +21,9 @@
 		9103F81224D9DB0B00587112 /* TopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80C24D9DB0B00587112 /* TopicViewController.swift */; };
 		9103F81324D9DB0B00587112 /* TopicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F80D24D9DB0B00587112 /* TopicInteractor.swift */; };
 		9103F81524D9DDF000587112 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F81424D9DDF000587112 /* TopicTableViewCell.swift */; };
+		9112370324EA11E2004FF4B5 /* ChatCellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9112370224EA11E2004FF4B5 /* ChatCellsViewController.swift */; };
+		9112370524EA1484004FF4B5 /* SendBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9112370424EA1484004FF4B5 /* SendBarViewController.swift */; };
+		9112370824EA1645004FF4B5 /* GaleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9112370724EA1645004FF4B5 /* GaleryViewController.swift */; };
 		9127F7FE24B3F84F0091968A /* AddSondagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */; };
 		9127F7FF24B3F84F0091968A /* AddSondageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7F924B3F84F0091968A /* AddSondageWorker.swift */; };
 		9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */; };
@@ -75,7 +78,6 @@
 		916ACE562464E1DD00498285 /* ImageSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE542464E1DD00498285 /* ImageSenderCell.xib */; };
 		916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE572464E1FE00498285 /* ImageReceiverCell.swift */; };
 		916ACE5A2464E1FE00498285 /* ImageReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE582464E1FE00498285 /* ImageReceiverCell.xib */; };
-		918574E5245D2A4D00F54DAE /* corbeille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918574E4245D2A4D00F54DAE /* corbeille.swift */; };
 		919A846B245A328B0094CE42 /* AddRoomPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8465245A328B0094CE42 /* AddRoomPresenter.swift */; };
 		919A846C245A328B0094CE42 /* AddRoomWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8466245A328B0094CE42 /* AddRoomWorker.swift */; };
 		919A846D245A328B0094CE42 /* AddRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8467245A328B0094CE42 /* AddRoomRouter.swift */; };
@@ -119,7 +121,10 @@
 		91C7ED3124E1976A00D0D8D2 /* ReplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7ED3024E1976A00D0D8D2 /* ReplyService.swift */; };
 		91C7ED3324E1988F00D0D8D2 /* Reply1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7ED3224E1988F00D0D8D2 /* Reply1.swift */; };
 		91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0E8952466D0AD00B7808A /* NetworkStatus.swift */; };
-		91F13ECD24E418BD00320364 /* ConnectRoomEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F13ECC24E418BD00320364 /* ConnectRoomEventBus.swift */; };
+		91F4A37724EAD8EA0088ED36 /* TextReceiverCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F4A37524EAD8EA0088ED36 /* TextReceiverCell1.swift */; };
+		91F4A37824EAD8EA0088ED36 /* TextReceiverCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F4A37624EAD8EA0088ED36 /* TextReceiverCell1.xib */; };
+		91F4A37B24EAD9240088ED36 /* TextSenderCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F4A37924EAD9240088ED36 /* TextSenderCell1.swift */; };
+		91F4A37C24EAD9240088ED36 /* TextSenderCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F4A37A24EAD9240088ED36 /* TextSenderCell1.xib */; };
 		91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0342454DD5400AA3974 /* LoginPresenter.swift */; };
 		91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0352454DD5400AA3974 /* LoginWorker.swift */; };
 		91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7B0362454DD5400AA3974 /* LoginRouter.swift */; };
@@ -146,6 +151,9 @@
 		9103F80C24D9DB0B00587112 /* TopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewController.swift; sourceTree = "<group>"; };
 		9103F80D24D9DB0B00587112 /* TopicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicInteractor.swift; sourceTree = "<group>"; };
 		9103F81424D9DDF000587112 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
+		9112370224EA11E2004FF4B5 /* ChatCellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellsViewController.swift; sourceTree = "<group>"; };
+		9112370424EA1484004FF4B5 /* SendBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendBarViewController.swift; sourceTree = "<group>"; };
+		9112370724EA1645004FF4B5 /* GaleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryViewController.swift; sourceTree = "<group>"; };
 		9127F7F824B3F84F0091968A /* AddSondagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondagePresenter.swift; sourceTree = "<group>"; };
 		9127F7F924B3F84F0091968A /* AddSondageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageWorker.swift; sourceTree = "<group>"; };
 		9127F7FA24B3F84F0091968A /* AddSondageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSondageRouter.swift; sourceTree = "<group>"; };
@@ -200,7 +208,6 @@
 		916ACE542464E1DD00498285 /* ImageSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSenderCell.xib; sourceTree = "<group>"; };
 		916ACE572464E1FE00498285 /* ImageReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReceiverCell.swift; sourceTree = "<group>"; };
 		916ACE582464E1FE00498285 /* ImageReceiverCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageReceiverCell.xib; sourceTree = "<group>"; };
-		918574E4245D2A4D00F54DAE /* corbeille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corbeille.swift; sourceTree = "<group>"; };
 		919A8465245A328B0094CE42 /* AddRoomPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomPresenter.swift; sourceTree = "<group>"; };
 		919A8466245A328B0094CE42 /* AddRoomWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomWorker.swift; sourceTree = "<group>"; };
 		919A8467245A328B0094CE42 /* AddRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomRouter.swift; sourceTree = "<group>"; };
@@ -246,7 +253,10 @@
 		91C7ED3024E1976A00D0D8D2 /* ReplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyService.swift; sourceTree = "<group>"; };
 		91C7ED3224E1988F00D0D8D2 /* Reply1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply1.swift; sourceTree = "<group>"; };
 		91F0E8952466D0AD00B7808A /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
-		91F13ECC24E418BD00320364 /* ConnectRoomEventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectRoomEventBus.swift; sourceTree = "<group>"; };
+		91F4A37524EAD8EA0088ED36 /* TextReceiverCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReceiverCell1.swift; sourceTree = "<group>"; };
+		91F4A37624EAD8EA0088ED36 /* TextReceiverCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextReceiverCell1.xib; sourceTree = "<group>"; };
+		91F4A37924EAD9240088ED36 /* TextSenderCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSenderCell1.swift; sourceTree = "<group>"; };
+		91F4A37A24EAD9240088ED36 /* TextSenderCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextSenderCell1.xib; sourceTree = "<group>"; };
 		91F7B0342454DD5400AA3974 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		91F7B0352454DD5400AA3974 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
 		91F7B0362454DD5400AA3974 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
@@ -299,6 +309,16 @@
 				9145041024DCE58D00DA85B0 /* DetailTopic */,
 			);
 			path = Topic;
+			sourceTree = "<group>";
+		};
+		9112370624EA1504004FF4B5 /* ExtensionsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9112370224EA11E2004FF4B5 /* ChatCellsViewController.swift */,
+				9112370424EA1484004FF4B5 /* SendBarViewController.swift */,
+				9112370724EA1645004FF4B5 /* GaleryViewController.swift */,
+			);
+			path = ExtensionsViewController;
 			sourceTree = "<group>";
 		};
 		9127F7F724B3F8250091968A /* AddSondage */ = {
@@ -452,6 +472,8 @@
 			children = (
 				916ACE4F2464E1B500498285 /* TextReceiverCell.swift */,
 				916ACE502464E1B500498285 /* TextReceiverCell.xib */,
+				91F4A37524EAD8EA0088ED36 /* TextReceiverCell1.swift */,
+				91F4A37624EAD8EA0088ED36 /* TextReceiverCell1.xib */,
 			);
 			path = TextReceiver;
 			sourceTree = "<group>";
@@ -461,6 +483,8 @@
 			children = (
 				916ACE4B2464E19E00498285 /* TextSenderCell.swift */,
 				916ACE4C2464E19E00498285 /* TextSenderCell.xib */,
+				91F4A37924EAD9240088ED36 /* TextSenderCell1.swift */,
+				91F4A37A24EAD9240088ED36 /* TextSenderCell1.xib */,
 			);
 			path = TextSender;
 			sourceTree = "<group>";
@@ -483,14 +507,13 @@
 			isa = PBXGroup;
 			children = (
 				916ACE462464E0AB00498285 /* CellsChat */,
-				91592C74245B62F000E88133 /* MessengerRouter.swift */,
-				91592C75245B62F000E88133 /* MessengerModels.swift */,
 				91592C73245B62F000E88133 /* MessengerWorker.swift */,
 				91592C77245B62F000E88133 /* MessengerInteractor.swift */,
 				91592C72245B62F000E88133 /* MessengerPresenter.swift */,
 				91592C76245B62F000E88133 /* MessengerViewController.swift */,
-				918574E4245D2A4D00F54DAE /* corbeille.swift */,
-				91F13ECC24E418BD00320364 /* ConnectRoomEventBus.swift */,
+				91592C74245B62F000E88133 /* MessengerRouter.swift */,
+				91592C75245B62F000E88133 /* MessengerModels.swift */,
+				9112370624EA1504004FF4B5 /* ExtensionsViewController */,
 			);
 			path = Messenger;
 			sourceTree = "<group>";
@@ -766,9 +789,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				916ACE5A2464E1FE00498285 /* ImageReceiverCell.xib in Resources */,
+				91F4A37C24EAD9240088ED36 /* TextSenderCell1.xib in Resources */,
 				916ACE562464E1DD00498285 /* ImageSenderCell.xib in Resources */,
 				916ACE522464E1B500498285 /* TextReceiverCell.xib in Resources */,
 				91A3962D245386A7005F43F4 /* LaunchScreen.storyboard in Resources */,
+				91F4A37824EAD8EA0088ED36 /* TextReceiverCell1.xib in Resources */,
 				916ACE4E2464E19E00498285 /* TextSenderCell.xib in Resources */,
 				91A3962A245386A7005F43F4 /* Assets.xcassets in Resources */,
 				91A39625245386A5005F43F4 /* Main.storyboard in Resources */,
@@ -876,29 +901,31 @@
 				919A846C245A328B0094CE42 /* AddRoomWorker.swift in Sources */,
 				91592C78245B62F000E88133 /* MessengerPresenter.swift in Sources */,
 				914DD35024AECD2100F11C33 /* ChoixSondageCollectionViewCell.swift in Sources */,
+				91F4A37B24EAD9240088ED36 /* TextSenderCell1.swift in Sources */,
 				91F7B03F2454DD5400AA3974 /* LoginInteractor.swift in Sources */,
 				91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */,
 				9166742A24B5D1C800A5E687 /* VoteTableViewCell.swift in Sources */,
 				91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */,
-				918574E5245D2A4D00F54DAE /* corbeille.swift in Sources */,
 				9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */,
 				91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */,
 				91F7B03E2454DD5400AA3974 /* LoginViewController.swift in Sources */,
 				9145041A24DCE5C000DA85B0 /* DetailTopicModels.swift in Sources */,
 				91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */,
 				919A8470245A328B0094CE42 /* AddRoomInteractor.swift in Sources */,
+				9112370324EA11E2004FF4B5 /* ChatCellsViewController.swift in Sources */,
 				91592C7A245B62F000E88133 /* MessengerRouter.swift in Sources */,
 				91C7ED3324E1988F00D0D8D2 /* Reply1.swift in Sources */,
 				9151A63D248F31C30068B55A /* ReactionsViewController.swift in Sources */,
 				91C0B8BA245E7C170059F675 /* EventBusApiClientTest.swift in Sources */,
 				91C7ED2F24E195A900D0D8D2 /* ReplyTableViewCell.swift in Sources */,
 				9127F80224B3F84F0091968A /* AddSondageViewController.swift in Sources */,
+				9112370524EA1484004FF4B5 /* SendBarViewController.swift in Sources */,
 				91A375A224538E1300854ADE /* APIConfiguration.swift in Sources */,
 				91A3759624538B4D00854ADE /* RoomPresenter.swift in Sources */,
 				9166742524B5D19A00A5E687 /* VoteSondageViewController.swift in Sources */,
-				91F13ECD24E418BD00320364 /* ConnectRoomEventBus.swift in Sources */,
 				9103F81224D9DB0B00587112 /* TopicViewController.swift in Sources */,
 				9145041924DCE5C000DA85B0 /* DetailTopicRouter.swift in Sources */,
+				9112370824EA1645004FF4B5 /* GaleryViewController.swift in Sources */,
 				91A3759A24538B4D00854ADE /* RoomViewController.swift in Sources */,
 				91F0E8962466D0AE00B7808A /* NetworkStatus.swift in Sources */,
 				91A375A82453B6E600854ADE /* RoomsTableViewCell.swift in Sources */,
@@ -937,6 +964,7 @@
 				913C420A24DB327600DDFC5D /* TagCollectionViewCell.swift in Sources */,
 				9127F80024B3F84F0091968A /* AddSondageRouter.swift in Sources */,
 				91A3759824538B4D00854ADE /* RoomRouter.swift in Sources */,
+				91F4A37724EAD8EA0088ED36 /* TextReceiverCell1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

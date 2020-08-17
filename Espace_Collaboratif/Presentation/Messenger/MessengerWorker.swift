@@ -21,7 +21,7 @@ class MessengerWorker{
         
     }
     func getRoomsById(id:Int) -> Promise<[Messenger1]>{
-    return RoomAPIClient.getRoomById(id: id)
+        return RoomAPIClient.getRoomById(id: id)
     }
     
     func PostMsg(type: String, file: String, room: [String: Any], user: [String: Any], body: String)-> Promise<Messenger1>{
@@ -48,6 +48,6 @@ class MessengerWorker{
     }
     
     
-
+    
 }
 

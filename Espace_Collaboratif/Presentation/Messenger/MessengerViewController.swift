@@ -17,9 +17,9 @@ import CoreData
 import GTProgressBar
 
 class DataManager {
-
-        static let shared = DataManager()
-        var mvc = MessengerViewController()
+    
+    static let shared = DataManager()
+    var mvc = MessengerViewController()
 }
 
 
@@ -43,7 +43,7 @@ protocol MessengerDisplayLogic: class
     func displayIdRoomEventBus(id: Room1)
     
     func DisplayVoteEventBus(idMessage: Int, idChoix: Int, user: User)
-
+    
     
     
 }
@@ -54,19 +54,18 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         
         let index: Int? = msgarray.firstIndex {
-             $0.id == idMessage
-
+            $0.id == idMessage
             
-         }
+            
+        }
         
         let indexchoix: Int? = msgarray[index!].choix?.firstIndex {
-                    $0.id == idChoix
-
-                   
-                }
-       
-
-         print(index!)
+            $0.id == idChoix
+            
+            
+        }
+        
+        
         
         var indexxuser = -1
         var indexChoixU = -1
@@ -84,9 +83,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         }
         
         msgarray[index!].choix![indexchoix!].users.append(user)
-                print("index")
-       
-         let indexPath = IndexPath(row: index! , section: 0)
+        
+        let indexPath = IndexPath(row: index! , section: 0)
         DispatchQueue.main.async {
             self.tv.reloadRows(at: [indexPath], with: .none)
         }
@@ -94,8 +92,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     func displayIdRoomEventBus(id: Room1) {
         self.idroomEventBus = id.id
-        print(idroomEventBus)
-        print("ideventbuseventbyssssssssssss")
+        
     }
     
     
@@ -116,7 +113,6 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     }
     
     func displayMessenger(messenger: Messenger1) {
-        print(messenger)
         self.msgarray.append(messenger)
         
         self.tv.reloadData()
@@ -195,10 +191,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     // var msgscoredataarray = MessageCoreData.all
     
-
+    
     
     var countUsers = 0
-
+    
     var MessagesArrayCoreData: [MessageCoreData] = []
     
     
@@ -222,17 +218,15 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     var nomroom:String?
     var idroom:Int!
     var idroomEventBus:Int!
-
+    
     var msgarray:[Messenger1] = []
     var reactionsArray:[Reaction] = []
     var choixcell: [Choix] = []
-
-
+    
+    
     let messageTextViewMaxHeight: CGFloat = 100
     
     var RoomSelectecCoreData : RoomCoreData?
-    
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -243,8 +237,11 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         tv.register(UINib(nibName: "ImageReceiverCell", bundle: nil), forCellReuseIdentifier: "ImageReceiverCell")
         
-        // msgscoredataarray = MessageCoreData.all
-       tv.reloadData()
+        tv.register(UINib(nibName: "TextReceiverCell1", bundle: nil), forCellReuseIdentifier: "TextReceiverCell1")
+        
+         tv.register(UINib(nibName: "TextSenderCell1", bundle: nil), forCellReuseIdentifier: "TextSenderCell1")
+        
+        tv.reloadData()
         
         
     }
@@ -252,14 +249,11 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrolltobottom(animated: false)
-       tv.reloadData()
-//        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: NSNotification.Name(rawValue: "fetchRendezVousListe"), object: nil)
-
-               
+        tv.reloadData()
         
     }
     
-     
+    
     
     @IBAction func DismissKeyBoard(_ sender: UITapGestureRecognizer) {
         message.resignFirstResponder()
@@ -295,15 +289,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         self.interactor?.getRoomById(id: self.idroom)
         self.interactor?.GetRoomEventBusid(id: self.idroom)
-
+        
         super.viewDidLoad()
-        
-        //DataManager.shared.mvc = self
-        
-        
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
         
         UserDefaultLogged.idRoom = self.idroom
         
@@ -315,15 +302,11 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         MessagesArrayCoreData =   try! AppDelegate.viewContext.fetch(request)
         
-        
-        
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
-        imagePicker.delegate = self
+        imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
         reachability.whenReachable = { reachability in
             if reachability.connection == .wifi {
@@ -354,8 +337,6 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
             print("could not start reachability notifier")
         }
         
-        //    print(nomroom!)
-        //    print(idroom!)
         
         
         scrolltobottom(animated: false)
@@ -390,31 +371,11 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
             
         default:
             
-            
-            
             let msgtxtview : String = self.message.text
             
             interactor?.send(idroom: self.idroom, messagesend: message.text, type:"TEXT", file: "")
             
-           // interactor?.PostMsg(type: "TEXT", file: "", room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: message.text!)
             designbuttonaftersend()
-            
-            //        let msgCoreData = MessageCoreData(context: AppDelegate.viewContext)
-            //        msgCoreData.body = msgtxtview
-            //        msgCoreData.firstname = UserDefaultLogged.firstNameUD
-            //        msgCoreData.lastname = UserDefaultLogged.lasttNameUD
-            //        msgCoreData.imguser = UserDefaultLogged.IMGUD
-            //        msgCoreData.type = "TEXT"
-            //        msgCoreData.file = ""
-            //
-            //        msgCoreData.room = RoomSelectecCoreData
-            //
-            //        try? AppDelegate.viewContext.save()
-            //        print("msgCoreData")
-            //
-            //        print(msgCoreData)
-            //        print("msgCoreData")
-            
         }
     }
     
@@ -425,48 +386,36 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     func displayrRoomByIdError(error: String) {
         print(error)
-        print("aaaa")
         
     }
     
     func displayrRoomByIdSuccess(roomdid: [Messenger1]) {
         
         self.msgarray = roomdid
-        print(msgarray)
-        print("feergger")
         
         for mmm in  self.msgarray{
-            print("mmmmmmm")
             
             
             if self.isEntityAttributeExist(id: Int32(mmm.id!), entityName: "MessageCoreData"){
-                print("duplication ma tzidech")
-               
                 
             }
             else{
-                print("zid fel core data")
                 let msgcc = MessageCoreData(context: AppDelegate.viewContext)
-                
-                
                 msgcc.id = Int32(mmm.id!)
                 msgcc.body = mmm.body
                 msgcc.file = mmm.file
                 msgcc.firstname = mmm.user.firstName
                 msgcc.lastname = mmm.user.lastName
                 msgcc.imguser = mmm.user.image
-             //   msgcc.timestamp = mmm.timestamp
+                //   msgcc.timestamp = mmm.timestamp
                 msgcc.room =  RoomSelectecCoreData
                 msgcc.type = mmm.type
                 
                 
                 
                 try? AppDelegate.viewContext.save()
-                print("hedha howa")
-
-                print(msgcc)
-                print("hedha howa")
-
+                
+                
                 
             }
             
@@ -478,630 +427,22 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     func displayPostMsgError(error: String) {
         print(error)
-        // print("aaaa")
     }
     
     func displayPostMsgSucess(msg: [Messenger1]) {
-        print("ok")
+        print(msg)
     }
     
     func displayPostImgSucess(img: [Messenger1]) {
-        print("ok")
+        print(img)
         
     }
     
     func displayPostImgError(error: String) {
         print(error)
-        print("braaaassssssadzafazfa")
     }
     
 }
-
-
-
-// Open gallery and upload image , file ,
-extension MessengerViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard let selectedImage = info[.originalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-        convertImageToBase64(selectedImage)
-        // Set photoImageView to display the selected image.           //  imgv.image = selectedImage
-        
-        // Dismiss the picker.
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func OpenSideUpMeny(_ sender: Any) {
-        actionSheet()
-    }
-    
-    func actionSheet() {
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let gallery = UIAlertAction(title: "Bibliothéque Photo", style: .default) { (gallery) in
-            // gallery Code
-            
-            let imagecontrooler = UIImagePickerController()
-            imagecontrooler.delegate = self
-            imagecontrooler.sourceType = .photoLibrary
-            
-            
-            
-            self.present(self.imagePicker
-                , animated: true
-                , completion: nil)
-            
-        }
-        
-        gallery.setValue(0, forKey: "titleTextAlignment")
-        gallery.setValue(UIColor.black, forKey: "titleTextColor")
-        
-        
-        gallery.setValue(UIImage(systemName: "photo"), forKey: "image")
-        sheet.addAction(gallery)
-        
-        
-        let camera = UIAlertAction(title: "Caméra", style: .default) { (camera) in
-            // Facebook Code
-    
-        }
-        
-        
-        camera.setValue(0, forKey: "titleTextAlignment")
-        camera.setValue(UIImage(systemName: "camera"), forKey: "image")
-        camera.setValue(UIColor.black, forKey: "titleTextColor")
-        
-        sheet.addAction(camera)
-        
-        
-        let sondage = UIAlertAction(title: "sondage", style: .default) { (sondage) in
-                // Facebook Code
-            print("sondage")
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                         let vc = storyBoard.instantiateViewController(withIdentifier: "AddSondageViewController") as! AddSondageViewController
-                   vc.modalPresentationStyle = .overFullScreen
-            self.present(vc,animated:true,completion: nil)
-
-        
-            }
-            
-            
-            sondage.setValue(0, forKey: "titleTextAlignment")
-            sondage.setValue(UIImage(systemName: "camera"), forKey: "image")
-            sondage.setValue(UIColor.black, forKey: "titleTextColor")
-            
-            sheet.addAction(sondage)
-        
-        
-        let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
-            // Instagram Code
-        }
-        doc.setValue(0, forKey: "titleTextAlignment")
-        doc.setValue(UIImage(systemName: "doc"), forKey: "image")
-        doc.setValue(UIColor.black, forKey: "titleTextColor")
-        
-        sheet.addAction(doc)
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        sheet.addAction(cancel)
-        
-        // sheet.view.backgroundColor = .white
-        
-        present(sheet, animated: true, completion: nil)
-    }
-    
-    
-    
-    func convertImageToBase64(_ image: UIImage) -> String {
-        let imageData:NSData = image.jpegData(compressionQuality: 0.4)! as NSData
-        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-        // print(strBase64)
-        
-        interactor?.send(idroom: self.idroom, messagesend: "", type:"IMAGE", file: strBase64)
-        
-        //
-        //                interactor?.postImage(type: "IMAGE", body: "", user: ["id":UserDefaultLogged.idUD], room: ["id":self.idroom!], file: strBase64)
-        
-        
-        
-        //                interactor?.PostMsg(type: "IMAGE", file: strBase64, room: ["id":self.idroom!], user: ["id":UserDefaultLogged.idUD], body: "")
-        
-        //
-        //
-        let myUrl = Keys.MobileIntegrationServer.baseURL + "/msg"
-
-        let parameters: [String: Any] = [
-            "type":"IMAGE",
-            "body":"",
-            "user":["id":UserDefaultLogged.idUD],
-            "room":["id":self.idroom],
-            "file":strBase64
-        ]
-        AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-            .responseJSON { response in
-                print(response.request)
-                print(response.response)
-                print(response.result)}
-        //vider textfields
-        // message.text = ""
-        //
-        //
-        
-        
-        return strBase64
-        
-    }
-    
-    
-    //               func convertBase64ToImage(_ str: String) -> UIImage {
-    //                       let dataDecoded : Data = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
-    //                       let decodedimage = UIImage(data: dataDecoded)
-    //                   print(decodedimage)
-    //
-    //                       return decodedimage!
-    //               }
-    
-    
-    func convertUTCDateToLocalDate(dateToConvert:String) -> String {
-        
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let convertedDate = format.date(from: dateToConvert)
-        format.timeZone = TimeZone.current
-        format.dateFormat = "HH:mm"
-        let localDateStr = format.string(from: convertedDate!)
-        return localDateStr
-    }
-    
-}
-
-
-///////// Extension mta3 bar elli tab3th beha l msg
-
-
-extension MessengerViewController: UITextViewDelegate{
-    
-    
-    //        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    //
-    //            if text == "\n" {
-    //                textView.resignFirstResponder()
-    //                return false
-    //            }
-    //            return true
-    //        }
-    //
-    
-    
-    func textViewDidChange(_ textView: UITextView)
-    {
-        if Whitespace(textView: message){
-            btn.backgroundColor = UIColor.systemBlue
-            
-        }
-        else{
-            btn.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
-        }
-        
-        if textView == self.message {
-            self.btn.isEnabled = Whitespace(textView: message)
-        }
-        
-        if textView.contentSize.height >= self.messageTextViewMaxHeight
-        {
-            textView.isScrollEnabled = true
-        }
-        else
-        {
-            textView.frame.size.height = textView.contentSize.height
-            textView.isScrollEnabled = false
-            
-        }
-    }
-    
-    //Configuration design textview mta3 chat
-    func design(){
-        message.layer.cornerRadius = 10
-        message.layer.cornerRadius = 10
-        message.layer.borderWidth = 1
-        message.layer.borderColor = #colorLiteral(red: 0.4948643718, green: 0.4948643718, blue: 0.4948643718, alpha: 1)
-        btn.layer.cornerRadius = 15
-        
-    }
-    
-    func designbuttonaftersend(){
-        message.text = ""
-        btn.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
-        btn.isEnabled = false
-        
-    }
-    
-    // Configuration tableview show the last item
-    func scrolltobottom(animated:Bool){
-        
-      //  switch NetworkStatus.Connection() {
-//        case false:
-//            let numberOfSections = self.tv.numberOfSections
-//                  let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
-//
-//                  let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
-//                  if MessagesArrayCoreData.count > 0{
-//                      self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: animated)
-//                  }
-//        default:
-            let numberOfSections = self.tv.numberOfSections
-                  let numberOfRows = self.tv.numberOfRows(inSection: numberOfSections-1)
-                  
-                  let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
-                  if msgarray.count > 0{
-                      self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: animated)
-                  }
-//        }
-      
-        
-    }
-    
-    // Fonction white space elimination
-    func Whitespace(textView textView: UITextView) -> Bool {
-        guard let text = textView.text,
-            !text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else {
-                // this will be reached if the text is nil (unlikely)
-                // or if the text only contains white spaces
-                // or no text at all
-                return false
-        }
-        
-        return true
-    }
-    
-    // l baar mta3  msg tatl3 w tahbet ki tselectionni l msg
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
-}
-
-
-// extension table view mta3 l chat configuration des 4 cellules
-
-extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    {
-       
-        switch NetworkStatus.Connection() {
-        case false:
-            if ( indexPath.row == MessagesArrayCoreData.count - 1)
-                   {
-                       print("came to last row")
-                       btnlastrow.isHidden = true
-                   }
-
-            if ( indexPath.row != MessagesArrayCoreData.count - 1)
-            {
-                btnlastrow.isHidden = false
-                
-                
-                
-            }
-        default:
-            if ( indexPath.row == msgarray.count - 1)
-                   {
-                       print("came to last row")
-                       btnlastrow.isHidden = true
-                   }
-            if ( indexPath.row != msgarray.count - 1)
-            {
-                btnlastrow.isHidden = false
-                
-                
-                
-            }
-        }
-        
-        
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        
-//        switch NetworkStatus.Connection() {
-//        case false:
-//            print("not conncted")
-//            print("connected")
-//            if  MessagesArrayCoreData.count == 0
-//            {
-//                tv.isHidden = true
-//                emptytvimg.isHidden = false
-//            }
-//            else{
-//                tv.isHidden = false
-//                emptytvimg.isHidden = true
-//
-//            }
-//            return MessagesArrayCoreData.count
-//        default:
-//            print("connected")
-//            if  msgarray.count == 0
-//            {
-//                tv.isHidden = true
-//                emptytvimg.isHidden = false
-//            }
-//            else{
-//                tv.isHidden = false
-//                emptytvimg.isHidden = true
-//
-//            }
-//            return msgarray.count
-//        }
-//
-        
-//            if  MessagesArrayCoreData.count == 0
-//            {
-//                tv.isHidden = true
-//                emptytvimg.isHidden = false
-//            }
-//            else{
-//                tv.isHidden = false
-//                emptytvimg.isHidden = true
-//
-//            }
-        return msgarray.count
-    }
-   
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-             let TextSenderCell = tv.dequeueReusableCell(withIdentifier: "TextSenderCell", for: indexPath) as! TextSenderCell
-        
-                TextSenderCell.delegate = self
-
-            
-            let TextReceiverCell = tv.dequeueReusableCell(withIdentifier: "TextReceiverCell", for: indexPath) as! TextReceiverCell
-                TextReceiverCell.delegate = self
-
-            
-            let ImageSenderCell = tv.dequeueReusableCell(withIdentifier: "ImageSenderCell", for: indexPath) as! ImageSenderCell
-                       
-            let ImageReceiverCell = tv.dequeueReusableCell(withIdentifier: "ImageReceiverCell", for: indexPath) as! ImageReceiverCell
-
-        
-        switch NetworkStatus.Connection() {
-        case false:
-            print("not connected")
-            
-            if (self.MessagesArrayCoreData[indexPath.row].type == "IMAGE" && self.MessagesArrayCoreData[indexPath.row].imguser == UserDefaultLogged.IMGUD ){
-                
-                
-                ImageSenderCell.receiverName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
-                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
-                let imagechat = MessagesArrayCoreData[indexPath.row].file
-                
-                ImageSenderCell.receiverImage.kf.setImage(with: URL(string: image))
-                // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
-                ImageSenderCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                    result in
-                    switch result {
-                    case .success:
-                        break
-                    case .failure:
-                        ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
-                    }
-                }
-                
-                
-                return ImageSenderCell
-            }
-            
-            
-            
-            if (self.MessagesArrayCoreData[indexPath.row].type == "IMAGE"){
-                
-                ImageReceiverCell.senderName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
-                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
-                let imagechat = MessagesArrayCoreData[indexPath.row].file
-                
-                ImageReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
-                //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
-                
-                ImageReceiverCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                    result in
-                    switch result {
-                    case .success:
-                        break
-                    case .failure:
-                        ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
-                    }
-                }
-               
-                
-                return ImageReceiverCell
-                
-            }
-            
-            
-            if (self.MessagesArrayCoreData[indexPath.row].imguser  == UserDefaultLogged.IMGUD){
-                
-                TextSenderCell.receiverName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
-                
-                TextSenderCell.messageTextView.text = self.MessagesArrayCoreData[indexPath.row].body
-                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
-                TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
-                return TextSenderCell
-            }
-                
-            else {
-                TextReceiverCell.senderName.text = (self.MessagesArrayCoreData[indexPath.row].firstname ?? "") + " " + (self.MessagesArrayCoreData[indexPath.row].lastname ?? "")
-                TextReceiverCell.messageTextView.text = self.MessagesArrayCoreData[indexPath.row].body
-                let image = MessagesArrayCoreData[indexPath.row].imguser ?? ""
-                TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
-                
-                
-                return TextReceiverCell
-            }
-            
-            
-        default:
-            if (self.msgarray[indexPath.row].type == "SONDAGE"){
-                           
-                           guard let cellsondage = tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath) as? SondageTableViewCell else {
-                           return tv.dequeueReusableCell(withIdentifier: "SondageTableViewCell", for: indexPath)
-                                   }
-                
-                cellsondage.delegate = self
-                cellsondage.voterBtn.tag = indexPath.row
-
-
-                           let sonadgeindex = msgarray[indexPath.item]
-                           cellsondage.questionsondage.text = sonadgeindex.body
-                           
-                           self.choixcell = sonadgeindex.choix ?? []
-                           
-                           return cellsondage
-
-                           
-                       }
-            
-            
-            if (self.msgarray[indexPath.row].type == "IMAGE" && self.msgarray[indexPath.row].user.image == UserDefaultLogged.IMGUD ){
-                
-                
-                ImageSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                let image = msgarray[indexPath.row].user.image
-                let imagechat = msgarray[indexPath.row].file
-                
-                ImageSenderCell.receiverImage.kf.setImage(with: URL(string: image))
-                // cellimageother.imgsend.kf.setImage(with: URL(string: imagechat!))
-                ImageSenderCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                    result in
-                    switch result {
-                    case .success:
-                        break
-                    case .failure:
-                        ImageSenderCell.imgChat.image = UIImage(named: "loadingimage")!
-                    }
-                }
-                // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
-                print(reactionsArray.count)
-                
-                return ImageSenderCell
-            }
-            
-            
-            
-            if (self.msgarray[indexPath.row].type == "IMAGE"){
-                
-                ImageReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                //cell3.msgtxt.text = self.msgarray[indexPath.row].body
-                let image = msgarray[indexPath.row].user.image
-                let imagechat = msgarray[indexPath.row].file
-                
-                ImageReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
-                //   cellimageme.imagechat.kf.setImage(with: URL(string: imagechat!))
-                
-                ImageReceiverCell.imgChat.kf.setImage(with: URL(string: imagechat!), placeholder: UIImage(named: "loadingimage")) {
-                    result in
-                    switch result {
-                    case .success:
-                        break
-                    case .failure:
-                        ImageReceiverCell.imgChat.image = UIImage(named: "loadingimage")!
-                    }
-                }
-                // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
-                print(reactionsArray.count)
-                
-                return ImageReceiverCell
-                
-            }
-            
-            
-            if (self.msgarray[indexPath.row].user.image  == UserDefaultLogged.IMGUD){
-                
-                TextSenderCell.receiverName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                
-                TextSenderCell.messageTextView.text = self.msgarray[indexPath.row].body
-                let image = msgarray[indexPath.row].user.image
-                TextSenderCell.receiverImage.kf.setImage(with: URL(string: image))
-                
-                // Reactionsss
-                reactionsArray = msgarray[indexPath.row].reactions ?? []
-                TextSenderCell.BtnReaction.tag = indexPath.row
-                
-                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
-                TextSenderCell.ReactionBtn.tag = indexPath.row
-                
-                print(reactionsArray.count)
-                TextSenderCell.ViewReaction.isHidden = true
-                if (msgarray[indexPath.row].reactions?.count ?? 0 > 0 ){
-                    TextSenderCell.ViewReaction.isHidden = false
-                }
-                
-                TextSenderCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
-//                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
-//                print(  UserDefaultLogged.idmsg )
-
-                
-                return TextSenderCell
-            }
-                
-           
-                    
-
-                
-            else {
-                TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
-                TextReceiverCell.messageTextView.text = self.msgarray[indexPath.row].body
-                let image = msgarray[indexPath.row].user.image
-                TextReceiverCell.senderPicture.kf.setImage(with: URL(string: image))
-                
-                // Reactionsss
-                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
-                TextReceiverCell.BtnReaction.tag = indexPath.row
-                
-               
-
-                print(reactionsArray.count)
-                
-                self.reactionsArray = msgarray[indexPath.row].reactions ?? []
-                TextReceiverCell.ReactionBtn.tag = indexPath.row
-                TextReceiverCell.ViewReaction.isHidden = true
-
-                if ((msgarray[indexPath.row].reactions ?? []).count > 0){
-                    TextReceiverCell.ViewReaction.isHidden = false
-                }
-                 TextReceiverCell.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
-//                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
-//                print(  UserDefaultLogged.idmsg )
-
-
-                
-                return TextReceiverCell
-            }
-            
-        }
-        
-    }
-    
-    }
-
 
 
 //// extension jitsi configuration jitsi
@@ -1196,6 +537,117 @@ extension MessengerViewController: JitsiMeetViewDelegate {
     
 }
 
+extension MessengerViewController: ReactionDelegate {
+    
+    func displayReaction(reaction: Reaction,messageId:Int) {
+        
+        let index: Int? = msgarray.firstIndex {
+            $0.id == messageId
+            
+            
+        }
+        
+        
+        
+        if (msgarray[index!].reactions?.contains(where: { $0.user.id == reaction.user.id }))! {
+            // found
+            print("found")
+            
+            let userIndex: Int? = msgarray[index!].reactions?.firstIndex {
+                $0.user.id == reaction.user.id
+                
+            }
+            msgarray[index!].reactions?.remove(at:userIndex ?? 0 )
+            
+        }
+        
+        msgarray[index!].reactions?.append(reaction)
+        if (msgarray[index!].reactions == nil )
+        {
+            msgarray[index!].reactions = []
+            
+            
+        }
+        let indexPath = IndexPath(row: index! , section: 0)
+        tv.reloadRows(at: [indexPath], with: .none)
+        
+    }
+    
+    func ReactionPost(tag: Int) {
+        
+        let user = User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD)
+        
+        let reaction = Reaction(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
+        
+        interactor?.sendReaction(idroom: idroom, type: "REACTION", reaction: reaction)
+        
+        
+    }
+    
+    func didButtonPressedreaction(tag: Int) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "ReactionsViewController") as! ReactionsViewController
+        vc.modalPresentationStyle = .overFullScreen
+        
+        
+        vc.reactionsArray = msgarray[tag].reactions ?? []
+        self.present(vc,animated:true,completion: nil)
+        
+        
+    }
+    
+    
+}
+
+extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDataSource,SondageDelegate{
+    func SondageVote(tag: Int) {
+        
+        UserDefaultLogged.idMsg = msgarray[tag].id!
+        print("userdefault id message")
+        print(UserDefaultLogged.idMsg)
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "VoteSondageViewController") as! VoteSondageViewController
+        vc.modalPresentationStyle = .automatic
+        
+        vc.question = msgarray[tag].body
+        vc.sondageArray = msgarray[tag].choix ?? []
+        self.present(vc,animated:true,completion: nil)
+        
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        countUsers = 0
+        choixcell.forEach{c in
+            self.countUsers += c.users.count
+        }
+        return choixcell.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cellx = collectionView.dequeueReusableCell(withReuseIdentifier: "ChoixSondageCollectionViewCell", for: indexPath) as? ChoixSondageCollectionViewCell
+            else{
+                return ChoixSondageCollectionViewCell()
+        }
+        
+        cellx.choixlbl.text =  self.choixcell[indexPath.item].body
+        
+        
+        var stat = CGFloat(Double(choixcell[indexPath.row].users.count)/Double(self.countUsers))
+        if(stat.isNaN){
+            stat = 0
+        }
+        cellx.viewstatrep.progress = stat
+        
+        return cellx
+        
+    }
+    
+    
+}
+
 
 extension UIView {
     
@@ -1208,132 +660,5 @@ extension UIView {
     
     
     
-    
-}
-
-
-extension MessengerViewController: ReactionDelegate {
-   
-    func displayReaction(reaction: Reaction,messageId:Int) {
-       
-        let index: Int? = msgarray.firstIndex {
-            $0.id == messageId
-
-           
-        }
-        print("index")
-
-        print(index!)
-
-        
-        if (msgarray[index!].reactions?.contains(where: { $0.user.id == reaction.user.id }))! {
-             // found
-            print("found")
-            
-            let userIndex: Int? = msgarray[index!].reactions?.firstIndex {
-                $0.user.id == reaction.user.id
-               
-            }
-            msgarray[index!].reactions?.remove(at:userIndex ?? 0 )
-
-        }
-            
-       
-        
-       print("index")
-        msgarray[index!].reactions?.append(reaction)
-        if (msgarray[index!].reactions == nil )
-        {
-            msgarray[index!].reactions = []
-
-
-        }
-        let indexPath = IndexPath(row: index! , section: 0)
-        tv.reloadRows(at: [indexPath], with: .none)
-
-    }
-    
-    func ReactionPost(tag: Int) {
-        
-      //  print(msgarray[tag].id!)
-        let user = User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD)
-        
-        let reaction = Reaction(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
-        
-        interactor?.sendReaction(idroom: idroom, type: "REACTION", reaction: reaction)
-        
-       
-    }
-    
-    func didButtonPressedreaction(tag: Int) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-              let vc = storyBoard.instantiateViewController(withIdentifier: "ReactionsViewController") as! ReactionsViewController
-        vc.modalPresentationStyle = .overFullScreen
-
-
-        vc.reactionsArray = msgarray[tag].reactions ?? []
-              self.present(vc,animated:true,completion: nil)
-     //   print( msgarray[tag].id!)
-
-        
-    }
-    
-
-}
-
-extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDataSource,SondageDelegate{
-    func SondageVote(tag: Int) {
-        
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-              let vc = storyBoard.instantiateViewController(withIdentifier: "VoteSondageViewController") as! VoteSondageViewController
-        vc.modalPresentationStyle = .automatic
-
-        vc.question = msgarray[tag].body
-        vc.sondageArray = msgarray[tag].choix ?? []
-              self.present(vc,animated:true,completion: nil)
-        //print(msgarray[tag].choix)
-
-        
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        countUsers = 0
-        choixcell.forEach{c in
-            self.countUsers += c.users.count
-        }
-       // print("azzziiiizzz")
-        //print(countUsers)
-//        collectionView.frame = CGRect(x: collectionView.frame.origin.x , y: collectionView.frame.origin.y, width: collectionView.frame.width, height: collectionView.frame.height * CGFloat(choixcell.count))
-        return choixcell.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cellx = collectionView.dequeueReusableCell(withReuseIdentifier: "ChoixSondageCollectionViewCell", for: indexPath) as? ChoixSondageCollectionViewCell
-                          else{
-                              return ChoixSondageCollectionViewCell()
-                      }
-        
-        cellx.choixlbl.text =  self.choixcell[indexPath.item].body
-        
-
-        var stat = CGFloat(Double(choixcell[indexPath.row].users.count)/Double(self.countUsers))
-      //  print (stat)
-     //   print("statttttt")
-        if(stat.isNaN){
-            stat = 0
-        }
-        cellx.viewstatrep.progress = stat
-
-        return cellx
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       // print(choixcell[indexPath.item])
-       // print(msgarray[tag].choix)
-       // SondageVote(tag:choixcell[indexPath.item].id!)
-
-    }
     
 }

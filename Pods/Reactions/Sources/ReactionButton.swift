@@ -34,7 +34,7 @@ import UIKit
  You can configure/skin the button using a `ReactionButtonConfig`.
  */
 public final class ReactionButton: UIReactionControl {
-  private let iconImageView: UIImageView = Components.reactionButton.facebookLikeIcon()
+ // private let iconImageView: UIImageView = Components.reactionButton.facebookLikeIcon()
   private let titleLabel: UILabel        = Components.reactionButton.facebookLikeLabel()
   private lazy var overlay: UIView       = UIView().build {
     $0.clipsToBounds   = false
@@ -82,7 +82,7 @@ public final class ReactionButton: UIReactionControl {
     addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ReactionButton.tapAction)))
     addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(ReactionButton.longPressAction)))
 
-    addSubview(iconImageView)
+  //  addSubview(iconImageView)
     addSubview(titleLabel)
   }
 
@@ -104,7 +104,7 @@ public final class ReactionButton: UIReactionControl {
   // MARK: - Updating Object State
 
   override func update() {
-    iconImageView.image = reaction.alternativeIcon ?? reaction.icon
+ //   iconImageView.image = reaction.alternativeIcon ?? reaction.icon
     titleLabel.font     = config.font
     titleLabel.text     = reaction.title
 
@@ -130,11 +130,11 @@ public final class ReactionButton: UIReactionControl {
       }
     }
 
-    iconImageView.frame = iconFrame
+   // iconImageView.frame = iconFrame
     titleLabel.frame    = titleFrame
 
     UIView.transition(with: titleLabel, duration: 0.15, options: .transitionCrossDissolve, animations: { [unowned self] in
-      self.iconImageView.tintColor = self.isSelected ? self.reaction.color : self.config.neutralTintColor
+   //   self.iconImageView.tintColor = self.isSelected ? self.reaction.color : self.config.neutralTintColor
       self.titleLabel.textColor    = self.isSelected ? self.reaction.color : self.config.neutralTintColor
       }, completion: nil)
   }
@@ -147,10 +147,10 @@ public final class ReactionButton: UIReactionControl {
     if isSelected {
       UIView.animateKeyframes(withDuration: 0.3, delay: 0, options: .calculationModeCubic, animations: { [weak self] in
         UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
-          self?.iconImageView.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
+       //   self?.iconImageView.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
         })
         UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
-          self?.iconImageView.transform = .identity
+       //   self?.iconImageView.transform = .identity
         })
         }, completion: nil)
     }

@@ -220,12 +220,16 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
                 ]
             ]
             
+           
             AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
                 .responseJSON { response in
                     print(response.value)
                     self.designbuttonaftersend()
-                    
-                    
+//                    
+//                    
+//                     let value = response.value as? Reply1
+//                        
+//                    self.replyarray.append(value!)
                     
                     self.tv.beginUpdates()
                     let indexPath = IndexPath(row: 0, section: 0)
@@ -236,6 +240,7 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
                     
                   
                  self.tv.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+                    self.NumberReply = self.NumberReply! + 1
             }
             
             

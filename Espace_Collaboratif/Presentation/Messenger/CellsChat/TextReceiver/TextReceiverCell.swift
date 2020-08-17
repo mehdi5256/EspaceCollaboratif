@@ -37,7 +37,9 @@ class TextReceiverCell: UITableViewCell {
           @IBOutlet var senderPicture: UIImageView!
           @IBOutlet var messageContainer: UIView!
           @IBOutlet var timeLabel: UILabel!
+    
     @IBOutlet weak var ViewReaction: UIView!
+    
     @IBOutlet weak var BtnReaction: UIButton!
     
     var delegate: ReactionDelegate?

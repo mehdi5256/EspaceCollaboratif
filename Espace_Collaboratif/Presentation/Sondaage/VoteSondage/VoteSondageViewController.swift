@@ -122,11 +122,9 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
     @IBAction func SendVote(_ sender: Any) {
         
         
-        interactor?.sendVoteSondage(idroom: UserDefaultLogged.idRoom, type: "VOTE", choixId:idvote!, messageId: 1234)
-        
-
-    }
-    
+        interactor?.sendVoteSondage(idroom: UserDefaultLogged.idRoom, type: "VOTE", choixId:idvote!, messageId: UserDefaultLogged.idMsg)
+      }
+ 
 }
 
 
