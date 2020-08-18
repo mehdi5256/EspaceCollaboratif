@@ -15,6 +15,8 @@ import JitsiMeet
 import Alamofire
 import CoreData
 import GTProgressBar
+import GrowingTextView
+
 
 class DataManager {
     
@@ -38,7 +40,7 @@ protocol MessengerDisplayLogic: class
     func displayPostImgSucess(img :[Messenger1])
     func displayPostImgError(error: String)
     
-    func displayReaction(reaction: Reaction,messageId:Int)
+    func displayReaction(reaction: Reaction1,messageId:Int)
     
     func displayIdRoomEventBus(id: Room1)
     
@@ -179,13 +181,16 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     //outlets
     @IBOutlet weak var emptytvimg: UIImageView!
-    @IBOutlet weak var message: UITextView!
+    @IBOutlet weak var message: GrowingTextView!
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var BtnSideUp: UIButton!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var btnlastrow: UIButton!
+    @IBOutlet weak var RoomName: UILabel!
+    @IBOutlet weak var ViewEntete: UIView!
     
+    @IBOutlet weak var bottomtextview: NSLayoutConstraint!
     
     //coredata
     
@@ -220,7 +225,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     var idroomEventBus:Int!
     
     var msgarray:[Messenger1] = []
-    var reactionsArray:[Reaction] = []
+    var reactionsArray:[Reaction1] = []
     var choixcell: [Choix] = []
     
     
@@ -302,9 +307,9 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         MessagesArrayCoreData =   try! AppDelegate.viewContext.fetch(request)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        
         
         imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
@@ -342,12 +347,57 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         scrolltobottom(animated: false)
         btnlastrow.roundCorners([.topLeft, .bottomLeft] , radius: 8)
         
+        ViewEntete.roundCorners([.topLeft, .topRight] , radius: 50)
+
+        
         interactor?.connect()
         
+        RoomName.text = self.nomroom
+
         
-        message.delegate = self
+        
         design()
         
+        
+        message.contentInsetAdjustmentBehavior = .always
+        automaticallyAdjustsScrollViewInsets = false
+
+        
+        // *** Customize GrowingTextView ***
+
+           // *** Listen to keyboard show / hide ***
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+
+           // *** Hide keyboard when tapping outside ***
+           let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
+           view.addGestureRecognizer(tapGesture)
+       
+    }
+    
+    deinit {
+              NotificationCenter.default.removeObserver(self)
+          }
+       
+        @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+               if let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                   var keyboardHeight = UIScreen.main.bounds.height - endFrame.origin.y
+                   if #available(iOS 11, *) {
+                       if keyboardHeight > 0 {
+                           keyboardHeight = keyboardHeight - view.safeAreaInsets.bottom
+                       }
+                   }
+                   bottomtextview.constant = keyboardHeight + 8
+                   view.layoutIfNeeded()
+               }
+           }
+
+           @objc func tapGestureHandler() {
+               view.endEditing(true)
+           }
+    
+    
+    @IBAction func BackButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     @IBAction func LastRowAction(_ sender: Any) {
         scrolltobottom(animated: true)
@@ -442,6 +492,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         print(error)
     }
     
+   
 }
 
 
@@ -449,57 +500,59 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
 
 extension MessengerViewController: JitsiMeetViewDelegate {
     
-    @IBAction func OpenJitsi(_ sender: Any) {
+    @IBAction func OpenVideoCall(_ sender: Any) {
         
         switch reachability.connection {
-        case .wifi:
-            
-            cleanUp()
-            // create and configure jitsimeet view
-            let jitsiMeetView = JitsiMeetView()
-            jitsiMeetView.delegate = self
-            self.jitsiMeetView = jitsiMeetView
-            let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                builder.welcomePageEnabled = true
-                
-                builder.welcomePageEnabled = false
-                builder.serverURL = (URL(string: Keys.MobileIntegrationServer.jitsiURL))
-                builder.room = self.nomroom
-                
-                self.navigationController?.isNavigationBarHidden = true
-            }
-            jitsiMeetView.join(options)
-            
-            // Enable jitsimeet view to be a view that can be displayed
-            // on top of all the things, and let the coordinator to manage
-            // the view state and interactions
-            pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
-            pipViewCoordinator?.configureAsStickyView(withParentView: view)
-            
-            // animate in
-            jitsiMeetView.alpha = 0
-            pipViewCoordinator?.show()
-            
-            
-        case .cellular:
-            print("Reachable via Cellular")
-        case .unavailable:
-            print("Network not reachable")
-            
-            let alert = UIAlertController(title: "", message: "Impossible D'émettre un appel. Assurer-vous que votre téléphone est connecté à Internet et réessayez.", preferredStyle: UIAlertController.Style.alert)
-            
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            
-            // show the alert
-            self.present(alert, animated: true, completion: nil)
-            
-            
-        case .none:
-            print("none")
-            
-        }
-        
+               case .wifi:
+                   
+                   cleanUp()
+                   // create and configure jitsimeet view
+                   let jitsiMeetView = JitsiMeetView()
+                   jitsiMeetView.delegate = self
+                   self.jitsiMeetView = jitsiMeetView
+                   let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+                       builder.welcomePageEnabled = true
+                       
+                       builder.welcomePageEnabled = false
+                       builder.serverURL = (URL(string: Keys.MobileIntegrationServer.jitsiURL))
+                       builder.room = self.nomroom
+                       
+                       self.navigationController?.isNavigationBarHidden = true
+                   }
+                   jitsiMeetView.join(options)
+                   
+                   // Enable jitsimeet view to be a view that can be displayed
+                   // on top of all the things, and let the coordinator to manage
+                   // the view state and interactions
+                   pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
+                   pipViewCoordinator?.configureAsStickyView(withParentView: view)
+                   
+                   // animate in
+                   jitsiMeetView.alpha = 0
+                   pipViewCoordinator?.show()
+                   
+                   
+               case .cellular:
+                   print("Reachable via Cellular")
+               case .unavailable:
+                   print("Network not reachable")
+                   
+                   let alert = UIAlertController(title: "", message: "Impossible D'émettre un appel. Assurer-vous que votre téléphone est connecté à Internet et réessayez.", preferredStyle: UIAlertController.Style.alert)
+                   
+                   // add an action (button)
+                   alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                   
+                   // show the alert
+                   self.present(alert, animated: true, completion: nil)
+                   
+                   
+               case .none:
+                   print("none")
+                   
+               }
+       }
+    
+    @IBAction func OpenJitsi(_ sender: Any) {
     }
     
     fileprivate func cleanUp() {
@@ -539,7 +592,7 @@ extension MessengerViewController: JitsiMeetViewDelegate {
 
 extension MessengerViewController: ReactionDelegate {
     
-    func displayReaction(reaction: Reaction,messageId:Int) {
+    func displayReaction(reaction: Reaction1,messageId:Int) {
         
         let index: Int? = msgarray.firstIndex {
             $0.id == messageId
@@ -577,7 +630,7 @@ extension MessengerViewController: ReactionDelegate {
         
         let user = User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD)
         
-        let reaction = Reaction(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
+        let reaction = Reaction1(id: nil, type: TextReceiverCell.typereac!, user: user, message: msgarray[tag])
         
         interactor?.sendReaction(idroom: idroom, type: "REACTION", reaction: reaction)
         
@@ -661,4 +714,18 @@ extension UIView {
     
     
     
+}
+
+
+extension MessengerViewController: GrowingTextViewDelegate {
+    
+    // *** Call layoutIfNeeded on superview for animation when changing height ***
+    
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: [.curveLinear], animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+   
 }

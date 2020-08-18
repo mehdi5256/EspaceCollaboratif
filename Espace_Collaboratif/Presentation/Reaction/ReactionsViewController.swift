@@ -67,7 +67,7 @@ class ReactionsViewController: UIViewController, ReactionsDisplayLogic
   
   // MARK: View lifecycle
     
-    var reactionsArray:[Reaction] = []
+    var reactionsArray:[Reaction1] = []
       override func viewDidLoad()
   {
     print (reactionsArray)

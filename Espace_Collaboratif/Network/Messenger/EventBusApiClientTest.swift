@@ -24,7 +24,7 @@ static func Connect(eventBus: EventBus) -> Promise<String> {
        return performRequest(bodyJson: bodyJson)
     }
     
-    static func presentReaction(bodyJson: JSON, messageId:Int) -> Promise<Reaction> {
+    static func presentReaction(bodyJson: JSON, messageId:Int) -> Promise<Reaction1> {
         return performRequestReaction(bodyJson: bodyJson,messageId:messageId)
     }
 }

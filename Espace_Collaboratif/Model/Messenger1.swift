@@ -18,7 +18,7 @@ struct Messenger1:Codable {
     var timestamp:Int?
     var type:String?
     var user: User
-    var reactions :[Reaction]?
+    var reactions :[Reaction1]?
     var choix: [Choix]?
 
  

@@ -32,7 +32,7 @@ protocol MessengerPresentationLogic
     
     func sendMessageEventBus(result:String)
     func presentMessenger(messenger:Messenger1)
-    func presentReaction(reaction: Reaction,messageId: Int)
+    func presentReaction(reaction: Reaction1,messageId: Int)
     func presentVoteEventBus(idMessage: String,idChoix: String, user:User)
     
 }
@@ -46,7 +46,7 @@ class MessengerPresenter: MessengerPresentationLogic
     }
     
     
-    func presentReaction(reaction: Reaction,messageId: Int) {
+    func presentReaction(reaction: Reaction1,messageId: Int) {
         self.viewController!.displayReaction(reaction: reaction, messageId:messageId)
     }
     

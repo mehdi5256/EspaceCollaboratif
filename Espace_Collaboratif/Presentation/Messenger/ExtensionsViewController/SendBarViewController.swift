@@ -30,7 +30,7 @@ extension MessengerViewController: UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView)
     {
         if Whitespace(textView: message){
-            btn.backgroundColor = UIColor.systemBlue
+            btn.backgroundColor = #colorLiteral(red: 0.1902842224, green: 0.7560861707, blue: 0.6563670039, alpha: 1)
             
         }
         else{
@@ -58,7 +58,7 @@ extension MessengerViewController: UITextViewDelegate{
         message.layer.cornerRadius = 10
         message.layer.cornerRadius = 10
         message.layer.borderWidth = 1
-        message.layer.borderColor = #colorLiteral(red: 0.4948643718, green: 0.4948643718, blue: 0.4948643718, alpha: 1)
+        message.layer.borderColor = #colorLiteral(red: 0.1902842224, green: 0.7560861707, blue: 0.6563670039, alpha: 1)
         btn.layer.cornerRadius = 15
         
     }
@@ -104,22 +104,22 @@ extension MessengerViewController: UITextViewDelegate{
                 // or no text at all
                 return false
         }
-        
+
         return true
     }
     
-    // l baar mta3  msg tatl3 w tahbet ki tselectionni l msg
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
+//    // l baar mta3  msg tatl3 w tahbet ki tselectionni l msg
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//            if self.view.frame.origin.y == 0 {
+//                self.view.frame.origin.y -= keyboardSize.height
+//            }
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        if self.view.frame.origin.y != 0 {
+//            self.view.frame.origin.y = 0
+//        }
+//    }
 }

@@ -52,7 +52,7 @@
 		9151A63D248F31C30068B55A /* ReactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A637248F31C30068B55A /* ReactionsViewController.swift */; };
 		9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A638248F31C30068B55A /* ReactionsInteractor.swift */; };
 		9151A640248F31E80068B55A /* ReactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A63F248F31E80068B55A /* ReactionTableViewCell.swift */; };
-		9151A642248F32140068B55A /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A641248F32140068B55A /* Reaction.swift */; };
+		9151A642248F32140068B55A /* Reaction1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A641248F32140068B55A /* Reaction1.swift */; };
 		91592C78245B62F000E88133 /* MessengerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C72245B62F000E88133 /* MessengerPresenter.swift */; };
 		91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C73245B62F000E88133 /* MessengerWorker.swift */; };
 		91592C7A245B62F000E88133 /* MessengerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91592C74245B62F000E88133 /* MessengerRouter.swift */; };
@@ -182,7 +182,7 @@
 		9151A637248F31C30068B55A /* ReactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsViewController.swift; sourceTree = "<group>"; };
 		9151A638248F31C30068B55A /* ReactionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsInteractor.swift; sourceTree = "<group>"; };
 		9151A63F248F31E80068B55A /* ReactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionTableViewCell.swift; sourceTree = "<group>"; };
-		9151A641248F32140068B55A /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
+		9151A641248F32140068B55A /* Reaction1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction1.swift; sourceTree = "<group>"; };
 		91592C72245B62F000E88133 /* MessengerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerPresenter.swift; sourceTree = "<group>"; };
 		91592C73245B62F000E88133 /* MessengerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerWorker.swift; sourceTree = "<group>"; };
 		91592C74245B62F000E88133 /* MessengerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerRouter.swift; sourceTree = "<group>"; };
@@ -525,7 +525,7 @@
 				91A37586245388F200854ADE /* Room1.swift */,
 				91A375882453892100854ADE /* User.swift */,
 				919A8474245AA7140094CE42 /* Messenger1.swift */,
-				9151A641248F32140068B55A /* Reaction.swift */,
+				9151A641248F32140068B55A /* Reaction1.swift */,
 				914DD34A24AEC5E400F11C33 /* Choix.swift */,
 				914E1E7B24DA35FF001BC09F /* Topic1.swift */,
 				914E1E7D24DA36A8001BC09F /* Tag.swift */,
@@ -940,7 +940,7 @@
 				91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */,
 				919A846F245A328B0094CE42 /* AddRoomViewController.swift in Sources */,
 				9103F81324D9DB0B00587112 /* TopicInteractor.swift in Sources */,
-				9151A642248F32140068B55A /* Reaction.swift in Sources */,
+				9151A642248F32140068B55A /* Reaction1.swift in Sources */,
 				91A6A61F245B9AC9004F0C3D /* Util.swift in Sources */,
 				91A6A621245B9AD6004F0C3D /* Response.swift in Sources */,
 				9145041724DCE5C000DA85B0 /* DetailTopicPresenter.swift in Sources */,

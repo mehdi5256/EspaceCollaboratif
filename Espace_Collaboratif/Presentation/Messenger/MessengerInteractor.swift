@@ -21,7 +21,7 @@ protocol MessengerBusinessLogic
     func connect()
     func registerMessenger(id:Int)
     func send(idroom: Int, messagesend:String,type:String,file:String)
-    func sendReaction(idroom: Int, type: String, reaction: Reaction)
+    func sendReaction(idroom: Int, type: String, reaction: Reaction1)
     
     func GetRoomEventBusid(id:Int)
 }
@@ -63,7 +63,7 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
         }
     }
     
-    func sendReaction(idroom: Int, type: String, reaction: Reaction) {
+    func sendReaction(idroom: Int, type: String, reaction: Reaction1) {
         
         
         var body : Dictionary<String,Any> = ["type":type,"user_id":UserDefaultLogged.idUD,

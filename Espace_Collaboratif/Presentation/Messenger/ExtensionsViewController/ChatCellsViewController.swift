@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+import Reactions
 
 
 // extension table view mta3 l chat configuration des 4 cellules
@@ -297,21 +297,116 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 if (msgarray[indexPath.row].reactions?.count ?? 0 > 0 ){
                     TextSenderCell1.ViewReaction.isHidden = false
                 }
-
-                TextSenderCell1.BtnReaction.setTitle(String((reactionsArray.count) ), for: .normal)
-//                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
-//                print(  UserDefaultLogged.idmsg )
-
+//
+//                TextSenderCell1.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
+                TextSenderCell1.BtnReaction.setTitle(String(""), for: .normal)
+                TextSenderCell1.ReactionSummary.text = String(reactionsArray.count)
+                
+                //                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
+                //                print(  UserDefaultLogged.idmsg )
+                var typereact =  [String]()
+                
+                for i in msgarray[indexPath.row].reactions ?? []{
+                    
+                    
+                    
+                    print("xdkflkhfdjhjfdskfjsk")
+                    typereact.append(i.type!)
+                    print(typereact)
+                    
+                    
+                    if ["LIKE", "LOVE", "INTERESTING", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("1")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.interesting,Reaction.facebook.bravo]
+                        
+                    }
+                        
+                    else if ["INTERESTING", "LOVE", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("2")
+                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.interesting,Reaction.facebook.bravo]
+                    }
+                    else if ["INTERESTING", "LOVE", "LIKE"].allSatisfy(typereact.contains) {
+                        print("15")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.interesting]
+                    }
+                        
+                    else if ["INTERESTING", "BRAVO", "LIKE"].allSatisfy(typereact.contains) {
+                        print("3")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.interesting,Reaction.facebook.bravo]
+                    }
+                    else if ["LOVE", "BRAVO", "LIKE"].allSatisfy(typereact.contains) {
+                        print("4")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.bravo]
+                    }
+                        
+                        
+                    else if ["INTERESTING", "LOVE"].allSatisfy(typereact.contains) {
+                        print("5")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.interesting]
+                    }
+                        
+                    else if ["INTERESTING", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("6")
+                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.interesting,Reaction.facebook.bravo]
+                    }
+                        
+                    else if ["INTERESTING", "LIKE"].allSatisfy(typereact.contains) {
+                        print("7")
+                       TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.interesting,Reaction.facebook.like]
+                    }
+                        
+                    else  if ["LOVE", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("8")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.bravo]
+                    }
+                        
+                        
+                        
+                    else  if ["LIKE", "LOVE"].allSatisfy(typereact.contains) {
+                        print("9")
+                       TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love]
+                    }
+                        
+                    else  if ["LIKE", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("10")
+                       TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.bravo]
+                    }
+                        
+                        
+                        
+                    else  if ["LIKE"].allSatisfy(typereact.contains) {
+                        print("11")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like]
+                    }
+                    else  if ["LOVE"].allSatisfy(typereact.contains) {
+                        print("12")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love]
+                    }
+                        
+                    else  if ["BRAVO"].allSatisfy(typereact.contains) {
+                        print("13")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.bravo]
+                    }
+                        
+                    else  if ["INTERESTING"].allSatisfy(typereact.contains) {
+                        print("14")
+                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.interesting]
+                    }
+                    
+                    
+                }
+                
+                
                 
                 return TextSenderCell1
             }
                 
-           
-                    
-
+                
+                
+                
                 
             else {
-//                TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
+                //                TextReceiverCell.senderName.text = self.msgarray[indexPath.row].user.firstName + " " + self.msgarray[indexPath.row].user.lastName
                 
                 TextReceiverCell1.txt.text = self.msgarray[indexPath.row].body
                 let image = msgarray[indexPath.row].user.image
@@ -332,11 +427,106 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 if ((msgarray[indexPath.row].reactions ?? []).count > 0){
                     TextReceiverCell1.ViewReaction.isHidden = false
                 }
-                 TextReceiverCell1.BtnReaction.setTitle(String((reactionsArray.count)), for: .normal)
-//                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
-//                print(  UserDefaultLogged.idmsg )
-
-
+                
+                
+                  TextReceiverCell1.BtnReaction.setTitle(String(""), for: .normal)
+                TextReceiverCell1.ReactionSummary.text = String(reactionsArray.count)
+                
+                //                UserDefaultLogged.idmsg  = msgarray[indexPath.row].id!
+                //                print(  UserDefaultLogged.idmsg )
+                var typereact =  [String]()
+                
+                for i in msgarray[indexPath.row].reactions ?? []{
+                    
+                    
+                    
+                    print("xdkflkhfdjhjfdskfjsk")
+                    typereact.append(i.type!)
+                    print(typereact)
+                    
+                    
+                    if ["LIKE", "LOVE", "INTERESTING", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("1")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.interesting,Reaction.facebook.bravo]
+                        
+                    }
+                        
+                    else if ["INTERESTING", "LOVE", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("2")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.interesting,Reaction.facebook.bravo]
+                    }
+                    else if ["INTERESTING", "LOVE", "LIKE"].allSatisfy(typereact.contains) {
+                        print("15")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.interesting]
+                    }
+                        
+                    else if ["INTERESTING", "BRAVO", "LIKE"].allSatisfy(typereact.contains) {
+                        print("3")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.interesting,Reaction.facebook.bravo]
+                    }
+                    else if ["LOVE", "BRAVO", "LIKE"].allSatisfy(typereact.contains) {
+                        print("4")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.bravo]
+                    }
+                        
+                        
+                    else if ["INTERESTING", "LOVE"].allSatisfy(typereact.contains) {
+                        print("5")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.interesting]
+                    }
+                        
+                    else if ["INTERESTING", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("6")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.interesting,Reaction.facebook.bravo]
+                    }
+                        
+                    else if ["INTERESTING", "LIKE"].allSatisfy(typereact.contains) {
+                        print("7")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.interesting,Reaction.facebook.like]
+                    }
+                        
+                    else  if ["LOVE", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("8")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.bravo]
+                    }
+                        
+                        
+                        
+                    else  if ["LIKE", "LOVE"].allSatisfy(typereact.contains) {
+                        print("9")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love]
+                    }
+                        
+                    else  if ["LIKE", "BRAVO"].allSatisfy(typereact.contains) {
+                        print("10")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.bravo]
+                    }
+                        
+                        
+                        
+                    else  if ["LIKE"].allSatisfy(typereact.contains) {
+                        print("11")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.like]
+                    }
+                    else  if ["LOVE"].allSatisfy(typereact.contains) {
+                        print("12")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.love]
+                    }
+                        
+                    else  if ["BRAVO"].allSatisfy(typereact.contains) {
+                        print("13")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.bravo]
+                    }
+                        
+                    else  if ["INTERESTING"].allSatisfy(typereact.contains) {
+                        print("14")
+                        TextReceiverCell1.ReactionSummary.reactions = [Reaction.facebook.interesting]
+                    }
+                    
+                    
+                    
+                    
+                }
                 
                 return TextReceiverCell1
             }
@@ -345,7 +535,7 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
         
     }
     
-    }
+}
 
 
 

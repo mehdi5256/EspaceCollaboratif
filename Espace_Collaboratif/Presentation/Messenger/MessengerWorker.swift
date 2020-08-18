@@ -43,7 +43,7 @@ class MessengerWorker{
         return EventBusApiClientTest.presentMessenger(bodyJson: bodyJson)
     }
     
-    func presentReaction(bodyJson: JSON,messageId: Int) -> Promise<Reaction>{
+    func presentReaction(bodyJson: JSON,messageId: Int) -> Promise<Reaction1>{
         return EventBusApiClientTest.presentReaction(bodyJson: bodyJson,messageId: messageId)
     }
     

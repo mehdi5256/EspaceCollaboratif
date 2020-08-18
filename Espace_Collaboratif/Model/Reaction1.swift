@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Reaction: Codable{
+public struct Reaction1: Codable{
     var id: Int?
     var type: String?
     var user: User

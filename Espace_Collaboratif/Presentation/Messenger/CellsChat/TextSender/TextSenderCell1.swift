@@ -14,6 +14,25 @@ class TextSenderCell1: UITableViewCell {
     let selectReaction    = ReactionSelector()
 
     
+    @IBOutlet weak var ReactionSummary: ReactionSummary!{
+      didSet {
+        
+      //  ReactionSummary.reactions = [Reaction.facebook.sad,Reaction.facebook.like,Reaction.facebook.angry]
+        
+        ReactionSummary.setDefaultText(withTotalNumberOfPeople: 4, includingYou: true)
+        ReactionSummary.config    = ReactionSummaryConfig {
+          $0.spacing      = 4
+          $0.iconMarging  = 0
+          $0.font         = UIFont(name: "HelveticaNeue", size: 12)
+          $0.textColor    = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
+          $0.alignment    = .right
+          $0.isAggregated = true
+        // ReactionSummary.text      = "16"
+
+        }
+      }
+    }
+    
     @IBOutlet weak var ReactionBtn: ReactionButton!{
 
         didSet {
@@ -29,11 +48,12 @@ class TextSenderCell1: UITableViewCell {
         }
     }
     
+    
+    @IBOutlet weak var ViewReaction: UIView!
     @IBOutlet weak var txt: UITextView!
     @IBOutlet weak var timstamp: UILabel!
     @IBOutlet weak var img: UIImageView!
     
-    @IBOutlet weak var ViewReaction: UIView!
     
     @IBOutlet weak var BtnReaction: UIButton!
     
