@@ -13,6 +13,7 @@ public struct Room1: Codable{
     var name: String?
     var image: String?
     var subject: String?
+    var isPrivate: Bool?
     var user :User?
     var users: [User]
 }

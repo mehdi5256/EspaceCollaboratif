@@ -38,6 +38,8 @@ class HomeViewController: UIViewController, HomeDisplayLogic
   
   // MARK: Setup
   
+    @IBOutlet weak var UserIcon: UIImageView!
+    @IBOutlet weak var greeting: UILabel!
     @IBAction func segmentedoutlet(_ sender: Any) {
     }
     @IBOutlet weak var forumview: UIView!
@@ -74,6 +76,24 @@ class HomeViewController: UIViewController, HomeDisplayLogic
   {
     super.viewDidLoad()
     doSomething()
+    
+    greeting.text = "Bonjour \(UserDefaultLogged.firstNameUD) !"
+    
+    
+    let image = UserDefaultLogged.IMGUD
+     
+
+
+          UserIcon.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic_user")) {
+              result in
+              switch result {
+              case .success:
+                  break
+              case .failure:
+                self.UserIcon.image = UIImage(named: "ic_user")!
+              }
+          }
+    
   }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -23,12 +23,12 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
             if ( indexPath.row == MessagesArrayCoreData.count - 1)
                    {
                        print("came to last row")
-                       btnlastrow.isHidden = true
+                 //      btnlastrow.isHidden = true
                    }
 
             if ( indexPath.row != MessagesArrayCoreData.count - 1)
             {
-                btnlastrow.isHidden = false
+               // btnlastrow.isHidden = false
                 
                 
                 
@@ -37,11 +37,11 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
             if ( indexPath.row == msgarray.count - 1)
                    {
                        print("came to last row")
-                       btnlastrow.isHidden = true
+                      // btnlastrow.isHidden = true
                    }
             if ( indexPath.row != msgarray.count - 1)
             {
-                btnlastrow.isHidden = false
+              //  btnlastrow.isHidden = false
                 
                 
                 

@@ -34,7 +34,31 @@ struct Colors {
     static let purple2     = UIColor(red: 117/255.0, green: 58/255.0, blue: 136/255.0, alpha: 1.0)
     
     static let lightpurple     = UIColor(red: 189/255.0, green: 156/255.0, blue: 200/255.0, alpha: 1.0)
-    }
+    
+static let Blue1     = UIColor(red: 52/255.0, green: 153/255.0, blue: 255/255.0, alpha: 1.0)
+    
+    
+    static let Blue2     = UIColor(red: 58/255.0, green: 57/255.0, blue: 133/255.0, alpha: 1.0)
+    
+    
+    static let Blue3     = UIColor(red: 100/255.0, green: 84/255.0, blue: 240/255.0, alpha: 1.0)
+    
+     static let Blue4     = UIColor(red: 110/255.0, green: 226/255.0, blue: 245/255.0, alpha: 1.0)
+    
+     static let Blue5     = UIColor(red: 55/255.0, green: 213/255.0, blue: 214/255.0, alpha: 1.0)
+    
+     static let Blue6     = UIColor(red: 54/255.0, green: 9/255.0, blue: 109/255.0, alpha: 1.0)
+    
+    
+    static let Blue7     = UIColor(red: 8/255.0, green: 200/255.0, blue: 246/255.0, alpha: 1.0)
+    
+     static let Blue8     = UIColor(red: 77/255.0, green: 93/255.0, blue: 251/255.0, alpha: 1.0)
+    
+    
+    
+    
+    
+}
 
 
 

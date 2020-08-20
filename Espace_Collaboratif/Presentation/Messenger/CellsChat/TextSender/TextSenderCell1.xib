@@ -17,7 +17,7 @@
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wr5-Wv-qNK">
                         <rect key="frame" x="74.5" y="5" width="224.5" height="55"/>
-                        <color key="backgroundColor" red="0.19028422236442566" green="0.75608617067337036" blue="0.65636700391769409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="18"/>

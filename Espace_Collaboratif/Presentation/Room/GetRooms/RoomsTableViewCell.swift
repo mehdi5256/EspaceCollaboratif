@@ -13,8 +13,8 @@ class RoomsTableViewCell: UITableViewCell {
     @IBOutlet weak var RoomName: UILabel!
     @IBOutlet weak var viewcell: UIView!
     
+    @IBOutlet weak var iconpriv: UIImageView!
     @IBOutlet weak var cv: UICollectionView!
-    @IBOutlet weak var NumPoste: UILabel!
     @IBOutlet weak var UserName: UILabel!
     
     override func awakeFromNib() {
@@ -41,7 +41,7 @@ class RoomsTableViewCell: UITableViewCell {
     
   func loadData(room: Room1){
     self.RoomName.text = room.name
-    self.NumPoste.text = room.id?.description
+    //self.NumPoste.text = room.id?.description
     self.UserName.text = room.subject
     self.selectionStyle = .none
 

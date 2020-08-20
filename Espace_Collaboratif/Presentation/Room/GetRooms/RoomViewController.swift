@@ -264,7 +264,7 @@ extension RoomViewController: UITableViewDataSource{
             //         affichage core data
             cell.RoomName.text = roomsCD[indexPath.item].name!
             cell.UserName.text = roomsCD[indexPath.item].subject
-            cell.NumPoste.text  =  (roomsCD[indexPath.item].id).description
+          //  cell.NumPoste.text  =  (roomsCD[indexPath.item].id).description
             usersCoreDataArray = try! JSONDecoder().decode([User].self, from: roomsCD[indexPath.row].users! )
 
       
@@ -272,35 +272,47 @@ extension RoomViewController: UITableViewDataSource{
             
             let roomindex = rooms[indexPath.item]
             cell.RoomName.text = roomindex.name!
-                cell.UserName.text = roomindex.subject!
-            cell.NumPoste.text  =  (roomindex.id!).description
+            cell.UserName.text = (roomindex.user?.firstName ?? "") + " " + (roomindex.user?.lastName ?? "")
+            
+          //  cell.NumPoste.text  =  (roomindex.id!).description
             self.usersCell = roomindex.users
+            if (roomindex.isPrivate! == false){
+                
+                cell.iconpriv.image = UIImage(systemName: "lock.open")
+
+            }
+            if (roomindex.isPrivate! == true){
+                
+                cell.iconpriv.image = UIImage(systemName: "lock")
+
+            }
         }
         
         cell.selectionStyle = .none
-        let frequency = indexPath.item % 10;
-        switch (frequency) {
-        case 0:
-            cell.setGradientBackground(colorOne: Colors.skyblue, colorTwo: Colors.skyblue2)
-            break;
-        case 1:
-            cell.setGradientBackground(colorOne: Colors.purple, colorTwo: Colors.blue)
-            break;
-            
-        case 2:
-            cell.setGradientBackground(colorOne: Colors.purple1, colorTwo: Colors.purple2)
-            break;
-            
-        case 3:
-            cell.setGradientBackground(colorOne: Colors.orange1, colorTwo: Colors.orange2)
-            break;
-        case 4:
-            cell.setGradientBackground(colorOne: Colors.lightGrey, colorTwo: Colors.veryDarkGrey)
-            break;
-        //up to case 9
-        default:
-            break;
-        }
+//        let frequency = indexPath.item % 10;
+//        switch (frequency) {
+//        case 0:
+//            cell.setGradientBackground(colorOne: Colors.Blue1, colorTwo: Colors.Blue2)
+//            break;
+//        case 1:
+//            cell.setGradientBackground(colorOne: Colors.Blue7, colorTwo: Colors.Blue3)
+//
+//            break;
+//            
+//        case 2:
+//            cell.setGradientBackground(colorOne: Colors.skyblue2, colorTwo: Colors.blue)
+//            break;
+//            
+//        case 3:
+//            cell.setGradientBackground(colorOne: Colors.Blue5, colorTwo: Colors.Blue1)
+//            break;
+//        case 4:
+//            cell.setGradientBackground(colorOne: Colors.Blue4, colorTwo: Colors.Blue1)
+//            break;
+//        //up to case 9
+//        default:
+//            break;
+//        }
         
         return  cell
     }

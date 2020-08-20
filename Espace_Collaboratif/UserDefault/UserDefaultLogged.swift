@@ -25,6 +25,8 @@ class UserDefaultLogged {
 
 
 
+
+
     }
     
     static var idRoom: Int{
@@ -36,6 +38,9 @@ class UserDefaultLogged {
            }
            
        }
+    
+      
+       
     
     static var idMsg: Int{
         get {

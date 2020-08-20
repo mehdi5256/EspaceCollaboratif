@@ -116,9 +116,13 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     func displayMessenger(messenger: Messenger1) {
         self.msgarray.append(messenger)
-        
+
         self.tv.reloadData()
-        self.scrolltobottom(animated: true)
+        if (msgarray.count > 0){
+            tv.scrollToBottom(animated: false)
+
+        }
+
     }
     
     
@@ -229,7 +233,6 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     var choixcell: [Choix] = []
     
     
-    let messageTextViewMaxHeight: CGFloat = 100
     
     var RoomSelectecCoreData : RoomCoreData?
     
@@ -246,16 +249,19 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
          tv.register(UINib(nibName: "TextSenderCell1", bundle: nil), forCellReuseIdentifier: "TextSenderCell1")
         
-        tv.reloadData()
+
+        
         
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scrolltobottom(animated: false)
-        tv.reloadData()
+       // tv.reloadData()
         
+
+        
+       
     }
     
     
@@ -288,6 +294,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     @objc func fetchData(){
         tv.reloadData()
+        if (msgarray.count > 0){
+            tv.scrollToBottom(animated: false)
+
+        }
     }
     override func viewDidLoad()
     {
@@ -344,12 +354,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         
         
-        scrolltobottom(animated: false)
         btnlastrow.roundCorners([.topLeft, .bottomLeft] , radius: 8)
         
         ViewEntete.roundCorners([.topLeft, .topRight] , radius: 50)
 
-        
         interactor?.connect()
         
         RoomName.text = self.nomroom
@@ -359,48 +367,50 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         design()
         
         
-        message.contentInsetAdjustmentBehavior = .always
-        automaticallyAdjustsScrollViewInsets = false
+       // *** Customize GrowingTextView ***
+        message.layer.cornerRadius = 15.0
 
-        
-        // *** Customize GrowingTextView ***
+        // *** Listen to keyboard show / hide ***
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
-           // *** Listen to keyboard show / hide ***
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-
-           // *** Hide keyboard when tapping outside ***
-           let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
-           view.addGestureRecognizer(tapGesture)
+        // *** Hide keyboard when tapping outside ***
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
+        view.addGestureRecognizer(tapGesture)
+       
        
     }
     
-    deinit {
-              NotificationCenter.default.removeObserver(self)
-          }
-       
-        @objc private func keyboardWillChangeFrame(_ notification: Notification) {
-               if let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                   var keyboardHeight = UIScreen.main.bounds.height - endFrame.origin.y
-                   if #available(iOS 11, *) {
-                       if keyboardHeight > 0 {
-                           keyboardHeight = keyboardHeight - view.safeAreaInsets.bottom
-                       }
-                   }
-                   bottomtextview.constant = keyboardHeight + 8
-                   view.layoutIfNeeded()
-               }
-           }
+     deinit {
+          NotificationCenter.default.removeObserver(self)
+      }
+      
+      @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+          if let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+              var keyboardHeight = UIScreen.main.bounds.height - endFrame.origin.y
+              if #available(iOS 11, *) {
+                  if keyboardHeight > 0 {
+                      keyboardHeight = keyboardHeight - view.safeAreaInsets.bottom
+                  }
+              }
+              bottomtextview.constant = keyboardHeight + 8
+              view.layoutIfNeeded()
+            if (msgarray.count > 0){
+                tv.scrollToBottom(animated: false)
 
-           @objc func tapGestureHandler() {
-               view.endEditing(true)
-           }
+            }
+          }
+      }
+
+      @objc func tapGestureHandler() {
+          view.endEditing(true)
+      }
     
     
     @IBAction func BackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func LastRowAction(_ sender: Any) {
-        scrolltobottom(animated: true)
+        tv.scrollToBottom(animated: true)
     }
     
     @IBAction func BtnSend(_ sender: Any) {
@@ -426,7 +436,11 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
             interactor?.send(idroom: self.idroom, messagesend: message.text, type:"TEXT", file: "")
             
             designbuttonaftersend()
-        }
+            
+            if (msgarray.count > 0){
+                tv.scrollToBottom(animated: false)
+
+            }        }
     }
     
     // MARK: Do something
@@ -472,6 +486,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
             
         }
         tv.reloadData()
+        if (msgarray.count > 0){
+            tv.scrollToBottom(animated: false)
+
+        }
         
     }
     
@@ -718,7 +736,6 @@ extension UIView {
 
 
 extension MessengerViewController: GrowingTextViewDelegate {
-    
     // *** Call layoutIfNeeded on superview for animation when changing height ***
     
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
@@ -726,6 +743,36 @@ extension MessengerViewController: GrowingTextViewDelegate {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
+
     
    
+}
+
+
+extension UITableView {
+    public func scrollToBottom(animated: Bool = true) {
+        guard let dataSource = dataSource else {
+            return
+        }
+
+        let sections = dataSource.numberOfSections?(in: self) ?? 1
+        let rows = dataSource.tableView(self, numberOfRowsInSection: sections - 1)
+        let bottomIndex = IndexPath(item: rows - 1, section: sections - 1)
+
+        scrollToRow(at: bottomIndex,
+                    at: .bottom,
+                    animated: animated)
+    }
+    public func scrollToReversedBottom(animated: Bool = true) {
+        guard let dataSource = dataSource else {
+            return
+        }
+
+        let sections = dataSource.numberOfSections?(in: self) ?? 1
+        let bottomIndex = IndexPath(item: 0, section: sections - 1)
+
+        scrollToRow(at: bottomIndex,
+                    at: .top,
+                    animated: animated)
+    }
 }
