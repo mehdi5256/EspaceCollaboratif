@@ -13,7 +13,7 @@ enum RoomsEndPoints: APIConfiguration {
     
     case getRooms
     case getUsers
-    case AddRoom (name:String , subject:String, users: [Dictionary<String,Any>])
+    case AddRoom (name:String , subject:String, user:User, isPrivate:Bool, users: [Dictionary<String,Any>])
     case getRoombyId(id: Int)
     case PostMsg(type:String, file:String,room:[String: Any],user:[String: Any],body: String)
      case PostImage(type:String,body: String ,user:[String: Any],room:[String: Any],file:String)
@@ -117,11 +117,13 @@ enum RoomsEndPoints: APIConfiguration {
       switch self {
      
         
-        case .AddRoom(let name, let subject, let users):
+        case .AddRoom(let name, let subject,let user,let isPrivate, let users):
         let object = NSMutableDictionary()
         
         object.setValue(name, forKey: Keys.AddRoomKey.name)
         object.setValue(subject, forKey: Keys.AddRoomKey.subject)
+        object.setValue(user, forKey: Keys.AddRoomKey.user)
+        object.setValue(isPrivate, forKey: Keys.AddRoomKey.isPrivate)
         object.setValue(users, forKey: Keys.AddRoomKey.users)
         
         return (object as! Parameters)

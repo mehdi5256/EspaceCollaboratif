@@ -17,7 +17,7 @@ import Alamofire
 
 protocol AddRoomDisplayLogic: class
 {
-  func displaySomething(viewModel: AddRoom.Something.ViewModel)
+    func displaySomething(viewModel: AddRoom.Something.ViewModel)
     func presentUsersSuccess(users: [User])
     func presentUsersError(error: String)
     
@@ -29,100 +29,110 @@ protocol AddRoomDisplayLogic: class
 class AddRoomViewController: UIViewController, AddRoomDisplayLogic
 {
     
+    var interactor: AddRoomBusinessLogic?
+    var router: (NSObjectProtocol & AddRoomRoutingLogic & AddRoomDataPassing)?
     
+    // MARK: Object lifecycle
     
-    
-  var interactor: AddRoomBusinessLogic?
-  var router: (NSObjectProtocol & AddRoomRoutingLogic & AddRoomDataPassing)?
-
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = AddRoomInteractor()
-    let presenter = AddRoomPresenter()
-    let router = AddRoomRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
-  }
-  
-  // MARK: View lifecycle
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup()
+    {
+        let viewController = self
+        let interactor = AddRoomInteractor()
+        let presenter = AddRoomPresenter()
+        let router = AddRoomRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
+    }
+    
+    // MARK: View lifecycle
     var users: [User] = []
     var selectarrayusers: [Dictionary<String,Any>] = []
-     //var arrFilter:[String] = []
-     var isSearch : Bool = false
+    //var arrFilter:[String] = []
+    var isSearch : Bool = false
     var arrFilter = [User]()
+    
+    var userid = Int()
+    
+    var boolstate :Bool = true
 
-     var userid = Int()
-   //  var Userscells = [User]()
+    //  var Userscells = [User]()
     
     
-
+    @IBOutlet weak var isPrivate: UISwitch!
+    
     @IBOutlet weak var tv: UITableView!
+    @IBOutlet weak var switchlbl: UILabel!
     @IBOutlet weak var selectalllabel: UILabel!
     @IBOutlet weak var numberusers: UILabel!
     @IBOutlet weak var createbtnoutlet: UIButton!
-   
+    
+    @IBOutlet weak var createbtn: UIBarButtonItem!
     
     @IBOutlet weak var Subject: UITextField!
     @IBOutlet weak var RoomName: UITextField!
     @IBOutlet weak var SearchBar: UISearchBar!
     
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    tv.isEditing = true
-    tv.allowsMultipleSelectionDuringEditing = true
-    interactor?.getUsers()
-
-    doSomething()
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = AddRoom.Something.Request()
-  }
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        tv.isEditing = true
+        tv.allowsMultipleSelectionDuringEditing = true
+        interactor?.getUsers()
+        
+        
+            createbtn.isEnabled  = false
+        
+        
+        
+        doSomething()
+    }
     
-  func presentUsersSuccess(users: [User]) {
+    
+    
+    // MARK: Do something
+    
+    //@IBOutlet weak var nameTextField: UITextField!
+    
+    func doSomething()
+    {
+        let request = AddRoom.Something.Request()
+    }
+    
+    func presentUsersSuccess(users: [User]) {
         self.users = users
-    self.arrFilter = self.users
+        self.arrFilter = self.users
+        
 
-        print(users)
         tv.reloadData()
     }
     
@@ -130,77 +140,86 @@ class AddRoomViewController: UIViewController, AddRoomDisplayLogic
     }
     
     func presentAddRoomSuccess(room: Room1) {
-//        var nomroom = RoomName.text;
-//        var description = Subject.text;
-//      //  nomroom = room.name
-      //  description = room.subject
-      //  selectarrayusers = room.users
-        
-        
-        
-        
     }
     
     func presentAddRoomError(error: String) {
         print(error)
-
+        
     }
-  
-  func displaySomething(viewModel: AddRoom.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    
+    func displaySomething(viewModel: AddRoom.Something.ViewModel)
+    {
+        //nameTextField.text = viewModel.name
+    }
     
     @IBAction func BackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func SwitchAction(_ sender: UISwitch) {
+        
+        if sender.isOn {
+        boolstate = true
+            print(boolstate)
+            
+        } else {
+      boolstate = false
+        }
+    }
+    
+    
+    @IBAction func test2(_ sender: UITextField) {
+        
+        if (Subject.text?.isEmpty == false && RoomName.text?.isEmpty == false){
+                  createbtn.isEnabled = true
+              }
+              else{
+                  createbtn.isEnabled = false
+
+              }
+    }
+    @IBAction func test1rom(_ sender: UITextField) {
+        
+        if (Subject.text?.isEmpty == false && RoomName.text?.isEmpty == false){
+                  createbtn.isEnabled = true
+              }
+              else{
+                  createbtn.isEnabled = false
+
+              }
+    }
+   
     @IBAction func AddRoomAction(_ sender: Any) {
-        
-        
+    
         let nomroom = RoomName.text!
         let description = Subject.text!
-        interactor?.AddRoom(name: nomroom, subject: description, users: selectarrayusers)
+        
+       
+        let myUrl = Keys.MobileIntegrationServer.baseURL + "/room"
+                
+                let parameters: [String: Any] = [
+                    "name":nomroom,
+                    "subject":description,
+                    "user":
+                        [
+                            "id": UserDefaultLogged.idUD,
+                            
+                        ],
+                    "users": selectarrayusers,
+                    "isPrivate": boolstate
+                        
+                ]
+                
+               
+                AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
+                    .responseJSON { response in
+      
+     
+        
+            //interactor?.AddRoom(name: nomroom, subject: description, user: userlogged, isPrivate: boolstate, users: selectarrayusers)
         
         self.performSegue(withIdentifier: "main", sender: self)
-
         
-//
-//        let nomroom = RoomName.text;
-//        let description = Subject.text;
-//             //  nomroom = room.name
-//             //  description = room.subject
-//             //  selectarrayusers = room.users
-//                let parameters: [String: Any] = [
-//                          "name":nomroom!,
-//                          "subject":description!,
-//                          "users": selectarrayusers
-//
-//
-//                      ]
-//
-//
-//
-//
-//                      AF.request("herherhe", method: .post, parameters: parameters,encoding: JSONEncoding.init())
-//                      .responseJSON { response in
-//                          print(response.request)
-//                          print(response.response)
-//                          print(response.result)
-//
-//
-//
-//
-//                      }
-        
-//      let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let RoomViewController = storyBoard.instantiateViewController(withIdentifier: "RoomViewController") as! RoomViewController
-//
-//        RoomViewController.modalPresentationStyle = .fullScreen
-//
-//        self.present(RoomViewController, animated: true, completion: nil)
-        
-//
-        
+    }
     }
 }
 
@@ -208,93 +227,74 @@ class AddRoomViewController: UIViewController, AddRoomDisplayLogic
 
 extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
     
-   
-   @IBAction func BtnSelectAll(_ sender: UIButton) {
     
-    self.selectarrayusers.removeAll()
-    
-    if sender.isSelected{
-        for row in 0..<arrFilter.count {
-            tv.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
-        }
-        sender.isSelected = false
-        sender.setImage(UIImage(named: "ok"), for: .normal)
-       // print(Userscells.count)
-        selectalllabel.text = ("Désélectionner tous les utilisateurs")
-        numberusers.text = (String(arrFilter.count) + " utilisateurs")
-
-        if let arr = tv.indexPathsForSelectedRows {
-            for index in arr{
-             //   selectarrayusers.append(arrFilter[index.row].id)
-              //   selectarrayusers.append(Userscells[index.row])
-                
-            //    selectarrayusers = [Userscells[index.row].id]
-
-                let dddddd = try users[index.row].jsonData
-                               // To get dictionary from `Data`
-                do {
-                    let json = try JSONSerialization.jsonObject(with: dddddd(), options: [])
-                    guard let dictionary = json as? [String : Any] else { return }
-                    
-                    selectarrayusers.append(dictionary)
-                    
-                } catch {
-                print(error.localizedDescription)
-                }
-                
-
-            }
-        }
-       // print(selectarrayusers)
+    @IBAction func BtnSelectAll(_ sender: UIButton) {
         
-        
-      //  selectarrayusers = Userscells
-        
-    }else{
-        
-        for row in 0..<arrFilter.count {
-        self.tv.deselectRow(at: IndexPath(row: row, section: 0), animated: false)
-
-        }
-        sender.isSelected = true
-        sender.setImage(UIImage(named: "circle25"), for: .normal)
-        selectalllabel.text = ("Sélectionner tous les utilisateurs")
-        numberusers.text = ("0 utilisateur")
-
-
-
-
         self.selectarrayusers.removeAll()
         
-        
-         
+        if sender.isSelected{
+            for row in 0..<arrFilter.count {
+                tv.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+            }
+            sender.isSelected = false
+            sender.setImage(UIImage(named: "ok"), for: .normal)
+            selectalllabel.text = ("Désélectionner tous les utilisateurs")
+            numberusers.text = (String(arrFilter.count) + " utilisateurs")
+            
+            if let arr = tv.indexPathsForSelectedRows {
+                for index in arr{
+                   
+                    let dddddd = try users[index.row].jsonData
+                    // To get dictionary from `Data`
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: dddddd(), options: [])
+                        guard let dictionary = json as? [String : Any] else { return }
+                        
+                        selectarrayusers.append(dictionary)
+                        
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+            }
+            
+                    
+        }else{
+            
+            for row in 0..<arrFilter.count {
+                self.tv.deselectRow(at: IndexPath(row: row, section: 0), animated: false)
+                
+            }
+            sender.isSelected = true
+            sender.setImage(UIImage(named: "circle25"), for: .normal)
+            selectalllabel.text = ("Sélectionner tous les utilisateurs")
+            numberusers.text = ("0 utilisateur")
+            self.selectarrayusers.removeAll()
+             
+        }
         
     }
     
-  // print(selectarrayusers)
-
-          
-      }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-                return arrFilter.count
-
+        return arrFilter.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-          guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UsersTableViewCell
-                               else{
-                                   return UITableViewCell()
-                           }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UsersTableViewCell
+            else{
+                return UITableViewCell()
+        }
         
         cell.usernom.text = arrFilter[indexPath.row].firstName + " " + arrFilter[indexPath.row].lastName
         
         let image = self.arrFilter[indexPath.row].image
-              
-
+        
+        
         cell.imguser.kf.setImage(with: URL(string: image))
         
         return cell
@@ -302,29 +302,16 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      //  let cell = tvuser.cellForRow(at: indexPath) as! AddUserTableViewCell
-
-        //    cell.checkuser.image = UIImage(named: "ok")
-        
-        
-        
+       
         self.selectdeselctrow(tableview: tv, indexpath: indexPath)
-               
-               
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         self.selectdeselctrow(tableview: tv, indexpath: indexPath)
         
         
-        
-        
-        //  let cell = tvuser.cellForRow(at: indexPath) as! AddUserTableViewCell
-
-                  // cell.checkuser.image = UIImage(named: "circle")
-        
-        
-
     }
     
     func selectdeselctrow(tableview:UITableView, indexpath:IndexPath){
@@ -332,10 +319,10 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
         self.selectarrayusers.removeAll()
         if let arr = tableview.indexPathsForSelectedRows {
             for index in arr{
-              //  selectarrayusers.append(arrFilter[index.row].id)
-                 
+                //  selectarrayusers.append(arrFilter[index.row].id)
+                
                 let dddddd = try users[index.row].jsonData
-                               // To get dictionary from `Data`
+                // To get dictionary from `Data`
                 do {
                     let json = try JSONSerialization.jsonObject(with: dddddd(), options: [])
                     guard let dictionary = json as? [String : Any] else { return }
@@ -343,34 +330,26 @@ extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
                     selectarrayusers.append(dictionary)
                     
                 } catch {
-                print(error.localizedDescription)
+                    print(error.localizedDescription)
                 }
                 
-
+                
             }
         }
-      //  print(selectarrayusers)
-        //print(selectarrayusers.count)
-        
-        
-       
         
         
         if (selectarrayusers.count == 1) {
             numberusers.text = "1 utilisateur"
         }
-            
-             if (selectarrayusers.count == 0) {
-                                         numberusers.text = "0 utilisateur"
-                                     }
+        
+        if (selectarrayusers.count == 0) {
+            numberusers.text = "0 utilisateur"
+        }
         
         if (selectarrayusers.count >= 2) {
             numberusers.text = (String(selectarrayusers.count) + " utilisateurs")
-
-            
+           
         }
-
-        
         
     }
     
@@ -389,11 +368,11 @@ extension AddRoomViewController:UISearchBarDelegate{
             return
         }
         arrFilter = users.filter({ (ussss) -> Bool in
-         
+            
             return ussss.firstName.lowercased().contains(searchText.lowercased())
         })
         tv.reloadData()
-       }
+    }
     
     
 }

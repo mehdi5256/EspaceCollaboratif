@@ -28,7 +28,6 @@ class RoomInteractor: RoomBusinessLogic, RoomDataStore
     var presenter: RoomPresentationLogic?
     var worker: RoomWorker?
     //var name: String = ""
-    var room: Room1!
 
     
     // MARK: Do something

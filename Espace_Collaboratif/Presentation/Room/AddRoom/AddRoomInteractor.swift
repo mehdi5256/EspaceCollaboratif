@@ -15,7 +15,7 @@ import UIKit
 protocol AddRoomBusinessLogic
 {
     func getUsers()
-    func AddRoom (name:String , subject:String, users: [Dictionary<String,Any>])
+    func AddRoom (name:String , subject:String,user:User,isPrivate:Bool, users: [Dictionary<String,Any>])
 
 }
 
@@ -26,16 +26,16 @@ protocol AddRoomDataStore
 
 class AddRoomInteractor: AddRoomBusinessLogic, AddRoomDataStore
 {
-    func AddRoom(name: String, subject: String, users: [Dictionary<String,Any>]) {
+    func AddRoom(name: String, subject: String, user:User,isPrivate:Bool, users: [Dictionary<String,Any>]) {
         worker = AddRoomWorker()
-        worker?.AddRoom(name: name, subject: subject, users: users).then
-        { addroom in
-
-            self.presenter?.presentAddRoomSucess(response : addroom)
-            }.catch { error in
-    self.presenter?.presentAddRoomError(error: error.localizedDescription)
-
-                          }
+        worker?.AddRoom(name: name, subject: subject, user:user , isPrivate: isPrivate, users: users).then
+            { addroom in
+                
+                self.presenter?.presentAddRoomSucess(response : addroom)
+        }.catch { error in
+            self.presenter?.presentAddRoomError(error: error.localizedDescription)
+            
+        }
     }
     
    
@@ -44,7 +44,6 @@ class AddRoomInteractor: AddRoomBusinessLogic, AddRoomDataStore
         worker = AddRoomWorker()
         worker?.getUsers().then {
         users in
-        print(users)
         self.presenter?.presentUsersSuccess(users: users)
             }.catch {
             error in

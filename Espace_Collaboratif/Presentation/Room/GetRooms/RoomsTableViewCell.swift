@@ -39,25 +39,7 @@ class RoomsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-  func loadData(room: Room1){
-    self.RoomName.text = room.name
-    //self.NumPoste.text = room.id?.description
-    self.UserName.text = room.subject
-    self.selectionStyle = .none
-
-
-    
-
-     }
-    func config(){
-    
-        cv.reloadData()
-
-     }
-    
-    
-
-    func setGradientBackground(colorOne: UIColor, colorTwo: UIColor) {
+   func setGradientBackground(colorOne: UIColor, colorTwo: UIColor) {
 
         if let gradientLayer = viewcell.layer.sublayers?.first as? CAGradientLayer {
             gradientLayer.colors = [colorOne.cgColor, colorTwo.cgColor]

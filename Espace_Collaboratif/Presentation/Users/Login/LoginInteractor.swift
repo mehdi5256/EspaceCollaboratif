@@ -36,7 +36,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
         worker?.me(token: token).then {
             userme in
             //print(userme)
-                UserDefaultLogged.idUD = userme.id!
+            UserDefaultLogged.idUD = userme.id
                 UserDefaultLogged.firstNameUD = userme.firstName
                 UserDefaultLogged.lasttNameUD = userme.lastName
                 UserDefaultLogged.emailUD = userme.email

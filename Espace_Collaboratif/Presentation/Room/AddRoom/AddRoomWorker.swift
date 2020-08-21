@@ -19,7 +19,8 @@ class AddRoomWorker
   {
     return RoomAPIClient.getUsers()
   }
-    func AddRoom (name:String , subject:String, users: [Dictionary<String,Any>]) -> Promise<Room1>{
-        return RoomAPIClient.AddRoom(name: name, subject: subject, users:users)
+    func AddRoom (name:String , subject:String, user:User,isPrivate:Bool, users: [Dictionary<String,Any>]) -> Promise<Room1>{
+        return RoomAPIClient.AddRoom(name: name, subject: subject, user: user, isPrivate: isPrivate, users:users)
+        
     }
 }

@@ -19,8 +19,8 @@ class RoomAPIClient: APIClient {
         return performRequest(route: RoomsEndPoints.getUsers)
     }
     
-    static func AddRoom (name:String , subject:String, users: [Dictionary<String,Any>]) -> Promise<Room1> {
-           return performRequest(route: RoomsEndPoints.AddRoom(name: name, subject: subject, users: users))
+    static func AddRoom (name:String , subject:String, user:User, isPrivate: Bool, users: [Dictionary<String,Any>]) -> Promise<Room1> {
+        return performRequest(route: RoomsEndPoints.AddRoom(name: name, subject: subject, user: user, isPrivate: isPrivate,  users: users))
        }
     
     static func getRoomById(id: Int) -> Promise<[Messenger1]> {

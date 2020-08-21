@@ -14,7 +14,8 @@ class TextReceiverCell1: UITableViewCell {
     
     let selectReaction    = ReactionSelector()
      static var typereac: String?
-
+    @IBOutlet weak var heightReaction: NSLayoutConstraint!
+    
     @IBOutlet weak var ReactionSummary: ReactionSummary!{
          didSet {
            
@@ -33,7 +34,11 @@ class TextReceiverCell1: UITableViewCell {
            }
          }
        }
-       
+      override func prepareForReuse() {
+           super.prepareForReuse()
+        img.image = nil
+           // Clear all content based views and their actions here
+       }
      
     @IBOutlet weak var ReactionBtn: ReactionButton! {
 

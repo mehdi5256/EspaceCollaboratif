@@ -47,7 +47,9 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
     setup()
   }
   
+    @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var tv: UITableView!
+    @IBOutlet weak var viewVote: UIView!
     @IBAction func btnvalid(_ sender: Any) {
     }
     @IBOutlet weak var suestlbl: UILabel!
@@ -103,13 +105,25 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
      tv.register(UINib(nibName: "VoteTableViewCell", bundle: nil), forCellReuseIdentifier: "VoteTableViewCell")
    
     suestlbl.text = question
+    
+    tv.tableFooterView = UIView()
+    
+    sendBtn.isEnabled = false
+
+    
+    viewVote.roundCorners([.topLeft, .topRight] , radius: 50)
+
   }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
   
-  func doSomething()
+   
+    @IBAction func Dismiss(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    func doSomething()
   {
     let request = VoteSondage.Something.Request()
     interactor?.doSomething(request: request)
@@ -123,6 +137,8 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
         
         
         interactor?.sendVoteSondage(idroom: UserDefaultLogged.idRoom, type: "VOTE", choixId:idvote!, messageId: UserDefaultLogged.idMsg)
+        
+        dismiss(animated: true, completion: nil)
       }
  
 }
@@ -138,6 +154,13 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
         let cellchoix = tv.dequeueReusableCell(withIdentifier: "VoteTableViewCell", for: indexPath) as! VoteTableViewCell
         cellchoix.choixlbl.text = sondageArray[indexPath.row].body
         
+        for choixuserlogged in sondageArray[indexPath.row].users {
+            
+            if choixuserlogged.id == UserDefaultLogged.idUD{
+                cellchoix.checkedimg.setImage(UIImage(named: "verified"), for: .normal)
+
+            }
+        }
         return cellchoix
         
     }
@@ -149,7 +172,9 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
         
         cellbutton.setImage(UIImage(named: "UnChecked"), for: .normal)
         idvote = sondageArray[indexPath.row].id
-        print(idvote)
+        sendBtn.isEnabled = true
+        sendBtn.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+
 
             
     }
@@ -160,7 +185,8 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
             
             cellbutton.setImage(UIImage(named: "verified"), for: .normal)
         idvote = sondageArray[indexPath.row].id
-        print(idvote)
+        sendBtn.isEnabled = false
+        sendBtn.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
                 
         }

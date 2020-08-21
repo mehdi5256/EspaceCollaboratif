@@ -23,58 +23,48 @@ protocol RoomDisplayLogic: class
 
 class RoomViewController: UIViewController, RoomDisplayLogic
 {
-  var interactor: RoomBusinessLogic?
-  var router: (NSObjectProtocol & RoomRoutingLogic & RoomDataPassing)?
-   
- // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = RoomInteractor()
-    let presenter = RoomPresenter()
-    let router = RoomRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-//  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//  {
-//    if let scene = segue.identifier {
-//      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-//      if let router = router, router.responds(to: selector) {
-//        router.perform(selector, with: segue)
-//      }
-//    }
-//  }
+    var interactor: RoomBusinessLogic?
+    var router: (NSObjectProtocol & RoomRoutingLogic & RoomDataPassing)?
+    
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup()
+    {
+        let viewController = self
+        let interactor = RoomInteractor()
+        let presenter = RoomPresenter()
+        let router = RoomRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
     
     // MARK: View lifecycle
     var rooms: [Room1] = []
     var usersCell: [User] = []
     var usersCoreDataArray: [User] = []
-
+    
     let reachability = try! Reachability()
-
+    
     //outlets
     @IBOutlet weak var ViewNoConnection: UIView!
     @IBOutlet weak var BtnAddOutlet: UIButton!
@@ -82,7 +72,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     
     // CORE DATA
     var roomsCD: [RoomCoreData] = []
-
+    
     // END CORE DATA
     
     @objc func reachabilityChanged(note: Notification) {
@@ -102,90 +92,90 @@ class RoomViewController: UIViewController, RoomDisplayLogic
             
         }
     }
-   
+    
     
     override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    
-    let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
-    roomsCD =   try! AppDelegate.viewContext.fetch(request)
-    
-    setupButton()
-    
-    
-    reachability.whenReachable = { reachability in
-        if reachability.connection == .wifi {
-            print("Reachable via WiFi")
-            self.interactor?.getRooms()
-            
-
-        } else {
-            print("Reachable via Cellular")
-
+    {
+        super.viewDidLoad()
+        
+        let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
+        roomsCD =   try! AppDelegate.viewContext.fetch(request)
+        
+        setupButton()
+        
+        
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                print("Reachable via WiFi")
+                self.interactor?.getRooms()
+                
+                
+            } else {
+                print("Reachable via Cellular")
+                
+            }
         }
-    }
-    reachability.whenUnreachable = { _ in
-        print("Not reachable")
-        self.ViewNoConnection.isHidden = true
-
-    }
-
-    do {
-        try reachability.startNotifier()
-    } catch {
-        print("Unable to start notifier")
-    }
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
-    do{
-      try reachability.startNotifier()
-    }catch{
-      print("could not start reachability notifier")
-    }
-    
-    
-    //refresh table view
-    
-    
-    let loadingFooter = NormalFooterAnimator()
-           loadingFooter.loadingDescription = "Chargement "
-           loadingFooter.noMoreDataDescription = "pas d'autres contacts"
-           let loadingHeader = NormalHeaderAnimator()
-           loadingHeader.loadingDescription = "Chargement "
-           loadingHeader.pullToRefreshDescription = "Tirer pour rafraîchir"
-           loadingHeader.releaseToRefreshDescription = "Relâcher pour rafraîchir"
-           tv.backgroundColor = UIColor(named: "f5f5f5")
-           
-      /// animator: your customize animator, default is NormalHeaderAnimator
-      tv.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
-          /// start refresh
-          /// Do anything you want...
-          DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-              /// Stop refresh when your job finished, it will reset refresh footer if completion is true
-            self?.interactor?.getRooms()
-            self?.tv.cr.endHeaderRefresh()
-
-          })
-      }
-      /// manual refresh
-     // tv.cr.beginHeaderRefresh()
-           
-    
-   
-    // core data
-   
-
+        reachability.whenUnreachable = { _ in
+            print("Not reachable")
+            self.ViewNoConnection.isHidden = true
+            
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+        
+        
+        //refresh table view
+        
+        
+        let loadingFooter = NormalFooterAnimator()
+        loadingFooter.loadingDescription = "Chargement "
+        loadingFooter.noMoreDataDescription = "pas d'autres contacts"
+        let loadingHeader = NormalHeaderAnimator()
+        loadingHeader.loadingDescription = "Chargement "
+        loadingHeader.pullToRefreshDescription = "Tirer pour rafraîchir"
+        loadingHeader.releaseToRefreshDescription = "Relâcher pour rafraîchir"
+        tv.backgroundColor = UIColor(named: "f5f5f5")
+        
+        /// animator: your customize animator, default is NormalHeaderAnimator
+        tv.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+            /// start refresh
+            /// Do anything you want...
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                /// Stop refresh when your job finished, it will reset refresh footer if completion is true
+                self?.interactor?.getRooms()
+                self?.tv.cr.endHeaderRefresh()
+                
+            })
+        }
+        /// manual refresh
+        // tv.cr.beginHeaderRefresh()
+        
+        
+        
+        // core data
+        
+        
     }
     
     func isEntityAttributeExist(id: Int32, entityName: String) -> Bool {
-      let appDelegate = UIApplication.shared.delegate as! AppDelegate
-      let managedContext = appDelegate.persistentContainer.viewContext
-      let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-      fetchRequest.predicate = NSPredicate(format: "id == %u", id)
-
-      let res = try! managedContext.fetch(fetchRequest)
-      return res.count > 0 ? true : false
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "id == %u", id)
+        
+        let res = try! managedContext.fetch(fetchRequest)
+        return res.count > 0 ? true : false
     }
     
     func setupButton() {
@@ -194,30 +184,26 @@ class RoomViewController: UIViewController, RoomDisplayLogic
         BtnAddOutlet.layer.masksToBounds = true
         BtnAddOutlet.clipsToBounds = true
     }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
+    
+    // MARK: Do something
+    
+    //@IBOutlet weak var nameTextField: UITextField!
     
     func displayListeSuccess(rooms: [Room1]){
         self.rooms = rooms
         for r in  self.rooms{
             if self.isEntityAttributeExist(id: Int32(r.id!), entityName: "RoomCoreData"){
-                print("duplication ma tzidech")
             }
             else{
-                print("zid fel core data")
                 let roomcc = RoomCoreData(context: AppDelegate.viewContext)
                 roomcc.id = Int32(r.id!)
                 roomcc.name = r.name
                 roomcc.subject = r.subject
                 let jsonData = try! JSONEncoder().encode(r.users)
-               // let jsonString = String(data: jsonData, encoding: .utf8)!
-              //  print(jsonString)
                 roomcc.users = jsonData
                 try? AppDelegate.viewContext.save()
                 let request:NSFetchRequest<RoomCoreData> = RoomCoreData.fetchRequest()
-                   roomsCD =   try! AppDelegate.viewContext.fetch(request)
+                roomsCD =   try! AppDelegate.viewContext.fetch(request)
                 
                 
             }
@@ -238,24 +224,24 @@ class RoomViewController: UIViewController, RoomDisplayLogic
 
 
 extension RoomViewController: UITableViewDataSource{
-      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          switch NetworkStatus.Connection() {
-          case false:
-              print("not conncted")
-              return self.roomsCD.count
-
-          default:
-              print("connected")
-              return rooms.count
-          }
-          
-      }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch NetworkStatus.Connection() {
+        case false:
+            print("not conncted")
+            return self.roomsCD.count
+            
+        default:
+            print("connected")
+            return rooms.count
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-    guard let cell = tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RoomsTableViewCell else {
-        return tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                                 }
+        
+        guard let cell = tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RoomsTableViewCell else {
+            return tv.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        }
         
         switch NetworkStatus.Connection() {
         case false:
@@ -264,59 +250,56 @@ extension RoomViewController: UITableViewDataSource{
             //         affichage core data
             cell.RoomName.text = roomsCD[indexPath.item].name!
             cell.UserName.text = roomsCD[indexPath.item].subject
-          //  cell.NumPoste.text  =  (roomsCD[indexPath.item].id).description
             usersCoreDataArray = try! JSONDecoder().decode([User].self, from: roomsCD[indexPath.row].users! )
-
-      
+            
+            
         default:
             
             let roomindex = rooms[indexPath.item]
             cell.RoomName.text = roomindex.name!
             cell.UserName.text = (roomindex.user?.firstName ?? "") + " " + (roomindex.user?.lastName ?? "")
-            
-          //  cell.NumPoste.text  =  (roomindex.id!).description
             self.usersCell = roomindex.users
             if (roomindex.isPrivate! == false){
                 
                 cell.iconpriv.image = UIImage(systemName: "lock.open")
-
+                
             }
             if (roomindex.isPrivate! == true){
                 
                 cell.iconpriv.image = UIImage(systemName: "lock")
-
+                
             }
         }
         
         cell.selectionStyle = .none
-//        let frequency = indexPath.item % 10;
-//        switch (frequency) {
-//        case 0:
-//            cell.setGradientBackground(colorOne: Colors.Blue1, colorTwo: Colors.Blue2)
-//            break;
-//        case 1:
-//            cell.setGradientBackground(colorOne: Colors.Blue7, colorTwo: Colors.Blue3)
-//
-//            break;
-//            
-//        case 2:
-//            cell.setGradientBackground(colorOne: Colors.skyblue2, colorTwo: Colors.blue)
-//            break;
-//            
-//        case 3:
-//            cell.setGradientBackground(colorOne: Colors.Blue5, colorTwo: Colors.Blue1)
-//            break;
-//        case 4:
-//            cell.setGradientBackground(colorOne: Colors.Blue4, colorTwo: Colors.Blue1)
-//            break;
-//        //up to case 9
-//        default:
-//            break;
-//        }
+        //        let frequency = indexPath.item % 10;
+        //        switch (frequency) {
+        //        case 0:
+        //            cell.setGradientBackground(colorOne: Colors.Blue1, colorTwo: Colors.Blue2)
+        //            break;
+        //        case 1:
+        //            cell.setGradientBackground(colorOne: Colors.Blue7, colorTwo: Colors.Blue3)
+        //
+        //            break;
+        //
+        //        case 2:
+        //            cell.setGradientBackground(colorOne: Colors.skyblue2, colorTwo: Colors.blue)
+        //            break;
+        //
+        //        case 3:
+        //            cell.setGradientBackground(colorOne: Colors.Blue5, colorTwo: Colors.Blue1)
+        //            break;
+        //        case 4:
+        //            cell.setGradientBackground(colorOne: Colors.Blue4, colorTwo: Colors.Blue1)
+        //            break;
+        //        //up to case 9
+        //        default:
+        //            break;
+        //        }
         
         return  cell
     }
-
+    
 }
 
 extension RoomViewController: UICollectionViewDataSource,UICollectionViewDelegate{
@@ -324,98 +307,96 @@ extension RoomViewController: UICollectionViewDataSource,UICollectionViewDelegat
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch NetworkStatus.Connection() {
-               case false:
+        case false:
             return usersCoreDataArray.count>4 ?  4 : usersCoreDataArray.count;
-
-                
-                default:
-
-        return usersCell.count>4 ?  4 : usersCell.count;
+            
+            
+        default:
+            
+            return usersCell.count>4 ?  4 : usersCell.count;
         }
-
-        }
+        
+    }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch NetworkStatus.Connection() {
-                      case false:
-                        
-                   guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
-                                     else{
-                                         return UserCollectionViewCell()
-                                 }
-                               
-                          let image = self.usersCoreDataArray[indexPath.item].image
-                          cell.lblnmbruser.text = "+" + (usersCoreDataArray.count-4).description
-
-
-                         cell.UserImage.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic_user")) {
-                             result in
-                             switch result {
-                             case .success:
-                                 break
-                             case .failure:
-                                 cell.UserImage.image = UIImage(named: "ic_user")!
-                             }
-                         }
-                          
-                          
-                          
-                          if (indexPath.item) < 3 {
-                              
-                              cell.lblnmbruser.isHidden = true
-                              
-                              
-                          }
-                          if (indexPath.item) == 3 {
-                              
-                              cell.lblnmbruser.isHidden = false
-                              
-                              
-                          }
-                          return cell
-                          
-                      
-                       default:
-      
-
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
-                   else{
-                       return UserCollectionViewCell()
-               }
-             
-        let image = self.usersCell[indexPath.item].image
-        cell.lblnmbruser.text = "+" + (usersCell.count-4).description
-
-
-       cell.UserImage.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic_user")) {
-           result in
-           switch result {
-           case .success:
-               break
-           case .failure:
-               cell.UserImage.image = UIImage(named: "ic_user")!
-           }
-       }
-        
-        
-        
-        if (indexPath.item) < 3 {
+        case false:
             
-            cell.lblnmbruser.isHidden = true
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
+                else{
+                    return UserCollectionViewCell()
+            }
             
+            let image = self.usersCoreDataArray[indexPath.item].image
+            cell.lblnmbruser.text = "+" + (usersCoreDataArray.count-4).description
+            
+            
+            cell.UserImage.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic_user")) {
+                result in
+                switch result {
+                case .success:
+                    break
+                case .failure:
+                    cell.UserImage.image = UIImage(named: "ic_user")!
+                }
+            }
+            
+            if (indexPath.item) < 3 {
+                
+                cell.lblnmbruser.isHidden = true
+                
+                
+            }
+            if (indexPath.item) == 3 {
+                
+                cell.lblnmbruser.isHidden = false
+                
+                
+            }
+            return cell
+            
+            
+        default:
+            
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as? UserCollectionViewCell
+                else{
+                    return UserCollectionViewCell()
+            }
+            
+            let image = self.usersCell[indexPath.item].image
+            cell.lblnmbruser.text = "+" + (usersCell.count-4).description
+            
+            
+            cell.UserImage.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic_user")) {
+                result in
+                switch result {
+                case .success:
+                    break
+                case .failure:
+                    cell.UserImage.image = UIImage(named: "ic_user")!
+                }
+            }
+            
+            
+            
+            if (indexPath.item) < 3 {
+                
+                cell.lblnmbruser.isHidden = true
+                
+                
+            }
+            if (indexPath.item) == 3 {
+                
+                cell.lblnmbruser.isHidden = false
+                
+                
+            }
+            return cell
             
         }
-        if (indexPath.item) == 3 {
-            
-            cell.lblnmbruser.isHidden = false
-            
-            
-        }
-        return cell
-        
     }
-          }
     
     
 }
@@ -436,64 +417,58 @@ extension RoomViewController: UICollectionViewDelegateFlowLayout{
     }
     
     
-   
-    
-    
 }
 
 extension RoomViewController:UITableViewDelegate{
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           performSegue(withIdentifier: "todetail", sender: indexPath)
-           
-       }
-    
-    
-       
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        performSegue(withIdentifier: "todetail", sender: indexPath)
         
-        switch reachability.connection {
-        case .wifi:
-            if segue.identifier == "todetail"{
-                let DVC = segue.destination as! MessengerViewController
-                let indice = sender as! IndexPath
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            
+            switch reachability.connection {
+            case .wifi:
+                if segue.identifier == "todetail"{
+                    let DVC = segue.destination as! MessengerViewController
+                    let indice = sender as! IndexPath
+                    
+                    DVC.nomroom = rooms[indice.row].name
+                    DVC.idroom = rooms[indice.row].id
+                    
+                    //CORE DATA
+                    
+//                    DVC.RoomSelectecCoreData = roomsCD[indice.row]
+//                    
+//                    DVC.nomroom = roomsCD[indice.row].name
+//                    DVC.RoomSelectecCoreData = roomsCD[indice.row]
+//                    navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
+                   
+                }
                 
-                DVC.nomroom = rooms[indice.row].name
-                DVC.idroom = rooms[indice.row].id
                 
-                //CORE DATA
+            case .cellular:
+                print("Reachable via Cellular")
+            case .unavailable:
+                if segue.identifier == "todetail"{
+                    
+                    let DVC = segue.destination as! MessengerViewController
+                    let indice = sender as! IndexPath
+                    DVC.nomroom = roomsCD[indice.row].name
+                    DVC.RoomSelectecCoreData = roomsCD[indice.row]
+                    
+                    navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
+                    
+                    
+                }
                 
-                DVC.RoomSelectecCoreData = roomsCD[indice.row]
+            case .none:
+                print("none")
                 
-                DVC.nomroom = roomsCD[indice.row].name
-                DVC.RoomSelectecCoreData = roomsCD[indice.row]
-                navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-               
             }
             
-            
-        case .cellular:
-            print("Reachable via Cellular")
-        case .unavailable:
-            if segue.identifier == "todetail"{
-                
-                let DVC = segue.destination as! MessengerViewController
-                let indice = sender as! IndexPath
-                DVC.nomroom = roomsCD[indice.row].name
-                DVC.RoomSelectecCoreData = roomsCD[indice.row]
-                
-                navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-                
-                
-            }
-            
-        case .none:
-            print("none")
             
         }
         
         
     }
-    
-    
-}

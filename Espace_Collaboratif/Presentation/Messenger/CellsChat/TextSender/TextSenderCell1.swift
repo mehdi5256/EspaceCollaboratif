@@ -55,6 +55,7 @@ class TextSenderCell1: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     
     
+    @IBOutlet weak var heightReaction: NSLayoutConstraint!
     @IBOutlet weak var BtnReaction: UIButton!
     
     var delegate: ReactionDelegate?
@@ -69,6 +70,12 @@ class TextSenderCell1: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func prepareForReuse() {
+           super.prepareForReuse()
+        img.image = nil
+           // Clear all content based views and their actions here
+       }
     
    
    

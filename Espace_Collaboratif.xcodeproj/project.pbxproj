@@ -107,6 +107,7 @@
 		91A39625245386A5005F43F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A39623245386A5005F43F4 /* Main.storyboard */; };
 		91A3962A245386A7005F43F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91A39629245386A7005F43F4 /* Assets.xcassets */; };
 		91A3962D245386A7005F43F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A3962B245386A7005F43F4 /* LaunchScreen.storyboard */; };
+		91A55EF324EF59F600F14A16 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A55EF224EF59F600F14A16 /* Badge.swift */; };
 		91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A618245B9AA0004F0C3D /* EventBus.swift */; };
 		91A6A61B245B9AAB004F0C3D /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A61A245B9AAB004F0C3D /* Mutex.swift */; };
 		91A6A61D245B9AB9004F0C3D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6A61C245B9AB9004F0C3D /* Message.swift */; };
@@ -239,6 +240,7 @@
 		91A39629245386A7005F43F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91A3962C245386A7005F43F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91A3962E245386A7005F43F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91A55EF224EF59F600F14A16 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		91A6A618245B9AA0004F0C3D /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
 		91A6A61A245B9AAB004F0C3D /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		91A6A61C245B9AB9004F0C3D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				914E1E7B24DA35FF001BC09F /* Topic1.swift */,
 				914E1E7D24DA36A8001BC09F /* Tag.swift */,
 				91C7ED3224E1988F00D0D8D2 /* Reply1.swift */,
+				91A55EF224EF59F600F14A16 /* Badge.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 				914E1E7E24DA36A8001BC09F /* Tag.swift in Sources */,
 				9127F7FF24B3F84F0091968A /* AddSondageWorker.swift in Sources */,
 				91A39622245386A5005F43F4 /* ViewController.swift in Sources */,
+				91A55EF324EF59F600F14A16 /* Badge.swift in Sources */,
 				9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */,
 				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
 				919A8475245AA7140094CE42 /* Messenger1.swift in Sources */,

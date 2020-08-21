@@ -115,7 +115,6 @@
                     <constraint firstItem="0nU-AF-MUZ" firstAttribute="top" secondItem="wr5-Wv-qNK" secondAttribute="top" id="G8M-6A-MRa"/>
                     <constraint firstItem="0nU-AF-MUZ" firstAttribute="trailing" secondItem="wr5-Wv-qNK" secondAttribute="trailing" constant="-5" id="Mxr-YQ-6hI"/>
                     <constraint firstAttribute="bottom" secondItem="esN-tE-6KD" secondAttribute="bottom" constant="7" id="O2j-7B-VHK"/>
-                    <constraint firstAttribute="bottom" secondItem="ss0-DM-nCD" secondAttribute="bottom" constant="29" id="RRR-Mh-KO0"/>
                     <constraint firstItem="Gen-li-F7d" firstAttribute="bottom" secondItem="wr5-Wv-qNK" secondAttribute="bottom" id="Te5-uB-Th3"/>
                     <constraint firstItem="0nU-AF-MUZ" firstAttribute="leading" secondItem="wr5-Wv-qNK" secondAttribute="leading" constant="5" id="Vco-6j-8b2"/>
                     <constraint firstItem="0nU-AF-MUZ" firstAttribute="bottom" secondItem="wr5-Wv-qNK" secondAttribute="bottom" id="WHx-bd-vxM"/>
@@ -124,6 +123,7 @@
                     <constraint firstItem="wr5-Wv-qNK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l5j-G3-vRz" secondAttribute="leading" constant="60" id="hVG-Pq-BZO"/>
                     <constraint firstItem="ss0-DM-nCD" firstAttribute="leading" secondItem="wr5-Wv-qNK" secondAttribute="trailing" constant="8" id="kaa-6C-h8h"/>
                     <constraint firstItem="wr5-Wv-qNK" firstAttribute="top" secondItem="l5j-G3-vRz" secondAttribute="top" constant="5" id="qQ6-5S-mFt"/>
+                    <constraint firstItem="esN-tE-6KD" firstAttribute="top" secondItem="ss0-DM-nCD" secondAttribute="bottom" constant="-3" id="sG6-Z7-Itg"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -132,6 +132,7 @@
                 <outlet property="ReactionBtn" destination="Gen-li-F7d" id="LlH-nT-gxL"/>
                 <outlet property="ReactionSummary" destination="N9w-RP-YOi" id="d5z-pb-8fL"/>
                 <outlet property="ViewReaction" destination="esN-tE-6KD" id="e3R-JT-PAC"/>
+                <outlet property="heightReaction" destination="4Po-hc-MqF" id="GYT-OJ-51a"/>
                 <outlet property="img" destination="ss0-DM-nCD" id="Hgy-Zr-MWW"/>
                 <outlet property="timstamp" destination="mUA-cS-btb" id="Sdk-0g-VXr"/>
                 <outlet property="txt" destination="0nU-AF-MUZ" id="3f0-6i-2Mj"/>

@@ -70,7 +70,6 @@ class ReactionsViewController: UIViewController, ReactionsDisplayLogic
     var reactionsArray:[Reaction1] = []
       override func viewDidLoad()
   {
-    print (reactionsArray)
     super.viewDidLoad()
     doSomething()
   }

@@ -28,7 +28,7 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
     }
     func displayConnexionSuccess(result: String) {
         print(result)
-        interactor?.connect()
+       // interactor?.connect()
     }
     
   var interactor: AddSondageBusinessLogic?
@@ -53,10 +53,11 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
     
 
   
+    @IBOutlet weak var ViewSondage: UIView!
     @IBOutlet weak var tv: UITableView!
-    @IBAction func BtnChoice(_ sender: Any) {
-    }
     @IBOutlet weak var QuestionOutlet: UITextField!
+    
+    
     private func setup()
   {
     let viewController = self
@@ -73,13 +74,17 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
   }
     
 
-  
+    @IBAction func BtnChoice(_ sender: Any) {
+      }
+    
+    
+    
     @IBAction func BtnCreatePoll(_ sender: Any) {
-
-
+        
+        
         let choixSondageArray = self.choix.map({ ["body": $0] })
-                          print (choixSondageArray)
-     var choixa :[Choi2] = []
+        print (choixSondageArray)
+        var choixa :[Choi2] = []
         
         
         for x in choixSondageArray{
@@ -87,31 +92,26 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
             let choix = Choi2( body: x["body"])
             choixa.append(choix)
         }
-        print("amir")
-
+        
         print(choixa)
         
-    
+        
         
         let Sondage = Messenger2(body: QuestionOutlet.text, type: "SONDAGE", user: User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD), choix: choixa,room: Room1(id: UserDefaultLogged.idRoom, users: []))
         
-        
-
-        
-
-          interactor?.connect()
-        
     interactor?.sendSondage(idroom: UserDefaultLogged.idRoom ,messagesend:Sondage, type: "SONDAGE")
+        
+        dismiss(animated: true, completion: nil)
         
         
     }
     @IBAction func AddChoiceAction(_ sender: Any) {
-        let alert = UIAlertController(title: "Add choix", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ajouter un choix", message: nil, preferredStyle: .alert)
                 alert.addTextField{
                     (choixtf) in
-                    choixtf.placeholder = "enter choix"
+                    choixtf.placeholder = "Ajouter un choix"
                 }
-                let action = UIAlertAction(title: "Add", style: .default){
+                let action = UIAlertAction(title: "Ajouter un choix", style: .default){
                     (_) in
                     guard let choice = alert.textFields?.first?.text
                         else { return }
@@ -119,9 +119,7 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
                     self.choix.append(choice)
                   //  print(self.choix)
                     
-                    for phonenumber in self.choix {
-                        //  print(phonenumber)
-                    }
+                 
                    
 
                     self.tv.reloadData()
@@ -154,10 +152,10 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
     super.viewDidLoad()
     doSomething()
     tv.isEditing = true
-    print("idrooom")
-    print(UserDefaultLogged.idRoom)
-    print("idrooom")
-    tv.tableFooterView = UIView()  // it's just 1 line, awesome!
+    interactor?.connect()
+
+
+    ViewSondage.roundCorners([.topLeft, .topRight] , radius: 50)
 
     
     }

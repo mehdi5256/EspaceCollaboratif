@@ -9,16 +9,14 @@
 import Foundation
 
 public struct User: Codable{
-    var id: String?
+    var id: String
     var firstName: String
     var lastName: String
     var email: String
     var image: String
    // var rooms: Array<String>
-    var  username :  String?
-    
-    
-        
-    
+    var  username :  String
+    var badge : Badge?  
+   
     
 }

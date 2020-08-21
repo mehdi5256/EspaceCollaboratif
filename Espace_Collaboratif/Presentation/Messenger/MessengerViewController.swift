@@ -196,6 +196,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     @IBOutlet weak var bottomtextview: NSLayoutConstraint!
     
+    @IBOutlet weak var BtnBack: UIButton!
+    
+    @IBOutlet weak var BtnAudio: UIButton!
+    @IBOutlet weak var BtnVideo: UIButton!
     //coredata
     
     // var msgscoredataarray = MessageCoreData.all
@@ -313,7 +317,13 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         request.sortDescriptors = [
             NSSortDescriptor(key: "room.name", ascending: false)
         ]
+        
+        switch NetworkStatus.Connection() {
+               case false:
         request.predicate = NSPredicate(format: "room.name == %@", RoomSelectecCoreData!.name!)
+        default:
+            print("okok")
+        }
         
         MessagesArrayCoreData =   try! AppDelegate.viewContext.fetch(request)
         
@@ -361,7 +371,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         interactor?.connect()
         
         RoomName.text = self.nomroom
-
+       
         
         
         design()
@@ -379,6 +389,8 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
        
        
     }
+    
+    
     
      deinit {
           NotificationCenter.default.removeObserver(self)
@@ -510,47 +522,57 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         print(error)
     }
     
-   
+  
+    
 }
 
 
 //// extension jitsi configuration jitsi
 
+
+
 extension MessengerViewController: JitsiMeetViewDelegate {
+    
+    
+    @IBAction func OpenAudioCall(_ sender: Any) {
+        
+        
+        switch reachability.connection {
+        case .wifi:
+            
+         JitsicCall(Videouted:true)
+         case .cellular:
+
+            
+            print("Reachable via Cellular")
+        case .unavailable:
+            print("Network not reachable")
+            
+            let alert = UIAlertController(title: "", message: "Impossible D'émettre un appel. Assurer-vous que votre téléphone est connecté à Internet et réessayez.", preferredStyle: UIAlertController.Style.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+            
+            
+        case .none:
+            print("none")
+            
+        }
+      }
     
     @IBAction func OpenVideoCall(_ sender: Any) {
         
         switch reachability.connection {
                case .wifi:
                    
-                   cleanUp()
-                   // create and configure jitsimeet view
-                   let jitsiMeetView = JitsiMeetView()
-                   jitsiMeetView.delegate = self
-                   self.jitsiMeetView = jitsiMeetView
-                   let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                       builder.welcomePageEnabled = true
-                       
-                       builder.welcomePageEnabled = false
-                       builder.serverURL = (URL(string: Keys.MobileIntegrationServer.jitsiURL))
-                       builder.room = self.nomroom
-                       
-                       self.navigationController?.isNavigationBarHidden = true
-                   }
-                   jitsiMeetView.join(options)
+               JitsicCall(Videouted:false)
+
+                case .cellular:
+
                    
-                   // Enable jitsimeet view to be a view that can be displayed
-                   // on top of all the things, and let the coordinator to manage
-                   // the view state and interactions
-                   pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
-                   pipViewCoordinator?.configureAsStickyView(withParentView: view)
-                   
-                   // animate in
-                   jitsiMeetView.alpha = 0
-                   pipViewCoordinator?.show()
-                   
-                   
-               case .cellular:
                    print("Reachable via Cellular")
                case .unavailable:
                    print("Network not reachable")
@@ -568,16 +590,53 @@ extension MessengerViewController: JitsiMeetViewDelegate {
                    print("none")
                    
                }
+        
        }
     
-    @IBAction func OpenJitsi(_ sender: Any) {
+    func JitsicCall(Videouted:Bool){
+        
+        
+        cleanUp()
+            // create and configure jitsimeet view
+            let jitsiMeetView = JitsiMeetView()
+            jitsiMeetView.delegate = self
+            self.jitsiMeetView = jitsiMeetView
+            let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+                builder.welcomePageEnabled = true
+                 builder.videoMuted = Videouted
+                builder.audioOnly = Videouted
+                builder.welcomePageEnabled = false
+                builder.serverURL = (URL(string: Keys.MobileIntegrationServer.jitsiURL))
+                builder.room = self.nomroom
+                
+            }
+            jitsiMeetView.join(options)
+        
+        BtnAudio.isEnabled = false
+            BtnBack.isEnabled = false
+        BtnVideo.isEnabled = false
+
+
+            // Enable jitsimeet view to be a view that can be displayed
+            // on top of all the things, and let the coordinator to manage
+            // the view state and interactions
+            pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
+            pipViewCoordinator?.configureAsStickyView(withParentView: view)
+            
+            // animate in
+            jitsiMeetView.alpha = 0
+            pipViewCoordinator?.show()
+        
+        
     }
-    
-    fileprivate func cleanUp() {
-        self.navigationController?.isNavigationBarHidden = false
+        fileprivate func cleanUp() {
         jitsiMeetView?.removeFromSuperview()
         jitsiMeetView = nil
         pipViewCoordinator = nil
+            
+            BtnAudio.isEnabled = true
+                      BtnBack.isEnabled = true
+                  BtnVideo.isEnabled = true
         
     }
     
@@ -679,7 +738,9 @@ extension MessengerViewController : UICollectionViewDelegate,UICollectionViewDat
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "VoteSondageViewController") as! VoteSondageViewController
-        vc.modalPresentationStyle = .automatic
+        vc.modalPresentationStyle = .overFullScreen
+        
+
         
         vc.question = msgarray[tag].body
         vc.sondageArray = msgarray[tag].choix ?? []

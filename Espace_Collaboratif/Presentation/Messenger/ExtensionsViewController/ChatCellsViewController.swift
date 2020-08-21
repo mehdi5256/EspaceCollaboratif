@@ -284,18 +284,45 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 TextSenderCell1.txt.text = self.msgarray[indexPath.row].body
                 let image = msgarray[indexPath.row].user.image
                 TextSenderCell1.img.kf.setImage(with: URL(string: image))
-                
+               
+//                let nextIndexPath=NSIndexPath(row: indexPath.row + 1, section: indexPath.section);
+//                
+//                if tableView.isLast(for: indexPath) {
+//                    TextSenderCell1.img.isHidden = false
+//                }
+//                if indexPath.row+1 < msgarray.count {
+//                    
+//                    
+//                    if (msgarray[nextIndexPath.row].user.id ==  msgarray[indexPath.row].user.id){
+//                        TextSenderCell1.img.isHidden = true
+//                        
+//                        
+//                    }
+//                    
+//        
+//                            }
+            
+               
+               
+//                
                 // Reactionsss
                 reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextSenderCell1.BtnReaction.tag = indexPath.row
-
+                
                 self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextSenderCell1.ReactionBtn.tag = indexPath.row
-
+                
                 print(reactionsArray.count)
                 TextSenderCell1.ViewReaction.isHidden = true
+                
+                    TextSenderCell1.heightReaction.constant = 0
+                    TextSenderCell1.layoutIfNeeded()
+             
+
                 if (msgarray[indexPath.row].reactions?.count ?? 0 > 0 ){
                     TextSenderCell1.ViewReaction.isHidden = false
+                    TextSenderCell1.heightReaction.constant = 25
+                                       TextSenderCell1.layoutIfNeeded()
                 }
 //
 //                TextSenderCell1.BtnReaction.setTitle(String("\(reactionsArray.count) reactions"), for: .normal)
@@ -316,80 +343,65 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                     
                     
                     if ["LIKE", "LOVE", "INTERESTING", "BRAVO"].allSatisfy(typereact.contains) {
-                        print("1")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.interesting,Reaction.facebook.bravo]
                         
                     }
                         
                     else if ["INTERESTING", "LOVE", "BRAVO"].allSatisfy(typereact.contains) {
-                        print("2")
                          TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.interesting,Reaction.facebook.bravo]
                     }
                     else if ["INTERESTING", "LOVE", "LIKE"].allSatisfy(typereact.contains) {
-                        print("15")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.interesting]
                     }
                         
                     else if ["INTERESTING", "BRAVO", "LIKE"].allSatisfy(typereact.contains) {
-                        print("3")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.interesting,Reaction.facebook.bravo]
                     }
                     else if ["LOVE", "BRAVO", "LIKE"].allSatisfy(typereact.contains) {
-                        print("4")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love,Reaction.facebook.bravo]
                     }
                         
                         
                     else if ["INTERESTING", "LOVE"].allSatisfy(typereact.contains) {
-                        print("5")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.interesting]
                     }
                         
                     else if ["INTERESTING", "BRAVO"].allSatisfy(typereact.contains) {
-                        print("6")
                          TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.interesting,Reaction.facebook.bravo]
                     }
                         
                     else if ["INTERESTING", "LIKE"].allSatisfy(typereact.contains) {
-                        print("7")
                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.interesting,Reaction.facebook.like]
                     }
                         
                     else  if ["LOVE", "BRAVO"].allSatisfy(typereact.contains) {
-                        print("8")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love,Reaction.facebook.bravo]
                     }
                         
                         
                         
                     else  if ["LIKE", "LOVE"].allSatisfy(typereact.contains) {
-                        print("9")
                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.love]
                     }
                         
                     else  if ["LIKE", "BRAVO"].allSatisfy(typereact.contains) {
-                        print("10")
                        TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like,Reaction.facebook.bravo]
                     }
                         
                         
                         
                     else  if ["LIKE"].allSatisfy(typereact.contains) {
-                        print("11")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.like]
                     }
                     else  if ["LOVE"].allSatisfy(typereact.contains) {
-                        print("12")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.love]
                     }
                         
                     else  if ["BRAVO"].allSatisfy(typereact.contains) {
-                        print("13")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.bravo]
                     }
                         
                     else  if ["INTERESTING"].allSatisfy(typereact.contains) {
-                        print("14")
                         TextSenderCell1.ReactionSummary.reactions = [Reaction.facebook.interesting]
                     }
                     
@@ -416,17 +428,42 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
                 self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextReceiverCell1.BtnReaction.tag = indexPath.row
 
+                    
 
-
-                print(reactionsArray.count)
+                
+                   
+                       
 
                 self.reactionsArray = msgarray[indexPath.row].reactions ?? []
                 TextReceiverCell1.ReactionBtn.tag = indexPath.row
                 TextReceiverCell1.ViewReaction.isHidden = true
+                TextReceiverCell1.heightReaction.constant = 0
+                       TextReceiverCell1.layoutIfNeeded()
+                
 
-                if ((msgarray[indexPath.row].reactions ?? []).count > 0){
-                    TextReceiverCell1.ViewReaction.isHidden = false
-                }
+                   if (msgarray[indexPath.row].reactions?.count ?? 0 > 0 ){
+                       TextReceiverCell1.ViewReaction.isHidden = false
+                       TextReceiverCell1.heightReaction.constant = 25
+                        TextReceiverCell1.layoutIfNeeded()
+                   }
+                
+//                let nextIndexPath=NSIndexPath(row: indexPath.row + 1, section: indexPath.section);
+//                let previousindexpath=NSIndexPath(row: indexPath.row - 1, section: indexPath.section);
+//
+//
+//                if indexPath.row+1 < msgarray.count {
+//
+//
+//                    if (msgarray[nextIndexPath.row].user.id ==  msgarray[indexPath.row].user.id) && (msgarray[previousindexpath.row].user.id ==  msgarray[indexPath.row].user.id) {
+//                        TextReceiverCell1.img.isHidden = true
+//
+//
+//                                   }
+//                }
+//                else if tableView.isLast(for: indexPath) {
+//                                                 TextReceiverCell1.img.isHidden = false
+//                                             }
+
                 
                 
                   TextReceiverCell1.BtnReaction.setTitle(String(""), for: .normal)
@@ -540,3 +577,13 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
 
 
 
+extension UITableView {
+
+    func isLast(for indexPath: IndexPath) -> Bool {
+
+        let indexOfLastSection = numberOfSections > 0 ? numberOfSections - 1 : 0
+        let indexOfLastRowInLastSection = numberOfRows(inSection: indexOfLastSection) - 1
+
+        return indexPath.section == indexOfLastSection && indexPath.row == indexOfLastRowInLastSection
+    }
+}
