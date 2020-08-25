@@ -14,7 +14,7 @@ import UIKit
 
 protocol AddRoomPresentationLogic
 {
-  func presentSomething(response: AddRoom.Something.Response)
+    func presentSomething(response: AddRoom.Something.Response)
     func presentUsersSuccess(users: [User])
     func presentUsersError(error: String)
     func presentAddRoomSucess(response : Room1)
@@ -27,32 +27,32 @@ class AddRoomPresenter: AddRoomPresentationLogic
     
     func presentUsersSuccess(users: [User]) {
         viewController?.presentUsersSuccess(users: users)
-
+        
     }
     
     func presentUsersError(error: String) {
         viewController?.presentUsersError(error: error)
-
+        
     }
     
-  
+    
     
     func presentAddRoomSucess(response: Room1) {
         viewController?.presentAddRoomSuccess(room: response)
-
+        
     }
     func presentAddRoomError(error: String) {
         viewController?.presentUsersError(error: error)
-
-      }
+        
+    }
     
-  weak var viewController: AddRoomDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: AddRoom.Something.Response)
-  {
-    let viewModel = AddRoom.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: AddRoomDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentSomething(response: AddRoom.Something.Response)
+    {
+        let viewModel = AddRoom.Something.ViewModel()
+        viewController?.displaySomething(viewModel: viewModel)
+    }
 }

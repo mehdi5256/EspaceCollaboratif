@@ -20,10 +20,27 @@ import GrowingTextView
 protocol DetailTopicDisplayLogic: class
 {
   func displaySomething(viewModel: DetailTopic.Something.ViewModel)
+    func displayPostReplySucess(reply : Reply1)
+    func displayPostReplyError(error: String)
+    func presentzidreplySuccess(reply: Reply1)
+
 }
 
 class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
 {
+    func presentzidreplySuccess(reply: Reply1) {
+        
+    }
+    
+    func displayPostReplySucess(reply: Reply1) {
+                print(reply)
+
+    }
+    
+    func displayPostReplyError(error: String) {
+        print(error)
+    }
+    
   var interactor: DetailTopicBusinessLogic?
   var router: (NSObjectProtocol & DetailTopicRoutingLogic & DetailTopicDataPassing)?
 
@@ -203,52 +220,38 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
     
     @IBAction func SendReply(_ sender: Any) {
         
+        
+              
+
         if(textreply.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                    BtnSendReply.isEnabled = false
-               
-            let myUrl = Keys.MobileIntegrationServer.baseURL + "/reply"
-            
-            let parameters: [String: Any] = [
-                "reply":textreply.text,
-                "topic":
-                    [
-                        "id":idtopic,
-                    ],
-                "user":
-                    [
-                        "id": UserDefaultLogged.idUD,
-                ]
-            ]
+
+            interactor?.PostReply(reply:textreply.text,topic:["id":idtopic!],user: ["id":UserDefaultLogged.idUD])
             
            
-            AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-                .responseJSON { response in
-                    print(response.value)
                     self.designbuttonaftersend()
-//                    
-//                    
-//                     let value = response.value as? Reply1
-//                        
-//                    self.replyarray.append(value!)
                     
-                    self.tv.beginUpdates()
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self.tv.insertRows(at: [indexPath], with: .top)
-                    self.tv.endUpdates()
-                    self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.none, animated: true)
-
                     
-                  
-                 self.tv.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-                    self.NumberReply = self.NumberReply! + 1
-            }
+                    
+//                    self.tv.beginUpdates()
+//                    let indexPath = IndexPath(row: 0, section: 0)
+//                    self.tv.insertRows(at: [indexPath], with: .top)
+//                    self.tv.endUpdates()
+//                    self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.none, animated: true)
+//
+//
+//
+//                 self.tv.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+//                    self.NumberReply = self.NumberReply! + 1}
+        
             
             
                } else {
                    print("tesstt")
                }
+
         
-        
+      
         
         
         

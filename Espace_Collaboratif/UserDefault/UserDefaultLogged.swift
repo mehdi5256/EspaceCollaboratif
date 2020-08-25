@@ -20,14 +20,21 @@ class UserDefaultLogged {
         static let KeyIMG = "UserDefIMG"
         static let KeyToken = "UserDefToken"
         static let userlogged = "isUserLogged"
+        static let token = "token"
 
 
-
-
-
-
-
-    }
+  }
+    
+    
+    static var tokenUD: String{
+           get {
+               return UserDefaults.standard.string(forKey: Keys.token) ??  "tt"
+               }
+           set {
+               UserDefaults.standard.set(newValue, forKey: Keys.token)
+           }
+           
+       }
     
     static var idRoom: Int{
            get {
@@ -40,6 +47,7 @@ class UserDefaultLogged {
        }
     
       
+    
        
     
     static var idMsg: Int{

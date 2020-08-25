@@ -15,7 +15,10 @@ import UIKit
 protocol DetailTopicBusinessLogic
 {
   func doSomething(request: DetailTopic.Something.Request)
+  func PostReply(reply:String,topic:[String: Any],user:[String: Any])
+
 }
+
 
 protocol DetailTopicDataStore
 {
@@ -24,6 +27,22 @@ protocol DetailTopicDataStore
 
 class DetailTopicInteractor: DetailTopicBusinessLogic, DetailTopicDataStore
 {
+    
+    
+    func PostReply(reply: String, topic: [String : Any], user: [String : Any]) {
+        worker = DetailTopicWorker()
+        worker?.PostReply(reply: reply, topic: topic, user: user).then
+            { reply in
+                
+                self.presenter?.presentzidReplySucess(response : reply)
+        }.catch { error in
+//            self.presenter?.presentAddRoomError(error: error.localizedDescription)
+            print(error)
+        }
+    }
+    
+    
+    
   var presenter: DetailTopicPresentationLogic?
   var worker: DetailTopicWorker?
   //var name: String = ""

@@ -11,10 +11,20 @@
 //
 
 import UIKit
+import Promises
 
 class DetailTopicWorker
 {
   func doSomeWork()
   {
   }
+    func PostReply(reply:String,topic:[String: Any],user:[String: Any])-> Promise<Reply1>
+    {
+        return RoomAPIClient.zidReply(reply: reply, topic: topic, user: user)
+    }
+    
+    
+    
 }
+    
+

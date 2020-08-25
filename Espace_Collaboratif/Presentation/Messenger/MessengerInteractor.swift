@@ -146,7 +146,7 @@ class MessengerInteractor: MessengerBusinessLogic, MessengerDataStore
         }
     }
     
-      
+    
     var presenter: MessengerPresentationLogic?
     var worker: MessengerWorker?
     //var name: String = ""

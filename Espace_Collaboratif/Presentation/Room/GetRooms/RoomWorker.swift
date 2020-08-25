@@ -15,10 +15,10 @@ import Promises
 
 class RoomWorker
 {
-  func getRooms() -> Promise<[Room1]>
-  {
-    return RoomAPIClient.getRooms()
-  }
+    func getRooms(token:String) -> Promise<[Room1]>
+    {
+        return RoomAPIClient.getRooms(token : token)
+    }
 }
 
 

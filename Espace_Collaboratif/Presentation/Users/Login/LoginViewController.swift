@@ -14,141 +14,123 @@ import UIKit
 
 protocol LoginDisplayLogic: class
 {
-  func tokenSuccess(token: String)
-  func tokenError()
+    func tokenSuccess(token: String)
+    func tokenError()
     func displayUserMeSuccess(token: String)
     func displayUserMeError(error: String)
 }
 
 class LoginViewController: UIViewController, LoginDisplayLogic
 {
-   
-    
-    
-  var interactor: LoginBusinessLogic?
-  var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
+    var interactor: LoginBusinessLogic?
+    var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
     var tokenURL: URL!
     var authURL: URL!
     var redirectURL: URL!
     var clientId: String!
     var clientsecret: String!
-    
     var accesstoken: String!
-
-
-
     
     @IBOutlet weak var BtnLogin: UIButton!
     
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = LoginInteractor()
-    let presenter = LoginPresenter()
-    let router = LoginRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
-  }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup()
+    {
+        let viewController = self
+        let interactor = LoginInteractor()
+        let presenter = LoginPresenter()
+        let router = LoginRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         if (UserDefaultLogged.isUserLogged == true){
-         performSegue(withIdentifier: "accueil", sender: nil)
+            performSegue(withIdentifier: "accueil", sender: nil)
         }
     }
-     
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
     
-    tokenURL = URL(string: Keys.MobileIntegrationServer.baseTokenURL)!
-    authURL = URL(string: Keys.MobileIntegrationServer.baseAuthURL)!
-    redirectURL = URL(string: Keys.MobileIntegrationServer.redirectURL)!
-    clientId = Keys.MobileIntegrationServer.ClientId
-    clientsecret = Keys.MobileIntegrationServer.ClientSecret
-    Setupbutton()
+    // MARK: View lifecycle
     
-   
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
- 
-  
-  func displaySomething(viewModel: Login.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        tokenURL = URL(string: Keys.MobileIntegrationServer.baseTokenURL)!
+        authURL = URL(string: Keys.MobileIntegrationServer.baseAuthURL)!
+        redirectURL = URL(string: Keys.MobileIntegrationServer.redirectURL)!
+        clientId = Keys.MobileIntegrationServer.ClientId
+        clientsecret = Keys.MobileIntegrationServer.ClientSecret
+        Setupbutton()
+        
+       
+        
+    }
+    
+    // MARK: Do something
+    
+    //@IBOutlet weak var nameTextField: UITextField!
+    func displaySomething(viewModel: Login.Something.ViewModel)
+    {
+        //nameTextField.text = viewModel.name
+    }
     func tokenSuccess(token: String) {
-       print(token)
         self.accesstoken = token
-        
-       interactor?.me(token: token)
-        
-      // Connected.userSession = UserSession(username: codeClientText.text!,color: UIColor.randomHex)
-
+        interactor?.me(token: token)
+         
     }
     
     func tokenError() {
-       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-       let vc = storyboard.instantiateInitialViewController()
-       vc?.modalPresentationStyle = .fullScreen
-       self.present(vc!, animated: false, completion: nil)
-       self.dismiss(animated: false, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()
+        vc?.modalPresentationStyle = .fullScreen
+        self.present(vc!, animated: false, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     
     
     func displayUserMeSuccess(token: String) {
-            self.accesstoken = token
-                  print(token)
+        self.accesstoken = token
+       
         performSegue(withIdentifier: "accueil", sender: nil)
         
         
-        }
-
-       
-       
-       func displayUserMeError(error: String) {
-                   print(error)
-       
-
-       }
+    }
     
+    func displayUserMeError(error: String) {
+        print(error)
+        
+    }
     
     func Setupbutton(){
         BtnLogin.layer.masksToBounds = false
@@ -157,10 +139,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     }
     
     @IBAction func Connect(_ sender: Any) {
-       
-    interactor?.connect(tokenURL: tokenURL, authURL: authURL, redirectURL: redirectURL, ClientId: clientId, ClientSecret: clientsecret)
-
-        
+        interactor?.connect(tokenURL: tokenURL, authURL: authURL, redirectURL: redirectURL, ClientId: clientId, ClientSecret: clientsecret)
     }
 }
 

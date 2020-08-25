@@ -11,14 +11,15 @@ import Alamofire
 
 enum RoomsEndPoints: APIConfiguration {
     
-    case getRooms
+    case getRooms(token:String)
     case getUsers
-    case AddRoom (name:String , subject:String, user:User, isPrivate:Bool, users: [Dictionary<String,Any>])
+    case AddRoom (name:String , subject:String, user:[String: Any], isPrivate:Bool, users: [Dictionary<String,Any>])
     case getRoombyId(id: Int)
     case PostMsg(type:String, file:String,room:[String: Any],user:[String: Any],body: String)
      case PostImage(type:String,body: String ,user:[String: Any],room:[String: Any],file:String)
-    case getAllTopics
     case getRoomIdEventBus(id: Int)
+    
+    case zidReply(reply:String,topic:[String: Any],user:[String: Any])
     
     
     
@@ -33,7 +34,9 @@ enum RoomsEndPoints: APIConfiguration {
     static let endPointaddroomURL = "/room/"
     static let getRoomById = "/msg/room/"
     static let postmsg = "/msg/"
-    static let getalltopics = "/topic/tag/"
+    static let reply = "/reply/"
+
+    
     
 
     
@@ -64,8 +67,10 @@ enum RoomsEndPoints: APIConfiguration {
       case  .AddRoom:
         return .post
         
-      case .getAllTopics:
+      case  .zidReply:
         return .post
+
+        
         
       case .getRoomIdEventBus:
         return .get
@@ -102,20 +107,30 @@ enum RoomsEndPoints: APIConfiguration {
         case .PostImage:
               return RoomsEndPoints.postmsg
         
-      case .getAllTopics:
-        return RoomsEndPoints.getalltopics
+      
 
         
 
         
         
 
-      }
+      case .zidReply:
+    return RoomsEndPoints.reply
+
+    }
    }
    
    var parameters: Parameters?{
       switch self {
      
+      case .zidReply(let reply, let topic, let user):
+        let object = NSMutableDictionary()
+        
+            object.setValue(reply, forKey: "reply")
+            object.setValue(topic, forKey: "topic")
+            object.setValue(user, forKey: "user")
+        return (object as! Parameters)
+        
         
         case .AddRoom(let name, let subject,let user,let isPrivate, let users):
         let object = NSMutableDictionary()
@@ -147,9 +162,7 @@ enum RoomsEndPoints: APIConfiguration {
 
                return (object as! Parameters)
         
-      case .getAllTopics:
-        let object = NSMutableDictionary()
-        return (object as! Parameters)
+      
         
 
 
@@ -173,10 +186,14 @@ enum RoomsEndPoints: APIConfiguration {
       var urlRequest = URLRequest(url: url)
       
       switch self {
-      case .getRooms:
-         urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
-         useParams = false
+      case .getRooms(let token):
+        
+         urlRequest.addValue("Bearer " + token, forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
+         
+         urlRequest.addValue(ContentType.json.rawValue, forHTTPHeaderField:  HTTPHeaderField.acceptType.rawValue)
+         
+           
+         useParams = true
         
          
 

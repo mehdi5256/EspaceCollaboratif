@@ -10,8 +10,10 @@ import Foundation
 public struct Reply1: Codable{
     var id: Int?
     var reply: String?
+    var useful: Bool?
     var timestamp: Int?
-    var topic : String?
     var user: User
+    var users: [User]?
+    var topic : String?
 
 }

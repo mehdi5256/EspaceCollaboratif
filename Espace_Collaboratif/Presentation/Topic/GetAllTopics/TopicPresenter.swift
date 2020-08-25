@@ -15,10 +15,21 @@ import UIKit
 protocol TopicPresentationLogic
 {
   func presentSomething(response: Topic.Something.Response)
+    func presentTopicsSuccess(topics: [Topic1])
+    func presentTopicsError(error:String)
 }
 
 class TopicPresenter: TopicPresentationLogic
 {
+    func presentTopicsSuccess(topics: [Topic1]) {
+    viewController?.displayTopicsSuccess(topics: topics)
+
+    }
+    
+    func presentTopicsError(error: String) {
+        viewController?.displayTopicsError(error: error)
+    }
+    
   weak var viewController: TopicDisplayLogic?
   
   // MARK: Do something

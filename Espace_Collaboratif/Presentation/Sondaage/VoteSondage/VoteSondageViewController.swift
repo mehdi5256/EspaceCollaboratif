@@ -108,7 +108,6 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
     
     tv.tableFooterView = UIView()
     
-    sendBtn.isEnabled = false
 
     
     viewVote.roundCorners([.topLeft, .topRight] , radius: 50)
@@ -133,14 +132,12 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
   {
     //nameTextField.text = viewModel.name
   }
-    @IBAction func SendVote(_ sender: Any) {
-        
-        
+    @IBAction func SendVotte(_ sender: Any) {
         interactor?.sendVoteSondage(idroom: UserDefaultLogged.idRoom, type: "VOTE", choixId:idvote!, messageId: UserDefaultLogged.idMsg)
         
         dismiss(animated: true, completion: nil)
-      }
- 
+    }
+   
 }
 
 
@@ -172,8 +169,8 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
         
         cellbutton.setImage(UIImage(named: "UnChecked"), for: .normal)
         idvote = sondageArray[indexPath.row].id
-        sendBtn.isEnabled = true
-        sendBtn.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        sendBtn.isEnabled = true
+//        sendBtn.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 
 
             
@@ -185,8 +182,8 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
             
             cellbutton.setImage(UIImage(named: "verified"), for: .normal)
         idvote = sondageArray[indexPath.row].id
-        sendBtn.isEnabled = false
-        sendBtn.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+//        sendBtn.isEnabled = false
+//        sendBtn.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
                 
         }

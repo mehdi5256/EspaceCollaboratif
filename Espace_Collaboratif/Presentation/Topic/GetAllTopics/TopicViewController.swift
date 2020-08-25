@@ -13,149 +13,143 @@
 import UIKit
 import Kingfisher
 import  Alamofire
+import CRRefresh
+
 protocol TopicDisplayLogic: class
 {
-  func displaySomething(viewModel: Topic.Something.ViewModel)
+    func displaySomething(viewModel: Topic.Something.ViewModel)
+    func displayTopicsSuccess(topics: [Topic1])
+    func displayTopicsError(error: String)
 }
 
 class TopicViewController: UIViewController, TopicDisplayLogic
 {
-  var interactor: TopicBusinessLogic?
-  var router: (NSObjectProtocol & TopicRoutingLogic & TopicDataPassing)?
-
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = TopicInteractor()
-    let presenter = TopicPresenter()
-    let router = TopicRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-//  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//  {
-//    if let scene = segue.identifier {
-//      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-//      if let router = router, router.responds(to: selector) {
-//        router.perform(selector, with: segue)
-//      }
-//    }
-//  }
-  
-  // MARK: View lifecycle
+    func displayTopicsSuccess(topics: [Topic1]) {
+        self.topicarray = topics
+        print(topics)
+        
+        tv.reloadData()
+    }
+    
+    func displayTopicsError(error: String) {
+        print(error)
+        
+    }
+    
+    
+    
+    var interactor: TopicBusinessLogic?
+    var router: (NSObjectProtocol & TopicRoutingLogic & TopicDataPassing)?
+    
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup()
+    {
+        let viewController = self
+        let interactor = TopicInteractor()
+        let presenter = TopicPresenter()
+        let router = TopicRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
+    
+    //  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    //  {
+    //    if let scene = segue.identifier {
+    //      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+    //      if let router = router, router.responds(to: selector) {
+    //        router.perform(selector, with: segue)
+    //      }
+    //    }
+    //  }
+    
+    // MARK: View lifecycle
     
     var topicarray: [Topic1] = []
     var tagname: [String] = []
     var tagsarray : [Tag] = []
-    let topicservice = TopicService()
-
+    
     
     @IBOutlet weak var tv: UITableView!
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
-          fetchalltopics()
-      // getalltopiic()
+        interactor?.getalltopics()
+
     }
-
-//    func getalltopiic(){
-//         let url = URL(string:"http://26bea6fa3918.ngrok.io/topic/tag")
-//
-//                var request = URLRequest(url: url!)
-//                request.httpMethod = "POST"
-//                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//                let values = [] as Any
-//
-//                request.httpBody = try! JSONSerialization.data(withJSONObject: values)
-//
-//                AF.request(request)
-//                    .responseJSON { response in
-//                        // do whatever you want here
-//                      print(response.request)
-//                                print(response.response)
-//                                 print("mmmmmmmmmmmmmmehhhhdiiiii")
-//                                 print(response.result)
-//
-//
-//                }
-//    }
     
     
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
-    print(topicarray.count)
-    fetchalltopics()
-    
-    
-    
-
-
-    
-    
-  }
-    
-    func fetchalltopics(){
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        doSomething()
+        interactor?.getalltopics()
+        
+        //refresh table view
         
         
-        topicservice.getAllTopics(){ (rooms) in
-            self.topicarray = rooms
-            self.tv.reloadData()
-            for r in rooms{
+        let loadingFooter = NormalFooterAnimator()
+        loadingFooter.loadingDescription = "Chargement "
+        loadingFooter.noMoreDataDescription = "pas d'autres contacts"
+        let loadingHeader = NormalHeaderAnimator()
+        loadingHeader.loadingDescription = "Chargement "
+        loadingHeader.pullToRefreshDescription = "Tirer pour rafraîchir"
+        loadingHeader.releaseToRefreshDescription = "Relâcher pour rafraîchir"
+        //           tv.backgroundColor = UIColor(named: "4873e8")
+        
+        /// animator: your customize animator, default is NormalHeaderAnimator
+        tv.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+            /// start refresh
+            /// Do anything you want...
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                /// Stop refresh when your job finished, it will reset refresh footer if completion is true
+                self?.interactor?.getalltopics()
+                self?.tv.cr.endHeaderRefresh()
                 
-                self.tagsarray = r.tags
-            }
-            for x in self.tagsarray{
-                self.tagname.append(x.name!)
-                
-            }
-            print(self.tagname)
-            print("lklklkjljklj")
-            print(self.topicarray)
-         
+            })
         }
+        /// manual refresh
+        // tv.cr.beginHeaderRefresh()
+        
+        
     }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = Topic.Something.Request()
-    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: Topic.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    
+    
+    // MARK: Do something
+    
+    //@IBOutlet weak var nameTextField: UITextField!
+    
+    func doSomething()
+    {
+        let request = Topic.Something.Request()
+        interactor?.doSomething(request: request)
+    }
+    
+    func displaySomething(viewModel: Topic.Something.ViewModel)
+    {
+        //nameTextField.text = viewModel.name
+    }
 }
 
 extension TopicViewController: UITableViewDataSource{
@@ -175,7 +169,7 @@ extension TopicViewController: UITableViewDataSource{
         
         //topic info
         cell.TitleTopic.text = topicarray[indexPath.row].title
-//        cell.DescriptionTopic.text = topicarray[indexPath.row].description
+        //        cell.DescriptionTopic.text = topicarray[indexPath.row].description
         //cell.TagName.text = topicarray[indexPath.row].tags
         cell.CountReply.text = topicarray[indexPath.row].countReplies!.description + " réponses"
         
@@ -184,15 +178,11 @@ extension TopicViewController: UITableViewDataSource{
         let array2 = topicarray[indexPath.row].tags
         for a in array2{
             arrtag.append(a.name!)
-            // print(arrtag)
             
             
         }
         cell.taglistview.removeAllTags()
         cell.taglistview.addTags(arrtag)
-        //print(arrtag)
-        
-        
         
         
         return cell
@@ -201,17 +191,17 @@ extension TopicViewController: UITableViewDataSource{
 extension TopicViewController:UITableViewDelegate{
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            performSegue(withIdentifier: "todetailtopic", sender: indexPath)
-            
-        }
-  
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
+        performSegue(withIdentifier: "todetailtopic", sender: indexPath)
+        
+    }
     
-          if segue.identifier == "todetailtopic"{
-              
-              let DVC = segue.destination as! DetailTopicViewController
-              let indice = sender as! IndexPath
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        if segue.identifier == "todetailtopic"{
+            
+            let DVC = segue.destination as! DetailTopicViewController
+            let indice = sender as! IndexPath
             
             DVC.idtopic = topicarray[indice.row].id
             DVC.userimg = topicarray[indice.row].user.image
@@ -221,23 +211,16 @@ extension TopicViewController:UITableViewDelegate{
             DVC.descriiptionTopic = topicarray[indice.row].description
             DVC.NumberReply = topicarray[indice.row].countReplies
             let array2 = topicarray[indice.row].tags
-                   for a in array2{
-                       DVC.arrtag.append(a.name!)
-                      // print(arrtag)
-                   }
+            for a in array2{
+                DVC.arrtag.append(a.name!)
+                // print(arrtag)
+            }
             
-
-
-              
-              
-          }
-          
-     
-      
-      
-  }
+        }
+        
+    }
     
- 
+    
     
 }
-  
+

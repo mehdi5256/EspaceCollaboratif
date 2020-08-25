@@ -79,7 +79,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
         let reachability = note.object as! Reachability
         switch reachability.connection {
         case .wifi:
-            interactor?.getRooms()
+            interactor?.getRooms(token: UserDefaultLogged.tokenUD)
             ViewNoConnection.isHidden = true
         case .cellular:
             print("Reachable via Cellular")
@@ -107,7 +107,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
         reachability.whenReachable = { reachability in
             if reachability.connection == .wifi {
                 print("Reachable via WiFi")
-                self.interactor?.getRooms()
+                self.interactor?.getRooms(token: UserDefaultLogged.tokenUD)
                 
                 
             } else {
@@ -133,27 +133,18 @@ class RoomViewController: UIViewController, RoomDisplayLogic
         }catch{
             print("could not start reachability notifier")
         }
-        
-        
         //refresh table view
-        
-        
-        let loadingFooter = NormalFooterAnimator()
+         let loadingFooter = NormalFooterAnimator()
         loadingFooter.loadingDescription = "Chargement "
         loadingFooter.noMoreDataDescription = "pas d'autres contacts"
         let loadingHeader = NormalHeaderAnimator()
         loadingHeader.loadingDescription = "Chargement "
         loadingHeader.pullToRefreshDescription = "Tirer pour rafraîchir"
         loadingHeader.releaseToRefreshDescription = "Relâcher pour rafraîchir"
-        tv.backgroundColor = UIColor(named: "f5f5f5")
         
-        /// animator: your customize animator, default is NormalHeaderAnimator
         tv.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
-            /// start refresh
-            /// Do anything you want...
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                /// Stop refresh when your job finished, it will reset refresh footer if completion is true
-                self?.interactor?.getRooms()
+                self?.interactor?.getRooms(token: UserDefaultLogged.tokenUD)
                 self?.tv.cr.endHeaderRefresh()
                 
             })
@@ -161,11 +152,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
         /// manual refresh
         // tv.cr.beginHeaderRefresh()
         
-        
-        
-        // core data
-        
-        
+         
     }
     
     func isEntityAttributeExist(id: Int32, entityName: String) -> Bool {
@@ -426,49 +413,37 @@ extension RoomViewController:UITableViewDelegate{
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            
-            switch reachability.connection {
-            case .wifi:
-                if segue.identifier == "todetail"{
-                    let DVC = segue.destination as! MessengerViewController
-                    let indice = sender as! IndexPath
-                    
-                    DVC.nomroom = rooms[indice.row].name
-                    DVC.idroom = rooms[indice.row].id
-                    
-                    //CORE DATA
-                    
-//                    DVC.RoomSelectecCoreData = roomsCD[indice.row]
-//                    
-//                    DVC.nomroom = roomsCD[indice.row].name
-//                    DVC.RoomSelectecCoreData = roomsCD[indice.row]
-//                    navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-                   
-                }
+        
+        switch reachability.connection {
+        case .wifi:
+            if segue.identifier == "todetail"{
+                let DVC = segue.destination as! MessengerViewController
+                let indice = sender as! IndexPath
                 
-                
-            case .cellular:
-                print("Reachable via Cellular")
-            case .unavailable:
-                if segue.identifier == "todetail"{
-                    
-                    let DVC = segue.destination as! MessengerViewController
-                    let indice = sender as! IndexPath
-                    DVC.nomroom = roomsCD[indice.row].name
-                    DVC.RoomSelectecCoreData = roomsCD[indice.row]
-                    
-                    navigationItem.backBarButtonItem = UIBarButtonItem(title: DVC.nomroom , style: .plain, target: nil, action: nil)
-                    
-                    
-                }
-                
-            case .none:
-                print("none")
+                DVC.nomroom = rooms[indice.row].name
+                DVC.idroom = rooms[indice.row].id
                 
             }
             
+        case .cellular:
+            print("Reachable via Cellular")
+        case .unavailable:
+            if segue.identifier == "todetail"{
+                
+                let DVC = segue.destination as! MessengerViewController
+                let indice = sender as! IndexPath
+                DVC.nomroom = roomsCD[indice.row].name
+                DVC.RoomSelectecCoreData = roomsCD[indice.row]
+                
+            }
+            
+        case .none:
+            print("none")
             
         }
         
         
     }
+    
+    
+}

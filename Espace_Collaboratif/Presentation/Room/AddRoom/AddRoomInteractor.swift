@@ -15,18 +15,18 @@ import UIKit
 protocol AddRoomBusinessLogic
 {
     func getUsers()
-    func AddRoom (name:String , subject:String,user:User,isPrivate:Bool, users: [Dictionary<String,Any>])
-
+    func AddRoom (name:String , subject:String,user:[String: Any],isPrivate:Bool, users: [Dictionary<String,Any>])
+    
 }
 
 protocol AddRoomDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class AddRoomInteractor: AddRoomBusinessLogic, AddRoomDataStore
 {
-    func AddRoom(name: String, subject: String, user:User,isPrivate:Bool, users: [Dictionary<String,Any>]) {
+    func AddRoom(name: String, subject: String, user:[String: Any],isPrivate:Bool, users: [Dictionary<String,Any>]) {
         worker = AddRoomWorker()
         worker?.AddRoom(name: name, subject: subject, user:user , isPrivate: isPrivate, users: users).then
             { addroom in
@@ -38,27 +38,25 @@ class AddRoomInteractor: AddRoomBusinessLogic, AddRoomDataStore
         }
     }
     
-   
-    
     func getUsers() {
         worker = AddRoomWorker()
         worker?.getUsers().then {
-        users in
-        self.presenter?.presentUsersSuccess(users: users)
-            }.catch {
+            users in
+            self.presenter?.presentUsersSuccess(users: users)
+        }.catch {
             error in
-        self.presenter?.presentUsersError(error: error.localizedDescription)
+            self.presenter?.presentUsersError(error: error.localizedDescription)
         }
     }
     
-  var presenter: AddRoomPresentationLogic?
-  var worker: AddRoomWorker?
-  //var name: String = ""
+    var presenter: AddRoomPresentationLogic?
+    var worker: AddRoomWorker?
+    //var name: String = ""
     var users: User!
-
-  
-  // MARK: Do something
-  
-  
-   
+    
+    
+    // MARK: Do something
+    
+    
+    
 }

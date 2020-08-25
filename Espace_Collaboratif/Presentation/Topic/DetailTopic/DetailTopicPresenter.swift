@@ -15,10 +15,29 @@ import UIKit
 protocol DetailTopicPresentationLogic
 {
   func presentSomething(response: DetailTopic.Something.Response)
+    func presentPostReplySuccess(reply: Reply1)
+    func presentPostReplyError(error:String)
+    func presentzidReplySucess(response : Reply1)
+    
 }
 
 class DetailTopicPresenter: DetailTopicPresentationLogic
 {
+    func presentzidReplySucess(response: Reply1) {
+    viewController?.presentzidreplySuccess(reply: response)
+
+    }
+    
+    func presentPostReplySuccess(reply: Reply1) {
+    viewController?.displayPostReplySucess(reply : reply)
+
+    }
+    
+    func presentPostReplyError(error: String) {
+    viewController?.displayPostReplyError(error: error)
+
+    }
+    
   weak var viewController: DetailTopicDisplayLogic?
   
   // MARK: Do something

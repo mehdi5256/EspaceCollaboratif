@@ -16,16 +16,12 @@ import AppAuth
 
 protocol LoginBusinessLogic
 {
-  func connect(tokenURL: URL, authURL: URL, redirectURL: URL,ClientId : String, ClientSecret:String)
-    
+    func connect(tokenURL: URL, authURL: URL, redirectURL: URL,ClientId : String, ClientSecret:String)
     func me(token: String)
-
-
 }
-
 protocol LoginDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
@@ -35,41 +31,28 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
         worker = LoginWorker()
         worker?.me(token: token).then {
             userme in
-            //print(userme)
             UserDefaultLogged.idUD = userme.id
-                UserDefaultLogged.firstNameUD = userme.firstName
-                UserDefaultLogged.lasttNameUD = userme.lastName
-                UserDefaultLogged.emailUD = userme.email
-                UserDefaultLogged.IMGUD = userme.image
-                UserDefaultLogged.isUserLogged = true
-            
-            print("xxxxxxxxxxxx")
-           print( UserDefaultLogged.IMGUD)
-            
-            
-            
-            
+            UserDefaultLogged.firstNameUD = userme.firstName
+            UserDefaultLogged.lasttNameUD = userme.lastName
+            UserDefaultLogged.emailUD = userme.email
+            UserDefaultLogged.IMGUD = userme.image
+            UserDefaultLogged.isUserLogged = true
             self.presenter?.presentUsermeSuccess(token: token)
         }.catch {
             error in
             self.presenter?.presentUsermeError(error: error.localizedDescription)
         }
     }
+
+    var presenter: LoginPresentationLogic?
+    var worker: LoginWorker?
+    //var name: String = ""
     
-   
-    
-    
-  var presenter: LoginPresentationLogic?
-  var worker: LoginWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
+    // MARK: Do something
     func connect(tokenURL: URL, authURL: URL, redirectURL: URL,ClientId : String, ClientSecret:String) {
+        let configuration = OIDServiceConfiguration(authorizationEndpoint: authURL, tokenEndpoint: tokenURL)
+        let request = OIDAuthorizationRequest(configuration: configuration, clientId: ClientId, clientSecret: ClientSecret , scope: nil, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: nil, nonce: nil, codeVerifier: nil, codeChallenge: nil, codeChallengeMethod: nil, additionalParameters: nil)
         
-      let configuration = OIDServiceConfiguration(authorizationEndpoint: authURL, tokenEndpoint: tokenURL)
-        
-      let request = OIDAuthorizationRequest(configuration: configuration, clientId: ClientId, clientSecret: ClientSecret , scope: nil, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: nil, nonce: nil, codeVerifier: nil, codeChallenge: nil, codeChallengeMethod: nil, additionalParameters: nil)
-  
         presenter?.connect(request: request)
-  }
+    }
 }

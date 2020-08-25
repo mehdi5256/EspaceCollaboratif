@@ -679,7 +679,7 @@ extension MessengerViewController: ReactionDelegate {
         
         
         
-        if (msgarray[index!].reactions?.contains(where: { $0.user.id == reaction.user.id }))! {
+            if (msgarray[index!].reactions?.contains(where: { $0.user.id == reaction.user.id }))! {
             // found
             print("found")
             

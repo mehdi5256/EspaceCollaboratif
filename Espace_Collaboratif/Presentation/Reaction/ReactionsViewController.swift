@@ -72,6 +72,9 @@ class ReactionsViewController: UIViewController, ReactionsDisplayLogic
   {
     super.viewDidLoad()
     doSomething()
+    //tableview.tableFooterView = UIView()
+    
+
   }
   
   // MARK: Do something

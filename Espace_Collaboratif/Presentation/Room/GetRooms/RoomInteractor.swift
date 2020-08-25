@@ -14,13 +14,13 @@ import UIKit
 
 protocol RoomBusinessLogic
 {
-    func getRooms()
-
+    func getRooms(token : String)
+    
 }
 
 protocol RoomDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class RoomInteractor: RoomBusinessLogic, RoomDataStore
@@ -28,26 +28,21 @@ class RoomInteractor: RoomBusinessLogic, RoomDataStore
     var presenter: RoomPresentationLogic?
     var worker: RoomWorker?
     //var name: String = ""
-
     
-    // MARK: Do something
-    
-    
-    
-    func getRooms() {
-          worker = RoomWorker()
-              worker?.getRooms().then {
-                  rooms in
-                
-                  self.presenter?.presentRoomsSuccess(rooms: rooms)
-              }.catch {
-                  error in
-                  self.presenter?.presentRoomsError(error: error.localizedDescription)
-              }
+    func getRooms(token: String) {
+        worker = RoomWorker()
+        worker?.getRooms(token: token).then {
+            rooms in
+            
+            self.presenter?.presentRoomsSuccess(rooms: rooms)
+        }.catch {
+            error in
+            self.presenter?.presentRoomsError(error: error.localizedDescription)
+        }
     }
     
-  
- 
+    
+    
 }
 
 

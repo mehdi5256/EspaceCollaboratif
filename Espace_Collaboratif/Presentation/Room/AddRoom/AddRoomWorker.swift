@@ -15,11 +15,13 @@ import Promises
 
 class AddRoomWorker
 {
-  func getUsers() -> Promise<[User]>
-  {
-    return RoomAPIClient.getUsers()
-  }
-    func AddRoom (name:String , subject:String, user:User,isPrivate:Bool, users: [Dictionary<String,Any>]) -> Promise<Room1>{
+    func getUsers() -> Promise<[User]>
+    {
+        return RoomAPIClient.getUsers()
+    }
+    
+    func AddRoom (name:String , subject:String, user:[String: Any],isPrivate:Bool, users: [Dictionary<String,Any>]) -> Promise<Room1>
+    {
         return RoomAPIClient.AddRoom(name: name, subject: subject, user: user, isPrivate: isPrivate, users:users)
         
     }

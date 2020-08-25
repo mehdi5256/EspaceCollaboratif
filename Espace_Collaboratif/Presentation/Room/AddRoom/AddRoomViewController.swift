@@ -159,7 +159,6 @@ class AddRoomViewController: UIViewController, AddRoomDisplayLogic
         
         if sender.isOn {
         boolstate = true
-            print(boolstate)
             
         } else {
       boolstate = false
@@ -193,37 +192,13 @@ class AddRoomViewController: UIViewController, AddRoomDisplayLogic
         let nomroom = RoomName.text!
         let description = Subject.text!
         
-       
-        let myUrl = Keys.MobileIntegrationServer.baseURL + "/room"
-                
-                let parameters: [String: Any] = [
-                    "name":nomroom,
-                    "subject":description,
-                    "user":
-                        [
-                            "id": UserDefaultLogged.idUD,
-                            
-                        ],
-                    "users": selectarrayusers,
-                    "isPrivate": boolstate
-                        
-                ]
-                
-               
-                AF.request(myUrl, method: .post, parameters: parameters,encoding: JSONEncoding.init())
-                    .responseJSON { response in
-      
-     
         
-            //interactor?.AddRoom(name: nomroom, subject: description, user: userlogged, isPrivate: boolstate, users: selectarrayusers)
-        
-        self.performSegue(withIdentifier: "main", sender: self)
+        interactor?.AddRoom(name: nomroom, subject: description, user: ["id":UserDefaultLogged.idUD], isPrivate: boolstate, users: selectarrayusers)
+              
+              self.performSegue(withIdentifier: "main", sender: self)
         
     }
     }
-}
-
-
 
 extension AddRoomViewController:UITableViewDataSource,UITableViewDelegate{
     

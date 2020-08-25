@@ -11,10 +11,16 @@
 //
 
 import UIKit
+import Promises
 
 class TopicWorker
 {
   func doSomeWork()
   {
   }
+    
+    func getalltopics() -> Promise<[Topic1]>
+    {
+        return TopicAPIClient.getalltopics()
+    }
 }

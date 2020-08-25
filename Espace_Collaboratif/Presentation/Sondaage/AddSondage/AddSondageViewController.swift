@@ -152,6 +152,8 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
     super.viewDidLoad()
     doSomething()
     tv.isEditing = true
+    tv.tableFooterView = UIView()
+
     interactor?.connect()
 
 

@@ -23,7 +23,7 @@ class RoomPresenter: RoomPresentationLogic
     weak var viewController: RoomDisplayLogic?
     
     // MARK: Do something
-   
+    
     func presentRoomsSuccess(rooms: [Room1]){
         viewController?.displayListeSuccess(rooms: rooms)
     }
@@ -33,8 +33,8 @@ class RoomPresenter: RoomPresentationLogic
     }
     
     
-  
-  }
+    
+}
 
 
 

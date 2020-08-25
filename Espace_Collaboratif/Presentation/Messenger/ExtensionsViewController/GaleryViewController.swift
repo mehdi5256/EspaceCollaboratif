@@ -5,7 +5,6 @@
 //  Created by mehdi on 8/17/20.
 //  Copyright © 2020 mehdi. All rights reserved.
 //
-
 import UIKit
 import Alamofire
 
@@ -69,7 +68,23 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
         sheet.addAction(camera)
         
         
-       
+        let sondage = UIAlertAction(title: "sondage", style: .default) { (sondage) in
+                // Facebook Code
+            print("sondage")
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                         let vc = storyBoard.instantiateViewController(withIdentifier: "AddSondageViewController") as! AddSondageViewController
+                   vc.modalPresentationStyle = .overFullScreen
+            self.present(vc,animated:true,completion: nil)
+
+        
+            }
+            
+            
+            sondage.setValue(0, forKey: "titleTextAlignment")
+            sondage.setValue(UIImage(systemName: "camera"), forKey: "image")
+            sondage.setValue(UIColor.black, forKey: "titleTextColor")
+            
+            sheet.addAction(sondage)
         
         
         let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
@@ -87,26 +102,6 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
         // sheet.view.backgroundColor = .white
         
         present(sheet, animated: true, completion: nil)
-        
-        
-        let sondage = UIAlertAction(title: "Sondage", style: .default) { (sondage) in
-                       // Facebook Code
-                   print("sondage")
-                   let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                                let vc = storyBoard.instantiateViewController(withIdentifier: "AddSondageViewController") as! AddSondageViewController
-                          vc.modalPresentationStyle = .overFullScreen
-                   self.present(vc,animated:true,completion: nil)
-
-               
-                   }
-                   
-                   
-                   sondage.setValue(0, forKey: "titleTextAlignment")
-                   sondage.setValue(UIImage(systemName: "camera"), forKey: "rectangle.stack")
-                   sondage.setValue(UIColor.black, forKey: "titleTextColor")
-                   
-                   sheet.addAction(sondage)
-        
     }
     
     

@@ -15,7 +15,7 @@ import Promises
 
 class LoginWorker
 {
-  func me(token : String) -> Promise<User> {
-      return UserAPIClient.me(token: token)
-  }
+    func me(token : String) -> Promise<User> {
+        return UserAPIClient.me(token: token)
+    }
 }

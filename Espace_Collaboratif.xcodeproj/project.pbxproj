@@ -44,7 +44,6 @@
 		914E1E7C24DA35FF001BC09F /* Topic1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E7B24DA35FF001BC09F /* Topic1.swift */; };
 		914E1E7E24DA36A8001BC09F /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E7D24DA36A8001BC09F /* Tag.swift */; };
 		914E1E8024DA3D68001BC09F /* TopicEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E7F24DA3D68001BC09F /* TopicEndPoints.swift */; };
-		914E1E8224DA5BEC001BC09F /* TopicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E1E8124DA5BEC001BC09F /* TopicService.swift */; };
 		9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A633248F31C30068B55A /* ReactionsPresenter.swift */; };
 		9151A63A248F31C30068B55A /* ReactionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A634248F31C30068B55A /* ReactionsWorker.swift */; };
 		9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9151A635248F31C30068B55A /* ReactionsRouter.swift */; };
@@ -78,6 +77,7 @@
 		916ACE562464E1DD00498285 /* ImageSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE542464E1DD00498285 /* ImageSenderCell.xib */; };
 		916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916ACE572464E1FE00498285 /* ImageReceiverCell.swift */; };
 		916ACE5A2464E1FE00498285 /* ImageReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916ACE582464E1FE00498285 /* ImageReceiverCell.xib */; };
+		91735EB924F5571C00068C6E /* TopicAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91735EB824F5571C00068C6E /* TopicAPIClient.swift */; };
 		919A846B245A328B0094CE42 /* AddRoomPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8465245A328B0094CE42 /* AddRoomPresenter.swift */; };
 		919A846C245A328B0094CE42 /* AddRoomWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8466245A328B0094CE42 /* AddRoomWorker.swift */; };
 		919A846D245A328B0094CE42 /* AddRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919A8467245A328B0094CE42 /* AddRoomRouter.swift */; };
@@ -175,7 +175,6 @@
 		914E1E7B24DA35FF001BC09F /* Topic1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic1.swift; sourceTree = "<group>"; };
 		914E1E7D24DA36A8001BC09F /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		914E1E7F24DA3D68001BC09F /* TopicEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicEndPoints.swift; sourceTree = "<group>"; };
-		914E1E8124DA5BEC001BC09F /* TopicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicService.swift; sourceTree = "<group>"; };
 		9151A633248F31C30068B55A /* ReactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsPresenter.swift; sourceTree = "<group>"; };
 		9151A634248F31C30068B55A /* ReactionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsWorker.swift; sourceTree = "<group>"; };
 		9151A635248F31C30068B55A /* ReactionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsRouter.swift; sourceTree = "<group>"; };
@@ -209,6 +208,7 @@
 		916ACE542464E1DD00498285 /* ImageSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSenderCell.xib; sourceTree = "<group>"; };
 		916ACE572464E1FE00498285 /* ImageReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReceiverCell.swift; sourceTree = "<group>"; };
 		916ACE582464E1FE00498285 /* ImageReceiverCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageReceiverCell.xib; sourceTree = "<group>"; };
+		91735EB824F5571C00068C6E /* TopicAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicAPIClient.swift; sourceTree = "<group>"; };
 		919A8465245A328B0094CE42 /* AddRoomPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomPresenter.swift; sourceTree = "<group>"; };
 		919A8466245A328B0094CE42 /* AddRoomWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomWorker.swift; sourceTree = "<group>"; };
 		919A8467245A328B0094CE42 /* AddRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomRouter.swift; sourceTree = "<group>"; };
@@ -347,15 +347,14 @@
 		9145040E24DCE3E100DA85B0 /* GetAllTopics */ = {
 			isa = PBXGroup;
 			children = (
-				9103F80824D9DB0B00587112 /* TopicPresenter.swift */,
 				9103F80924D9DB0B00587112 /* TopicWorker.swift */,
+				9103F80D24D9DB0B00587112 /* TopicInteractor.swift */,
+				9103F80824D9DB0B00587112 /* TopicPresenter.swift */,
+				9103F80C24D9DB0B00587112 /* TopicViewController.swift */,
+				9103F81424D9DDF000587112 /* TopicTableViewCell.swift */,
+				913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */,
 				9103F80A24D9DB0B00587112 /* TopicRouter.swift */,
 				9103F80B24D9DB0B00587112 /* TopicModels.swift */,
-				9103F80C24D9DB0B00587112 /* TopicViewController.swift */,
-				9103F80D24D9DB0B00587112 /* TopicInteractor.swift */,
-				9103F81424D9DDF000587112 /* TopicTableViewCell.swift */,
-				914E1E8124DA5BEC001BC09F /* TopicService.swift */,
-				913C420924DB327600DDFC5D /* TagCollectionViewCell.swift */,
 			);
 			path = GetAllTopics;
 			sourceTree = "<group>";
@@ -363,12 +362,12 @@
 		9145041024DCE58D00DA85B0 /* DetailTopic */ = {
 			isa = PBXGroup;
 			children = (
-				9145041124DCE5C000DA85B0 /* DetailTopicPresenter.swift */,
 				9145041224DCE5C000DA85B0 /* DetailTopicWorker.swift */,
+				9145041624DCE5C000DA85B0 /* DetailTopicInteractor.swift */,
+				9145041124DCE5C000DA85B0 /* DetailTopicPresenter.swift */,
+				9145041524DCE5C000DA85B0 /* DetailTopicViewController.swift */,
 				9145041324DCE5C000DA85B0 /* DetailTopicRouter.swift */,
 				9145041424DCE5C000DA85B0 /* DetailTopicModels.swift */,
-				9145041524DCE5C000DA85B0 /* DetailTopicViewController.swift */,
-				9145041624DCE5C000DA85B0 /* DetailTopicInteractor.swift */,
 				91C7ED2E24E195A900D0D8D2 /* ReplyTableViewCell.swift */,
 				91C7ED3024E1976A00D0D8D2 /* ReplyService.swift */,
 			);
@@ -553,6 +552,7 @@
 			children = (
 				91A3759D24538D5600854ADE /* RoomAPIClient.swift */,
 				91F7B0412454F2D800AA3974 /* UserAPIClient.swift */,
+				91735EB824F5571C00068C6E /* TopicAPIClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -583,13 +583,13 @@
 		91A3758E24538AFA00854ADE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				91F7B0322454DCA300AA3974 /* Users */,
 				9103F7FA24D9BA1600587112 /* Home */,
-				9103F80724D9DADA00587112 /* Topic */,
+				91A3758F24538B0800854ADE /* Room */,
+				919A8473245AA6B30094CE42 /* Messenger */,
 				9166741924B5D15F00A5E687 /* Sondaage */,
 				9151A632248F31AC0068B55A /* Reaction */,
-				919A8473245AA6B30094CE42 /* Messenger */,
-				91F7B0322454DCA300AA3974 /* Users */,
-				91A3758F24538B0800854ADE /* Room */,
+				9103F80724D9DADA00587112 /* Topic */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -597,8 +597,8 @@
 		91A3758F24538B0800854ADE /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				919A8464245A325C0094CE42 /* AddRoom */,
 				91D6966D24566F86000E9F20 /* GetRooms */,
+				919A8464245A325C0094CE42 /* AddRoom */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -866,7 +866,6 @@
 				9151A63E248F31C30068B55A /* ReactionsInteractor.swift in Sources */,
 				916ACE552464E1DD00498285 /* ImageSenderCell.swift in Sources */,
 				919A8475245AA7140094CE42 /* Messenger1.swift in Sources */,
-				914E1E8224DA5BEC001BC09F /* TopicService.swift in Sources */,
 				91A3759924538B4D00854ADE /* RoomModels.swift in Sources */,
 				91A3759B24538B4D00854ADE /* RoomInteractor.swift in Sources */,
 				919A846D245A328B0094CE42 /* AddRoomRouter.swift in Sources */,
@@ -909,6 +908,7 @@
 				91F7B03F2454DD5400AA3974 /* LoginInteractor.swift in Sources */,
 				91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */,
 				9166742A24B5D1C800A5E687 /* VoteTableViewCell.swift in Sources */,
+				91735EB924F5571C00068C6E /* TopicAPIClient.swift in Sources */,
 				91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */,
 				9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */,
 				91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */,

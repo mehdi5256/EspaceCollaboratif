@@ -15,6 +15,8 @@ import UIKit
 protocol TopicBusinessLogic
 {
   func doSomething(request: Topic.Something.Request)
+    func getalltopics()
+
 }
 
 protocol TopicDataStore
@@ -24,6 +26,22 @@ protocol TopicDataStore
 
 class TopicInteractor: TopicBusinessLogic, TopicDataStore
 {
+    func getalltopics() {
+          worker = TopicWorker()
+              worker?.getalltopics().then {
+                  topics in
+                  self.presenter?.presentTopicsSuccess(topics: topics)
+                print("topiddddcs\(topics)")
+
+              }.catch {
+                  error in
+                  self.presenter?.presentTopicsError(error: error.localizedDescription)
+                print("errrrrrprrrr")
+
+                
+              }
+    }
+    
   var presenter: TopicPresentationLogic?
   var worker: TopicWorker?
   //var name: String = ""
