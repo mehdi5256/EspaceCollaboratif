@@ -26,7 +26,8 @@ class TopicViewController: UIViewController, TopicDisplayLogic
 {
     func displayTopicsSuccess(topics: [Topic1]) {
         self.topicarray = topics
-        print(topics)
+        arrFilterTopics = topicarray
+        //print(topics)
         
         tv.reloadData()
     }
@@ -88,10 +89,13 @@ class TopicViewController: UIViewController, TopicDisplayLogic
     var topicarray: [Topic1] = []
     var tagname: [String] = []
     var tagsarray : [Tag] = []
+    var arrFilterTopics = [Topic1]()
+
     
     
     @IBOutlet weak var tv: UITableView!
     
+    @IBOutlet weak var SearchBar: UISearchBar!
     
     override func viewWillAppear(_ animated: Bool) {
         interactor?.getalltopics()
@@ -155,27 +159,27 @@ class TopicViewController: UIViewController, TopicDisplayLogic
 extension TopicViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(topicarray.count)
-        return topicarray.count
+        //print(topicarray.count)
+        return arrFilterTopics.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topiccell", for: indexPath) as! TopicTableViewCell
         
         //user info
-        let image = topicarray[indexPath.row].user.image
+        let image = arrFilterTopics[indexPath.row].user.image
         cell.UserImage.kf.setImage(with: URL(string: image))
-        cell.Username.text = topicarray[indexPath.row].user.firstName + " " + topicarray[indexPath.row].user.lastName
+        cell.Username.text = arrFilterTopics[indexPath.row].user.firstName + " " + arrFilterTopics[indexPath.row].user.lastName
         
         //topic info
-        cell.TitleTopic.text = topicarray[indexPath.row].title
+        cell.TitleTopic.text = arrFilterTopics[indexPath.row].title
         //        cell.DescriptionTopic.text = topicarray[indexPath.row].description
         //cell.TagName.text = topicarray[indexPath.row].tags
-        cell.CountReply.text = topicarray[indexPath.row].countReplies!.description + " réponses"
+        cell.CountReply.text = arrFilterTopics[indexPath.row].countReplies!.description + " réponses"
         
-        cell.numberview.text = topicarray[indexPath.row].seen!.description + " vues"
+        cell.numberview.text = arrFilterTopics[indexPath.row].seen!.description + " vues"
         var arrtag :[String] = []
-        let array2 = topicarray[indexPath.row].tags
+        let array2 = arrFilterTopics[indexPath.row].tags
         for a in array2{
             arrtag.append(a.name!)
             
@@ -203,14 +207,14 @@ extension TopicViewController:UITableViewDelegate{
             let DVC = segue.destination as! DetailTopicViewController
             let indice = sender as! IndexPath
             
-            DVC.idtopic = topicarray[indice.row].id
-            DVC.userimg = topicarray[indice.row].user.image
-            DVC.FirstName = topicarray[indice.row].user.firstName
-            DVC.LastName = topicarray[indice.row].user.lastName
-            DVC.TitreTopic = topicarray[indice.row].title
-            DVC.descriiptionTopic = topicarray[indice.row].description
-            DVC.NumberReply = topicarray[indice.row].countReplies
-            let array2 = topicarray[indice.row].tags
+            DVC.idtopic = arrFilterTopics[indice.row].id
+            DVC.userimg = arrFilterTopics[indice.row].user.image
+            DVC.FirstName = arrFilterTopics[indice.row].user.firstName
+            DVC.LastName = arrFilterTopics[indice.row].user.lastName
+            DVC.TitreTopic = arrFilterTopics[indice.row].title
+            DVC.descriiptionTopic = arrFilterTopics[indice.row].description
+            DVC.NumberReply = arrFilterTopics[indice.row].countReplies
+            let array2 = arrFilterTopics[indice.row].tags
             for a in array2{
                 DVC.arrtag.append(a.name!)
                 // print(arrtag)
@@ -224,3 +228,30 @@ extension TopicViewController:UITableViewDelegate{
     
 }
 
+
+extension TopicViewController:UISearchBarDelegate{
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else
+        {
+            arrFilterTopics = topicarray
+            tv.reloadData()
+            return
+        }
+        arrFilterTopics = topicarray.filter({ (topictest) -> Bool in
+            
+            return topictest.title!.lowercased().contains(searchText.lowercased())
+        })
+        tv.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//            searchBar.resignFirstResponder()
+//        tv.keyboardDismissMode = .onDrag
+        
+        searchBar.endEditing(true)
+
+
+    }
+    
+}

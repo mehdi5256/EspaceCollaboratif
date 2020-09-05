@@ -349,7 +349,26 @@ extension AddRoomViewController:UISearchBarDelegate{
         tv.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    //            searchBar.resignFirstResponder()
+    //        tv.keyboardDismissMode = .onDrag
+            
+            searchBar.endEditing(true)
+
+
+        }
     
+    
+}
+
+extension AddRoomViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Subject.resignFirstResponder()
+        RoomName.resignFirstResponder()
+
+        return true
+    }
 }
 
 extension Encodable { /// Encode into JSON and return `Data`

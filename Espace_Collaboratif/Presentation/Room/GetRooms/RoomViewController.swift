@@ -62,6 +62,8 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     var rooms: [Room1] = []
     var usersCell: [User] = []
     var usersCoreDataArray: [User] = []
+    var arrFilter = [Room1]()
+
     
     let reachability = try! Reachability()
     
@@ -70,6 +72,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     @IBOutlet weak var BtnAddOutlet: UIButton!
     @IBOutlet weak var tv: UITableView!
     
+    @IBOutlet weak var Searchbar: UISearchBar!
     // CORE DATA
     var roomsCD: [RoomCoreData] = []
     
@@ -178,6 +181,7 @@ class RoomViewController: UIViewController, RoomDisplayLogic
     
     func displayListeSuccess(rooms: [Room1]){
         self.rooms = rooms
+        arrFilter = rooms
         for r in  self.rooms{
             if self.isEntityAttributeExist(id: Int32(r.id!), entityName: "RoomCoreData"){
             }
@@ -219,7 +223,7 @@ extension RoomViewController: UITableViewDataSource{
             
         default:
             print("connected")
-            return rooms.count
+            return arrFilter.count
         }
         
     }
@@ -242,7 +246,7 @@ extension RoomViewController: UITableViewDataSource{
             
         default:
             
-            let roomindex = rooms[indexPath.item]
+            let roomindex = arrFilter[indexPath.item]
             cell.RoomName.text = roomindex.name!
             cell.UserName.text = (roomindex.user?.firstName ?? "") + " " + (roomindex.user?.lastName ?? "")
             self.usersCell = roomindex.users
@@ -420,8 +424,8 @@ extension RoomViewController:UITableViewDelegate{
                 let DVC = segue.destination as! MessengerViewController
                 let indice = sender as! IndexPath
                 
-                DVC.nomroom = rooms[indice.row].name
-                DVC.idroom = rooms[indice.row].id
+                DVC.nomroom = arrFilter[indice.row].name
+                DVC.idroom = arrFilter[indice.row].id
                 
             }
             
@@ -445,5 +449,33 @@ extension RoomViewController:UITableViewDelegate{
         
     }
     
+    
+}
+
+
+extension RoomViewController:UISearchBarDelegate{
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else
+        {
+            arrFilter = rooms
+            tv.reloadData()
+            return
+        }
+        arrFilter = rooms.filter({ (roomstest) -> Bool in
+            
+            return roomstest.name!.lowercased().contains(searchText.lowercased())
+        })
+        tv.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//            searchBar.resignFirstResponder()
+//        tv.keyboardDismissMode = .onDrag
+        
+        searchBar.endEditing(true)
+
+
+    }
     
 }
