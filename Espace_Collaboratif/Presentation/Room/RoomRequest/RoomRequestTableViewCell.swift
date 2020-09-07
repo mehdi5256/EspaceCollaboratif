@@ -36,7 +36,7 @@ class RoomRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var username2: UILabel!
     @IBOutlet weak var WhiteView: UIView!
     @IBOutlet weak var GroupeName: UILabel!
-    @IBOutlet weak var Username: UILabel!
+    @IBOutlet weak var lblaccept: UILabel!
     @IBOutlet weak var BlueView: UIView!
     @IBOutlet weak var userimage: UIImageView!
     @IBOutlet weak var Accept: UIButton!
@@ -52,12 +52,22 @@ class RoomRequestTableViewCell: UITableViewCell {
     
     @IBAction func BtnRéfuserAction(_ sender: UIButton) {
         
+        Accept.isHidden = true
+        Refus.isHidden = true
+        lblaccept.isHidden = false
+        lblaccept.text = "Demande réfusée!"
         delegate?.rejectDemande(tag:sender.tag)
+
 
     }
     @IBAction func BtnAcceptAction(_ sender: UIButton) {
         
+        Accept.isHidden = true
+        Refus.isHidden = true
+        lblaccept.isHidden = false
+        lblaccept.text = "Demande acceptéé!"
         delegate?.didButtonPressedRoomRequest(tag:sender.tag)
+
 
     }
 }

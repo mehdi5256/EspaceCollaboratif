@@ -151,10 +151,11 @@ extension RoomRequestViewController:UITableViewDelegate,UITableViewDataSource{
         
         roomrequestcell.delegate = self
         roomrequestcell.Accept.tag = indexPath.row
+        roomrequestcell.Refus.tag  = indexPath.row
 
         
         roomrequestcell.GroupeName.text = roomrequestArray[indexPath.row].room.name
-        roomrequestcell.Username.text = roomrequestArray[indexPath.row].user.firstName
+       
         roomrequestcell.username2.text = roomrequestArray[indexPath.row].user.firstName + " " + roomrequestArray[indexPath.row].user.lastName
         
         let imageuser = roomrequestArray[indexPath.row].user.image
@@ -184,15 +185,16 @@ extension RoomRequestViewController:RoomRequestDelegate{
                     "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
                        "Accept": "application/json"
                    ]
-                AF.request("http://b03440bb0b0a.ngrok.io/roomrequest/reject/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
+                AF.request("http://c689b3e9efce.ngrok.io/roomrequest/reject/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
                                  response in
                 
                     print(UserDefaultLogged.tokenUD)
                         print(response.request)
                         print(response.response)
                         print(response.result)
-        //            self.displayRoomRequestSuccess(roomrequest: self.roomrequestArray)
-                    self.interactor?.getRoomRequest(token: UserDefaultLogged.tokenUD)
+           
+                    
+                self.interactor?.getRoomRequest(token: UserDefaultLogged.tokenUD)
                 }
                 
     }
@@ -205,14 +207,13 @@ extension RoomRequestViewController:RoomRequestDelegate{
             "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
                "Accept": "application/json"
            ]
-        AF.request("http://b03440bb0b0a.ngrok.io/roomrequest/accept/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
+        AF.request("http://c689b3e9efce.ngrok.io/roomrequest/accept/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
                          response in
         
             print(UserDefaultLogged.tokenUD)
                 print(response.request)
                 print(response.response)
                 print(response.result)
-//            self.displayRoomRequestSuccess(roomrequest: self.roomrequestArray)
             self.interactor?.getRoomRequest(token: UserDefaultLogged.tokenUD)
         }
         

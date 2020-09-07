@@ -10,15 +10,15 @@ import Foundation
 
 enum Keys{
    enum MobileIntegrationServer {
-     static let baseURL = "http://b03440bb0b0a.ngrok.io"
+     static let baseURL = "http://c689b3e9efce.ngrok.io"
    // static let baseURL = "https://api.jsonbin.io"
     static let baseURLEventBus = "0.tcp.ngrok.io"
-      static let basePortEventBus = 18518
+      static let basePortEventBus = 11213
     
       static let baseAuthURL =
-    "http://03efd3a72ac3.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/auth"
+    "http://9353d680ab58.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/auth"
       static let baseTokenURL =
-    "http://03efd3a72ac3.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/token"
+    "http://9353d680ab58.ngrok.io/auth/realms/espace_collaborative/protocol/openid-connect/token"
     static let ClientSecret = "9973ca70-d786-40df-acb0-565b83411061"
     static let redirectURL = "accretio://mobile/loginsuccess"
     static let  ClientId = "ios-app"

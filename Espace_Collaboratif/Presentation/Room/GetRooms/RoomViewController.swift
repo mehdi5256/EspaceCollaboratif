@@ -430,6 +430,12 @@ extension RoomViewController:UITableViewDelegate{
                 
                 DVC.nomroom = arrFilter[indice.row].name
                 DVC.idroom = arrFilter[indice.row].id
+                DVC.UsersinRoom = arrFilter[indice.row].users
+                DVC.RoomOwner = arrFilter[indice.row].user
+                DVC.isPrivate = arrFilter[indice.row].isPrivate
+                DVC.RequestStatus = arrFilter[indice.row].requestStatus
+
+
                 
             }
             

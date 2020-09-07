@@ -185,6 +185,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     
     //outlets
     @IBOutlet weak var emptytvimg: UIImageView!
+    @IBOutlet weak var prévisualisationview: UIView!
     @IBOutlet weak var message: GrowingTextView!
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var BtnSideUp: UIButton!
@@ -194,6 +195,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     @IBOutlet weak var RoomName: UILabel!
     @IBOutlet weak var ViewEntete: UIView!
     
+    @IBOutlet weak var joinbtn: UIButton!
     @IBOutlet weak var bottomtextview: NSLayoutConstraint!
     
     @IBOutlet weak var BtnBack: UIButton!
@@ -231,10 +233,18 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
     var nomroom:String?
     var idroom:Int!
     var idroomEventBus:Int!
+    var isPrivate:Bool!
+    var RequestStatus:String?
+
     
     var msgarray:[Messenger1] = []
     var reactionsArray:[Reaction1] = []
     var choixcell: [Choix] = []
+    var UsersinRoom:[User]?
+   var RoomOwner:User?
+    
+    
+
     
     
     
@@ -303,9 +313,87 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
 
         }
     }
+   
+    @IBAction func JoinRoom(_ sender: Any) {
+        
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
+            "Accept": "application/json"
+        ]
+        AF.request("http://c689b3e9efce.ngrok.io/room/join/\(idroom!)",method: .put, headers: headers).responseJSON{
+            response in
+            
+            print(UserDefaultLogged.tokenUD)
+            print(response.request)
+            print(response.response)
+            print(response.result)
+            
+            if (self.isPrivate == false)
+            {
+                self.prévisualisationview.isHidden = true
+
+            }
+            else{
+                    self.prévisualisationview.isHidden = false
+                    self.joinbtn.setTitle("En attente", for: .normal)
+                    self.joinbtn.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                    self.joinbtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+                    self.joinbtn.isEnabled = false
+            }
+            
+            
+            
+            //    self.interactor?.getRoomRequest(token: UserDefaultLogged.tokenUD)
+        }
+        
+    }
     override func viewDidLoad()
     {
         
+        
+        
+        var usersinroomsvar =  [String]()
+            print("xdkflkhfdjhjfdskfjsk")
+        
+        for uservar in UsersinRoom ?? []{
+
+            usersinroomsvar.append(uservar.id)
+            print(usersinroomsvar)
+   
+            
+            if [UserDefaultLogged.idUD].allSatisfy(usersinroomsvar.contains) {
+                print("1")
+               prévisualisationview.isHidden = true
+
+                
+            }
+            else{
+                prévisualisationview.isHidden = false
+                print("2")
+
+
+            }
+       
+        }
+        if RequestStatus == "PENDING"{
+            
+            prévisualisationview.isHidden = false
+            joinbtn.setTitle("En attente", for: .normal)
+            joinbtn.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            joinbtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+
+            self.joinbtn.isEnabled = false
+            
+        }
+        if RequestStatus == "ACCEPTED"{
+            
+            prévisualisationview.isHidden = true
+        }
+        if RequestStatus == "REJECTED"{
+                   
+                   prévisualisationview.isHidden = false
+               }
         self.interactor?.getRoomById(id: self.idroom)
         self.interactor?.GetRoomEventBusid(id: self.idroom)
         
@@ -327,9 +415,6 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         MessagesArrayCoreData =   try! AppDelegate.viewContext.fetch(request)
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-//        
         
         imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
@@ -366,7 +451,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         
         btnlastrow.roundCorners([.topLeft, .bottomLeft] , radius: 8)
         
-        ViewEntete.roundCorners([.topLeft, .topRight] , radius: 50)
+        //ViewEntete.roundCorners([.topLeft, .topRight] , radius: 50)
 
         interactor?.connect()
         
@@ -842,4 +927,101 @@ extension UITableView {
                     at: .top,
                     animated: animated)
     }
+}
+
+
+extension MessengerViewController{
+    
+    @IBAction func BtnMoreOptions(_ sender: Any) {
+        ActionMoreOptions()
+       }
+    
+    func ActionMoreOptions() {
+        
+       let actionSheetAlertController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+       let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
+           // Instagram Code
+       }
+       doc.setValue(0, forKey: "titleTextAlignment")
+       doc.setValue(UIImage(systemName: "doc"), forKey: "image")
+       doc.setValue(UIColor.black, forKey: "titleTextColor")
+        
+        let doc2 = UIAlertAction(title: "Document", style: .default) { (doc) in
+                  // Instagram Code
+              }
+              doc2.setValue(0, forKey: "titleTextAlignment")
+              doc2.setValue(UIImage(systemName: "doc"), forKey: "image")
+              doc2.setValue(UIColor.black, forKey: "titleTextColor")
+        
+        let doc3 = UIAlertAction(title: "Document", style: .default) { (doc) in
+                  // Instagram Code
+              }
+              doc3.setValue(0, forKey: "titleTextAlignment")
+              doc3.setValue(UIImage(systemName: "doc"), forKey: "image")
+              doc3.setValue(UIColor.black, forKey: "titleTextColor")
+        
+        let doc4 = UIAlertAction(title: "Quiter la discussion", style: .destructive) { (doc) in
+            
+            let alertController = UIAlertController(
+                title: "Quitter la discussion?",
+                message: "Si vous quittez cette discussion, vous ne recevrez plus de nouveaux messages.",
+                preferredStyle: UIAlertController.Style.alert
+            )
+
+            let confirmAction = UIAlertAction(
+                title: "Quitter",
+                style: UIAlertAction.Style.destructive) { (action) in
+                    
+                    print("quitter")
+                    
+                    let headers: HTTPHeaders = [
+                        "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
+                        "Accept": "application/json"
+                    ]
+                    AF.request("http://c689b3e9efce.ngrok.io/room/leave/\(self.idroom!)",method: .put, headers: headers).responseJSON{
+                        response in
+                        
+                        print(UserDefaultLogged.tokenUD)
+                        print(response.request)
+                        print(response.response)
+                        print(response.result)
+                        
+                self.navigationController?.popToRootViewController(animated: true)
+
+                        
+                        
+                // ...
+            }
+            }
+
+            let cancelAction = UIAlertAction(
+            title: "Annuler",
+            style: UIAlertAction.Style.cancel)
+                
+            { (action) in
+                print("cancel")
+
+                // ...
+            }
+
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+
+            self.present(alertController, animated: true)
+        }
+              doc4.setValue(0, forKey: "titleTextAlignment")
+              doc4.setValue(UIImage(systemName: "person.badge.minus"), forKey: "image")
+              doc4.setValue(UIColor.red, forKey: "titleTextColor")
+        
+        
+       
+        actionSheetAlertController.addAction(doc)
+        actionSheetAlertController.addAction(doc2)
+        actionSheetAlertController.addAction(doc3)
+        actionSheetAlertController.addAction(doc4)
+
+
+        self.present(actionSheetAlertController, animated: true, completion: nil)
+}
 }

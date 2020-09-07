@@ -16,4 +16,7 @@ public struct Room1: Codable{
     var isPrivate: Bool?
     var user :User?
     var users: [User]
+    var requestStatus: String?
+
+    
 }
