@@ -96,6 +96,10 @@ class RoomViewController: UIViewController, RoomDisplayLogic
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        interactor?.getRooms(token: UserDefaultLogged.tokenUD)
+
+    }
     
     override func viewDidLoad()
     {

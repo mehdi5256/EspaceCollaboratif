@@ -109,15 +109,7 @@ class UserDefaultLogged {
         
     }
     
-    static var TokenUD: String{
-          get {
-              return UserDefaults.standard.string(forKey: Keys.KeyToken) ??  "tt"
-              }
-          set {
-              UserDefaults.standard.set(newValue, forKey: Keys.KeyToken)
-          }
-          
-      }
+
 
     static var isUserLogged: Bool{
         get {

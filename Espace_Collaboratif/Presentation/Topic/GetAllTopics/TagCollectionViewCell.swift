@@ -15,6 +15,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         RoundViewTag.layer.masksToBounds = true
            RoundViewTag.layer.cornerRadius = 15
+        
+        
 
     
 

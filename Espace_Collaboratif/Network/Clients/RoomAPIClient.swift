@@ -11,6 +11,11 @@ import Promises
 
 class RoomAPIClient: APIClient {
     
+    static func getroomrequest(token: String) -> Promise<[RoomRequest1]> {
+        return performRequest(route: RoomsEndPoints.getRoomsRequest(token: token))
+    }
+    
+    
     static func zidReply(reply:String,topic:[String: Any],user:[String: Any]) -> Promise<Reply1> {
      return performRequest(route: RoomsEndPoints.zidReply(reply: reply, topic: topic, user: user))
     }

@@ -21,6 +21,8 @@ enum RoomsEndPoints: APIConfiguration {
     
     case zidReply(reply:String,topic:[String: Any],user:[String: Any])
     
+    case getRoomsRequest(token:String)
+    
     
     
     
@@ -35,6 +37,8 @@ enum RoomsEndPoints: APIConfiguration {
     static let getRoomById = "/msg/room/"
     static let postmsg = "/msg/"
     static let reply = "/reply/"
+    static let roomrequest = "/roomrequest/"
+
 
     
     
@@ -75,6 +79,10 @@ enum RoomsEndPoints: APIConfiguration {
       case .getRoomIdEventBus:
         return .get
         
+        case .getRoomsRequest:
+        
+            return .get
+        
       default:
       return .get
         
@@ -107,16 +115,12 @@ enum RoomsEndPoints: APIConfiguration {
         case .PostImage:
               return RoomsEndPoints.postmsg
         
-      
-
-        
-
-        
-        
-
       case .zidReply:
     return RoomsEndPoints.reply
-
+        
+      case .getRoomsRequest:
+        return RoomsEndPoints.roomrequest
+ 
     }
    }
    
@@ -194,8 +198,17 @@ enum RoomsEndPoints: APIConfiguration {
          
            
          useParams = true
+      
         
+        case .getRoomsRequest(let token):
+        
+         urlRequest.addValue("Bearer " + token, forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
          
+         urlRequest.addValue(ContentType.json.rawValue, forHTTPHeaderField:  HTTPHeaderField.acceptType.rawValue)
+        
+         useParams = true
+        
+        
 
         
       default:

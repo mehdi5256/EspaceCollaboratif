@@ -19,12 +19,37 @@ var currentAuthorizationFlow: OIDExternalUserAgentSession?
 
 
     var window: UIWindow?
+    var roomrequestArray: [RoomRequest1] = []
+    var interactor: RoomRequestBusinessLogic?
+
+
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//
+//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "RoomRequestViewController") as! RoomRequestViewController
+//       // viewController.interactor?.getRoomRequest(token: UserDefaultLogged.tokenUD)
+//        // viewController.displayRoomRequestSuccess(roomrequest: roomrequestArray )
+//       // viewController.tv.reloadData()
+//        print("aaaaaaaaaaaaaa")
+//        viewController.displayRoomRequestSuccess(roomrequest: roomrequestArray)
+//       // print(viewController.roomrequestArray.count)
+//        print("aaaaaaaaaaaaaa")
+//
+//        
+        
         guard let launchOptions = launchOptions else { return false }
         return JitsiMeet.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-    }
+        
+        
+        
+    
+        }
+    
+    
+
+    
     
     
     // KeyCloak methods
@@ -111,6 +136,9 @@ var currentAuthorizationFlow: OIDExternalUserAgentSession?
        static var viewContext: NSManagedObjectContext {
            return persistentContainer.viewContext
        }
+    
 }
+
+
 
 

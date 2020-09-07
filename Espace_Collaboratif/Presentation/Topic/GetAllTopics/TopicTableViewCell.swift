@@ -19,6 +19,7 @@ class TopicTableViewCell: UITableViewCell {
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var DescriptionTopic: UILabel!
     @IBOutlet weak var CountReply: UILabel!
+    @IBOutlet weak var roundview: UIView!
     @IBOutlet weak var TagName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,19 @@ class TopicTableViewCell: UITableViewCell {
 //        taglistview.addTag("TEAChart")
 //        taglistview.addTag("To Be Removed")
 //        taglistview.addTag("To Be Removed")
+        
+        
+        roundview.backgroundColor = .white
+
+
+               roundview.layer.shadowColor = UIColor.gray.cgColor
+
+               roundview.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+
+               roundview.layer.shadowRadius = 6.0
+
+               roundview.layer.shadowOpacity = 0.7
+        
         taglistview.textFont = .systemFont(ofSize: 13)
 
     }

@@ -24,6 +24,17 @@ class RoomsTableViewCell: UITableViewCell {
 
         gradientLayer.frame = viewcell.bounds
       //  self.setGradientBackground(colorOne: .green, colorTwo: .blue)
+        
+        viewcell.backgroundColor = .white
+
+
+        viewcell.layer.shadowColor = UIColor.gray.cgColor
+
+        viewcell.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+
+        viewcell.layer.shadowRadius = 6.0
+
+        viewcell.layer.shadowOpacity = 0.7
 
 
     }

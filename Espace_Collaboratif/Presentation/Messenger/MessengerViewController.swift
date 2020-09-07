@@ -789,7 +789,13 @@ extension UIView {
         mask.path = path.cgPath
         self.layer.mask = mask
     }
-    
+        
+    func roundCorners2(view :UIView, corners: UIRectCorner, radius: CGFloat){
+            let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            view.layer.mask = mask
+    }
     
     
     
