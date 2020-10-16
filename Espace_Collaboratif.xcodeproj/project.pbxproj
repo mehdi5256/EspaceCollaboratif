@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1A628816FC5283D7E2FAB758 /* Pods_Espace_Collaboratif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48386D4104445DA38D1184E /* Pods_Espace_Collaboratif.framework */; };
+		693247B6253728AA00C5BCF3 /* ProfilPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693247B0253728AA00C5BCF3 /* ProfilPresenter.swift */; };
+		693247B7253728AA00C5BCF3 /* ProfilWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693247B1253728AA00C5BCF3 /* ProfilWorker.swift */; };
+		693247B8253728AA00C5BCF3 /* ProfilRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693247B2253728AA00C5BCF3 /* ProfilRouter.swift */; };
+		693247B9253728AA00C5BCF3 /* ProfilModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693247B3253728AA00C5BCF3 /* ProfilModels.swift */; };
+		693247BA253728AA00C5BCF3 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693247B4253728AA00C5BCF3 /* ProfilViewController.swift */; };
+		693247BB253728AA00C5BCF3 /* ProfilInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693247B5253728AA00C5BCF3 /* ProfilInteractor.swift */; };
 		9103F80124D9BA3300587112 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FB24D9BA3300587112 /* HomePresenter.swift */; };
 		9103F80224D9BA3300587112 /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FC24D9BA3300587112 /* HomeWorker.swift */; };
 		9103F80324D9BA3300587112 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103F7FD24D9BA3300587112 /* HomeRouter.swift */; };
@@ -147,6 +153,12 @@
 
 /* Begin PBXFileReference section */
 		25011D67E9EDF04603A98FB0 /* Pods-Espace_Collaboratif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.debug.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.debug.xcconfig"; sourceTree = "<group>"; };
+		693247B0253728AA00C5BCF3 /* ProfilPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilPresenter.swift; sourceTree = "<group>"; };
+		693247B1253728AA00C5BCF3 /* ProfilWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilWorker.swift; sourceTree = "<group>"; };
+		693247B2253728AA00C5BCF3 /* ProfilRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilRouter.swift; sourceTree = "<group>"; };
+		693247B3253728AA00C5BCF3 /* ProfilModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilModels.swift; sourceTree = "<group>"; };
+		693247B4253728AA00C5BCF3 /* ProfilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
+		693247B5253728AA00C5BCF3 /* ProfilInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilInteractor.swift; sourceTree = "<group>"; };
 		85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Espace_Collaboratif.release.xcconfig"; path = "Target Support Files/Pods-Espace_Collaboratif/Pods-Espace_Collaboratif.release.xcconfig"; sourceTree = "<group>"; };
 		9103F7FB24D9BA3300587112 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		9103F7FC24D9BA3300587112 /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
@@ -307,6 +319,19 @@
 				85A2B53FFE1011E8CA4372BA /* Pods-Espace_Collaboratif.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		693247AF2537289300C5BCF3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				693247B0253728AA00C5BCF3 /* ProfilPresenter.swift */,
+				693247B1253728AA00C5BCF3 /* ProfilWorker.swift */,
+				693247B2253728AA00C5BCF3 /* ProfilRouter.swift */,
+				693247B3253728AA00C5BCF3 /* ProfilModels.swift */,
+				693247B4253728AA00C5BCF3 /* ProfilViewController.swift */,
+				693247B5253728AA00C5BCF3 /* ProfilInteractor.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		9103F7FA24D9BA1600587112 /* Home */ = {
@@ -732,6 +757,7 @@
 		91F7B0322454DCA300AA3974 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				693247AF2537289300C5BCF3 /* Profile */,
 				91F7B0332454DCB500AA3974 /* Login */,
 			);
 			path = Users;
@@ -889,6 +915,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693247BA253728AA00C5BCF3 /* ProfilViewController.swift in Sources */,
 				9103F80524D9BA3300587112 /* HomeViewController.swift in Sources */,
 				91A6A619245B9AA0004F0C3D /* EventBus.swift in Sources */,
 				916ACE592464E1FE00498285 /* ImageReceiverCell.swift in Sources */,
@@ -950,11 +977,13 @@
 				91F7B03F2454DD5400AA3974 /* LoginInteractor.swift in Sources */,
 				91F7B03C2454DD5400AA3974 /* LoginRouter.swift in Sources */,
 				9166742A24B5D1C800A5E687 /* VoteTableViewCell.swift in Sources */,
+				693247B9253728AA00C5BCF3 /* ProfilModels.swift in Sources */,
 				91735EB924F5571C00068C6E /* TopicAPIClient.swift in Sources */,
 				91F7B03A2454DD5400AA3974 /* LoginPresenter.swift in Sources */,
 				91E66951250543A600F2E6C9 /* RoomRequest1.swift in Sources */,
 				9151A639248F31C30068B55A /* ReactionsPresenter.swift in Sources */,
 				91C1728C245485E000588967 /* UserCollectionViewCell.swift in Sources */,
+				693247BB253728AA00C5BCF3 /* ProfilInteractor.swift in Sources */,
 				91F7B03E2454DD5400AA3974 /* LoginViewController.swift in Sources */,
 				9145041A24DCE5C000DA85B0 /* DetailTopicModels.swift in Sources */,
 				91F7B03B2454DD5400AA3974 /* LoginWorker.swift in Sources */,
@@ -982,6 +1011,7 @@
 				91C0B8B5245E6A4D0059F675 /* EventBusApiClient.swift in Sources */,
 				91A6A623245B9B09004F0C3D /* Word.swift in Sources */,
 				91A6A61B245B9AAB004F0C3D /* Mutex.swift in Sources */,
+				693247B7253728AA00C5BCF3 /* ProfilWorker.swift in Sources */,
 				914E1E8024DA3D68001BC09F /* TopicEndPoints.swift in Sources */,
 				916ACE512464E1B500498285 /* TextReceiverCell.swift in Sources */,
 				91592C79245B62F000E88133 /* MessengerWorker.swift in Sources */,
@@ -999,7 +1029,9 @@
 				9166742624B5D19A00A5E687 /* VoteSondageInteractor.swift in Sources */,
 				9151A63B248F31C30068B55A /* ReactionsRouter.swift in Sources */,
 				91A37587245388F200854ADE /* Room1.swift in Sources */,
+				693247B6253728AA00C5BCF3 /* ProfilPresenter.swift in Sources */,
 				91F7B0442454F46D00AA3974 /* UserConnectedEndPoints.swift in Sources */,
+				693247B8253728AA00C5BCF3 /* ProfilRouter.swift in Sources */,
 				9151A63C248F31C30068B55A /* ReactionsModels.swift in Sources */,
 				91A375AA2453B80600854ADE /* ConstantColor.swift in Sources */,
 				9166742424B5D19A00A5E687 /* VoteSondageModels.swift in Sources */,

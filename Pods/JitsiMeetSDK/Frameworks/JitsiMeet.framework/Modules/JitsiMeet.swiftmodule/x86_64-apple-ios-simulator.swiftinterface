@@ -20,19 +20,19 @@ public class PiPViewCoordinator {
     case upperRightCorner
     case lowerLeftCorner
     case upperLeftCorner
-    public static func == (a: JitsiMeet.PiPViewCoordinator.Position, b: JitsiMeet.PiPViewCoordinator.Position) -> Swift.Bool
+    public static func == (a: PiPViewCoordinator.Position, b: PiPViewCoordinator.Position) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }
     public func hash(into hasher: inout Swift.Hasher)
   }
-  public var initialPositionInSuperview: JitsiMeet.PiPViewCoordinator.Position
+  public var initialPositionInSuperview: PiPViewCoordinator.Position
   public var pipSizeRatio: CoreGraphics.CGFloat
-  weak public var delegate: JitsiMeet.PiPViewCoordinatorDelegate?
+  weak public var delegate: PiPViewCoordinatorDelegate?
   public init(withView view: UIKit.UIView)
   public func configureAsStickyView(withParentView parentView: UIKit.UIView? = nil)
-  public func show(completion: JitsiMeet.AnimationCompletion? = nil)
-  public func hide(completion: JitsiMeet.AnimationCompletion? = nil)
+  public func show(completion: AnimationCompletion? = nil)
+  public func hide(completion: AnimationCompletion? = nil)
   public func enterPictureInPicture()
   @objc public func exitPictureInPicture()
   public func resetBounds(bounds: CoreGraphics.CGRect)
@@ -47,8 +47,8 @@ public class PiPViewCoordinator {
   }
   @objc public static func configureProvider(localizedName: Swift.String, ringtoneSound: Swift.String?, iconTemplateImageData: Foundation.Data?)
   @objc public static func isProviderConfigured() -> Swift.Bool
-  @objc public static func addListener(_ listener: JitsiMeet.JMCallKitListener)
-  @objc public static func removeListener(_ listener: JitsiMeet.JMCallKitListener)
+  @objc public static func addListener(_ listener: JMCallKitListener)
+  @objc public static func removeListener(_ listener: JMCallKitListener)
   @objc public static func hasActiveCallForUUID(_ callUUID: Swift.String) -> Swift.Bool
   @objc public static func reportNewIncomingCall(UUID: Foundation.UUID, handle: Swift.String?, displayName: Swift.String?, hasVideo: Swift.Bool, completion: @escaping (Swift.Error?) -> Swift.Void)
   @objc public static func reportCallUpdate(with UUID: Foundation.UUID, handle: Swift.String?, displayName: Swift.String?, hasVideo: Swift.Bool)
@@ -68,5 +68,5 @@ public class PiPViewCoordinator {
   @objc optional func providerDidDeactivateAudioSession(session: AVFoundation.AVAudioSession)
   @objc optional func providerTimedOutPerformingAction(action: CallKit.CXAction)
 }
-extension JitsiMeet.PiPViewCoordinator.Position : Swift.Equatable {}
-extension JitsiMeet.PiPViewCoordinator.Position : Swift.Hashable {}
+extension PiPViewCoordinator.Position : Swift.Equatable {}
+extension PiPViewCoordinator.Position : Swift.Hashable {}

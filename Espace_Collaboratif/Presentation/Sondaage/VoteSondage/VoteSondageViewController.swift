@@ -110,7 +110,7 @@ class VoteSondageViewController: UIViewController, VoteSondageDisplayLogic
     
 
     
-    viewVote.roundCorners([.topLeft, .topRight] , radius: 50)
+ //   viewVote.roundCorners([.topLeft, .topRight] , radius: 50)
 
   }
   
@@ -155,6 +155,8 @@ extension VoteSondageViewController:UITableViewDataSource,UITableViewDelegate
             
             if choixuserlogged.id == UserDefaultLogged.idUD{
                 cellchoix.checkedimg.setImage(UIImage(named: "verified"), for: .normal)
+                sendBtn.setTitle("Changer ma vote", for: .normal)
+
 
             }
         }

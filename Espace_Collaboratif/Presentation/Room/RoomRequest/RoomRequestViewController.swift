@@ -185,7 +185,7 @@ extension RoomRequestViewController:RoomRequestDelegate{
                     "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
                        "Accept": "application/json"
                    ]
-                AF.request("http://c689b3e9efce.ngrok.io/roomrequest/reject/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
+                AF.request(Keys.MobileIntegrationServer.baseURL + "/roomrequest/reject/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
                                  response in
                 
                     print(UserDefaultLogged.tokenUD)
@@ -207,7 +207,7 @@ extension RoomRequestViewController:RoomRequestDelegate{
             "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
                "Accept": "application/json"
            ]
-        AF.request("http://c689b3e9efce.ngrok.io/roomrequest/accept/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
+        AF.request(Keys.MobileIntegrationServer.baseURL + "/roomrequest/accept/\(roomrequestArray[tag].id!)",method: .put, headers: headers).responseJSON{
                          response in
         
             print(UserDefaultLogged.tokenUD)

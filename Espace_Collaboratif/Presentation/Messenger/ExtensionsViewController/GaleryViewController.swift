@@ -26,8 +26,18 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
     }
     
     @IBAction func OpenSideUpMeny(_ sender: Any) {
-        actionSheet()
+        //        actionSheet()
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "AddSondageViewController") as! AddSondageViewController
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc,animated:true,completion: nil)
+        
+        
     }
+    
+        
+    
     
     func actionSheet() {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -68,24 +78,7 @@ extension MessengerViewController: UINavigationControllerDelegate, UIImagePicker
         sheet.addAction(camera)
         
         
-        let sondage = UIAlertAction(title: "sondage", style: .default) { (sondage) in
-                // Facebook Code
-            print("sondage")
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                         let vc = storyBoard.instantiateViewController(withIdentifier: "AddSondageViewController") as! AddSondageViewController
-                   vc.modalPresentationStyle = .overFullScreen
-            self.present(vc,animated:true,completion: nil)
-
-        
-            }
-            
-            
-            sondage.setValue(0, forKey: "titleTextAlignment")
-            sondage.setValue(UIImage(systemName: "camera"), forKey: "image")
-            sondage.setValue(UIColor.black, forKey: "titleTextColor")
-            
-            sheet.addAction(sondage)
-        
+       
         
         let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
             // Instagram Code

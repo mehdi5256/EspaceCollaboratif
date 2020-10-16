@@ -54,48 +54,23 @@ extension MessengerViewController:UITableViewDataSource,UITableViewDelegate{
         
         
         
-//        switch NetworkStatus.Connection() {
-//        case false:
-//            print("not conncted")
-//            print("connected")
-//            if  MessagesArrayCoreData.count == 0
-//            {
-//                tv.isHidden = true
-//                emptytvimg.isHidden = false
-//            }
-//            else{
-//                tv.isHidden = false
-//                emptytvimg.isHidden = true
-//
-//            }
-//            return MessagesArrayCoreData.count
-//        default:
-//            print("connected")
-//            if  msgarray.count == 0
-//            {
-//                tv.isHidden = true
-//                emptytvimg.isHidden = false
-//            }
-//            else{
-//                tv.isHidden = false
-//                emptytvimg.isHidden = true
-//
-//            }
-//            return msgarray.count
-//        }
-//
+        switch NetworkStatus.Connection() {
+       case false:
+           print("not conncted")
+           
+            return MessagesArrayCoreData.count
+            print(MessagesArrayCoreData.count)
+            print("sssssssss")
+
+        default:
+            print("connected")
+            
+            return msgarray.count
+        }
+
         
-//            if  MessagesArrayCoreData.count == 0
-//            {
-//                tv.isHidden = true
-//                emptytvimg.isHidden = false
-//            }
-//            else{
-//                tv.isHidden = false
-//                emptytvimg.isHidden = true
-//
-//            }
-        return msgarray.count
+           
+    //    return msgarray.count
     }
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

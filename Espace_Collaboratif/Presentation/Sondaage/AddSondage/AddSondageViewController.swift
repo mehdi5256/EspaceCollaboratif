@@ -157,7 +157,7 @@ class AddSondageViewController: UIViewController, AddSondageDisplayLogic
     interactor?.connect()
 
 
-    ViewSondage.roundCorners([.topLeft, .topRight] , radius: 50)
+  //  ViewSondage.roundCorners([.topLeft, .topRight] , radius: 50)
 
     
     }

@@ -217,6 +217,10 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
     
     
     
+    @IBAction func BackButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+
+    }
     
     @IBAction func SendReply(_ sender: Any) {
         
@@ -224,26 +228,35 @@ class DetailTopicViewController: UIViewController, DetailTopicDisplayLogic
               
 
         if(textreply.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-                   BtnSendReply.isEnabled = false
+                //   BtnSendReply.isEnabled = false
+            
+            
+           
+            replyarray.insert(Reply1(reply: textreply.text, user: User(id: UserDefaultLogged.idUD, firstName: UserDefaultLogged.firstNameUD, lastName: UserDefaultLogged.lasttNameUD, email: UserDefaultLogged.emailUD, image: UserDefaultLogged.IMGUD, username: UserDefaultLogged.firstNameUD)), at: 0)
+           
+                tv.beginUpdates()
+            
+            let indexPath = IndexPath(row: 0, section: 0)
+            tv.insertRows(at: [indexPath], with: .top)
+                self.NumberReply! += 1
+            //
+                self.tv.endUpdates()
+            
+            tv.reloadSections(IndexSet(integer: 0), with: .bottom)
+
+          //  tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.none, animated: true)
+
+
+          //  tv.reloadData()
+
 
             interactor?.PostReply(reply:textreply.text,topic:["id":idtopic!],user: ["id":UserDefaultLogged.idUD])
             
            
-                    self.designbuttonaftersend()
-                    
-                    
-                    
-//                    self.tv.beginUpdates()
-//                    let indexPath = IndexPath(row: 0, section: 0)
-//                    self.tv.insertRows(at: [indexPath], with: .top)
-//                    self.tv.endUpdates()
-//                    self.tv.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.none, animated: true)
-//
-//
-//
-//                 self.tv.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-//                    self.NumberReply = self.NumberReply! + 1}
-        
+            self.designbuttonaftersend()
+            //tv.reloadData()
+
+            
             
             
                } else {
@@ -283,13 +296,13 @@ extension DetailTopicViewController:UITableViewDataSource,UITableViewDelegate{
         
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 60))
-        let label = UILabel(frame: CGRect(x: 30, y: 5, width: tableView.frame.width, height: 50))
-    label.text = "Réponses (\(NumberReply!))"
-        view.backgroundColor = #colorLiteral(red: 0.9182453156, green: 0.9182668328, blue: 0.9182552695, alpha: 1)
+        let labelheadernumber = UILabel(frame: CGRect(x: 30, y: 5, width: tableView.frame.width, height: 50))
+    labelheadernumber.text = "Réponses (\(NumberReply!))"
+        view.backgroundColor = #colorLiteral(red: 0.9528016448, green: 0.9659723639, blue: 0.9814048409, alpha: 1)
 
-        label.textAlignment = .left
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
-        view.addSubview(label)
+        labelheadernumber.textAlignment = .left
+        labelheadernumber.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
+        view.addSubview(labelheadernumber)
         
         return view
 
@@ -313,7 +326,7 @@ extension DetailTopicViewController:UITableViewDataSource,UITableViewDelegate{
         
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             if scrollView == self.scrollView {
-                tv.isScrollEnabled = (self.scrollView.contentOffset.y >= 200)
+                tv.isScrollEnabled = (self.scrollView.contentOffset.y >= 260)
             }
             
             if scrollView == self.tv {

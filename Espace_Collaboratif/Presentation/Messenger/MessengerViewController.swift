@@ -321,7 +321,7 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
             "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
             "Accept": "application/json"
         ]
-        AF.request("http://c689b3e9efce.ngrok.io/room/join/\(idroom!)",method: .put, headers: headers).responseJSON{
+        AF.request(Keys.MobileIntegrationServer.baseURL + "/room/join/\(idroom!)",method: .put, headers: headers).responseJSON{
             response in
             
             print(UserDefaultLogged.tokenUD)
@@ -394,12 +394,10 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
                    
                    prévisualisationview.isHidden = false
                }
-        self.interactor?.getRoomById(id: self.idroom)
-        self.interactor?.GetRoomEventBusid(id: self.idroom)
+        
         
         super.viewDidLoad()
         
-        UserDefaultLogged.idRoom = self.idroom
         
         let request:NSFetchRequest<MessageCoreData> = MessageCoreData.fetchRequest()
         request.sortDescriptors = [
@@ -421,7 +419,11 @@ class MessengerViewController: UIViewController, MessengerDisplayLogic
         reachability.whenReachable = { reachability in
             if reachability.connection == .wifi {
                 print("Reachable via WiFi")
+             //   self.interactor?.getRoomById(id: self.idroom)
                 self.interactor?.getRoomById(id: self.idroom)
+                self.interactor?.GetRoomEventBusid(id: self.idroom)
+                UserDefaultLogged.idRoom = self.idroom
+
                 
                 
             } else {
@@ -939,29 +941,27 @@ extension MessengerViewController{
     func ActionMoreOptions() {
         
        let actionSheetAlertController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        
+       
 
-       let doc = UIAlertAction(title: "Document", style: .default) { (doc) in
-           // Instagram Code
-       }
-       doc.setValue(0, forKey: "titleTextAlignment")
-       doc.setValue(UIImage(systemName: "doc"), forKey: "image")
-       doc.setValue(UIColor.black, forKey: "titleTextColor")
+      
         
-        let doc2 = UIAlertAction(title: "Document", style: .default) { (doc) in
+        let allUsers = UIAlertAction(title: "Voir les membres du groupe", style: .default) { (doc) in
                   // Instagram Code
               }
-              doc2.setValue(0, forKey: "titleTextAlignment")
-              doc2.setValue(UIImage(systemName: "doc"), forKey: "image")
-              doc2.setValue(UIColor.black, forKey: "titleTextColor")
+              allUsers.setValue(0, forKey: "titleTextAlignment")
+              allUsers.setValue(UIImage(systemName: "person.3.fill"), forKey: "image")
+              allUsers.setValue(UIColor.black, forKey: "titleTextColor")
         
-        let doc3 = UIAlertAction(title: "Document", style: .default) { (doc) in
+        let addUsers = UIAlertAction(title: "Ajouter des membres", style: .default) { (doc) in
                   // Instagram Code
               }
-              doc3.setValue(0, forKey: "titleTextAlignment")
-              doc3.setValue(UIImage(systemName: "doc"), forKey: "image")
-              doc3.setValue(UIColor.black, forKey: "titleTextColor")
+              addUsers.setValue(0, forKey: "titleTextAlignment")
+              addUsers.setValue(UIImage(systemName: "person.badge.plus.fill"), forKey: "image")
+              addUsers.setValue(UIColor.black, forKey: "titleTextColor")
         
-        let doc4 = UIAlertAction(title: "Quiter la discussion", style: .destructive) { (doc) in
+        let leaveRoom = UIAlertAction(title: "Quiter la discussion", style: .destructive) { (doc) in
             
             let alertController = UIAlertController(
                 title: "Quitter la discussion?",
@@ -979,7 +979,7 @@ extension MessengerViewController{
                         "Authorization": "Bearer \(UserDefaultLogged.tokenUD)" ,
                         "Accept": "application/json"
                     ]
-                    AF.request("http://c689b3e9efce.ngrok.io/room/leave/\(self.idroom!)",method: .put, headers: headers).responseJSON{
+                    AF.request(Keys.MobileIntegrationServer.baseURL + "/room/leave/\(self.idroom!)",method: .put, headers: headers).responseJSON{
                         response in
                         
                         print(UserDefaultLogged.tokenUD)
@@ -987,7 +987,7 @@ extension MessengerViewController{
                         print(response.response)
                         print(response.result)
                         
-                self.navigationController?.popToRootViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
 
                         
                         
@@ -1010,16 +1010,17 @@ extension MessengerViewController{
 
             self.present(alertController, animated: true)
         }
-              doc4.setValue(0, forKey: "titleTextAlignment")
-              doc4.setValue(UIImage(systemName: "person.badge.minus"), forKey: "image")
-              doc4.setValue(UIColor.red, forKey: "titleTextColor")
+              leaveRoom.setValue(0, forKey: "titleTextAlignment")
+              leaveRoom.setValue(UIImage(systemName: "person.badge.minus"), forKey: "image")
+              leaveRoom.setValue(UIColor.red, forKey: "titleTextColor")
         
-        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
        
-        actionSheetAlertController.addAction(doc)
-        actionSheetAlertController.addAction(doc2)
-        actionSheetAlertController.addAction(doc3)
-        actionSheetAlertController.addAction(doc4)
+        actionSheetAlertController.addAction(allUsers)
+        actionSheetAlertController.addAction(addUsers)
+        actionSheetAlertController.addAction(leaveRoom)
+        actionSheetAlertController.addAction(cancel)
+
 
 
         self.present(actionSheetAlertController, animated: true, completion: nil)
